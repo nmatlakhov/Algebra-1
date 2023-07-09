@@ -1,0 +1,664 @@
+\documentclass[12pt]{article}
+\usepackage[left=1cm, right=1cm, top=2cm,bottom=1.5cm]{geometry} 
+
+\usepackage[parfill]{parskip}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage{enumitem}
+\usepackage[normalem]{ulem}
+\usepackage{amsfonts, amsmath, amsthm, amssymb, mathtools,xcolor}
+\usepackage{blkarray}
+
+\usepackage{tabularx}
+\usepackage{hhline}
+
+\usepackage{accents}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{1.5pt}
+\renewcommand{\footrulewidth}{1pt}
+
+\usepackage{graphicx}
+\usepackage[figurename=Рис.]{caption}
+\usepackage{subcaption}
+\usepackage{float}
+
+%%Наименование папки откуда забирать изображения
+\graphicspath{ {./images/} }
+
+%%Изменение формата для ввода доказательства
+\renewcommand{\proofname}{$\square$  \nopunct}
+\renewcommand\qedsymbol{$\blacksquare$}
+
+%%Изменение отступа на таблицах
+\addto\captionsrussian{%
+	\renewcommand{\proofname}{$\square$ \nopunct}%
+}
+%% Римские цифры
+\newcommand{\RN}[1]{%
+	\textup{\uppercase\expandafter{\romannumeral#1}}%
+}
+
+%% Для удобства записи
+\newcommand{\MR}{\mathbb{R}}
+\newcommand{\MC}{\mathbb{C}}
+\newcommand{\MQ}{\mathbb{Q}}
+\newcommand{\MN}{\mathbb{N}}
+\newcommand{\MZ}{\mathbb{Z}}
+\newcommand{\MTB}{\mathbb{T}}
+\newcommand{\MTI}{\mathbb{I}}
+\newcommand{\MI}{\mathrm{I}}
+\newcommand{\MCI}{\mathcal{I}}
+\newcommand{\MJ}{\mathrm{J}}
+\newcommand{\MH}{\mathrm{H}}
+\newcommand{\MT}{\mathrm{T}}
+\newcommand{\MA}{\mathcal{A}}
+\newcommand{\MCB}{\mathcal{B}}
+\newcommand{\MCC}{\mathcal{C}}
+\newcommand{\MCE}{\mathcal{E}}
+\newcommand{\MU}{\mathcal{U}}
+\newcommand{\MV}{\mathcal{V}}
+\newcommand{\MB}{\mathcal{B}}
+\newcommand{\MF}{\mathcal{F}}
+\newcommand{\MW}{\mathcal{W}}
+\newcommand{\ML}{\mathcal{L}}
+\newcommand{\MP}{\mathcal{P}}
+\newcommand{\VN}{\varnothing}
+\newcommand{\VE}{\varepsilon}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Опр:}
+\newtheorem{rem}{Rm:}
+\newtheorem{prop}{Утв.}
+\newtheorem{exrc}{Упр.}
+\newtheorem{problem}{Задача}
+\newtheorem{lemma}{Лемма}
+\newtheorem{theorem}{Теорема}
+\newtheorem{corollary}{Следствие}
+
+\newenvironment{cusdefn}[1]
+{\renewcommand\thedefn{#1}\defn}
+{\enddefn}
+
+\DeclareRobustCommand{\divby}{%
+	\mathrel{\text{\vbox{\baselineskip.65ex\lineskiplimit0pt\hbox{.}\hbox{.}\hbox{.}}}}%
+}
+%Короткий минус
+\DeclareMathSymbol{\SMN}{\mathbin}{AMSa}{"39}
+%Длинная шапка
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+%Функция знака
+\DeclareMathOperator{\sgn}{sgn}
+
+%Функция ранга
+\DeclareMathOperator{\rk}{\text{rk}}
+\DeclareMathOperator{\diam}{\text{diam}}
+
+
+%Обозначение константы
+\DeclareMathOperator{\const}{\text{const}}
+
+\DeclareMathOperator{\codim}{\text{codim}}
+
+\DeclareMathOperator*{\dsum}{\displaystyle\sum}
+\newcommand{\ddsum}[2]{\displaystyle\sum\limits_{#1}^{#2}}
+
+%Интеграл в большом формате
+\DeclareMathOperator{\dint}{\displaystyle\int}
+\newcommand{\ddint}[2]{\displaystyle\int\limits_{#1}^{#2}}
+\newcommand{\ssum}[1]{\displaystyle \sum\limits_{n=1}^{\infty}{#1}_n}
+
+\newcommand{\smallerrel}[1]{\mathrel{\mathpalette\smallerrelaux{#1}}}
+\newcommand{\smallerrelaux}[2]{\raisebox{.1ex}{\scalebox{.75}{$#1#2$}}}
+
+\newcommand{\smallin}{\smallerrel{\in}}
+\newcommand{\smallnotin}{\smallerrel{\notin}}
+
+\newcommand*{\medcap}{\mathbin{\scalebox{1.25}{\ensuremath{\cap}}}}%
+\newcommand*{\medcup}{\mathbin{\scalebox{1.25}{\ensuremath{\cup}}}}%
+
+\makeatletter
+\newcommand{\vast}{\bBigg@{3.5}}
+\newcommand{\Vast}{\bBigg@{5}}
+\makeatother
+
+%Промежуточное значение для sup\inf, поскольку они имеют разную высоту
+\newcommand{\newsup}{\mathop{\smash{\mathrm{sup}}}}
+\newcommand{\newinf}{\mathop{\mathrm{inf}\vphantom{\mathrm{sup}}}}
+
+%Скалярное произведение
+\newcommand{\inner}[2]{\left\langle #1, #2 \right\rangle }
+\newcommand{\linsp}[1]{\left\langle #1 \right\rangle }
+\newcommand{\linmer}[2]{\left\langle #1 \vert #2\right\rangle }
+
+%Подпись символов снизу
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+
+%% Шапка для букв сверху
+\newcommand{\wte}[1]{\widetilde{#1}}
+\newcommand{\wht}[1]{\widehat{#1}}
+
+%%Трансформация Фурье
+\newcommand{\fourt}[1]{\mathcal{F}\left(#1\right)}
+\newcommand{\ifourt}[1]{\mathcal{F}^{-1}\left(#1\right)}
+
+%%Символ вектора
+\newcommand{\vecm}[1]{\overrightarrow{#1\,}}
+
+%%Пространстов матриц
+\newcommand{\matsq}[1]{\operatorname{Mat}_{#1}}
+\newcommand{\mat}[2]{\operatorname{Mat}_{#1, #2}}
+
+
+%%Взятие в скобки, модули и норму
+\newcommand{\parfit}[1]{\left( #1 \right)}
+\newcommand{\modfit}[1]{\left| #1 \right|}
+\newcommand{\sqparfit}[1]{\left\{ #1 \right\}}
+\newcommand{\normfit}[1]{\left\| #1 \right\|}
+
+%%Функция для обозначения равномерной сходимости по множеству
+\newcommand{\uconv}[1]{\overset{#1}{\rightrightarrows}}
+\newcommand{\uconvm}[2]{\overset{#1}{\underset{#2}{\rightrightarrows}}}
+
+
+%%Функция для обозначения нижнего и верхнего интегралов
+\def\upint{\mathchoice%
+	{\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	\int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+
+%%След матрицы
+\DeclareMathOperator*{\tr}{tr}
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+	\hskip -\arraycolsep
+	\let\@ifnextchar\new@ifnextchar
+	\array{#1}}
+\makeatother
+
+
+%% Переопределение функции хи, чтобы выглядела более приятно
+\makeatletter
+\@ifdefinable\@latex@chi{\let\@latex@chi\chi}
+\renewcommand*\chi{{\@latex@chi\smash[t]{\mathstrut}}} % want only bottom half of \mathstrut
+\makeatletter
+
+\begin{document}
+\lhead{Алгебра-\RN{1}}
+\chead{Тимашев Д.А.}
+\rhead{Лекция - 8}
+\section*{Теория перестановок и подстановок}
+\subsection*{Транспозиции}
+
+\begin{defn}
+	\uwave{Транспозиция} это цикл длины $2$: 
+	$$
+		\tau = (i,j) = (ij), \, \tau(i) = j, \, \tau(j) = i, \, \tau(k) = k,\, \forall k \neq i,j
+	$$
+\end{defn}
+\begin{prop}
+	Любая подстановка $\sigma \in S_n$ разлагается в произведение транспозиций. 
+\end{prop}
+\begin{proof}
+	Разложим $\sigma$ в произведение попарно независимых циклов, воспользовавшись предыдущей теоремой:
+	$$
+		\sigma = \sigma_1{\cdot}\sigma_2{\cdot}\dotsc{\cdot}\sigma_s
+	$$
+	Достаточно разложить каждый $\sigma_i$ в произведение транспозиций. Можно считать, что исходная подстановка $\sigma = (i_1i_2\dotsc i_l)$ это цикл длины $l$. Тогда этот цикл разлагается в произведение цикла длины $l-1$ и транспозиции двух последних номеров $\sigma$:
+	$$
+		\sigma = (i_1 i_2 \dotsc i_{l-1}){\cdot}(i_{l-1} i_l )
+	$$ 
+	Понятно, что все числа, которые не вошли в орбиту $\sigma$ они с помощью $\sigma$ и с помощью подстановки справа остаются на месте. Докажем, что на числа из орбиты $\sigma$ обе подстановки действуют одинаково:
+	$$
+		\begin{array}{rl}
+			\tau = (i_{l-1}i_l) \colon & i_{l-1} \to i_l \to i_{l-1} \\ [5pt]
+			\pi = (i_1 i_2 \dotsc i_{l-1}) \colon & i_1 \to i_2 \to i_3 \to \dotsc \to i_{l-1} \to i_1\\ [5pt]
+			\pi{\cdot}\tau \colon & i_1 \xrightarrow{\tau} i_1 \xrightarrow{\pi} i_2 \xrightarrow{\tau} i_2 \xrightarrow{\pi} i_3 \xrightarrow{\tau} \dotsc \xrightarrow{\tau} i_{l-2} \xrightarrow{\pi} i_{l-1} \xrightarrow{\tau}  i_l \xrightarrow{\pi} i_l \xrightarrow{\tau} i_{l-1} \xrightarrow{\pi} i_1
+		\end{array}
+	$$
+	Таким образом, подстановка $(i_1 i_2 \dotsc i_{l-1}){\cdot}(i_{l-1} i_l )$ действует на числа $i_1,\dotsc, i_l$ также, как и $\sigma$. Далее, мы можем аналогично разложить цикл длины $l-1$, затем цикл длины $l-2$ и так далее, тогда:
+	$$
+		\sigma = (i_1 i_2 \dotsc i_{l-1}){\cdot}(i_{l-1} i_l ) = (i_1 i_2 \dotsc i_{l-2}){\cdot}(i_{l-2} i_{l-1} ){\cdot}(i_{l-1} i_l ) = \dotsc = (i_1 i_2){\cdot}(i_2 i_3){\cdot}\dotsc{\cdot}(i_{l-1}i_l)
+	$$
+	И таким образом, мы можем разложить каждый независимый цикл $\Rightarrow$ получаем требуемое.
+\end{proof}
+\begin{defn}
+	\uwave{Инверсия} (беспорядок) в перестановке $(i_1i_2 \dotsc i_n)$ это пара чисел $(i_k i_l)$, где $k < l$, но $i_k > i_l$.
+\end{defn}
+\begin{defn}
+	Перестановка \uwave{чётна}, если количество инверсий в этой перестановке чётно.
+\end{defn}
+\begin{defn}
+	Перестановка \uwave{нечётна}, если количество инверсий в этой перестановке нечётно.
+\end{defn}
+\begin{defn}
+	\uwave{Знак перестановки} $\sgn{(i_1\dotsc i_l)} = 
+	\begin{cases}
+		1, & (i_1\dotsc i_l) \text{ - чётна}\\
+		-1, & (i_1\dotsc i_l) \text{ - нечётна}
+	\end{cases}$.
+\end{defn}
+
+\textbf{Пример}: рассмотрим перестановку номеров $\{1,2,3,4, 5\}$: $(25413)$. Число инверсий:
+$$
+	1 \colon (21), (51), (41), \, 2 \colon 0, \, 3 \colon (53), (43), \, 4 \colon (54), \, 5 \colon 0 \Rightarrow 3 + 0 + 2 + 1 + 0 = 6
+$$
+то есть перестановка является чётной и её знак равен $1$.
+\begin{defn}
+	Подстановка $\sigma = \begin{pmatrix}
+		1 & 2 & \dotsc & n\\
+		i_1 & i_2 & \dotsc & n
+	\end{pmatrix}$ называется \uwave{чётной}, если перестановка $(i_1 i_2 \dotsc i_n)$ чётна.
+\end{defn}
+\begin{defn}
+	Подстановка $\sigma = \begin{pmatrix}
+		1 & 2 & \dotsc & n\\
+		i_1 & i_2 & \dotsc & n
+	\end{pmatrix}$ называется \uwave{нечётной}, если перестановка $(i_1 i_2 \dotsc i_n)$ нечётна.
+\end{defn}
+\newpage
+\begin{defn}
+	\uwave{Знак подстановки} $\sigma = \begin{pmatrix}
+		1 & 2 & \dotsc & n\\
+		i_1 & i_2 & \dotsc & n
+	\end{pmatrix}$ равен $\sgn{(i_1 i_2 \dotsc i_n)}$.
+\end{defn}
+
+\begin{prop}
+	При транспозиции двух элементов в перестановке, её четность меняется.
+\end{prop}
+\begin{proof}
+	Рассмотрим перестановку:
+	$$
+		(i_1, \dotsc, i_k, \dotsc, i_l, \dotsc , i_n)
+	$$
+	Предположим, что мы переставили местами два элемента: $i_k \leftrightarrow i_l$. Теперь мы получили новую перестановку:
+	$$
+		(i_1, \dotsc, i_l, \dotsc, i_k, \dotsc , i_n)
+	$$
+	Выясним число инверсий в новой перестановке. 
+	\begin{enumerate}[label=\arabic*)]
+		\item Среди пар $(i_p, i_q)$, где $p,q \neq k,l$ число инверсий не меняется, поскольку они остаются на местах;
+		
+		\item  Среди пар $(i_p, i_k), \, p< k\vee p > l$:
+		$$
+			(i_1, \dotsc, {\color{red}i_p}, \dotsc, i_k, \dotsc, i_l, \dotsc , i_n) \vee (i_1, \dotsc, i_k, \dotsc, i_l, \dotsc, {\color{red}i_p}, \dotsc, i_n)
+		$$
+		Если $p < k$, то порядок следования элементов среди $i_p$ не изменился: $i_p$ все ещё идут перед $i_k$. Аналогично для $ p > l$: $i_p$ все ещё идут после $i_k$:
+		$$
+			(i_1, \dotsc, {\color{red}i_p}, \dotsc, i_l, \dotsc, i_k, \dotsc , i_n) \vee (i_1, \dotsc, i_l, \dotsc, i_k, \dotsc,{\color{red}i_p}, \dotsc, i_n)
+		$$
+		\item Аналогично, среди пар $(i_p, i_l), \, p< k\vee p > l$ количество инверсии не меняется;
+		
+		\item Среди пар $(i_q, i_k), \, k < q < l$, количество инверсий меняется на $\pm 1, \pm 1, \dotsc, \pm 1$. При этом слагаемых столько, сколько этих пар $=$ количество чисел $q$ между $k$ и $l$: $l - k -1$;
+		$$
+			(i_1, \dotsc,  i_k, \underbrace{\dotsc,{\color{red}i_p}, \dotsc}_{l -k -1}, i_l, \dotsc , i_n) 
+		$$
+		
+		\item Аналогично, среди пар $(i_q, i_l), \, k < q < l$, количество инверсий меняется на $\pm 1, \pm 1, \dotsc, \pm 1$. При этом слагаемых столько, сколько этих пар $=$ количество чисел $q$ между $k$ и $l$: $l - k -1$;
+		
+		\item В паре $(i_k i_l)$ после перестановки либо инверсия появилась, либо она исчезла, если она была;
+	\end{enumerate}
+	Общее изменение количества инверсий равно: 
+	$$ 
+		\underbrace{\pm 1, \dotsc, \pm 1}_{l -k - 1} \underbrace{\pm 1, \dotsc, \pm 1}_{l -k - 1} \pm 1 = \underbrace{\pm 1, \dotsc, \pm 1}_{2(l -k - 1) + 1}
+	$$ 
+	Поскольку $2(l - k - 1) + 1$ - нечетно, то число инверсий изменилось на нечетное число $\Rightarrow$ чётность изменится. 
+\end{proof}
+
+\begin{corollary}
+	$\#$ чётных и нечётных перестановок (а значит и подстановок) одинаковое и равно $\dfrac{n!}{2}$.
+\end{corollary}
+\begin{proof}
+	Установим взаимнооднозначное соответствие между множествами чётных и нечётных перестановок:
+	$$
+		(i_1 i_2 i_3 \dotsc i_l) \leftrightarrow (i_2 i_1 i_3 \dotsc i_n)
+	$$
+	Перестановка первых двух номеров меняет четность перестановки $\Rightarrow$ это взаимнооднозначное отображение между чётными и нечётными перестановками $\Rightarrow$ на каждое множество приходится одинаковое число элементов $\Rightarrow \tfrac{n!}{2}$. 
+\end{proof}
+\begin{rem}
+	Заметим, что взаимооднозначность отображения выше можно легко понять из-за конечности множества перестановок и инъективности отображения.
+\end{rem}
+
+\begin{prop}
+	Если подстановка $\sigma = \tau_1{\cdot}\tau_2 {\cdot}\dotsc {\cdot}\tau_N$, где $\tau_i$ - транспозиции, то тогда $\sgn{\sigma} = (-1)^N$.
+\end{prop}
+\begin{proof}
+	Индукцией по числу множителей:
+	
+	\textbf{\uline{База}}: $N = 0 \Rightarrow \sigma = \VE \Rightarrow$ инверсий нет, поскольку верхняя и нижняя строки совпадают $\Rightarrow \sgn{\sigma} = 1$.
+	
+	\textbf{\uline{Шаг}}: $\sigma = \tau_1{\cdot}\tau_2{\cdot} \dotsc {\cdot}\tau_{N-1} {\cdot}\tau_N = \sigma'{\cdot}\tau_N$, где $\tau_N = (kl)$, запишем $\sigma'$ в стандартной двухрядной записи:
+	$$
+		\sigma' = \begin{pmatrix}
+			1 & \dotsc  & k & \dotsc & l & \dotsc & n \\
+			i_1 & \dotsc & i_k & \dotsc & i_l & \dotsc & i_n
+		\end{pmatrix} \Rightarrow 
+		\sigma = 
+		\begin{pmatrix}
+			1 & \dotsc & k & \dotsc & l & \dotsc & n\\
+			i_1 & \dotsc & i_l & \dotsc & i_k & \dotsc & i_n
+		\end{pmatrix}
+	$$
+	Таким образом, произошла перестановка двух номеров местами. По-доказанному ранее предложению, чётность поменялась: $\sgn{\sigma} = -\sgn{\sigma'}$. По предположению индукции:
+	$$
+		\sgn{\sigma'} = (-1)^{N-1} \Rightarrow \sgn{\sigma} = -(-1)^{N-1} = (-1)^{N}
+	$$
+\end{proof}
+
+\begin{prop}
+	$\forall \sigma,\sigma' \in S_n, \, \sgn{(\sigma{\cdot}\sigma')} = \sgn{\sigma}{\cdot}\sgn{\sigma'}$.
+\end{prop}
+\begin{proof}
+	Разложим подстановку $\sigma$ и $\sigma'$ в произведение транспозиций:
+	$$
+		\sigma = \tau_1{\cdot}\dotsc{\cdot}\tau_N, \, \sigma' = \tau'_1{\cdot}\dotsc{\cdot}\tau'_M
+	$$
+	где $\tau_i, \, \tau'_i$ - транспозиции. Тогда:
+	$$
+		\sigma{\cdot}\sigma' = \tau_1{\cdot}\dotsc{\cdot}\tau_N{\cdot}\tau'_1{\cdot}\dotsc{\cdot}\tau'_M
+	$$
+	По доказанному предложению выше, мы получаем:
+	$$
+		\sgn{(\sigma{\cdot}\sigma')} = (-1)^{N + M} = (-1)^N{\cdot}(-1)^{M} = \sgn{\sigma}{\cdot}\sgn{\sigma'}
+	$$
+\end{proof}
+\begin{prop}
+	Знак обратной подстановки равен знаку самой подстановки: $\forall \sigma \in S_n, \, \sgn{(\sigma^{-1})} = \sgn{\sigma}$.
+\end{prop}
+\begin{proof}
+	Рассмотрим произведение $\sigma{\cdot}\sigma^{-1} = \VE$, тогда:
+	$$
+		\sgn{\sigma}{\cdot}\sgn{\sigma^{-1}} = \sgn{(\sigma{\cdot}\sigma^{-1})} = \sgn{\VE} = 1 
+	$$
+	Но поскольку $\sgn{\sigma} = \pm1$, $\sgn{\sigma^{-1}} = \pm1$ и их произведение равно $1 \Rightarrow$ они равны.
+\end{proof}
+
+\newpage
+\section*{Теория определителей}
+\begin{defn}
+	Пусть $A$ - квадратная матрица размера $n\times n$. Её \uwave{определитель} это число:
+	$$
+		\det{A} = \begin{vmatrix}
+			a_{11} & \dotsc & a_{1n}\\
+			\vdots & \ddots & \vdots \\
+			a_{n1} & \dotsc & a_{nn}
+		\end{vmatrix} =
+		\ddsum{(i_1i_2 \dotsc i_n)}{}a_{1{i_1}}{\cdot}a_{2{i_2}}{\cdot}\dotsc{\cdot}a_{n{i_n}}{\cdot}\sgn{(i_1 i_2 \dotsc i_n )} = \ddsum{\sigma \in S_n}{}a_{1\sigma(1)}{\cdot}a_{2\sigma(2)}{\cdot}\dotsc{\cdot}a_{n\sigma(n)}{\cdot}\sgn{\sigma}
+	$$
+	эта формула называется \uwave{развернутой формулой для определителя}.
+\end{defn}
+\begin{rem}
+	Запись определителя в терминах подстановок вместо перестановок обусловлена тем, что каждая подстановка может быть записана в стандартной двухрядной записи, а тогда в нижней строке будет фигурировать как раз перестановка из первой формулы:
+	$$
+		\sigma = \begin{pmatrix}
+			1 & 2 & \dotsc & n \\
+			i_1 & i_2 & \dotsc & i_n
+		\end{pmatrix}
+	$$
+\end{rem}
+\begin{rem}
+	Это число ещё называют \uwave{определителем порядка} $n$ или \uwave{определителем} $n$-го \uwave{порядка}. Возможно обозначение $|A| = \det{A}$.
+\end{rem}
+По смыслу, в определителе суммирование ведется по перестановкам $\Rightarrow$ там $n!$ слагаемых (столько, сколько перестановок), причем эти слагаемые берутся со знаками $\Rightarrow$ ровно половина слагаемых с плюсом, половина - с минусом.
+
+Каждое слагаемое это произведение элементов матрицы, которые берутся по одному из каждой строки и из каждого столбца. И каждое такое произведение берется со знаком, которое равно знаку подстановки, устанавливающей соответствие между номерами строк и номерами столбцов в этом произведении.
+
+\textbf{Пример}: рассмотрим простейщий нетривиальный пример:
+$$
+	\begin{vmatrix}
+		a_{11} & a_{12}\\
+		a_{21} & a_{22}
+	\end{vmatrix} = a_{11}{\cdot}a_{22}{\cdot}\sgn{(12)} + a_{12}{\cdot}a_{21}{\cdot}\sgn{(21)} = a_{11}{\cdot}a_{22} - a_{12 }{\cdot}a_{21}
+$$
+то есть произведение элементов по главной диагонали минус произведение элементов по побочной:
+$$
+	+ \begin{pmatrix}
+		* & \cdot\\
+		\cdot  & *
+	\end{pmatrix} - 
+	\begin{pmatrix}
+		\cdot & * \\
+		* & \cdot\\
+	\end{pmatrix}
+$$
+\subsection*{Свойства определителя матрицы}
+Удобно рассматривать определитель как функцию от набора строчек (столбцов) этой матрицы: 
+$$\det{A} = \det{(A_1, \dotsc, A_n)}$$
+где $A_1, \dotsc, A_n$ - строки матрицы $A$ (векторы из $\MR^n$).
+
+\begin{enumerate}[label=\arabic*)]
+	\item \textbf{Аддитивность}: при разложении $k$-ой строчки в сумму двух строк, определитель будет равен сумме определителей со слагаемыми $k$-ой строчки:
+	$$
+		\det{(A_1, \dotsc, A'_k + A''_k, \dotsc, A_n)} = \det{(A_1, \dotsc, A'_k , \dotsc, A_n)} + \det{(A_1, \dotsc,  A''_k, \dotsc, A_n)}
+	$$ 
+	\begin{proof}
+		$$
+			\det{A} = \ddsum{(i_1 \dotsc i_n)}{}a_{1{i_1}}{\cdot}\dotsc{\cdot}a_{k{i_k}}{\cdot}\dotsc{\cdot}a_{n{i_n}}{\cdot}\sgn{(i_1  \dotsc i_n )}, \, a_{k{i_k}} = a'_{k{i_k}} + a''_{k{i_k}} \Rightarrow \det{A} = 
+		$$
+		$$
+			 = \ddsum{(i_1 \dotsc i_n)}{}a_{1{i_1}}{\cdot}\dotsc{\cdot}a'_{k{i_k}}{\cdot}\dotsc{\cdot}a_{n{i_n}}{\cdot}\sgn{(i_1  \dotsc i_n )} + \ddsum{(i_1 \dotsc i_n)}{}a_{1{i_1}}{\cdot}\dotsc{\cdot}a''_{k{i_k}}{\cdot}\dotsc{\cdot}a_{n{i_n}}{\cdot}\sgn{(i_1  \dotsc i_n )} = 
+		$$
+		$$
+			=	\det{(A_1, \dotsc, A'_k , \dotsc, A_n)} + \det{(A_1, \dotsc,  A''_k, \dotsc, A_n)}
+		$$
+	\end{proof}
+	\item \textbf{Однородность}: при умножении строчки на $\lambda$, исходный определитель умножиться на $\lambda$:
+	$$
+		\det{(A_1,\dotsc, \lambda{\cdot}A_k, \dotsc, A_n)} = \lambda {\cdot} \det{A}
+	$$
+	\begin{proof}
+		$$
+			\det{(A_1,\dotsc, \lambda{\cdot}A_k, \dotsc, A_n)} = \ddsum{(i_1 \dotsc i_n)}{}a_{1{i_1}}{\cdot}\dotsc{\cdot}(\lambda{\cdot}a_{k{i_k}}){\cdot}\dotsc{\cdot}a_{n{i_n}}{\cdot}\sgn{(i_1  \dotsc i_n )} =
+		$$
+		$$
+			=	\lambda{\cdot}\ddsum{(i_1 \dotsc i_n)}{}a_{1{i_1}}{\cdot}\dotsc{\cdot}a_{k{i_k}}{\cdot}\dotsc{\cdot}a_{n{i_n}}{\cdot}\sgn{(i_1  \dotsc i_n )} = \lambda{\cdot}\det{A}
+		$$
+	\end{proof}
+	\item \textbf{Линейность определителя по $k$-ой строке}: определитель - \textbf{полилинейная функция} от строк матрицы, то есть он линеен по каждой $k = 1,\dotsc,n$ строке;
+	\begin{proof}
+		Следует сразу из первых двух свойств.
+	\end{proof}
+	\item  \textbf{Кососимметричность}: при перестановке двух строк местами, определитель меняет знак:
+	$$
+		\det{(A_1,\dotsc, A_k,\dotsc,A_l,\dotsc,A_n)} = - \det{(A_1,\dotsc, A_l,\dotsc,A_k,\dotsc,A_n)}
+	$$
+	\begin{proof}
+		$$
+			A \xrightarrow[\text{ $k$-ой и $l$-ой строки}]{\text{транспозиция}} A', \,  \det{A} = \ddsum{\sigma \in S_n}{}a_{1\sigma(1)}{\cdot}\dotsc{\cdot}a_{k\sigma(k)}{\cdot}\dotsc{\cdot}a_{l\sigma(l)}{\cdot}\dotsc{\cdot}a_{n\sigma(n)}{\cdot}\sgn{\sigma} \Rightarrow
+		$$
+		$$
+			\Rightarrow \det{A} = \ddsum{\sigma \in S_n}{}a_{1\sigma(1)}{\cdot}\dotsc{\cdot}a_{l\sigma(l)}{\cdot}\dotsc{\cdot}a_{k\sigma(k)}{\cdot}\dotsc{\cdot}a_{n\sigma(n)}{\cdot}\sgn{\sigma} 
+		$$
+		$$
+			\pi = \sigma{\cdot}\tau, \, \tau = (kl) \Rightarrow \pi{\cdot}\tau = \sigma{\cdot}\tau{\cdot}\tau = \sigma, \, \sgn{\sigma} = \sgn{\tau}{\cdot}\sgn{\pi} = - \sgn{\pi}
+		$$
+		Заметим, что $\pi$ пробегает всё $S_n$ по одному разу, если $\sigma = \pi{\cdot}\tau$ пробегает всё $S_n$ по одному разу, поскольку $\sigma$ можно однозначно восстановить по $\pi$: число разных $\sigma =$ числу разных $\pi = n!$, а если для разных $\sigma$ две $\pi$ совпали, то и $\sigma$ должны совпасть $\Rightarrow$ инъективность и конечность множества дают биективность. Следовательно, можно суммировать по $\pi$:
+		$$
+			\ddsum{\sigma \in S_n}{}a_{1\sigma(1)}{\cdot}\dotsc{\cdot}a_{l\sigma(l)}{\cdot}\dotsc{\cdot}a_{k\sigma(k)}{\cdot}\dotsc{\cdot}a_{n\sigma(n)}{\cdot}\sgn{\sigma}  = \ddsum{\pi \in S_n}{}a'_{1\pi(1)}{\cdot}\dotsc{\cdot}a'_{k\pi(k)}{\cdot}\dotsc{\cdot}a'_{l\pi(l)}{\cdot}\dotsc{\cdot}a'_{n\pi(n)}{\cdot}\sgn{\sigma} =
+		$$
+		$$
+			=	\ddsum{\pi \in S_n}{}a'_{1\pi(1)}{\cdot}\dotsc{\cdot}a'_{k\pi(k)}{\cdot}\dotsc{\cdot}a'_{l\pi(l)}{\cdot}\dotsc{\cdot}a'_{n\pi(n)}{\cdot}(-\sgn{\pi}) = -\det{A'}
+		$$
+	\end{proof}
+	\item $\exists \, k \colon A_k = 0 \Rightarrow \det{A} = 0$;
+	\begin{proof}
+		$$
+			\det{(A_1,\dotsc, A_k, \dotsc ,A_n)} = \det{(A_1,\dotsc, 0{\cdot}A_k, \dotsc, A_n)} = 0 {\cdot}\det{(A_1,\dotsc, A_k, \dotsc ,A_n)}=0
+		$$
+	\end{proof}
+	\item $\exists \, k \neq l \colon A_k = A_l \Rightarrow \det{A} = 0$;
+	\begin{proof}
+		$$
+			\det{A} = \det{(A_1,\dotsc, A_k,\dotsc,A_l, \dotsc,A_n)} = -\det{(A_1,\dotsc, A_l,\dotsc,A_k, \dotsc,A_n)} = |A_k = A_l| =
+		$$
+		$$
+			= - \det{(A_1,\dotsc, A_k,\dotsc,A_l, \dotsc,A_n)} = -\det{A} \Rightarrow \det{A} = 0
+		$$
+	\end{proof}
+	\item $\exists \, k \neq l \colon A_l = \lambda{\cdot}A_k \Rightarrow \det{A} = 0$;
+	\begin{proof}
+		$$
+			\det{A} = \det{(A_1,\dotsc, A_k,\dotsc,A_l, \dotsc,A_n)} = \det{(A_1,\dotsc, A_k,\dotsc,\lambda{\cdot}A_k, \dotsc,A_n)} =
+		$$
+		$$
+			= \lambda{\cdot}\det{(A_1,\dotsc, A_k,\dotsc,A_k, \dotsc,A_n)} \Rightarrow \det{A} = 0
+		$$
+	\end{proof}
+	\item При ЭП строк $1$-го типа (прибавление к одной строке другой, умноженной на скаляр), определитель не меняется:
+	$$
+		A \xrightarrow{\text{ЭП}1} A' \Rightarrow \det{A} = \det{A'}
+	$$
+	\begin{proof}
+		$$
+			\det{A'} = \det{(A_1,\dotsc, A_k + \lambda{\cdot}A_l,\dotsc,A_l, \dotsc,A_n)} = 
+		$$
+		$$
+			=	\det{(A_1,\dotsc, A_k ,\dotsc,A_l, \dotsc,A_n)} + \lambda{\cdot}\det{(A_1,\dotsc, A_l ,\dotsc,A_l, \dotsc,A_n)} = \det{A} + 0= \det{A}
+		$$
+	\end{proof}
+	\item При транспонировании определитель матрицы не меняется:
+	$$
+		\det{A} = \det{A^T}
+	$$
+	\begin{proof}
+		$$
+			\det{A^T} = \ddsum{\sigma \in S_n}{}a^T_{1\sigma(1)}{\cdot}\dotsc{\cdot}a^T _{n\sigma(n)}{\cdot}\sgn{\sigma} = \ddsum{\sigma \in S_n}{}a_{\sigma(1)1}{\cdot}\dotsc{\cdot}a _{\sigma(n)n}{\cdot}\sgn{\sigma}
+		$$
+		Переставим множители в этом произведении. Посмотрим, какая будет перестановка:
+		$$
+			\sigma(j) = i \Rightarrow j = \sigma^{-1}(i )
+		$$
+		где $i$ - это номер строки, а $j$ - это номер столбца. Тогда:
+		$$
+			\ddsum{\sigma \in S_n}{}a_{\sigma(1)1}{\cdot}\dotsc{\cdot}a _{\sigma(n)n}{\cdot}\sgn{\sigma} = \ddsum{\sigma \in S_n}{}a_{1\sigma^{-1}(1)}{\cdot}\dotsc{\cdot}a _{n\sigma^{-1}(n)}{\cdot}\sgn{\sigma}
+		$$
+		Заметим, что если $\sigma$ пробегает все подстановки по одному разу, то $\pi =\sigma^{-1}$ тоже пробегает множество всех подстановок по одному разу: если две подстановки разные, то и обратные подстановки у них будут разные. Можем переписать нашу сумму:
+		$$
+			\ddsum{\sigma \in S_n}{}a_{1\sigma^{-1}(1)}{\cdot}\dotsc{\cdot}a _{n\sigma^{-1}(n)}{\cdot}\sgn{\sigma} = \ddsum{\pi \in S_n}{}a_{1\pi(1)}{\cdot}\dotsc{\cdot}a _{n\pi(n)}{\cdot}\sgn{(\pi^{-1})} = 
+		$$
+		$$
+			= \ddsum{\pi \in S_n}{}a_{1\pi(1)}{\cdot}\dotsc{\cdot}a _{n\pi(n)}{\cdot}\sgn{\pi} = \det{A}
+		$$
+	\end{proof}
+	\item Все свойства выше будут верны для определителя, как функции от столбцов матрицы;
+	\begin{proof}
+		При транспонировании строки и столбцы меняются ролями, а поскольку определитель транспонированной матрицы такой же, то свойства будут верными.
+	\end{proof}
+\end{enumerate}
+
+Мы определили определитель с помощью развернутой формулы, но на самом деле она не очень удобна для его вычисления, поскольку в ней очень много слагаемых и оно очень растёт с ростом $n$. Нужен более эффективный метод вычисления определителей.
+
+\subsection*{Метод вычисления $\det$ привидением матрицы к треугольному виду}
+
+Пусть у нас есть матрица $A$ и ЭП строк мы её приводим к ступенчатому виду $A^*$. Поскольку матрица квадратная, то ниже диагонали у неё всегда должны быть нули и она будет иметь вид:
+$$
+	A \xrightarrow{\text{ЭП строк}} A^* = 
+	\begin{pmatrix}
+		\lambda_1 & * & \dotsc & * \\
+		0 & \lambda_2 &  \dotsc & *\\
+		\vdots & \vdots & \ddots & \vdots\\
+		0 & 0 & \dotsc & \lambda_n
+	\end{pmatrix}
+$$
+Данный вид называется \uwave{треугольным}. Любую квадратную матрицу мы можем сделать треугольной, тогда определитель новой матрицы запишется так:
+$$
+	\det{A^*} = \det{A}{\cdot}(-1)^p{\cdot}\mu_1{\cdot}\dotsc{\cdot}\mu_q
+$$
+где $p$ - количество ЭП$2$, которые мы совершали перед приведением к $A^*$, а когда мы делаем ЭП$3$, то определитель тоже умножается на коэффициенты этих ЭП: $\mu_1, \dotsc,\mu_q$. При ЭП$1$ определитель не меняется, как мы уже знаем.
+\begin{prop}
+	$$
+		\begin{vmatrix}
+			\lambda_1 & * & \dotsc & * \\
+			0 & \lambda_2 &  \dotsc & *\\
+			\vdots & \vdots & \ddots & \vdots\\
+			0 & 0 & \dotsc & \lambda_n
+		\end{vmatrix} = \lambda_1{\cdot}\dotsc{\cdot}\lambda_n
+	$$
+\end{prop}
+\begin{proof}
+	Воспользуемся однородностью и рассмотрим последнюю строку матрицы:
+	$$
+		\begin{vmatrix}
+			\lambda_1 & * & \dotsc & * \\
+			0 & \lambda_2 &  \dotsc & *\\
+			\vdots & \vdots & \ddots & \vdots\\
+			0 & 0 & \dotsc & \lambda_n
+		\end{vmatrix} = 
+		\lambda_n{\cdot}
+		\begin{vmatrix}
+			\lambda_1 & * & \dotsc & * \\
+			0 & \lambda_2 &  \dotsc & *\\
+			\vdots & \vdots & \ddots & \vdots\\
+			0 & 0 & \dotsc & 1
+		\end{vmatrix}
+	$$
+	Применим ЭП$1$ и будем вычитать последнюю строку из остальных строк с подходящими коэффициентами, чтобы обнулить все элементы выше $1$ в столбце, тогда:
+	$$
+		\lambda_n{\cdot}
+		\begin{vmatrix}
+			\lambda_1 & * & \dotsc & * & * \\
+			0 & \lambda_2 &  \dotsc & * & *\\
+			\vdots & \vdots & \ddots & \vdots & \vdots\\
+			0 & 0 & \dotsc & \lambda_{n-1} & *\\
+			0 & 0 & \dotsc & 0 & 1
+		\end{vmatrix} = 
+		\lambda_n{\cdot}
+		\begin{vmatrix}
+			\lambda_1 & * & \dotsc & * &  0 \\
+			0 & \lambda_2 &  \dotsc & * & 0\\
+			\vdots & \vdots & \ddots & \vdots & \vdots\\
+			0 & 0 & \dotsc & \lambda_{n-1} & 0\\
+			0 & 0 & \dotsc & 0 & 1
+		\end{vmatrix}
+	$$
+	Аналогично проделываем операции с $\lambda_{n-1}$:
+	$$
+		\lambda_n{\cdot}
+		\begin{vmatrix}
+			\lambda_1 & * & \dotsc & * &  0 \\
+			0 & \lambda_2 &  \dotsc & * & 0\\
+			\vdots & \vdots & \ddots & \vdots & \vdots\\
+			0 & 0 & \dotsc & \lambda_{n-1} & 0\\
+			0 & 0 & \dotsc & 0 & 1
+		\end{vmatrix} = 
+		\lambda_n{\cdot}\lambda_{n-1}{\cdot}
+		\begin{vmatrix}
+			\lambda_1 & * & \dotsc & * &  0 \\
+			0 & \lambda_2 &  \dotsc & * & 0\\
+			\vdots & \vdots & \ddots & \vdots & \vdots\\
+			0 & 0 & \dotsc & 1 & 0\\
+			0 & 0 & \dotsc & 0 & 1
+		\end{vmatrix}= 
+		\lambda_n{\cdot}\lambda_{n-1}{\cdot}
+		\begin{vmatrix}
+			\lambda_1 & * & \dotsc & 0 &  0 \\
+			0 & \lambda_2 &  \dotsc & 0 & 0\\
+			\vdots & \vdots & \ddots & \vdots & \vdots\\
+			0 & 0 & \dotsc & 1 & 0\\
+			0 & 0 & \dotsc & 0 & 1
+		\end{vmatrix} = \dotsc 
+	$$
+	И так далее, в итоге мы получим:
+	$$
+		\dotsc = \lambda_1{\cdot}\lambda_2{\cdot}\dotsc{\cdot} \lambda_n{\cdot}
+		\begin{vmatrix}
+			1 & 0 & \dotsc & 0 &  0 \\
+			0 & 1 &  \dotsc & 0 & 0\\
+			\vdots & \vdots & \ddots & \vdots & \vdots\\
+			0 & 0 & \dotsc & 1 & 0\\
+			0 & 0 & \dotsc & 0 & 1
+		\end{vmatrix} = \lambda_1{\cdot}\lambda_2{\cdot}\dotsc{\cdot} \lambda_n{\cdot}1{\cdot}\dotsc{\cdot}1{\cdot}\sgn{\VE} = \lambda_1{\cdot}\lambda_2{\cdot}\dotsc{\cdot} \lambda_n{\cdot}
+	$$
+\end{proof}
+Собирая всё в одном месте, после приведения нашей матрицы к треугольной, мы найдем определитель исходной матрицы $A$:
+$$
+	\det{A} = \det{A^*}{\cdot}(-1)^p{\cdot}\dfrac{1}{\mu_1}{\cdot}\dotsc{\cdot}\dfrac{1}{\mu_q}= \lambda_1{\cdot}\dotsc{\cdot}\lambda_n{\cdot}(-1)^p{\cdot}\dfrac{1}{\mu_1}{\cdot}\dotsc{\cdot}\dfrac{1}{\mu_q}
+$$
+
+\end{document}

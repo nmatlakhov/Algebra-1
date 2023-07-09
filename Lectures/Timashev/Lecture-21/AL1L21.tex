@@ -1,0 +1,656 @@
+\documentclass[12pt]{article}
+\usepackage[left=1cm, right=1cm, top=2cm,bottom=1.5cm]{geometry} 
+
+\usepackage[parfill]{parskip}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage{enumitem}
+\usepackage[normalem]{ulem}
+\usepackage{amsfonts, amsmath, amsthm, amssymb, mathtools,xcolor}
+\usepackage{blkarray}
+
+\usepackage{tabularx}
+\usepackage{hhline}
+
+\usepackage{accents}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{1.5pt}
+\renewcommand{\footrulewidth}{1pt}
+
+\usepackage{graphicx}
+\usepackage[figurename=Рис.]{caption}
+\usepackage{subcaption}
+\usepackage{float}
+
+%%Наименование папки откуда забирать изображения
+\graphicspath{ {./images/} }
+
+%%Изменение формата для ввода доказательства
+\renewcommand{\proofname}{$\square$  \nopunct}
+\renewcommand\qedsymbol{$\blacksquare$}
+
+%%Изменение отступа на таблицах
+\addto\captionsrussian{%
+	\renewcommand{\proofname}{$\square$ \nopunct}%
+}
+%% Римские цифры
+\newcommand{\RN}[1]{%
+	\textup{\uppercase\expandafter{\romannumeral#1}}%
+}
+
+%% Для удобства записи
+\newcommand{\MR}{\mathbb{R}}
+\newcommand{\MC}{\mathbb{C}}
+\newcommand{\MQ}{\mathbb{Q}}
+\newcommand{\MN}{\mathbb{N}}
+\newcommand{\MZ}{\mathbb{Z}}
+\newcommand{\MTB}{\mathbb{T}}
+\newcommand{\MTI}{\mathbb{I}}
+\newcommand{\MI}{\mathrm{I}}
+\newcommand{\MCI}{\mathcal{I}}
+\newcommand{\MJ}{\mathrm{J}}
+\newcommand{\MH}{\mathrm{H}}
+\newcommand{\MT}{\mathrm{T}}
+\newcommand{\MU}{\mathcal{U}}
+\newcommand{\MV}{\mathcal{V}}
+\newcommand{\MB}{\mathcal{B}}
+\newcommand{\MF}{\mathcal{F}}
+\newcommand{\MW}{\mathcal{W}}
+\newcommand{\ML}{\mathcal{L}}
+\newcommand{\MP}{\mathcal{P}}
+\newcommand{\VN}{\varnothing}
+\newcommand{\VE}{\varepsilon}
+\newcommand{\dx}{\, dx}
+\newcommand{\dy}{\, dy}
+\newcommand{\dz}{\, dz}
+\newcommand{\dd}{\, d}
+
+
+\theoremstyle{definition}
+\newtheorem{defn}{Опр:}
+\newtheorem{rem}{Rm:}
+\newtheorem{prop}{Утв.}
+\newtheorem{exrc}{Упр.}
+\newtheorem{problem}{Задача}
+\newtheorem{lemma}{Лемма}
+\newtheorem{theorem}{Теорема}
+\newtheorem{corollary}{Следствие}
+
+\newenvironment{cusdefn}[1]
+{\renewcommand\thedefn{#1}\defn}
+{\enddefn}
+
+\DeclareRobustCommand{\divby}{%
+	\mathrel{\text{\vbox{\baselineskip.65ex\lineskiplimit0pt\hbox{.}\hbox{.}\hbox{.}}}}%
+}
+\DeclareRobustCommand{\ndivby}{\mkern-1mu\not\mathrel{\mkern4.5mu\divby}\mkern1mu}
+
+
+%Короткий минус
+\DeclareMathSymbol{\SMN}{\mathbin}{AMSa}{"39}
+%Длинная шапка
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+%Функция знака
+\DeclareMathOperator{\sgn}{sgn}
+
+%Функция ранга
+\DeclareMathOperator{\rk}{\text{rk}}
+\DeclareMathOperator{\diam}{\text{diam}}
+
+
+%Обозначение константы
+\DeclareMathOperator{\const}{\text{const}}
+
+\DeclareMathOperator{\codim}{\text{codim}}
+
+\DeclareMathOperator*{\dsum}{\displaystyle\sum}
+\newcommand{\ddsum}[2]{\displaystyle\sum\limits_{#1}^{#2}}
+
+%Интеграл в большом формате
+\DeclareMathOperator{\dint}{\displaystyle\int}
+\newcommand{\ddint}[2]{\displaystyle\int\limits_{#1}^{#2}}
+\newcommand{\ssum}[1]{\displaystyle \sum\limits_{n=1}^{\infty}{#1}_n}
+
+\newcommand{\smallerrel}[1]{\mathrel{\mathpalette\smallerrelaux{#1}}}
+\newcommand{\smallerrelaux}[2]{\raisebox{.1ex}{\scalebox{.75}{$#1#2$}}}
+
+\newcommand{\smallin}{\smallerrel{\in}}
+\newcommand{\smallnotin}{\smallerrel{\notin}}
+
+\newcommand*{\medcap}{\mathbin{\scalebox{1.25}{\ensuremath{\cap}}}}%
+\newcommand*{\medcup}{\mathbin{\scalebox{1.25}{\ensuremath{\cup}}}}%
+
+\makeatletter
+\newcommand{\vast}{\bBigg@{3.5}}
+\newcommand{\Vast}{\bBigg@{5}}
+\makeatother
+
+%Промежуточное значение для sup\inf, поскольку они имеют разную высоту
+\newcommand{\newsup}{\mathop{\smash{\mathrm{sup}}}}
+\newcommand{\newinf}{\mathop{\mathrm{inf}\vphantom{\mathrm{sup}}}}
+
+%Скалярное произведение
+\newcommand{\inner}[2]{\left\langle #1, #2 \right\rangle }
+\newcommand{\linsp}[1]{\left\langle #1 \right\rangle }
+\newcommand{\linmer}[2]{\left\langle #1 \vert #2\right\rangle }
+
+%Подпись символов снизу
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+
+%% Шапка для букв сверху
+\newcommand{\wte}[1]{\widetilde{#1}}
+\newcommand{\wht}[1]{\widehat{#1}}
+\newcommand{\ovl}[1]{\overline{#1}}
+
+%%Трансформация Фурье
+\newcommand{\fourt}[1]{\mathcal{F}\left(#1\right)}
+\newcommand{\ifourt}[1]{\mathcal{F}^{-1}\left(#1\right)}
+
+%%Символ вектора
+\newcommand{\vecm}[1]{\overrightarrow{#1\,}}
+
+%%Пространстов матриц
+\newcommand{\matsq}[1]{\operatorname{Mat}_{#1}}
+\newcommand{\mat}[2]{\operatorname{Mat}_{#1, #2}}
+
+%Оператор для действ и мнимых чисел
+\DeclareMathOperator{\IM}{\operatorname{Im}}
+\DeclareMathOperator{\RE}{\operatorname{Re}}
+\DeclareMathOperator{\li}{\operatorname{li}}
+\DeclareMathOperator{\GL}{\operatorname{GL}}
+\DeclareMathOperator{\SL}{\operatorname{SL}}
+\DeclareMathOperator{\Char}{\operatorname{char}}
+\DeclareMathOperator\Arg{Arg}
+
+%Делимость чисел
+\newcommand{\modn}[3]{#1 \equiv #2 \; (\bmod \; #3)}
+
+
+%%Взятие в скобки, модули и норму
+\newcommand{\parfit}[1]{\left( #1 \right)}
+\newcommand{\modfit}[1]{\left| #1 \right|}
+\newcommand{\sqparfit}[1]{\left\{ #1 \right\}}
+\newcommand{\normfit}[1]{\left\| #1 \right\|}
+
+%%Функция для обозначения равномерной сходимости по множеству
+\newcommand{\uconv}[1]{\overset{#1}{\rightrightarrows}}
+\newcommand{\uconvm}[2]{\overset{#1}{\underset{#2}{\rightrightarrows}}}
+
+
+%%Функция для обозначения нижнего и верхнего интегралов
+\def\upint{\mathchoice%
+	{\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	\int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+
+%%След матрицы
+\DeclareMathOperator*{\tr}{tr}
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+	\hskip -\arraycolsep
+	\let\@ifnextchar\new@ifnextchar
+	\array{#1}}
+\makeatother
+
+
+%% Переопределение функции хи, чтобы выглядела более приятно
+\makeatletter
+\@ifdefinable\@latex@chi{\let\@latex@chi\chi}
+\renewcommand*\chi{{\@latex@chi\smash[t]{\mathstrut}}} % want only bottom half of \mathstrut
+\makeatletter
+
+\setcounter{MaxMatrixCols}{20}
+
+\begin{document}
+\lhead{Алгебра-\RN{1}}
+\chead{Тимашев Д.А.}
+\rhead{Лекция - 21}
+
+\section*{Многочлены от нескольких переменных}
+Пусть $K$ - коммутативное, ассоциативное кольцо с единицей.
+\begin{defn}
+	\uwave{Кольцо многочленов от $n$ переменных} с коэффициентами из кольца $K$ это ассоциативное, коммутативное кольцо с единицей, удовлетворяющее следующим свойствам:
+	\begin{enumerate}[label=\arabic*)]
+		\item $K \subset K[x_1,\dotsc, x_n]$;
+		\item $x_1,\dotsc,x_n \in K[x_1,\dotsc, x_n], \, x_1,\dotsc, x_n \not\in K$;
+		\item $\forall f \in K[x_1,\dotsc,x_n], \, \exists!$ представление: 
+		$$
+			f = \ddsum{k_1,\dotsc,k_n \geq 0}{}a_{k_1\dotsc k_n}{\cdot}x_1^{k_1}{\cdot}\dotsc{\cdot}x_n^{k_n}
+		$$ 
+		С точностью до добавления нулевых слагаемых;
+	\end{enumerate}
+	\textbf{\uwave{Обозначение}}: $K[x_1,\dotsc, k_n]$.
+\end{defn}
+\begin{defn}
+	Элементы $x_1,\dotsc,x_n \in K[x_1,\dotsc, x_n]$ называются \uwave{переменными}.
+\end{defn}
+\begin{defn}
+	Элементы $a_{k_1\dotsc k_n} \in K$ в представлении $f \in K[x_1,\dotsc,x_n]$ называются \uwave{коэффициентами}.
+\end{defn}
+\begin{defn}
+	Элементы $x_1^{k_1}{\cdot}\dotsc{\cdot}x_n^{k_n}$ в представлении $f \in K[x_1,\dotsc,x_n]$ называются \uwave{одночленами}.
+\end{defn}
+
+\begin{theorem}
+	$K[x_1,\dotsc,x_n]$ - существует и единственно с точностью до изоморфизма.
+\end{theorem}
+
+\begin{proof}\hfill\\
+	\textbf{\uline{Существование}}: Проведём индукцией по числу переменных.
+	
+	\uline{База индукции}: При $n = 1$ - ранее доказали.
+	
+	\uline{Шаг индукции}: При $n > 1$ определим кольцо так:
+	$$
+		K[x_1,\dotsc, x_n] = \left(K[x_1,\dotsc,x_{n-1}]\right)[x_n]
+	$$ 
+	То есть рассматриваем кольцо многочленов от одной переменной $x_n$ с кольцом коэффициентов равным кольцу многочленов от $n-1$ переменной, построенное по индукции. Надо проверить, что новое кольцо будет удовлетворять свойствам из определения:
+	\begin{enumerate}[label=\arabic*)]
+		\item $K \subset K[x_1,\dotsc,x_{n-1}] \subset \left(K[x_1,\dotsc,x_{n-1}]\right)[x_n]$;
+		\item $x_1,\dotsc,x_{n-1} \in K[x_1,\dotsc,x_{n-1}] \Rightarrow x_1,\dotsc,x_{n-1} \in \left(K[x_1,\dotsc,x_{n-1}]\right)[x_n], \, x_n \in \left(K[x_1,\dotsc,x_{n-1}]\right)[x_n]$;
+		\item Поскольку мы строим кольцо многочленов от одной переменной, то каждый элемент из построенного кольца единственным образом представляется единственным образом в виде многочлена от переменной $x_n$ с коэффициентами из $K[x_1,\dotsc,x_{n-1}]$:
+		$$
+			\forall f \in \left(K[x_1,\dotsc,x_{n-1}]\right)[x_n], \, \exists! \, \text{представление}\colon f = \ddsum{k\geq 0}{}f_k{\cdot}x_n^k, \, f_k \in K[x_1,\dotsc,x_{n-1}]
+		$$
+		где $f_k$ также имеют единственное представление по предположению индукции:
+		$$
+			\forall k, \, \exists! \, \text{представление}\colon f_k =\ddsum{k_1,\dotsc, k_{n-1} \geq 0}{}a_{k_1\dotsc k_{n-1}k}{\cdot}x_1^{k_1}{\cdot}\dotsc{\cdot}x_{n-1}^{k_{n-1}} \Rightarrow
+		$$
+		$$
+			\Rightarrow f = \ddsum{k_1,\dotsc,k_{n-1},k \geq 0}{}a_{k_1\dotsc k_{n-1}k}{\cdot}x_1^{k_1}{\cdot}\dotsc{\cdot}x_{n-1}^{k_{n-1}}{\cdot}x_n^k
+		$$
+		Если существует другое представление $f$, то:
+		$$
+			f = \ddsum{k_1,\dotsc,k_{n-1},k \geq 0}{}b_{k_1\dotsc k_{n-1}k}{\cdot}x_1^{k_1}{\cdot}\dotsc{\cdot}x_{n-1}^{k_{n-1}}{\cdot}x_n^k = \ddsum{k \geq 0}{}\left( \ddsum{k_1,\dotsc,k_{n-1} \geq 0}{}b_{k_1\dotsc k_{n-1}k}{\cdot}x_1^{k_1}{\cdot}\dotsc{\cdot}x_{n-1}^{k_{n-1}}\right){\cdot}x_n^k \Rightarrow
+		$$
+		$$
+			\Rightarrow \ddsum{k_1,\dotsc,k_{n-1} \geq 0}{}b_{k_1\dotsc k_{n-1}k}{\cdot}x_1^{k_1}{\cdot}\dotsc{\cdot}x_{n-1}^{k_{n-1}} = f_k
+		$$
+		где последнее равенство верно в силу единственности представления в кольце многочленов от $x_n$. Поскольку в кольце многочленов от $n-1$ переменной каждый многочлен единственным способом представляется в виде многочлена от одночленов, то:
+		$$
+			\forall k_1, \dotsc, k_{n-1}, k, \, a_{k_1\dotsc k_{n-1}k} = b_{k_1\dotsc k_{n-1}k}
+		$$
+	\end{enumerate}
+	\textbf{\uline{Единственность}}: доказывается как для $n = 1$: операции над многочленами не зависят существенным образом от переменных. В самом деле, пусть есть два многочлена:
+	$$
+		f = \ddsum{}{}a_{k1\dotsc k_n}{\cdot}x_1^{k_1}{\cdot}\dotsc{\cdot}x_n^{k_n}, \quad g = \ddsum{}{}b_{l_1\dotsc l_n}{\cdot}x_1^{l_1}{\cdot}\dotsc{\cdot}x_n^{l_n} \Rightarrow
+	$$
+	$$
+		\Rightarrow f + g = \ddsum{m_1,\dotsc,m_n \geq 0}{}(a_{m_1\dotsc m_n} + b_{m_1\dotsc m_n}){\cdot}x_1^{m_1}{\cdot}\dotsc{\cdot}x_n^{m_n}
+	$$
+	$$
+		\Rightarrow f{\cdot}g = \ddsum{\substack{k_1,\dotsc,k_n \geq 0\\l_1,\dotsc,l_n \geq 0}}{}a_{k_1\dotsc k_n}{\cdot}b_{l_1\dotsc l_n}{\cdot}x_1^{k_1 + l_1}{\cdot}\dotsc{\cdot}x_n^{k_n + l_n} = \ddsum{m_1,\dotsc,m_n \geq 0}{}\bigg(\ddsum{\substack{k_1,\dotsc,k_n \geq 0\\l_1,\dotsc,l_n \geq 0\\ k_i + l_i = m_i}}{} a_{k_1\dotsc k_n}{\cdot}b_{l_1\dotsc l_n}\bigg) {\cdot}x_1^{m_1}{\cdot}\dotsc{\cdot}x_n^{m_n}
+	$$
+	Таким образом, коэффициенты суммы и произведения определяются только по коэффициентам исходных многочленов, независимо от переменных $\Rightarrow$ мы можем построить изоморфизм между двумя кольцами многочленов от $n$ переменных:
+	$$
+		\varphi K[x_1,\dotsc,x_n] \xrightarrow[\sim]{} K[y_1,\dotsc, y_n], \quad f  \mapsto \varphi(f) = \ddsum{k_1,\dotsc,k_{n-1},k \geq 0}{}a_{k1\dotsc k_n}{\cdot}y_1^{k_1}{\cdot}\dotsc{\cdot}y_n^{k_n}
+	$$
+	Такое соответствие взаимнооднозначно, поскольку каждый многочлен единственным способом представляется в виде линейной комбинации одночленов, то есть он определяется последовательностью своих коэффициентов. Это соответствие также согласовано с операциями сложения/умножения, поскольку результат операций зависит только от исходных коэффициентов многочленов.
+\end{proof}
+
+\newpage
+\section*{Свойства кольца многочленов от многих переменных}
+\begin{defn}
+	Функция многих аргументов $f \colon K^n \to K$ называется \uwave{полиномиальной функцией}.
+\end{defn}
+
+Каждый многочлен $f \in K[x_1,\dotsc,x_n]$ задаёт полиномиальную функцию $f \colon K^n \to K$:
+$$
+	\forall c_1,\dotsc, c_n \in K, \, f(c_1,\dotsc,c_n) = \ddsum{k_1,\dotsc,k_n \geq 0}{}a_{k_1\dotsc k_n}{\cdot}c_1^{k_1}{\cdot}\dotsc{\cdot}c_n^{k_n}
+$$
+Мы можем доказать утверждение, аналогичное утверждению для кольца многочленов от одной переменной про эквивалентность формального равенства функциональному.
+\begin{prop}
+	Пусть $K$ - бесконечное поле, тогда функциональное равенство двух многочленов от многих переменных над этим полем равносильно формальному равенству: 
+	$$
+		\forall f,g, \, K[x_1,\dotsc,x_n], \, f = g \Leftrightarrow \forall c_1,\dotsc,c_n \in K, \, f(c_1,\dotsc,c_n) = g(c_1,\dotsc, c_n)
+	$$
+\end{prop}
+\begin{proof}\hfill\\
+	$(\Rightarrow)$ Очевидно, поскольку если многочлены равны покоэффициентно, то подставляя вместо $x_1,\dotsc,x_n$ любые значения, мы получим равенство значений.
+	
+	$(\Leftarrow)$ Воспользуемся индукцией по числу переменных:
+	
+	\uline{База индукции}: При $n = 1$ - ранее доказали.
+	
+	\uline{Шаг индукции}: Пусть у нас есть два многочлена $f,g \in K[x_1,\dotsc,x_n]$, которые равны функционально:
+	$$
+		f = \ddsum{k}{}f_k{\cdot}x_n^k, \quad g = \ddsum{k}{}g_k{\cdot}x_n^k, \quad f_k, g_k \in K[x_1,\dotsc, x_{n-1}]
+	$$
+	$$
+		\forall c_1,\dotsc,c_n \in K, \, f(c_1,\dotsc,c_n) = g(c_1,\dotsc,c_n) \Rightarrow \ddsum{k}{}f_k(c_1,\dotsc,c_{n-1}){\cdot}c_n^k = \ddsum{k}{}g_k(c_1,\dotsc,c_{n-1}){\cdot}c_n^k
+	$$
+	Зафиксируем $c_1,\dotsc,c_{n-1}$ и будем менять только $c_n$, тогда мы получим равенство двух полиномиальных функций только от одной переменной. Используя случай $n=1$, в $K[x_n]$ будет верно:
+	$$
+		\psi(x_n) = \ddsum{k}{}f_k(c_1,\dotsc,c_{n-1}){\cdot}x_n^k = \ddsum{k}{}g_k(c_1,\dotsc,c_{n-1}){\cdot}x_n^k = \varphi(x_n), \, \psi(x_n), \varphi(x_n) \in K[x_n]
+	$$
+	Равенство двух многочленов это равенство их соответствующих коэффициентов, тогда: 
+	$$
+		\forall k, \, \forall c_1,\dotsc,c_{n-1} \in K, \, f_k(c_1,\dotsc,c_{n-1}) = g_k(c_1,\dotsc,c_{n-1})
+	$$
+	По предположению индукции, равенство полиномиальных функций от $n-1$ переменной влечет их формальное равенство, тогда: $f_k = g_k, \, f_k,g_k \in K[x_1,\dotsc,x_{n-1}] \Rightarrow f = g$.
+\end{proof}
+
+\begin{defn}
+	\uwave{Степенью одночлена} $u = x_1^{k_1}{\cdot}\dotsc{\cdot}x_n^{k_n}$ от $n$ переменных по переменной $x_i$ называется число:
+	$$
+		\deg_{x_i}(u) = \deg_{x_i}\left(x_1^{k_1}{\cdot}\dotsc{\cdot}x_i^{k_i}{\cdot}\dotsc{\cdot}x_n^{k_n}\right) = k_i
+	$$
+\end{defn}
+\begin{defn}
+	\uwave{Полной степенью одночлена} $u = x_1^{k_1}{\cdot}\dotsc{\cdot}x_n^{k_n}$ от $n$ переменных называется число:
+	$$
+		\deg(u) = \deg\left(x_1^{k_1}{\cdot}\dotsc{\cdot}x_i^{k_i}{\cdot}\dotsc{\cdot}x_n^{k_n}\right) = k_1 + \dotsc + k_i + \dotsc + k_n
+	$$
+\end{defn}
+\begin{defn}
+	\uwave{Степенью многочлена} $f \in K[x_1,\dotsc,x_n]$ по переменной $x_i$ называется максимальная степень одночленов по переменной $x_i$, входящих в него с ненулевым коэффициентом:
+	$$
+		\deg_{x_i}(f) = \deg_{x_i}\left(\ddsum{k_1,\dotsc,k_n \geq 0}{}a_{k_1\dotsc k_n}{\cdot}x_1^{k_1}{\cdot}\dotsc{\cdot}x_n^{k_n}\right) = \max\limits_{i \colon a_{k_1\dotsc k_n} \neq 0 }\deg_{x_i}(x_1^{k_1}{\cdot}\dotsc{\cdot}x_n^{k_n})
+	$$
+\end{defn}
+
+\begin{defn}
+	\uwave{Степенью многочлена} $f \in K[x_1,\dotsc,x_n]$ называется максимальная полная степень одночленов, входящих в него с ненулевым коэффициентом:
+	$$
+		\deg(f) = \deg\left(\ddsum{k_1,\dotsc,k_n \geq 0}{}a_{k_1\dotsc k_n}{\cdot}x_1^{k_1}{\cdot}\dotsc{\cdot}x_n^{k_n}\right) = \max\limits_{ a_{k_1\dotsc k_n} \neq 0 }\deg(x_1^{k_1}{\cdot}\dotsc{\cdot}x_n^{k_n})
+	$$
+\end{defn}
+\begin{defn}
+	Многочлен $f \in K[x_1,\dotsc,x_n]$ называется \uwave{однородным}, если полная степень всех одночленов входящих в $f$ с ненулевыми коэффициентами - одинакова.
+\end{defn}
+Отметим следующее полезное утверждение.
+\begin{prop}
+	Любой многочлен от $n$ переменных можно разложить на сумму однородных многочленов, причем единственным образом: 
+	$$
+		\forall f \in K[x_1,\dotsc, x_n], \, f \neq 0, \, \deg(f) = d,\, \exists! \, \text{разложение} \colon f = f_0 + f_1 + \dotsc + f_d
+	$$ 
+	где все многочлены $f_k$ - однородны, степени $\deg(f_k) = k$.
+\end{prop}
+\begin{proof}
+	Если у $f$ есть одночлены разных степеней в него входящие, то все одночлены одной и той же фиксированной степени $k$ сгруппируем в одну подсумму большой суммы $\Rightarrow$ получим $f_k$. Единственность очевидно следует из определения кольца многочленов от $n$ переменных.
+\end{proof}
+
+\begin{defn}
+	Однородные многочлены $f_0,f_1,\dotsc, f_d$ называются \uwave{однородными компонентами} $f$.
+\end{defn}
+
+\subsection*{Лексикографиечский порядок}
+В случае одной переменной все одночлены можно различать и упорядочивать по их степеням: у двух разных одночленов разные степени и их можно сравнивать по степеням. В случае одночленов от нескольких переменных их уже нельзя сравнивать по степени, поскольку бывают разные одночлены одной и той же степени. При этом, их хочется как-то сравнивать и упорядочивать между собой.
+
+\begin{defn}
+	\uwave{Лексикографический порядок} на одночленах устроен следующим образом:
+	$$
+		u = x_1^{k_1}{\cdot}\dotsc{\cdot}x_n^{k_n} \succ v = x_1^{l_1}{\cdot}\dotsc{\cdot}x_n^{l_n}
+	$$
+	Одночлен $u$ \uwave{старше}, чем одночлен $v$, если: 
+	$$
+		\exists \, i \colon k_i > l_i, \, \forall j < i, \, k_j = l_j
+	$$
+\end{defn}
+\begin{rem}
+	Лексикографический означает - словарный. Похожим образом, например, сравниваются слова в словаре.
+\end{rem}
+
+\textbf{Пример}: Рассмотрим два одночлена: $x_1^2x_2x_3^3x_4^2x_5$ и  $x_1^2x_2x_3^2x_4^3x_5^4$. Первый одночлен старше:
+$$
+	x_1 \colon 2 = 2, \, x_2 \colon 1 = 1, \, x^3 \colon 3 > 2 \Rightarrow x_1^2x_2x_3^3x_4^2x_5 \succ x_1^2x_2x_3^2x_4^3x_5^4
+$$
+При этом: $\deg(x_1^2x_2x_3^2x_4^3x_5^4) = 2 + 1 + 2 + 3 + 4 = 12 > \deg(x_1^2x_2x_3^3x_4^2x_5) = 2 + 1 + 3 + 2 + 1 = 9$.
+
+\begin{rem}
+	Заметим, что лексикографический порядок, вообще говоря, не согласован с полной степенью. Можно модифицировать определение лексикографического порядка - сначала упорядочивая члены по степени, а уже одночлены одинаковых степеней упорядочивать лексикографически. Такой порядок будет называться \uwave{однородным лексикографическим порядком}.
+\end{rem}
+
+\begin{prop}(\textbf{Свойства лексикографического порядка}):
+	\begin{enumerate}[label=\arabic*)]
+		\item Для любых двух одночленов $u$ и $v$ верно одно из трёх: $u \succ v,\, u \prec v, \, u =v$;
+		\item \textbf{Транзитивность}: $u \succ v \succ w \Rightarrow u \succ w$;
+		\item Если $u \succ v$, то $u{\cdot}w \succ v{\cdot}w$;
+		\item Если $u_1 \succ v_1, \, u_2 \succ v_2$, то $u_1{\cdot}u_2 \succ v_1{\cdot}v_2$;
+	\end{enumerate}
+\end{prop}
+\begin{proof}\hfill
+	\begin{enumerate}[label=\arabic*)]
+		\item Очевидно, поскольку по порядку степени переменных в одночленах либо равны, либо больше или меньше друг друга;
+		
+		\item Пусть $u = x_1^{k_1}{\cdot}\dotsc{\cdot}x_n^{k_n}, \, v = x_1^{l_1}{\cdot}\dotsc{\cdot}x_n^{l_n}, \, w = x_1^{m_1}{\cdot}\dotsc{\cdot}x_n^{m_n}$, будем их сравнивать:
+		$$
+			\begin{matrix}
+				k_1 & k_2 & \dotsc & k_i & \dotsc & k_j & \dotsc & k_n \\
+				\rotatebox[origin = c]{90}{=} & \rotatebox[origin = c]{90}{=} & \dotsc & \rotatebox[origin = c]{-90}{>} & \dotsc & ? & \dotsc & ? \\
+				l_1 & l_2 & \dotsc & l_i & \dotsc & l_j & \dotsc & l_n \\
+				\rotatebox[origin = c]{90}{=} & \rotatebox[origin = c]{90}{=} & \dotsc & \rotatebox[origin = c]{90}{=} & \dotsc & \rotatebox[origin = c]{-90}{>} & \dotsc & ? \\
+				m_1 & m_2 & \dotsc & m_i & \dotsc & m_j & \dotsc & m_n
+			\end{matrix} \Rightarrow
+			\begin{cases}
+				k_i > l_i, \, k_p = l_p, & p < i\\
+				l_j > m_j, \, l_s = m_s, & s < j	
+			\end{cases}
+		$$
+		Сравним теперь $u$ и $w$:
+		$$
+			r = \min(i,j) \Rightarrow \forall t < r, \, k_t = l_t = m_t,  \, k_r \geq l_r \geq m_r
+		$$
+		Причем в последнем неравенстве одно из них будет строгим $\Rightarrow k_r > m_r \Rightarrow u \succ w$;
+		\item Пусть, например: $u \succ v$ и $w = x_1^{m_1}{\cdot}\dotsc{\cdot}x_n^{m_n}$, тогда:
+		$$
+			\exists \, i \colon k_i > l_i, \, \forall j < i, \, k_j = l_j \Rightarrow k_i + m_i > l_i + m_i, \, \forall j < i, \, k_j + m_j = l_j + m_j \Rightarrow u{\cdot}w \succ v{\cdot}w	
+		$$
+		\item Воспользуемся свойством $3)$ и $2)$:
+		$$
+			u_1 \succ v_1, \, u_2 \succ v_2 \underset{3)}{\Rightarrow} u_1{\cdot}u_2 \succ v_1{\cdot}u_2,\, v_1{\cdot}u_2 \succ v_1{\cdot}v_2 \underset{2)}{\Rightarrow} u_1{\cdot}u_2 \succ v_1{\cdot}v_2
+		$$
+	\end{enumerate}
+\end{proof}
+
+\begin{defn}
+	\uwave{Старший член} многочлена $f \in K[x_1,\dotsc,x_n], \, f \neq 0$ это самый старший из одночленов, входящих в $f$ с ненулевым коэффициентом. 
+	
+	\textbf{\uwave{Обозначение}}: $\wht{f}$.
+\end{defn}
+\begin{prop}
+	Пусть $K$ это область целостности (коммутативное, ассоциативное кольцо с единицей без делителей нуля). Тогда если $f,g \in K[x_1,\dotsc,x_n], \, f,g \neq 0$, то $f{\cdot}g \neq 0$ и $\wht{fg} = \wht{f}{\cdot}\wht{g}$.
+\end{prop}
+\begin{proof}
+	Пусть многочлены имеют вид:
+	$$
+		f = a_0u_0 + a_1u_1 + \dotsc + a_ku_k, \quad g = b_0v_0 + b_1v_1 + \dotsc+ b_lv_l
+	$$
+	где $u_i, v_j$ это одночлены, $a_i, b_j \in K, \, a_i, b_j \neq 0$. Пусть также будет верен лексикографический порядок:
+	$$
+		u_0 \succ u_1 \succ \dotsc \succ u_k,\, \wht{f} = u_0 \quad v_0 \succ v_1 \succ \dotsc\succ v_k, \, \wht{g} = v_0 \Rightarrow
+	$$
+	$$
+		\Rightarrow f{\cdot}g = \underset{\neq 0}{a_0{\cdot}b_0}{\cdot}u_0{\cdot}v_0 + \ddsum{i,j \colon i > 0 \vee j > 0 }{}a_i{\cdot}b_j{\cdot}u_i{\cdot}v_j
+	$$
+	где $a_0{\cdot}b_0 \neq 0$ поскольку мы находимся в целостном кольце и произведение ненулевых элементов также дает ненулевой элемент. Рассмотрим одночлен $u_0{\cdot}v_0$:
+	$$
+		\wht{f} = u_0 \Rightarrow \forall i > 0, \, u_0v_0 \succ u_iv_0, \, \wht{g} = v_0 \Rightarrow \forall j, \, u_iv_0 \succeq u_iv_j \Rightarrow \forall i > 0, \, u_0 v_0 \succ u_i v_j
+	$$
+	$$
+		\wht{g} = v_0 \Rightarrow \forall j > 0, \, u_0v_0 \succ u_0v_j, \, \wht{u} = u_0 \Rightarrow \forall i, \, u_0v_j \succeq u_iv_j \Rightarrow \forall j > 0, \, u_0 v_0 \succ u_i v_j
+	$$
+	Таким образом, мы получаем: $\forall i,j > 0, \, u_0v_0 \succ u_iv_j \Rightarrow$ первое слагаемое ни с кем не сокращается $\Rightarrow f{\cdot}g \neq 0$ и вместе с этим: $\wht{f{\cdot}g} = u_0{\cdot}v_0 = \wht{f}{\cdot}\wht{g}$.
+\end{proof}
+
+\begin{corollary}
+	Если $K$ это область целостности, то $K[x_1,\dotsc, x_n]$ тоже будет областью целостности.
+\end{corollary}
+\begin{proof}
+	Произведение ненулевых элементов не равно нулю $\Rightarrow$ нет делителей нуля $\Rightarrow$ получим область целостности. Коммутативность, ассоциативность, наличие единицы всегда будет иметь место.
+\end{proof}
+\begin{exrc}
+	Если $K$ это область целостности, $f,g \in K[x_1,\dotsc, x_n], \, f,g \neq 0$, то тогда: 
+	$$
+		\deg(f{\cdot}g) = \deg(f) + \deg(g)
+	$$ 
+	В том числе это будет верно для степеней по переменным.
+\end{exrc}
+
+\section*{Факториальность кольца многочленов от многих переменных}
+В случае многочленов от одной переменной кольцо многочленов с коэффициентами из поля - евклидово, а всякое евклидово кольцо факториально: есть однозначное разложение на простые множители. Оказывается, что $K[x_1,\dotsc,x_n]$ уже не евклидово при $n > 1$, тем не менее оно факториально.
+
+\begin{exrc}
+	Доказать, что $K[x_1,\dotsc,x_n]$ над полем $K$ - не евклидово.
+\end{exrc}
+
+\begin{theorem}
+	Если $A$ это факториальное кольцо, то тогда $A[x]$ тоже факториально.
+\end{theorem}
+\begin{corollary}
+	$\MZ[x]$ - факториально.
+\end{corollary}
+\begin{proof}
+	$\MZ$ это факториальное кольцо $\Rightarrow$ применяя теорему получаем требуемое.
+\end{proof}
+\begin{corollary}
+	$K[x_1,\dotsc,x_n]$ - факториально, если $K$ - это поле (или факториальное кольцо).
+\end{corollary}
+\begin{proof}
+	Индукцией по $n$.
+	
+	\uline{База индукции}: При $n = 1$: кольцо многочленов над полем евклидово $\Rightarrow$ факториально. Кольцо многочленов над произвольным факториальным кольцом, то это следует из теоремы.
+	
+	\uline{Шаг индукции}: Представим наше кольцо многочленов следующим образом: 
+	$$
+		K[x_1,\dotsc,x_n] = \left(K[x_1,\dotsc,x_{n-1}]\right)[x_n]
+	$$ 
+	По предположению индукции $K[x_1,\dotsc,x_{n-1}]$ будет факториальным $\Rightarrow$ кольцо многочленов над этим кольцом также будет факториальным по теореме.
+\end{proof}
+
+Докажем теорему $2$. Обозначим $K = Q(A)$ - поле дробей факториального кольца $A$. Вспомним:
+\begin{defn}
+	Целостное кольцо $A$ называется \uwave{факториальным}, если $\forall a \in A, \, a\neq 0, \, a\not\in A^{\times}$ можно разложить в произведение простых множителей единственным образом, с точностью до перестановки множителей и их замены на ассоциированные элементы.
+\end{defn}
+\begin{defn}
+	Многочлен $g = a_0 + a_1 x + \dotsc + a_nx^n \in A[x]$ называется \uwave{примитивным}, если все его коэффициенты $a_0,a_1,\dotsc,a_n \in A$ взаимно просты в совокупности: $(a_0,a_1,\dotsc,a_n) = 1$.
+\end{defn}
+\begin{rem}
+	Взаимная простота коэффициентов в совокупности $\Leftrightarrow$ у них нет общего необратимого делителя.
+\end{rem}
+\begin{lemma}\hfill
+	\begin{enumerate}[label=\arabic*)]
+		\item $f \in K[x] \Rightarrow f = \lambda{\cdot}g, \, \lambda \in K^{\times}, \, g\in A[x]$ - примитивен;
+		\item $f \in A[x] \Rightarrow \lambda \in A$;
+	\end{enumerate}
+\end{lemma}
+\begin{proof}\hfill
+	\begin{enumerate}[label=\arabic*)]
+		\item Пусть многочлен $f \in K[x]$ имеет вид: 
+		$$
+			f  = c_0 + c_1x + \dotsc + c_nx^n, \, c_0,c_1,\dotsc, c_n \in K
+		$$ 
+		Поскольку $K = Q(A)$, то каждый из коэффициентов представляется в виде дроби с числителем и знаменателем из $A$, причем их можно привести к общему знаменателю:
+		$$
+			\forall i = \ovl{0,n}, \, c_i = \dfrac{b_i}{c}, \, b_i,c \in A
+		$$
+		Так как мы находимся в факториальном кольце, то у любого набора элементов есть НОД, он вычисляется по разложению на простые множители (смотри лекцию $17$ этого семестра). Положим НОД: $b = (b_0,b_1,\dotsc, b_n) \in A$, тогда:
+		$$
+			\forall i = \ovl{0,n}, \, b_i = b{\cdot}a_i, \, a_i \in A \colon (a_0,a_1,\dotsc,a_n) = 1 \Rightarrow 
+		$$
+		$$
+			\forall i = \ovl{0,n}, \, c_i = \dfrac{b}{c}{\cdot}a_i, \, \lambda = \dfrac{b}{c}\Rightarrow f = \lambda(a_0 + a_1{\cdot}x + \dotsc +  a_n{\cdot}x^n)
+		$$
+		где многочлен $g = a_0 + a_1{\cdot}x + \dotsc +  a_n{\cdot}x^n$ будет примитивным с коэффициентами из $A$;
+		\item Воспользуемся $1)$ и представим $f \in A[x]$ в виде: $f = \lambda{\cdot}g$, где $g$ - примитивный и $\lambda = \tfrac{b}{c}$. Можем считать, что $(b,c) = 1$ в кольце $A$, сократив их на НОД, тогда:
+		$$
+			f \in A[x] \Rightarrow \forall i =\ovl{0,n}, \, c_i = \dfrac{ba_i}{c} \in A \Rightarrow ba_i = c_ic \Rightarrow ba_i \divby c
+		$$
+		где последнее верно по определению делимости. Предположим противное: пусть $\lambda = \tfrac{b}{c} \not\in A$, тогда:
+		$$
+			\exists \, \text{простое }p \in A\colon p \mid c, \, p \nmid b \Rightarrow \forall i = \ovl{0,n}, \, b{\cdot}a_i \divby p \Rightarrow \forall i = \ovl{0,n}, \, a_i \divby p
+		$$
+		Последнее следует из того факта, что если произведение двух множителей делится на какой-то простой элемент, то один из множителей должен на него делится, в силу единственности разложения на простые множители. 
+		
+		Получили противоречие с примитивностью многочлена, так как все его коэффициенты делятся на $p$, хотя их НОД $(a_0, a_1,\dotsc,a_n) = 1 \Rightarrow \lambda \in A$;
+	\end{enumerate}
+\end{proof}
+
+\begin{lemma}(\textbf{Гаусс})
+	Произведение примитивных многочленов - примитивный многочлен.
+\end{lemma}
+\begin{proof}
+	Пусть $f = a_0 + a_1x + \dotsc + a_n x^n$ и $g = b_0 + b_1x + \dotsc + b_mx_m$ - два примитивных многочлена. Рассмотрим их произведение:
+	$$
+		f{\cdot}g = c_0 + c_1x + \dotsc + c_{n + m}x^{n + m}, \, c_k = \ddsum{i + j = k}{}a_ib_j
+	$$
+	Предположим противное: пусть $f{\cdot}g$ - не примитивен, тогда 
+	$$
+		\exists \, \text{простой }p\in A \colon \forall k =\ovl{0,n+m}, \, c_k \divby p
+	$$ 
+	Поскольку многочлены $f,g$ были примитивными, то: $\exists \, i,j \colon a_i,b_j \ndivby p$. Возьмем наименьшие $i,j$ с этими свойствами и рассмотрим коэффициент $c_k = c_{i + j}$:
+	$$
+		c_k = a_0b_k + \dotsc + a_{i-1}b_{j+1} + a_ib_j + a_{i+1}b_{j-1} + \dotsc + a_k b_0
+	$$
+	$$
+		\forall k < i, \, a_k \divby p \Rightarrow a_0, \dotsc, a_{i-1} \divby p \Rightarrow a_0b_k, \dotsc, a_{i-1}b_{j+1} \divby p
+	$$
+	$$
+		\forall k < j, \, b_k \divby p \Rightarrow b_{j-1}, \dotsc, b_0 \divby p \Rightarrow a_{i+1}b_{j-1}, \dotsc,  a_k b_0 \divby p
+	$$
+	Получаем противоречие, поскольку $c_k$ делится на $p$ и все члены кроме $a_i b_j$ тоже делятся на $p$.
+\end{proof}
+
+\begin{proof}(\textbf{Доказательство теоремы $2$})
+	\begin{enumerate}[label=\arabic*)]
+		\item \uline{Описание простых элементов в $A[x]$}:
+		\begin{enumerate}[label=(\arabic*)]
+			\item $\deg = 0$: Простые элементы $p \in A$: если многочлен степени $0$ мог бы разлагаться на два множителя нулевой степени, то он не мог бы быть простым элементом в $A \Rightarrow$ он простой в $A$; 
+			\item $\deg > 0$: Многочлены примитивные в $A[x]$ и неприводимые в $K[x]$: такой многочлен мог бы разлагаться на следующие множители:
+			\begin{enumerate}[label=\alph*)]
+				\item На два множителя меньшей степени (тоже положительной) $\Rightarrow$ по определению был бы приводимым многочленом $\Rightarrow$ не разлагается на такие множители;
+				\item На два множителя нулевой и первончальной степеней $\Rightarrow$ из коэффициентов исходного многочлена можно было бы вынести общую константу $\Rightarrow$ он не был бы примитивным $\Rightarrow$ не разлагается на такие множители;  
+			\end{enumerate}
+		\end{enumerate}
+		Других простых нет, поскольку каждый многочлен из $A[x]$ может быть разложен в произведение многочленов нулевой и положительной степени (вытекает из следующего пункта);
+		\item \uline{Разложение многочленов в $A[x]$}:
+		$$
+			\forall f \in A[x], \, \exists\, \text{ разложение} \colon f = p_1{\cdot}\dotsc{\cdot}p_m{\cdot}g_1{\cdot}\dotsc{\cdot}g_n
+		$$
+		где $p_1, \dotsc, p_m$ - простые в $A$, а $g_1,\dotsc, g_n$ - примитивные многочлены, неприводимые над $K$. В самом деле, кольцо многочленов над полем $K$ факториально (поскольку оно евклидово) $\Rightarrow$ каждый многочлен разлагается в произведение неприводимых, тогда:
+		$$
+			\forall f \in A[x] \Rightarrow f \in K[x] \Rightarrow f = f_1{\cdot}\dotsc{\cdot}f_n, \, \forall i = \ovl{1,n}, \, f_i \text{ - неприводимые в } K[x]
+		$$
+		По лемме $1$ многочлены $f_i$ в $f$ можно представить в следующем виде:
+		$$
+			f = f_1{\cdot}\dotsc{\cdot}f_n = (\lambda_1g_1){\cdot}\dotsc{\cdot}(\lambda_ng_n), \, \forall i =\ovl{1,n}, \, \lambda_i \in K^{\times}, \, g_i\text{ - примитивные}, \, g_i \in A[x]
+		$$
+		Соберём все константы $\lambda_1,\dotsc,\lambda_n$ в одну $\lambda$, тогда:
+		$$
+			f = \lambda{\cdot}\underbrace{g_1{\cdot}\dotsc{\cdot}g_n}_{\text{примитивно}}, \, \lambda \in K^{\times}, \, \forall i =\ovl{1,n}, \, g_i \in A[x]
+		$$
+		Заметим, что произведение $g_1{\cdot}\dotsc{\cdot}g_n$ примитивно по лемме $2$. Вместе с этим $g_i$ ещё и неприводимы, поскольку пропорциональны неприводимым многочленам над $K$. Так как произведение примитивного многочлена на $\lambda$ даёт многочлен с коэффициентами из $A$, то по лемме $1$ пункту $2)$, коэффициент $\lambda \in A \Rightarrow$ его можно разложить в произведение простых элементов:
+		$$
+			\lambda = p_1{\cdot}\dotsc{\cdot}p_m, \, \forall i =\ovl{1,m}, \, p_i \text{ - простые},\, p_i \in A
+		$$
+		Следовательно, мы получили требуемое разложение;
+		\item \uline{Единственность разложения $f \in A[x]$}:
+
+		Пусть $f \in A[x]$ разлагается двумя способами:
+		$$
+			f = p_1{\cdot}\dotsc{\cdot}p_m{\cdot}g_1{\cdot}\dotsc{\cdot}g_n = q_1{\cdot}\dotsc{\cdot}q_k{\cdot}h_1{\cdot}\dotsc{\cdot}h_l
+		$$
+		где $p_i, q_j$ - простые в $A$, а $g_i, h_j$ - примитивные многочлены из $A[x]$, неприводимые над $K$. Поскольку кольцо многочленов $K[x]$ факториально $\Rightarrow$ разложение на неприводимые многочлены над $K$ единственно $\Rightarrow$ количество неприводимых множителей в обоих способах одинаковое: $n = l$ и после перенумерации будет верно: 
+		$$
+			\forall i = \ovl{1,n}, \, h_i = \alpha_i{\cdot}g_i, \,  \alpha_i \in K^{\times}, \, h_i, g_i \in A[x]
+		$$ 
+		Но поскольку $h_i$ и $g_i$ примитивны, то по лемме $1$ будет верно: $\alpha_i \in A$ и более того, у $h_i$ не может быть необратимого общего делителя его коэффициентов $\Rightarrow$ он обратим $\Rightarrow \alpha_i \in A^{\times}$. Таким образом, если мы заменим $h_i$ на $\alpha_ig_i$, то получим равенство констант:
+		$$
+			p_1{\cdot}\dotsc{\cdot}p_m = \underbrace{\alpha_1{\cdot}\dotsc{\cdot}\alpha_n}_{\in A^\times}{\cdot}q_1{\cdot}\dotsc{\cdot}q_k
+		$$
+		В результате, мы имеем два разложения на простые множители уже для константы из кольца $A$, но поскольку кольцо $A$ факториально, то такое разложение единственно $\Rightarrow m = k$ и после упорядочивания получим ассоциированные элементы: 
+		$$
+			\forall i = \ovl{1,m}, \, p_i \sim q_i  
+		$$ 
+		Следовательно, разложения совпадают с точностью до перестановки множителей и их ассоциированности. Таким образом, мы доказали единственность разложения на простые элементы $A[x]$;
+	\end{enumerate}
+	Поскольку разложение любого многочлена $A[x]$ на простые элементы единственно с точностью до перестановки и ассоциированности множителей, то $A[x]$ - факториально.
+\end{proof}
+
+\end{document}

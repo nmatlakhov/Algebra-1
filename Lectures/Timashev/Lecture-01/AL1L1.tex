@@ -1,0 +1,669 @@
+\documentclass[12pt]{article}
+\usepackage[left=1cm, right=1cm, top=2cm,bottom=1.5cm]{geometry} 
+
+\usepackage[parfill]{parskip}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage{enumitem}
+\usepackage[normalem]{ulem}
+\usepackage{amsfonts, amsmath, amsthm, amssymb, mathtools,xcolor}
+\usepackage{blkarray}
+
+\usepackage{tabularx}
+\usepackage{hhline}
+
+\usepackage{accents}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{1.5pt}
+\renewcommand{\footrulewidth}{1pt}
+
+\usepackage{graphicx}
+\usepackage[figurename=Рис.]{caption}
+\usepackage{subcaption}
+\usepackage{float}
+
+%%Наименование папки откуда забирать изображения
+\graphicspath{ {./images/} }
+
+%%Изменение формата для ввода доказательства
+\renewcommand{\proofname}{$\square$  \nopunct}
+\renewcommand\qedsymbol{$\blacksquare$}
+
+%%Изменение отступа на таблицах
+\addto\captionsrussian{%
+	\renewcommand{\proofname}{$\square$ \nopunct}%
+}
+%% Римские цифры
+\newcommand{\RN}[1]{%
+	\textup{\uppercase\expandafter{\romannumeral#1}}%
+}
+
+%% Для удобства записи
+\newcommand{\MR}{\mathbb{R}}
+\newcommand{\MC}{\mathbb{C}}
+\newcommand{\MQ}{\mathbb{Q}}
+\newcommand{\MN}{\mathbb{N}}
+\newcommand{\MZ}{\mathbb{Z}}
+\newcommand{\MTB}{\mathbb{T}}
+\newcommand{\MTI}{\mathbb{I}}
+\newcommand{\MI}{\mathrm{I}}
+\newcommand{\MCI}{\mathcal{I}}
+\newcommand{\MJ}{\mathrm{J}}
+\newcommand{\MH}{\mathrm{H}}
+\newcommand{\MT}{\mathrm{T}}
+\newcommand{\MU}{\mathcal{U}}
+\newcommand{\MV}{\mathcal{V}}
+\newcommand{\MB}{\mathcal{B}}
+\newcommand{\MF}{\mathcal{F}}
+\newcommand{\MW}{\mathcal{W}}
+\newcommand{\ML}{\mathcal{L}}
+\newcommand{\MP}{\mathcal{P}}
+\newcommand{\VN}{\varnothing}
+\newcommand{\VE}{\varepsilon}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Опр:}
+\newtheorem{rem}{Rm:}
+\newtheorem{prop}{Утв.}
+\newtheorem{exrc}{Упр.}
+\newtheorem{lemma}{Лемма}
+\newtheorem{theorem}{Теорема}
+\newtheorem{corollary}{Следствие}
+
+\newenvironment{cusdefn}[1]
+{\renewcommand\thedefn{#1}\defn}
+{\enddefn}
+
+\DeclareRobustCommand{\divby}{%
+	\mathrel{\text{\vbox{\baselineskip.65ex\lineskiplimit0pt\hbox{.}\hbox{.}\hbox{.}}}}%
+}
+%Короткий минус
+\DeclareMathSymbol{\SMN}{\mathbin}{AMSa}{"39}
+%Длинная шапка
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+%Функция знака
+\DeclareMathOperator{\sgn}{sgn}
+
+%Функция ранга
+\DeclareMathOperator{\rk}{\text{rk}}
+
+%Обозначение константы
+\DeclareMathOperator{\const}{\text{const}}
+
+\DeclareMathOperator{\codim}{\text{codim}}
+
+\DeclareMathOperator*{\dsum}{\displaystyle\sum}
+\newcommand{\ddsum}[2]{\displaystyle\sum\limits_{#1}^{#2}}
+
+%Интеграл в большом формате
+\DeclareMathOperator{\dint}{\displaystyle\int}
+\newcommand{\ddint}[2]{\displaystyle\int\limits_{#1}^{#2}}
+\newcommand{\ssum}[1]{\displaystyle \sum\limits_{n=1}^{\infty}{#1}_n}
+
+\newcommand{\smallerrel}[1]{\mathrel{\mathpalette\smallerrelaux{#1}}}
+\newcommand{\smallerrelaux}[2]{\raisebox{.1ex}{\scalebox{.75}{$#1#2$}}}
+
+\newcommand{\smallin}{\smallerrel{\in}}
+\newcommand{\smallnotin}{\smallerrel{\notin}}
+
+\newcommand*{\medcap}{\mathbin{\scalebox{1.25}{\ensuremath{\cap}}}}%
+\newcommand*{\medcup}{\mathbin{\scalebox{1.25}{\ensuremath{\cup}}}}%
+
+\makeatletter
+\newcommand{\vast}{\bBigg@{3.5}}
+\newcommand{\Vast}{\bBigg@{5}}
+\makeatother
+
+%Промежуточное значение для sup\inf, поскольку они имеют разную высоту
+\newcommand{\newsup}{\mathop{\smash{\mathrm{sup}}}}
+\newcommand{\newinf}{\mathop{\mathrm{inf}\vphantom{\mathrm{sup}}}}
+
+%Скалярное произведение
+\newcommand{\inner}[2]{\left\langle #1, #2 \right\rangle }
+\newcommand{\linsp}[1]{\left\langle #1 \right\rangle }
+\newcommand{\linmer}[2]{\left\langle #1 \vert #2\right\rangle }
+
+%Подпись символов снизу
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+
+%% Шапка для букв сверху
+\newcommand{\wte}[1]{\widetilde{#1}}
+\newcommand{\wht}[1]{\widehat{#1}}
+
+%%Трансформация Фурье
+\newcommand{\fourt}[1]{\mathcal{F}\left(#1\right)}
+\newcommand{\ifourt}[1]{\mathcal{F}^{-1}\left(#1\right)}
+
+%%Символ вектора
+\newcommand{\vecm}[1]{\overrightarrow{#1\,}}
+
+%%Пространстов матриц
+\newcommand{\mat}[2]{\operatorname{Mat}_{#1, #2}}
+
+
+%%Взятие в скобки, модули и норму
+\newcommand{\parfit}[1]{\left( #1 \right)}
+\newcommand{\modfit}[1]{\left| #1 \right|}
+\newcommand{\sqparfit}[1]{\left\{ #1 \right\}}
+\newcommand{\normfit}[1]{\left\| #1 \right\|}
+
+%%Функция для обозначения равномерной сходимости по множеству
+\newcommand{\uconv}[1]{\overset{#1}{\rightrightarrows}}
+\newcommand{\uconvm}[2]{\overset{#1}{\underset{#2}{\rightrightarrows}}}
+
+
+%%Функция для обозначения нижнего и верхнего интегралов
+\def\upint{\mathchoice%
+	{\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	\int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+
+%%След матрицы
+\DeclareMathOperator*{\tr}{tr}
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+	\hskip -\arraycolsep
+	\let\@ifnextchar\new@ifnextchar
+	\array{#1}}
+\makeatother
+
+\begin{document}
+\lhead{Алгебра-\RN{1}}
+\chead{Тимашев Д.А.}
+\rhead{Лекция - 1}
+\section*{Список литературы}
+\begin{enumerate}[label=\arabic*)]
+	\item А.И. Кострикин. Введение в алгебру. Часть $\RN{1}$. Основы алгебры.
+	\item Э.Б. Винберг. Курс алгебры. Главы $1-4$.
+\end{enumerate}
+
+\section*{Введение}
+Алгебра - от арабского ``аль-джабр'' $=$ ``восполнение''. В данном случае имеется в виду одна из операций, которая используется при решении уравнений, а именно перенос вычитаемого члена из одной части уравнения в другую с заменой знака. Это часть трактата Аль-Хорезми, $825$ г.
+
+\section*{Системы линейных уравнений}
+\begin{defn}
+	\uwave{Система линейных уравнений} (алгебраических) сокращенно СЛУ, имеет следующий вид:
+	$$
+		\left\{
+		\begin{array}{ccccccccc}
+			 a_{11} x_1 & +& a_{12}x_2 &+& \dotsc &+& a_{1n} x_n  & = & b_1 \\
+			 a_{21} x_1 &+& a_{22}x_2 &+& \dotsc &+& a_{2n} x_n & = & b_2\\
+			 \vdots & \vdots & \vdots & \vdots & \ddots & \vdots &\vdots & \vdots & \vdots  \\
+			 a_{m1}x_1 &+& a_{m2}x_2 &+& \dotsc &+&  a_{mn}x_n & = & b_m
+		\end{array}
+		\right.
+	$$
+\end{defn}
+\begin{defn}
+	Переменные $x_1, \dotsc, x_n$ в указанной системе линейных уравнений называются \uwave{неизвестными}.
+\end{defn}
+\begin{defn}
+	Коэффициенты $\{a_{ij}\}$ - это заданные конкретные числа, которые называются \uwave{коэффициентами при неизвестных}, где $i = \overline{1,m}$ - номер уравнения, $j = \overline{1,n}$ - номер того неизвестного при котором стоит данный коэффициента. 
+\end{defn}	
+\begin{defn}	 
+	 $\{b_i\}$ - заданные конкретные числа, которые называются \uwave{свободными членами}, где $i = \overline{1,m}$.
+\end{defn}
+\begin{defn}
+	\uwave{Решением СЛУ} называется упорядоченный набор чисел $(x_1^\circ, x_2^\circ, \dotsc, x_n^\circ)$, при подстановке которых вместо неизвестных: $x_1 = x_1^\circ, \dotsc, x_n = x_n^\circ$ уравнения обращаются в верные равенства. Решить систему означает найти все её решения или показать, что их нет.
+\end{defn}
+\begin{defn}
+	Система линейных уравнений называется \uwave{совместной}, если у неё $\exists$ решение.
+\end{defn}
+\begin{defn}
+	Система линейных уравнений называется \uwave{несовместной}, если у неё $\nexists$ решений.
+\end{defn}
+\begin{defn}
+	Система линейных уравнений называется \uwave{определенной}, если у неё $\exists!$ решение.
+\end{defn}
+\begin{defn}
+	Система линейных уравнений называется \uwave{неопределенной}, если у неё $\exists$ больше одного решения.
+\end{defn}
+\begin{defn}
+	\uwave{Матрица коэффициентов} СЛУ это прямоугольная таблица ($m$ строк, $n$ столбцов), составленная из всех коэффициентов при всех неизвестных (таблица чисел):
+	$$
+		A = 
+		\begin{pmatrix}
+			a_{11} & a_{12} & \dotsc & a_{1n} \\
+			a_{21} & a_{22} & \dotsc & a_{2n} \\
+			\vdots & \vdots & \ddots & \vdots \\
+			a_{m1} & a_{m2} & \dotsc & a_{mn}
+		\end{pmatrix}
+	$$
+\end{defn}
+\begin{defn}
+	\uwave{Расширенной матрицей} СЛУ называется прямоугольная таблица ($m$ строк, $n + 1$ столбец), составленная из матрицы коэффициентов $A$, дописыванием справа столбца свободных членов:
+	$$
+		\wte{A} = 
+		\begin{pmatrix}[cccc|c]
+			a_{11} & a_{12} & \dotsc & a_{1n} &  b_1\\
+			a_{21} & a_{22} & \dotsc & a_{2n} &  b_2\\
+			\vdots & \vdots & \ddots & \vdots &  \vdots \\
+			a_{m1} & a_{m2} & \dotsc & a_{mn} &	b_m
+		\end{pmatrix}
+	$$
+\end{defn}
+\begin{rem}
+	Имея расширенную матрицу мы можем восстановить все исходные уравнения, поскольку каждая строчка содержит информацию об $i$-ом уравнении. На практике удобнее работать с матрицами.
+\end{rem}
+
+\subsection*{Элементарные преобразования СЛУ и их матриц}
+
+\begin{defn}
+	\uwave{Сложение строк матриц} определим, как:
+	$$
+		\begin{pmatrix}
+			c_1 & c_2 &\dotsc & c_n
+		\end{pmatrix} + 
+		\begin{pmatrix}
+			d_1 & d_2 &\dotsc & d_n
+		\end{pmatrix} =
+		\begin{pmatrix}
+			c_1 + d_1 & c_2 + d_2&\dotsc & c_n + d_n
+		\end{pmatrix}
+	$$
+	Или в эквивалентной записи:
+	$$
+		(c_1, c_2,\dotsc, c_n) + (d_1,d_2, \dotsc, d_n) = (c_1 + d_1, c_2 + d_2, \dotsc , c_n + d_n)
+	$$
+\end{defn}
+
+\begin{defn}
+	\uwave{Умножение строки матрицы на скаляр} определим, как:
+	$$
+	\lambda{\cdot}\begin{pmatrix}
+		c_1 & c_2 &\dotsc & c_n
+	\end{pmatrix} =
+	\begin{pmatrix}
+		\lambda{\cdot} c_1 &\lambda{\cdot} c_2 &\dotsc &\lambda{\cdot} c_n 
+	\end{pmatrix}
+	$$
+	Или в эквивалентной записи:
+	$$
+		\lambda{\cdot}(c_1, c_2, \dotsc, c_n) = (\lambda{\cdot}c_1, \lambda{\cdot}c_2, \dotsc, \lambda{\cdot}c_n)
+	$$
+\end{defn}
+
+\begin{defn}
+	\uwave{Элементарные преобразования} СЛУ и их матриц называются преобразования трёх типов:
+	\begin{enumerate}[label=\arabic*)]
+		\item Прибавление к одному уравнению другого, умноженного на число. 
+		
+		\uline{Символически}: $
+			\underset{\text{новое }i\text{-ое уравнение}}{(i)'}= \underset{\text{старое }i\text{-ое уравнение}}{(i)} +  \underset{j\text{-ое уравнение, умнож. на }\lambda}{\lambda{\cdot}(j)}$.
+			
+		\uline{В матрицах}: $\wte{A}_i^{'} = \wte{A}_i + \lambda {\cdot}\wte{A}_j, \, \wte{A}_k^{'} = \wte{A}_k, \, \forall k \neq i$, где $\wte{A}_i$ - $i$-ая строка матрицы $\wte{A}$;
+		\item Перестановка двух уравнений местами.
+		
+		\uline{Символически}: $(i) \longleftrightarrow (j)$.
+		
+		\uline{В матрицах}: $\wte{A}_i^{'} = \wte{A}_j, \, \wte{A}_j^{'} =\wte{A}_i, \, \wte{A}_k^{'} = \wte{A}_k, \, \forall k \neq i,j$;
+		
+		\item Умножение одного уравнения на ненулевое число:
+		
+		\uline{Символически}: $(i)^{'} = (i){\cdot}\lambda, \, \lambda \neq 0$;
+		
+		\uline{В матрицах}: $\wte{A}_i^{'} = \lambda{\cdot}\wte{A}_i, \, \wte{A}_k^{'} = \wte{A}_k, \, \forall k \neq i, \, \lambda \neq 0$;
+	\end{enumerate}
+\end{defn}
+
+\begin{defn}
+	Системы линейных уравнений называются \uwave{эквивалентными}, если множество их решений совпадают.
+\end{defn}
+
+\newpage
+
+\begin{prop}
+	Элементарные преобразования СЛУ приводят к эквивалентной СЛУ.
+\end{prop}
+\begin{proof}
+	Пусть изначально была СЛУ $(*)$ и мы элементарными преобразованиями перешли к СЛУ $(*)^{'}$. Следовательно, уравнения в $(*)^{'}$ следуют из уравнений в $(*)$: 
+	\begin{enumerate}[label=\arabic*)]
+		\item Если мы складываем два верных равенства, умножив одно из них на число, эти равенства сохраняются верными;
+		\item Изменение уравнений местами не меняет верных равенств;
+		\item Умножение верного равенства на число не меняет верного равенства;
+	\end{enumerate}
+	Например, пусть $(\wte{x}_1, \dotsc \wte{x}_n)$ - решение системы $(*)$, тогда:
+	$$
+		\begin{cases}
+			a_{i1}\wte{x}_1 + \dotsc + a_{in}\wte{x}_n = b_i \\
+			a_{j1}\wte{x}_1 + \dotsc + a_{jn}\wte{x}_n = b_j
+		\end{cases} \Rightarrow
+		(a_{i1} + \lambda{\cdot}a_{j1})\wte{x}_1 + \dotsc + (a_{in} + \lambda{\cdot}a_{jn})\wte{x}_n = b_i + \lambda{\cdot} b_j
+	$$
+	Следовательно, любое решение $(*)$ является решением $(*)^{'}$. Новых решений не появляется, поскольку элементарные преобразования - обратимы, то есть существуют обратные ЭП такие, что: $(*)^{'} \Rightarrow (*)$.
+	\begin{enumerate}[label=\arabic*)]
+		\item $(i)^{'} = (i) + \lambda{\cdot}(j) \Rightarrow (i)^{i} = (i) - \lambda{\cdot}(j)$;
+		\item $(i) \leftrightarrow (j) \Rightarrow (j){'} \leftrightarrow (i)^{'}$;
+		\item $(i)^{'} = (i){\cdot}\lambda, \, \lambda \neq 0 \Rightarrow (i)^{'} = \dfrac{1}{\lambda}(i)$;
+	\end{enumerate}
+	По соображениям, аналогичным выше, используя обратные преобразования к новой системе мы получим, что любое решение $(*)^{'}$ есть решение $(*)$. Следовательно, две системы эквивалентны.
+\end{proof}
+\subsection*{Метод Гаусса}
+
+\begin{defn}
+	Назовем \uwave{ведущим элементом} (\uwave{лидером}) строки $(a_1,\dotsc, a_n)$ такой $a_i \neq 0$, что все элементы левее его равны нулю: $a_j = 0, \, \forall j < i$. 
+\end{defn}
+
+\textbf{Метод Гаусса} решения СЛУ: последовательное исключение неизвестных из уравнений.
+
+\uline{Шаг 1}: Выбираем в $\wte{A}$ строку с самым левым лидером. 
+$$
+\wte{A} = \begin{pmatrix}
+	0 & \dotsc & 0 &  * & \dotsc & *\\
+	\vdots & \ddots &\vdots & \vdots & \ddots & \vdots \\
+	0 & \dotsc & 0 & {\color{red}\pmb{*}} & \dotsc & * \\
+	\vdots & \ddots & \vdots & \vdots & \ddots & \vdots \\
+		0 & \dotsc & 0 & * & \dotsc & *
+\end{pmatrix}
+$$
+где $*$ - любое значение и ${\color{red}\pmb{*}} \neq 0$.
+
+\uline{Шаг 2}: Переставим эту строку на $1$-ое место с помощью ЭП$2$.
+$$
+	\wte{A} \to \wte{A}' = \begin{pmatrix}
+		0 & \dotsc & 0 & {\color{red}\pmb{*}} & \dotsc & * \\
+		\vdots & \ddots &\vdots & \vdots & \ddots & \vdots \\
+		0 & \dotsc & 0 &  * & \dotsc & *\\
+		\vdots & \ddots & \vdots & \vdots & \ddots & \vdots \\
+		0 & \dotsc & 0 & * & \dotsc & *
+	\end{pmatrix} = 	\begin{pmatrix}
+	0 & \dotsc & 0 & a_{1j}^{'} & \dotsc & a_{1n}^{'} \\
+	\vdots & \ddots &\vdots & \vdots & \ddots & \vdots \\
+	0 & \dotsc & 0 &  a_{kj}^{'} & \dotsc & a_{kn}^{'}\\
+	\vdots & \ddots & \vdots & \vdots & \ddots & \vdots \\
+	0 & \dotsc & 0 & a_{mj}^{'} & \dotsc & a_{mn}^{'}
+\end{pmatrix}
+$$
+
+\uline{Шаг 3}: Обнуляем коэффициенты под лидером $1$-ой строки с помощью ЭП$1$, то есть вычитанием из всех строк первой строки, умноженной на  $-\dfrac{ a_{kj}^{'}}{a_{1j}^{'}}$.
+$$
+\wte{A}' \to \wte{A}'' = 	\begin{pmatrix}
+	0 & \dotsc & 0 & a_{1j}^{'} & \dotsc & a_{1n}^{'} \\
+	\vdots & \ddots &\vdots & \vdots & \ddots & \vdots \\
+	0 & \dotsc & 0 &  0 & \dotsc & a_{kn}^{'}\\
+	\vdots & \ddots & \vdots & \vdots & \ddots & \vdots \\
+	0 & \dotsc & 0 & 0 & \dotsc & a_{mn}^{'}
+\end{pmatrix}
+$$
+
+\uline{Шаг 4}: Временно забываем про $1$-ую строку и получаем матрицу $\overline{A}$.
+$$
+\wte{A}'' = 	
+\begin{pmatrix}
+	0 & \dotsc & 0 & a'_{1j} & a'_{1(j+1)} & \dotsc & a'_{1n} &\\ \cline{5-7} 
+	0 & \dotsc & 0 & 0 &\multicolumn{1}{|c}{ a'_{2(j+1)} }& \dotsc & \multicolumn{1}{c|}{a'_{2n} }& \\
+	\vdots & \ddots & \vdots & \vdots &\multicolumn{1}{|c}{ \vdots} & \ddots & \multicolumn{1}{c|}{\vdots} &\\ 
+	0 & \dotsc & 0 & 0 & \multicolumn{1}{|c}{a'_{m(j+1)}} & \dotsc & \multicolumn{1}{c|}{a'_{mn}}& \\ \cline{5-7} 
+\end{pmatrix} \to \overline{A} = 
+\begin{pmatrix}
+	a'_{2(j+1)} & \dotsc & a'_{2n} \\
+	\vdots & \ddots & \vdots \\
+	a'_{m(j+1)} & \dotsc & a'_{mn}
+\end{pmatrix}
+$$
+
+\uline{Шаг 5}: Если $\overline{A} = 0$, то останавливаем алгоритм, если это не так, то проделываем шаги $1-4$.
+
+\uline{\textbf{В итоге}}: матрица $\wte{A}$ путем проведения ЭП придёт к матрице $A^{*}$, которая имеет вид ступенчатой матрицы:
+$$
+	A^{*}  = 
+	\begin{pmatrix} \cline{4-9}
+		0 & \dotsc & 0 & \multicolumn{1}{|c}{*} & * & * & * & \dotsc & \multicolumn{1}{c|}{*} & \\ \cline{4-5}
+		0 & \dotsc & 0 & 0 & 0 & \multicolumn{1}{|c}{*} & * &\dotsc & \multicolumn{1}{c|}{*} & \\  \cline{6-6}
+		\vdots & \ddots & \vdots & \vdots & \vdots & \vdots & \multicolumn{1}{|c}{\vdots} & \ddots & \multicolumn{1}{c|}{\vdots} & \\ 
+		0 & \dotsc & 0 & 0 & 0 & 0 & \multicolumn{1}{|c}{*} & \dotsc & \multicolumn{1}{c|}{*} & \\ \cline{7-9}
+		0 & \dotsc & 0 & 0 & 0 & 0 & 0 & \dotsc & 0 &\\  
+		\vdots & \ddots & \vdots & \vdots & \vdots & \vdots & \vdots & \ddots & \vdots& \\  
+		0 & \dotsc & 0 & 0 & 0 & 0 & 0 & \dotsc & 0 &\\  
+	\end{pmatrix}
+$$
+то есть в каждом следующем уравнении (сверху вниз) неизвестных меньше, чем в предыдущем.
+\begin{defn}
+	\uwave{Ступенчатой матрицей} называется матрица у которой ненулевые строки идут в начале, нулевые строки идут в конце и лидер каждой ненулевой строки стоит правее лидера предыдущей строки. Или более формально, матрица называется \textbf{ступенчатой}, если:
+	\begin{enumerate}[label=\arabic*)]
+		\item номера лидеров её строк образуют строго возрастающую последовательность;
+		\item все нулевые строки стоят после всех ненулевых;
+	\end{enumerate}
+\end{defn}
+\uline{Шаг 6}: В ступенчатой матрице $A^*$ с помощью ЭП$3$ можем на местах лидеров всех строк сделать $1$, поделив на подходящие числа.
+$$
+	A^{*}  \to A^{**} =  
+	\begin{pmatrix} \cline{4-9}
+		0 & \dotsc & 0 & \multicolumn{1}{|c}{1} & * & * & * & \dotsc & \multicolumn{1}{c|}{*} & \\ \cline{4-5}
+		0 & \dotsc & 0 & 0 & 0 & \multicolumn{1}{|c}{1} & * &\dotsc & \multicolumn{1}{c|}{*} & \\  \cline{6-6}
+		\vdots & \ddots & \vdots & \vdots & \vdots & \vdots & \multicolumn{1}{|c}{\vdots} & \ddots & \multicolumn{1}{c|}{\vdots} & \\ 
+		0 & \dotsc & 0 & 0 & 0 & 0 & \multicolumn{1}{|c}{1} & \dotsc & \multicolumn{1}{c|}{*} & \\ \cline{7-9}
+		0 & \dotsc & 0 & 0 & 0 & 0 & 0 & \dotsc & 0 &\\  
+		\vdots & \ddots & \vdots & \vdots & \vdots & \vdots & \vdots & \ddots & \vdots& \\  
+		0 & \dotsc & 0 & 0 & 0 & 0 & 0 & \dotsc & 0 &\\  
+	\end{pmatrix}
+$$
+После чего, мы можем вычитать каждую строчку из предыдущих с подходящими коэффициентами, чтобы как ниже, так и выше лидеров были $0$:
+$$
+	A^{**} \to \wte{A}^{**} =  
+	\begin{pmatrix} \cline{4-9}
+		0 & \dotsc & 0 & \multicolumn{1}{|c}{1} & * & 0 & 0 & \dotsc & \multicolumn{1}{c|}{*} & \\ \cline{4-5}
+		0 & \dotsc & 0 & 0 & 0 & \multicolumn{1}{|c}{1} & 0 &\dotsc & \multicolumn{1}{c|}{*} & \\  \cline{6-6}
+		\vdots & \ddots & \vdots & \vdots & \vdots & \vdots & \multicolumn{1}{|c}{\vdots} & \ddots & \multicolumn{1}{c|}{\vdots} & \\ 
+		0 & \dotsc & 0 & 0 & 0 & 0 & \multicolumn{1}{|c}{1} & \dotsc & \multicolumn{1}{c|}{*} & \\ \cline{7-9}
+		0 & \dotsc & 0 & 0 & 0 & 0 & 0 & \dotsc & 0 &\\  
+		\vdots & \ddots & \vdots & \vdots & \vdots & \vdots & \vdots & \ddots & \vdots& \\  
+		0 & \dotsc & 0 & 0 & 0 & 0 & 0 & \dotsc & 0 &\\  
+	\end{pmatrix}
+$$
+такой вид матрицы называется улучшенным ступенчатым видом матрицы.
+\begin{defn}
+	\uwave{Улучшенный ступенчатый вид матрицы} это ступенчатый вид матрицы, у которой лидеры всех ненулевых строк равны $1$ и каждый лидер это единственный ненулевой элемент своего столбца. Или более формально, матрица имеет \textbf{улучшенный ступенчатый вид}, если:
+	\begin{enumerate}[label=\arabic*)]
+		\item номера лидеров её строк образуют строго возрастающую последовательность;
+		\item все нулевые строки стоят после всех ненулевых;
+		\item лидеры всех ненулевых строк равны $1$;
+		\item каждый лидер - единственный ненулевой элемент своего столбца;
+	\end{enumerate}
+\end{defn}
+\begin{defn}
+	Ступенчатая матрица называется \uwave{строго ступенчатой}, если число ненулевых строк этой матрицы равно числу столбцов.
+\end{defn}
+
+\begin{defn}
+	\uwave{Рангом ступенчатой матрицы} называется число ненулевых строк в этой матрице.
+\end{defn}
+
+\subsection*{Анализ ступенчатой СЛУ и обратный ход метода Гаусса}
+Пусть $r =$ ранг $A^*$ - матрицы в ступенчатом виде, $\wte{r} = $ ранг расширенной матрицы $\wte{A}^{*}$ в ступенчатом виде. Возможны следующие случаи:
+
+$1)$ $r < \wte{r} = r + 1\Rightarrow$ из $(r + 1)$-ой строки мы получаем, что в левой части уравнения стоит $0$, а в правой части стоит ненулевой член: 
+$$
+	\wte{A}^{*} =  
+	\begin{pmatrix} 
+		0 & \dotsc & 0 & * & * & * & * & \dotsc & \multicolumn{1}{c|}{*} &* \\ 
+		0 & \dotsc & 0 & 0 & 0 & * & * &\dotsc & \multicolumn{1}{c|}{*} & *\\  
+		\vdots & \ddots & \vdots & \vdots & \vdots & \vdots & \vdots & \ddots & \multicolumn{1}{c|}{\vdots} &\vdots \\ 
+		0 & \dotsc & 0 & 0 & 0 & 0 & * & \dotsc & \multicolumn{1}{c|}{*} & *\\ 
+		0 & \dotsc & 0 & 0 & 0 & 0 & 0 & \dotsc & \multicolumn{1}{c|}{0} & b_{r+1}\\  
+		\vdots & \ddots & \vdots & \vdots & \vdots & \vdots & \vdots & \ddots & \multicolumn{1}{c|}{\vdots} & \vdots\\  
+		0 & \dotsc & 0 & 0 & 0 & 0 & 0 & \dotsc & \multicolumn{1}{c|}{0} & 0\\  
+	\end{pmatrix} \Rightarrow 0 = b^{*}_{r+1} \neq 0
+$$
+Такое уравнение не зависит от неизвестных $\Rightarrow$ противоречивое уравнение $\Rightarrow$ СЛУ не имеет решений, то есть она несовместна. Также такие уравнения называют экзотическими:
+$$
+	0{\cdot}x_1 + 0{\cdot}x_2 + \dotsc + 0{\cdot}x_n = b \neq 0
+$$
+$2)$ $r = \wte{r}$, запишем расширенную матрицу и пронумеруем столбцы, которые проходят через лидеров строчек:
+$$
+	\begin{blockarray}{ccccccccccccc}
+		\begin{block}{c(cccccccccc|c)c}			
+			& 0 & \dotsc & 0 & * & * & * & \dotsc & * & \dotsc & * &* & 1\\ 
+			& 0 & \dotsc & 0 & 0 & 0 & * & \dotsc &* &\dotsc & * & * & 2\\  
+			& \vdots & \ddots & \vdots & \vdots & \vdots & \vdots & \ddots & \vdots & \ddots & \vdots &\vdots & \vdots\\ 
+			\wte{A}^{*} =  & 0 & \dotsc & 0 & 0 & 0 & 0 & \dotsc &  * & \dotsc & * & * & r\\ 
+			&0 & \dotsc & 0 & 0 & 0 & 0 &\dotsc &  0 & \dotsc & 0 & 0 & r+1 \\  
+			&\vdots & \ddots & \vdots & \vdots & \vdots & \vdots &\ddots & \vdots & \ddots & \vdots & \vdots & \vdots\\  
+			&0 & \dotsc & 0 & 0 & 0 & 0 &\dotsc &  0 & \dotsc & 0 & 0 & m\\
+		\end{block}
+		 & &  &  & j_1 &  & j_2 &\dotsc &  j_r &  &  & & 
+	\end{blockarray}
+$$
+Неизвестные с этими номерами $x_{j_1}, x_{j_2}, \dotsc, x_{j_r}$ назовём \uwave{главными неизвестными}, неизвестные с оставшимися номерами $x_j, \, (j \neq j_1, \dotsc, j_r)$ назовём \uwave{свободными}.
+
+\begin{defn}
+	Неизвестные соответствующие лидерам строк в расширенной матрице СЛУ в ступенчатом виде называются \uwave{главными}. В противном случае, они называются \uwave{свободными}.
+\end{defn} 
+
+Для решения такой системы используют \textbf{обратный ход метода Гаусса} $\Rightarrow$ рассмотрим последнее $r$-ое уравнение в системе:
+$$
+	(r) \colon a^*_{rj_r}x_{j_r} + \sum\limits_{j > j_r} a_{rj}^* x_j = b_r^{*} \Rightarrow x_{j_r} = \dfrac{ b_r^* - \sum\limits_{j > j_r} a_{rj}^* x_j }{a_{rj_r}^*}
+$$
+Таким образом, получилось выразить $x_{j_r}$ через неизвестные с большими номерами $x_j, \, j > j_r$, которые все являются свободными. Поднимаемся на уравнение выше - на $(r-1)$-ую строку расширенной матрицы и поступаем абсолютно аналогично:
+$$
+	(r-1) \colon x_{j_{r-1}} =  \dfrac{ b_{r-1}^* - \sum\limits_{j > j_{r-1}} a_{(r-1)j}^* x_j }{a_{(r-1)j_{r-1}}^*}
+$$
+В полученном будут неизвестные с большими номерами, среди которых будет и главная неизвестная $x_{j_r}$, но мы уже выразили её через свободные неизвестные $\Rightarrow$ подставляя это выражение мы получим, что $x_{j_{r-1}}$ также может быть выражено через свободные неизвестные $x_j, \, j > j_{j-1}, \, j \neq j_r$. Продолжаем такую процедуру далее. 
+
+\uline{\textbf{В итоге}}: СЛУ после всех преобразований превратиться в систему уравнений вида:
+$$
+	x_{j_k} = \ddsum{j \neq j_1, \dotsc, j_k}{} c_{kj} x_j + c_k, \, \forall k = \overline{1,r}
+$$
+то есть набор уравнений, которые выражают главные неизвестные через свободные.
+\begin{defn}
+	Набор уравнений, в которых главные неизвестные выражены через свободные называется \uwave{общим решением} СЛУ.
+\end{defn} 
+Подставляя вместо свободных неизвестных произвольные значения мы можем однозначно найти значения главных неизвестных: 
+$$
+	x_j = x_j^{\circ}, \, \forall j \neq j_1, \dotsc, j_r \Rightarrow x_{j_k} = x_{j_k}^{\circ}, \, \forall k = \overline{1,r}
+$$ 
+И получить \uwave{частное решение}: $(x_1^{\circ}, \dotsc, x_n^{\circ} )$. В частности, видим что СЛУ оказывается совместна.
+\begin{defn}
+	\uwave{Частное решение} это набор значений всех неизвестных, превращающий уравнения в верные равенство.
+\end{defn}
+\begin{rem}
+	Преимущество улучшенного ступенчатого вида заключается в том, что можно сразу написать общее решение, потому что в каждом уравнении такой системы содержится ровно одно главное неизвестное с коэффициентом $1$, а остальные главные неизвестные идут с коэффициентом $0$. Следовательно, перенося из левой части все остальные слагаемые направо, мы сразу получим выражение для главного неизвестного. 
+\end{rem}
+
+\begin{prop}
+	Пусть $r$ ранг это матрицы коэффициентов СЛУ в ступенчатом виде и $\wte{r}$ ранг этой расширенной матрицы в ступенчатом виде. Тогда:
+	\begin{enumerate}[label=\arabic*)]
+		\item СЛУ совместна $\Leftrightarrow r = \wte{r}$;
+		\item СЛУ несовместна $\Leftrightarrow r < \wte{r}$;
+		\item СЛУ определена $\Leftrightarrow r = \wte{r} = n$;
+		\item СЛУ неопределена $\Leftrightarrow r = \wte{r} < n$;
+	\end{enumerate}
+\end{prop}
+\begin{proof}\hfill
+	\begin{enumerate}[label=\arabic*)]
+		\item Доказали в методе Гаусса;
+		\item Доказали в методе Гаусса;
+		\item Пусть СЛУ совместна, тогда верно: 
+		$$
+			|\#\text{ свободных неизвестных в ней}|= |\#\text{ неизвестных}| - |\#\text{ главных неизвестных}| = n - r
+		$$
+		СЛУ определена $\Leftrightarrow$ нет свободных неизвестных, поскольку все решения системы получаются подстановкой в общее решение произвольных значений свободных неизвестных, а если все неизвестные главные, то подставлять нечего и решение будет единственным, в противном случае можно подставлять разные значения и получать разные решения. Все неизвестные - главные $\Leftrightarrow n = r$.
+		\item Следует сразу из $3)$.
+	\end{enumerate}
+\end{proof}
+
+\textbf{Пример}: Рассмотрим следующую систему:
+$$
+	\left\{
+	\begin{array}{ccccccccc}
+		x_1 &+& 2 x_2 &+& 3x_3 &+& 4x_4 &=& 5\\
+		2x_1 &+& 4x_2 &+& 7x_3 &+& 9x_4 &=& 11\\
+		4x_1 &+& 8x_2 &+& 13x_3 &+& 17 x_4 & = & 21
+	\end{array}\right. \Rightarrow \wte{A} = 
+	\begin{pmatrix}[cccc|c]
+		1 & 2 & 3 & 4 & 5\\
+		2 & 4 & 7 & 9 & 11 \\
+		4 & 8 & 13 & 17 & 21
+	\end{pmatrix}
+$$
+Обнулим все коэффициенты под  лидером первой строки:
+$$
+	\begin{pmatrix}[cccc|c]
+		2 & 4 & 7 & 9 & 11
+	\end{pmatrix} + (-2){\cdot}
+	\begin{pmatrix}[cccc|c]
+		1 & 2 & 3 & 4 & 5
+	\end{pmatrix} = 
+	\begin{pmatrix}[cccc|c]
+		0 & 0 & 1 & 1 & 1
+	\end{pmatrix}
+$$
+$$
+	\begin{pmatrix}[cccc|c]
+		4 & 8 & 13 & 17 & 21
+	\end{pmatrix} + (-4){\cdot}
+	\begin{pmatrix}[cccc|c]
+		1 & 2 & 3 & 4 & 5
+	\end{pmatrix} = 
+	\begin{pmatrix}[cccc|c]
+		0 & 0 & 1 & 1 & 1
+	\end{pmatrix}
+$$
+В результате получим ступенчатый вид матрицы и перейдем к улучшенному ступенчатому виду:
+$$
+	\begin{pmatrix}[cccc|c]
+		1 & 2 & 3 & 4 & 5\\
+		2 & 4 & 7 & 9 & 11 \\
+		4 & 8 & 13 & 17 & 21
+	\end{pmatrix} \Rightarrow
+	\begin{pmatrix}[cccc|c]
+		1 & 2 & 3 & 4 & 5\\
+		0 & 0 & 1 & 1 & 1 \\
+		0 & 0 & 1 & 1 & 1
+	\end{pmatrix} \Rightarrow 
+	\begin{pmatrix}[ccccc|c]
+		&\multicolumn{1}{|c}{1} & 2 & 3 & 4 & 5  \\ \cline{2-3}
+		&0 & 0 & \multicolumn{1}{|c}{1} & 1 & 1 \\ \cline{4-6}
+		&0 & 0 & 0 & 0 & 0
+	\end{pmatrix} \Rightarrow
+	\begin{pmatrix}[ccccc|c]
+		&\multicolumn{1}{|c}{1} & 2 & 0 & 1 & 2  \\ \cline{2-3}
+		&0 & 0 & \multicolumn{1}{|c}{1} & 1 & 1 \\ \cline{4-6}
+		&0 & 0 & 0 & 0 & 0
+	\end{pmatrix}
+$$
+Ранг расширенной матрицы совпадает с рангом матрицы коэффициентов и равен $2 \Rightarrow$ система совместна, но число неизвестных равно $4 \Rightarrow$ СЛУ будет неопределена. Заметим, что: $x_1, x_3$ - главные неизвестные, $x_2, x_4$ - свободные неизвестные, тогда общее решение будет иметь вид:
+$$
+	\left\{
+	\begin{array}{ccc}
+		x_1 &=& 2 - 2x_2 - x_4\\
+		x_3 &=& 1 - x_4
+	\end{array}
+	\right.	
+$$
+Пусть: $x_2 = x_4 = 1 \Rightarrow x_3 = 1 - 1 = 0, \, x_1 = 2 - 2 - 1 = -1 \Rightarrow  (-1,1,0,1)$ - пример частного решения.
+
+\begin{defn}
+	\uwave{Однородной} системой линейных уравнений (ОСЛУ) называется СЛУ следующего вида:
+	$$
+		\left\{
+		\begin{array}{ccccccccc}
+			a_{11} x_1 & +& a_{12}x_2 &+& \dotsc &+& a_{1n} x_n  & = & 0 \\
+			a_{21} x_1 &+& a_{22}x_2 &+& \dotsc &+& a_{2n} x_n & = & 0\\
+			\vdots & \vdots & \vdots & \vdots & \ddots & \vdots &\vdots & \vdots & \vdots  \\
+			a_{m1}x_1 &+& a_{m2}x_2 &+& \dotsc &+&  a_{mn}x_n & = & 0
+		\end{array}
+		\right.
+	$$
+\end{defn}
+\begin{prop}
+	У ОСЛУ всегда существут нулевое решение $x_1 = x_2 = \dotsc = x_n = 0$, то есть эта система всегда совместна.
+\end{prop}
+\begin{proof}
+	Подстановкой нулевого решения все уравнения становятся верными равенствами.
+\end{proof}
+
+\begin{prop}
+	ОСЛУ, в которой количество уравнений меньше количества неизвестных: $m < n$, всегда имеет ненулевое решение.
+\end{prop}
+\begin{proof}
+	Приведем ОСЛУ к ступенчатому виду $\Rightarrow$ расширенная матрица отличается только нулевым столбцом справа $\Rightarrow$ ранги обычной и расширенной матриц совпадают, но ранг ступенчатой матрицы заведомо не превосходит количества строк в этой матрице (ранг это число ненулевых строк): $r = \wte{r} \leq m < n \Rightarrow$ по утверждения $2$ СЛУ неопределена $\Rightarrow$ у неё больше одного решения, нулевое решение уже известно $\Rightarrow$ существует ненулевое решению. 
+\end{proof}
+
+\end{document}

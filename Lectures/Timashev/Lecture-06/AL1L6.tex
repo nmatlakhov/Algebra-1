@@ -1,0 +1,909 @@
+\documentclass[12pt]{article}
+\usepackage[left=1cm, right=1cm, top=2cm,bottom=1.5cm]{geometry} 
+
+\usepackage[parfill]{parskip}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage{enumitem}
+\usepackage[normalem]{ulem}
+\usepackage{amsfonts, amsmath, amsthm, amssymb, mathtools,xcolor}
+\usepackage{blkarray}
+
+\usepackage{tabularx}
+\usepackage{hhline}
+
+\usepackage{accents}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{1.5pt}
+\renewcommand{\footrulewidth}{1pt}
+
+\usepackage{graphicx}
+\usepackage[figurename=Рис.]{caption}
+\usepackage{subcaption}
+\usepackage{float}
+
+%%Наименование папки откуда забирать изображения
+\graphicspath{ {./images/} }
+
+%%Изменение формата для ввода доказательства
+\renewcommand{\proofname}{$\square$  \nopunct}
+\renewcommand\qedsymbol{$\blacksquare$}
+
+%%Изменение отступа на таблицах
+\addto\captionsrussian{%
+	\renewcommand{\proofname}{$\square$ \nopunct}%
+}
+%% Римские цифры
+\newcommand{\RN}[1]{%
+	\textup{\uppercase\expandafter{\romannumeral#1}}%
+}
+
+%% Для удобства записи
+\newcommand{\MR}{\mathbb{R}}
+\newcommand{\MC}{\mathbb{C}}
+\newcommand{\MQ}{\mathbb{Q}}
+\newcommand{\MN}{\mathbb{N}}
+\newcommand{\MZ}{\mathbb{Z}}
+\newcommand{\MTB}{\mathbb{T}}
+\newcommand{\MTI}{\mathbb{I}}
+\newcommand{\MI}{\mathrm{I}}
+\newcommand{\MCI}{\mathcal{I}}
+\newcommand{\MJ}{\mathrm{J}}
+\newcommand{\MH}{\mathrm{H}}
+\newcommand{\MT}{\mathrm{T}}
+\newcommand{\MA}{\mathcal{A}}
+\newcommand{\MCB}{\mathcal{B}}
+\newcommand{\MCC}{\mathcal{C}}
+\newcommand{\MCE}{\mathcal{E}}
+\newcommand{\MU}{\mathcal{U}}
+\newcommand{\MV}{\mathcal{V}}
+\newcommand{\MB}{\mathcal{B}}
+\newcommand{\MF}{\mathcal{F}}
+\newcommand{\MW}{\mathcal{W}}
+\newcommand{\ML}{\mathcal{L}}
+\newcommand{\MP}{\mathcal{P}}
+\newcommand{\VN}{\varnothing}
+\newcommand{\VE}{\varepsilon}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Опр:}
+\newtheorem{rem}{Rm:}
+\newtheorem{prop}{Утв.}
+\newtheorem{exrc}{Упр.}
+\newtheorem{problem}{Задача}
+\newtheorem{lemma}{Лемма}
+\newtheorem{theorem}{Теорема}
+\newtheorem{corollary}{Следствие}
+
+\newenvironment{cusdefn}[1]
+{\renewcommand\thedefn{#1}\defn}
+{\enddefn}
+
+\DeclareRobustCommand{\divby}{%
+	\mathrel{\text{\vbox{\baselineskip.65ex\lineskiplimit0pt\hbox{.}\hbox{.}\hbox{.}}}}%
+}
+%Короткий минус
+\DeclareMathSymbol{\SMN}{\mathbin}{AMSa}{"39}
+%Длинная шапка
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+%Функция знака
+\DeclareMathOperator{\sgn}{sgn}
+
+%Функция ранга
+\DeclareMathOperator{\rk}{\text{rk}}
+\DeclareMathOperator{\diam}{\text{diam}}
+
+
+%Обозначение константы
+\DeclareMathOperator{\const}{\text{const}}
+
+\DeclareMathOperator{\codim}{\text{codim}}
+
+\DeclareMathOperator*{\dsum}{\displaystyle\sum}
+\newcommand{\ddsum}[2]{\displaystyle\sum\limits_{#1}^{#2}}
+
+%Интеграл в большом формате
+\DeclareMathOperator{\dint}{\displaystyle\int}
+\newcommand{\ddint}[2]{\displaystyle\int\limits_{#1}^{#2}}
+\newcommand{\ssum}[1]{\displaystyle \sum\limits_{n=1}^{\infty}{#1}_n}
+
+\newcommand{\smallerrel}[1]{\mathrel{\mathpalette\smallerrelaux{#1}}}
+\newcommand{\smallerrelaux}[2]{\raisebox{.1ex}{\scalebox{.75}{$#1#2$}}}
+
+\newcommand{\smallin}{\smallerrel{\in}}
+\newcommand{\smallnotin}{\smallerrel{\notin}}
+
+\newcommand*{\medcap}{\mathbin{\scalebox{1.25}{\ensuremath{\cap}}}}%
+\newcommand*{\medcup}{\mathbin{\scalebox{1.25}{\ensuremath{\cup}}}}%
+
+\makeatletter
+\newcommand{\vast}{\bBigg@{3.5}}
+\newcommand{\Vast}{\bBigg@{5}}
+\makeatother
+
+%Промежуточное значение для sup\inf, поскольку они имеют разную высоту
+\newcommand{\newsup}{\mathop{\smash{\mathrm{sup}}}}
+\newcommand{\newinf}{\mathop{\mathrm{inf}\vphantom{\mathrm{sup}}}}
+
+%Скалярное произведение
+\newcommand{\inner}[2]{\left\langle #1, #2 \right\rangle }
+\newcommand{\linsp}[1]{\left\langle #1 \right\rangle }
+\newcommand{\linmer}[2]{\left\langle #1 \vert #2\right\rangle }
+
+%Подпись символов снизу
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+
+%% Шапка для букв сверху
+\newcommand{\wte}[1]{\widetilde{#1}}
+\newcommand{\wht}[1]{\widehat{#1}}
+
+%%Трансформация Фурье
+\newcommand{\fourt}[1]{\mathcal{F}\left(#1\right)}
+\newcommand{\ifourt}[1]{\mathcal{F}^{-1}\left(#1\right)}
+
+%%Символ вектора
+\newcommand{\vecm}[1]{\overrightarrow{#1\,}}
+
+%%Пространстов матриц
+\newcommand{\matsq}[1]{\operatorname{Mat}_{#1}}
+\newcommand{\mat}[2]{\operatorname{Mat}_{#1, #2}}
+
+
+%%Взятие в скобки, модули и норму
+\newcommand{\parfit}[1]{\left( #1 \right)}
+\newcommand{\modfit}[1]{\left| #1 \right|}
+\newcommand{\sqparfit}[1]{\left\{ #1 \right\}}
+\newcommand{\normfit}[1]{\left\| #1 \right\|}
+
+%%Функция для обозначения равномерной сходимости по множеству
+\newcommand{\uconv}[1]{\overset{#1}{\rightrightarrows}}
+\newcommand{\uconvm}[2]{\overset{#1}{\underset{#2}{\rightrightarrows}}}
+
+
+%%Функция для обозначения нижнего и верхнего интегралов
+\def\upint{\mathchoice%
+	{\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	\int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+
+%%След матрицы
+\DeclareMathOperator*{\tr}{tr}
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+	\hskip -\arraycolsep
+	\let\@ifnextchar\new@ifnextchar
+	\array{#1}}
+\makeatother
+
+
+%% Переопределение функции хи, чтобы выглядела более приятно
+\makeatletter
+\@ifdefinable\@latex@chi{\let\@latex@chi\chi}
+\renewcommand*\chi{{\@latex@chi\smash[t]{\mathstrut}}} % want only bottom half of \mathstrut
+\makeatletter
+
+\begin{document}
+\lhead{Алгебра-\RN{1}}
+\chead{Тимашев Д.А.}
+\rhead{Лекция - 6}
+\section*{Матричная алгебра}
+\begin{theorem}
+	$\rk{(A\cdot B)} \leq \min\{\rk{A},\rk{B}\}$.
+\end{theorem}
+\begin{proof}
+	Пусть $A \in \mat{m}{n}, \, B \in \mat{n}{p} \Rightarrow C = A{\cdot}B \in \mat{m}{p}$ и верно: $$
+		\forall i,j, \, c_{ij} = \ddsum{k = 1}{n}a_{ik}b_{kj}
+	$$ 
+	Если зафиксировать индекс $i$ и менять индекс $j$, то мы получим элементы в $i$-ой строке матрицы $C$. Тогда, $j$-ый элемент $i$-ой строки матрицы $C$ получается как линейная комбинация $j$-ых элементов строк матрицы $B$ по $k =\overline{1,n}$ с коэффициентами $a_{ik}$: 
+	$$
+		C_i = \ddsum{k = 1}{n}a_{ik}B_k
+	$$ 
+	Значит система строк: $\{C_1,\dotsc, C_m\}$ линейно выражается через систему строк: $\{B_1 , \dotsc, B_n \}$, тогда: 
+	$$
+		\rk{C} = \rk\{C_1,\dotsc, C_m\} \leq \rk\{B_1,\dotsc,B_n\} = \rk{B}
+	$$ 
+	С рангом матрицы $A$ ситуация аналогичная: 
+	$$
+		C^{(j)} = \ddsum{k = 1}{n}A^{(k)}b_{kj}
+	$$ 
+	Следовательно, $\{C^{(1)}, \dotsc, C^{(p)}\}$ линейно выражается через $\{A^{(1)},\dotsc,  A^{(n)}\}$, тогда:
+	$$
+		\rk{C} = \rk\{C^{(1)},\dotsc, C^{(p)}\} \leq \rk\{A^{(1)}, \dots, A^{(n)}\} = \rk{A}
+	$$
+\end{proof}
+
+\begin{exrc}
+	$\rk{(A+B)}  \leq \rk{A} + \rk{B}$
+\end{exrc}
+\begin{proof}
+	Пусть $A \in \mat{m}{n}, \, B \in \mat{m}{n} \Rightarrow A + B \in \mat{m}{n}$. Любая строка матрицы $A + B$ представляется в виде: $(a_{i1} + b_{i1}, \dotsc, a_{in} + b_{in}) \Rightarrow$ система строк имеет следующий вид: 
+	$$
+		\{A_1 + B_1, \dotsc, A_m + B_m\}
+	$$
+	То есть это линейная комбинация системы строк обеих матриц: 
+	$$
+		\{A_1, \dotsc, A_m, B_1, \dotsc,B_m\}
+	$$ 
+	Тогда: 
+	$$
+		 \rk{(A+B)} = \rk{\{A_1 + B_1, \dotsc, A_m + B_m\}} \leq \rk{\{A_1, \dotsc, A_m, B_1, \dotsc,B_m\}}
+	$$
+	Пусть $e_a = \{A_{i_1}, \dotsc, A_{i_k}\}$ - базис системы строк $A$ и $e_b = \{B_{j_1}, \dotsc, B_{j_r}\}$ - базис системы строк $B$. Тогда будет верно: $|e_a| = \rk{A}, \, |e_b| = \rk{B}$. Пусть $e_{ab}$ - базис системы строк $\{A_1, \dotsc, A_m, B_1, \dotsc, B_m\}$ составленный из векторов $e_a, e_b \Rightarrow$ очевидно, что $|e_{ab}| \leq |e_a| + |e_b|$. Тогда:
+	$$
+		 \rk{(A+B)} = \rk{\{A_1 + B_1, \dotsc, A_m + B_m\}} \leq \rk{\{A_1, \dotsc, A_m, B_1, \dotsc,B_m\}} \leq \rk{A} + \rk{B}
+	$$
+\end{proof}
+
+\newpage
+\section*{Тождественное отображение}
+В прошлый раз мы посмотрели, что матрицы взаимнооднозначно связаны с линейными отображениями, в частности можно рассмотреть тождественное отображение.
+\begin{defn}
+	\uwave{Тождественное отображение} $\MCE \colon \MR^n \to \MR^n, \, \MCE(x) = x, \, \forall x \in \MR^n$.
+\end{defn}
+\begin{prop}
+	Тождественное отображение линейно.
+\end{prop}
+\begin{proof}
+	Это проверяется элементарно:
+	\begin{enumerate}[label=\arabic*)]
+		\item $\forall x,y \in \MR^n, \, \MCE(x + y) = x + y = \MCE(x) + \MCE(y)$;
+		\item $\forall x \in \MR^n,\, \forall \lambda \in \MR, \, \MCE(\lambda{\cdot}x) = \lambda{\cdot}x = \lambda{\cdot}\MCE(x)$;
+	\end{enumerate}
+\end{proof}
+Поскольку это линейное отображение, то ему соответсвтует некоторая матрица $E$. Матрица этого отображения определяется по общему правилу так: в столбцах этой матрицы стоят образы векторов стандартного базиса пространства $\MR^n$ под действием этого отображения. А поскольку векторы переходят сами в себя, то там записаны стандартные базисные столбцы $n$-мерного пространства столбцов. 
+$$
+	\begin{blockarray}{cccccccc}
+		\begin{block}{c(cccccc)c}
+			& 1 & 0 & \dotsc &  0 & \dotsc & 0 & \\
+			& 0 & 1 & \dotsc &  0 & \dotsc & 0 &\\
+			& \vdots & \vdots &  \ddots & \vdots & \ddots & \vdots &\\
+			E = & 0 & 0 & \dotsc & 1 & \dotsc & 0 & j\\
+			& \vdots & \vdots & \ddots & \vdots & \ddots & \vdots &\\
+			& 0 & 0 & \dotsc & 0 & \dotsc & 1 &\\
+		\end{block}
+		&&&&j&&&
+	\end{blockarray}
+$$
+\begin{defn}
+	Матрица тождественного отображения называется \uwave{единичной матрицей} размера $n\times n$. 
+\end{defn}
+\begin{defn}
+	\uwave{Символом Кронекера} назовем функцию вида: $\delta_{ij} = \delta(i,j) = 
+		\begin{cases}
+			1, & i =j \\
+			0, & i \neq j
+		\end{cases}$.	 
+\end{defn}
+Элементы единичной матрицы являются символами Кронекера: $e_{ij} = \delta_{ij}$.
+
+\begin{prop}(\textbf{основное свойство тождественного отображения})
+	\begin{enumerate}[label=\arabic*)]
+		\item $\MA{\cdot}\MCE = \MA, \, \forall \MA \in \MR^n \to \MR^m $;
+		\item $\MCE {\cdot}\MCB = \MCB, \, \forall \MCB \in \MR^p \to \MR^n $;
+	\end{enumerate}
+\end{prop}
+\begin{proof}\hfill
+	\begin{enumerate}[label=\arabic*)]
+		\item $\forall x \in \MR^n, \, \MA{\cdot}\MCE(x) = \MA(\MCE(x)) = \MA(x)$;
+		\item $\forall x \in \MR^m, \, \MCE{\cdot}\MCB(x) = \MCE(\MCB(x)) = \MCB(x)$;
+	\end{enumerate}
+\end{proof}
+В силу взаимнооднозначного соответствия, такое же свойство будет верно и для матриц.
+\newpage
+\begin{corollary}(\textbf{основное свойство единичной матрицы})
+	\begin{enumerate}[label=\arabic*)]
+		\item $A{\cdot}E = A, \, \forall A \in \mat{m}{n} $;
+		\item $E {\cdot}B = B, \, \forall B \in \mat{n}{p} $;
+	\end{enumerate}
+\end{corollary}
+
+\subsection*{Матричная единица}
+\begin{defn}
+	\uwave{Матричной единицей} $E_{ij}$ назовем квадратную матрицу у которой на $ij$-ом месте стоит $1$, на остальных местах - нули:
+	$$
+		\begin{blockarray}{cccccccc}
+			\begin{block}{c(cccccc)c}
+				& 0 & 0 & \dotsc &  0 & \dotsc & 0 & \\
+				& 0 & 0 & \dotsc &  0 & \dotsc & 0 &\\
+				& \vdots & \vdots &  \ddots & \vdots & \ddots & \vdots &\\
+				E_{ij} = & 0 & 0 & \dotsc & 1 & \dotsc & 0 & i\\
+				& \vdots & \vdots & \ddots & \vdots & \ddots & \vdots &\\
+				& 0 & 0 & \dotsc & 0 & \dotsc & 0 &\\
+			\end{block}
+			&&&&j&&&
+		\end{blockarray}
+	$$
+\end{defn}
+\begin{rem}
+	Всего таких матриц $n^2$ штук по числу элементов в квадртаной матрице размера $n \times n$.
+\end{rem}
+Заметим, что любая квадратная матрица $A \in \mat{n}{n}$ представима в следующем виде:
+$$
+	A = \ddsum{i, j = 1}{n}a_{ij}E_{ij}
+$$
+\begin{lemma}
+	$$
+		E_{ij}{\cdot}E_{kl} = 
+		\begin{cases}
+			0, & j \neq k\\
+			E_{il}, & j = k 
+		\end{cases}
+	$$
+\end{lemma}
+\begin{proof}
+	Заметим, что: $(E_{ij})_{kl} = \delta_{ik}{\cdot}\delta_{jl}$, тогда:
+	$$
+		(E_{ij}{\cdot}E_{kl})_{sr} = \ddsum{p = 1}{n}(E_{ij})_{sp}{\cdot}(E_{kl})_{pr} = \ddsum{p=1}{n}\delta_{is}\delta_{jp}\delta_{kp}\delta_{lr} = 
+		\begin{cases}
+			0, & j \neq k \\
+			1, & j = k \text{ на месте } (i,l)
+		\end{cases}
+	$$
+\end{proof}
+
+
+\section*{Обратные матрицы}
+Далее будем рассматривать квадратные матрицы размера $n \times n$. Множество таких матриц образует векторное пространство, будем записывать его так: $\mat{n}{n} = \matsq{n}$.
+\begin{defn}
+	Пусть $A \in \matsq{n}$, матрица $B \in \matsq{n}$ называется \uwave{обратной} к матрице $A$, если:
+	$$
+		A{\cdot}B = B{\cdot}A = E
+	$$
+\end{defn}
+\begin{defn}
+	Матрица $A$ называется \uwave{обратимой}, если у неё существует обратная матрица.
+\end{defn}
+\begin{rem}
+	То есть понятие обратной матрицы это аналог понятия обратного числа.
+\end{rem}
+
+\subsection*{Свойства обратных матриц}
+\begin{prop}
+	Обратная к $A$ матрица единственна (если она существует).
+\end{prop}
+\begin{proof}
+	Пусть $B, B'$ - обратные к $A$ матрицы. Рассмотрим произведение:
+	$$
+		(B{\cdot}A){\cdot}B' = E{\cdot}B' = B'
+	$$
+	Поскольку произведение ассоциативно, то верно следующее:
+	$$
+		(B{\cdot}A){\cdot}B' = B{\cdot}(A{\cdot}B') = B{\cdot}E = B \Rightarrow B = B'
+	$$
+\end{proof}
+\uline{\textbf{Каноническое обозначение}} для обратной матрицы матрицы $A$: $B = A^{-1}$.
+
+\begin{prop}
+	Если матрица $A$ соответствует линейному отображению $\MA \colon \MR^n \to \MR^n$, то тогда $A^{-1}$ соответствует обратному отображению: $\MA^{-1} \colon \MR^n \to \MR^n$, которое тоже будет линейно.
+\end{prop}
+\begin{proof}
+	Если линейное отображение имеет обратное $\Rightarrow$ оно взаимнооднозначное и $x \in \MR^n$ взаимнооднозначно переходит в $\MA(x) \in \MR^n$, а поскольку отображение $\MA$ - линейное, то:
+	$$
+		\forall \lambda \in \MR, \, \forall x,y \in \MR^n, \, \MA(x + y) = \MA(x) + \MA(y) = u + v \in \MR^n, \, \MA(\lambda x) = \lambda\MA(x) = w \in \MR^n \Rightarrow
+	$$
+	$$
+		\Rightarrow \MA^{-1}(u + v)  = \MA^{-1}(\MA(x + y)) = x + y = \MA^{-1}(\MA(x)) + \MA^{-1}(\MA(y)) = \MA^{-1}(u) + \MA^{-1}(v)
+	$$
+	$$
+		\MA^{-1}(\lambda u)=\MA^{-1}(\lambda\MA( x)) = \MA^{-1}(\MA( \lambda x)) = \lambda x = \lambda \MA^{-1}(\MA(x)) = \lambda \MA^{-1}(u)
+	$$
+	То есть, обратное отображение тоже будет линейным. В силу взаимной однозначности, соответствие обратной матрице будет следовать из следующего свойства:
+	$$
+		A{\cdot}A^{-1} = A^{-1}{\cdot}A = E \Rightarrow \exists \, \MCB \colon \MA{\cdot}\MCB = \MCB{\cdot}\MA = \MCE \Rightarrow \MCB = \MA^{-1}
+	$$
+	То есть два отображения обратны друг другу.
+\end{proof}
+\begin{corollary}
+	Матрица $A$ обратима $\Leftrightarrow \MA$ это обратимое (то есть взаимнооднозначное/биективное).
+\end{corollary}
+\begin{proof}
+	Следует сразу из утверждения выше. Но можем это ещё дополнительно проверить на основе определений, данных в предыдущей лекции. \hfill\\
+	($\Rightarrow$) 
+	$$
+		\MA(x) = A^{(1)}x_1 + \dotsc + A^{(n)}x_n, \quad \MCB(x) = (A^{-1})^{(1)}x_1 + \dotsc + (A^{-1})^{(n)}x_n \Rightarrow
+	$$
+	$$
+		\Rightarrow E^{(j)} = (A{\cdot}A^{-1})^{(j)} = \MA(\MCB(e_j)) = \MA\left((A^{-1})^{(j)}\right) = \MA((a^{-1})_{1j}e_1 + \dotsc + (a^{-1})_{nj}e_n) = 
+	$$
+	$$
+		=	A^{(1)}{\cdot}(a^{-1})_{1j} + \dotsc + A^{(n)}{\cdot}(a^{-1})_{nj} =  e_j = \MCE(e_j), \, \forall j = \overline{1,n} 
+	$$
+	$$
+		\Rightarrow \forall x \in \MR^n, \,  \MA(\MCB(x)) = \MA(\MCB(e_1))x_1 + \dotsc + \MA(\MCB(e_n))x_n = x_1e_1 + \dotsc + x_n e_n = x
+	$$
+	$$
+		E^{(j)} = (A^{-1}{\cdot}A)^{(j)} = \MCB(\MA(e_j)) = e_j = \MCE(e_j) , \, \forall j = \overline{1,n}
+	$$
+	$$ 
+		\Rightarrow \MCB(\MA(x)) = x
+	$$
+	Таким образом, $\MA{\cdot}\MCB = \MA(\MCB) = \MCB(\MA) = \MCB{\cdot}\MA = \MCE$, то есть отображения обратные.
+	
+	($\Leftarrow$) Пусть отображение $\MA$ - обратимое, $\MA(\MA^{-1}) = \MA^{-1}(\MA) = \MCE \Rightarrow$  матрица линейного отображения $\MA$:
+	$$
+		A = (\MA(e_1), \dotsc, \MA(e_n)) = \left(A^{(1)}, \dotsc, A^{(n)}\right)
+	$$
+	Матрица $B$ обратного линейного отображения будет иметь свойства:
+	$$
+		B = \left(\MA^{-1}(e_1), \dotsc, \MA^{-1}(e_n)\right) \Rightarrow (A{\cdot}B)^{(j)} = \MA(\MA^{-1}(e_j)) = \MCE(e_j) = e_j = E^{(j)}, \, \forall j = \overline{1,n} 
+	$$
+	$$
+		(B{\cdot}A)^{(j)} = \MA^{-1}(\MA(e_j)) = \MCE(e_j) = e_j = E^{(j)}, \, \forall j = \overline{1,n} \Rightarrow A{\cdot}B = B{\cdot}A = E
+	$$
+	А это и значит, что матрица линейного отображения обратима по определению.
+\end{proof}
+\begin{prop}
+	Пусть $A,B$ - две обратимые матрицы. Тогда $A{\cdot}B$ тоже будет обратимо и будет верно:
+	$$
+		(AB)^{-1} = B^{-1}{\cdot}A^{-1}
+	$$
+\end{prop}
+\begin{proof}
+	Проверим, что $B^{-1}{\cdot}A^{-1}$ обратно к $A{\cdot}B$:
+	$$
+		(AB){\cdot}(B^{-1}A^{-1})= A{\cdot}(B{\cdot}B^{-1}){\cdot}A^{-1} = A{\cdot}E{\cdot}A^{-1} = A{\cdot}A^{-1} = E
+	$$
+	$$
+		(B^{-1}A^{-1}){\cdot}(AB)= B^{-1}{\cdot}(A^{-1}{\cdot}A){\cdot}B = B^{-1}{\cdot}E{\cdot}B = B^{-1}{\cdot}B = E
+	$$
+\end{proof}
+
+Мы увидели, что если у матрицы существует обратная, то она единственна. У каких матриц существует обратная, как это понять?
+
+\begin{defn}
+	Матрица $A \in \matsq{n}$ называется \uwave{невырожденной}, если $\rk{A} = n$.
+\end{defn}
+
+\begin{theorem}
+	Матрица $A \in \matsq{n}$ обратима $\Leftrightarrow A$ невырождена.
+\end{theorem}
+\begin{proof}\hfill\\
+	($\Rightarrow$) Матрица обратима $\Rightarrow \exists \, A^{-1} \colon AA^{-1} = A^{-1}A = E$. По теореме $1$ верно: 
+	$$
+		n = \rk{E} = \rk{(AA^{-1})} \leq \min\{\rk{A},\rk{A^{-1}}\} \Rightarrow \rk{A} \geq n \wedge \rk{A} \leq n \Rightarrow \rk{A} = n
+	$$
+	Таким образом, обратимая матрица невырождена.
+	
+	($\Leftarrow$) Пусть $A$ - невырождена $\Rightarrow \rk{A} = n \Rightarrow$  столбцы $\{A^{(1)}, \dotsc, A^{(n)}\}$ - линейно независимы. Таким образом, столбцы образуют систему $n$ линейно независимых векторов $\Rightarrow$ они образуют базис в $\MR^n$. Иначе, можно было бы дополнить эту систему столбцов до базиса и там бы было больше, чем $n$ векторов и мы бы получили противоречие. Таким образом:
+	$$
+		\forall y \in \MR^n, \, \exists! \, x_1, \dotsc, x_n \in \MR \colon y = A^{(1)}{\cdot}x_1 + A^{(2)}{\cdot}x_2 + \dotsc + A^{(n)}{\cdot}x_n
+	$$
+	Эта формула есть ничто иное, как образ столбца из $x_1,\dotsc, x_n$ при линейном отображении $\MA$, тогда:
+	$$
+		\forall y \in \MR^n, \, \exists! x \in \MR^n \colon y = \MA(x)
+	$$
+	где $\MA \colon \MR^n \to \MR^n$ - линейное отображение с матрицей $A \Rightarrow \MA$ - взаимнооднозначное, так как для каждого вектора из образа существует единственный вектор-аргумент, который в него переходит при этом отображении $\Rightarrow \MA$ - обратимое $\Rightarrow A$ - обратима.
+\end{proof}
+
+\section*{Алгоритм нахождения обратной матрицы}
+Пусть $A$ - невырожденная матрица. Припишем к этой матрице единичную матрицу справа, отделив чертой: $(A|E)$ - матрица размера $n \times 2n$. Будем действовать ЭП строк над этой расширенной матрицей так, чтобы матрицу $A$ привести к улучшенному ступенчатому виду. 
+\begin{prop}
+	Улучшенный ступенчатый вид квадратной невырожденной матрицы это единичная матрица.
+\end{prop}
+\begin{proof}
+	Улучшенный ступенчатый вид означает, что на местах лидеров стоят единицы, а в столбцах под лидерами и над лидерами стоят нули. Поскольку матрица невырождена, то при приведении к ступенчатому виду её ранг сохраняется $\Rightarrow$ у ступенчатой матрицы число лидеров будет равно числу строк и равно числу столбцов, поскольку матрица квадратная. Следовательно, лидеры идут по диагонали и матрица имеет вид единичной.
+\end{proof}
+Поскольку $A$ - квадратная и невырожденная $\Rightarrow$ её улучшенный ступенчатый вид будет единичной матрицей. При этом на месте матрицы $E$ появляется некая новая матрица $B$:
+$$
+	(A|E) \xrightarrow{\text{ЭП строк}} (E|B)
+$$
+\begin{prop}
+	При приведении расширенной невырожденной матрицы $A$ к улучшенному ступенчатому виду, мы получим обратную к $A$ матрицу:
+	$$
+		(A|E) \xrightarrow{\text{ЭП строк}} \left(E|A^{-1}\right)
+	$$
+\end{prop}
+\begin{proof}
+	$X = A^{-1}$ является решением уравнения $A{\cdot}X = E$. Если мы хотим посчитать элемент $(ij)$ в произведении матриц $AX$, то мы умножаем строку $i$ матрицы $A$ на столбец $j$ матрицы $X \Rightarrow$ если мы хотим получить $j$-ый столбец произведения, то надо взять каждую строчку матрицы $A$ и умножить на $j$-ый столбец матрицы $X$. Таким образом:
+	$$
+		A{\cdot}X = E \Leftrightarrow A{\cdot}X^{(j)} = E^{(j)}, \, \forall j = \overline{1,n}
+	$$
+	Каждое из таких уравнений можно рассматривать как СЛУ на $X^{(j)}$ с матрицей коэффициентов $A$ и столбцом свободных членов $E^{(j)}$. Решаем такую матричную СЛУ методом Гаусса: 
+	$$
+		\left(A|E^{(j)}\right) \xrightarrow{\text{ЭП строк}} \left(E|B^{(j)}\right)
+	$$
+	Матрица коэффициентов одна и та же, различаются только столбцы свободных членов $\Rightarrow$ когда решаем СЛУ мы можем приводить эти $n$ штук СЛУ ЭП к ступенчатому виду одними и теми же преобразованиями (теми, которые используются в алгоритме нахождения матрицы $B$). Тогда:
+	$$
+		A{\cdot}X^{(j)} = E^{(j)} \Leftrightarrow E{\cdot}X^{(j)} = B^{(j)}, \, \forall j = \overline{1,n}
+	$$
+	Соберём эти $n$ штук СЛУ в одно матричное уравнение:
+	$$
+		A{\cdot}X = E \Leftrightarrow E{\cdot}X = B
+	$$
+	У второго матричного уравнения единственное решение это $X = B \Rightarrow$ и у первого это тоже будет единственным решением $\Rightarrow A^{-1} = X = B$.
+\end{proof}
+
+\textbf{Пример}: рассмотрим невырожденную матрицу $A = 
+\begin{pmatrix}
+	1 & 2 \\
+	3 & 5
+\end{pmatrix}$. Найдем её обратную матрицу:
+$$
+	(A|E) = 
+	\begin{pmatrix}[cc|cc]
+		1 & 2 & 1 & 0 \\
+		3 & 5 & 0 & 1
+	\end{pmatrix} \xrightarrow{1){\cdot}(-3) + 2)} 
+	\begin{pmatrix}[cc|cc]
+		1 & 2 & 1 & 0 \\
+		0 & -1 & -3 & 1
+	\end{pmatrix}
+	\xrightarrow{2){\cdot}(-1)} 
+	\begin{pmatrix}[cc|cc]
+		1 & 2 & 1 & 0 \\
+		0 & 1 & 3 & -1
+	\end{pmatrix}\xrightarrow{2){\cdot}(-2) + 1)} 
+	\begin{pmatrix}[cc|cc]
+		1 & 0 & -5 & 2 \\
+		0 & 1 & 3 & -1
+	\end{pmatrix}
+$$
+Таким образом:
+$$
+	A^{-1} = 
+	\begin{pmatrix}
+		-5 & 2 \\
+		3 & -1
+	\end{pmatrix}
+$$
+
+\section*{Элементарные матрицы}
+Всякую невырожденную матрицу ЭП строк можно привести к единичной матрице. Но и наоборот, всякая невырожденная матрица получается из единичной, если ЭП строк проделаем в обратном порядке. Рассмотрим класс матриц, получаемых из единичной матрицы с помощью одного ЭП строк. 
+\begin{defn}
+	\uwave{Элементарная матрица} это матрица $n\times n$, получаемая из $E$ с помощью ЭП строк или столбцов.
+\end{defn}
+Элементарные матрицы бывают трёх типов в соответствии ЭП строк:
+\begin{enumerate}[label = \arabic*)]
+	\item К строчке $i$ прибавляем строчку $j$ с коэффициентом $\lambda$:
+	$$
+		\begin{blockarray}{ccccccccc}
+			\begin{block}{(ccccccc)cc}
+				1 & \dotsc & 0 & \dotsc & 0 & \dotsc & 0 & &\\
+				\vdots & \ddots & \vdots & \ddots & \vdots & \ddots & \vdots & &\\
+				0 & \dotsc & 1 & \dotsc & 0 & \dotsc & 0 & i&\\
+				\vdots & \ddots & \vdots & \ddots & \vdots & \ddots & \vdots & &\Rightarrow\\
+				0 & \dotsc & 0 & \dotsc & 1 & \dotsc & 0 & j\\
+				\vdots & \ddots & \vdots & \ddots & \vdots & \ddots & \vdots &&\\
+				0 & \dotsc & 0 & \dotsc & 0 & \dotsc & 1 &&\\
+			\end{block}
+				 &  & i &  & j &  &  &&\\
+		\end{blockarray}	
+		\begin{blockarray}{ccccccccc}
+			\begin{block}{c(ccccccc)c}
+				& 1 & \dotsc & 0 & \dotsc & 0 & \dotsc & 0 & \\
+				& \vdots & \ddots & \vdots & \ddots & \vdots & \ddots & \vdots & \\
+				& 0 & \dotsc & 1 & \dotsc & {\color{red}\lambda} & \dotsc & 0 & i\\
+				U_{ij}(\lambda) =& \vdots & \ddots & \vdots & \ddots & \vdots & \ddots & \vdots & \\
+				&0 & \dotsc & 0 & \dotsc & 1 & \dotsc & 0 & j\\
+				&\vdots & \ddots & \vdots & \ddots & \vdots & \ddots & \vdots &\\
+				&0 & \dotsc & 0 & \dotsc & 0 & \dotsc & 1 &\\
+			\end{block}
+			&&  & i &  & j &  &  &\\
+		\end{blockarray}
+	$$
+	Ту же самую матрицу можно получить если к $E$ применим ЭП столбцов: к столбце $j$ прибавляем столбце $i$ с коэффициентом $\lambda$;
+	\item Перестановка местами двух строк или столбцов:
+	$$
+		\begin{blockarray}{ccccccccc}
+			\begin{block}{(ccccccc)cc}
+				1 & \dotsc & 0 & \dotsc & 0 & \dotsc & 0 & &\\
+				\vdots & \ddots & \vdots & \ddots & \vdots & \ddots & \vdots & &\\
+				0 & \dotsc & 1 & \dotsc & 0 & \dotsc & 0 & i&\\
+				\vdots & \ddots & \vdots & \ddots & \vdots & \ddots & \vdots & &\Rightarrow\\
+				0 & \dotsc & 0 & \dotsc & 1 & \dotsc & 0 & j\\
+				\vdots & \ddots & \vdots & \ddots & \vdots & \ddots & \vdots &&\\
+				0 & \dotsc & 0 & \dotsc & 0 & \dotsc & 1 &&\\
+			\end{block}
+			&  & i &  & j &  &  &&\\
+		\end{blockarray}	
+		\begin{blockarray}{ccccccccc}
+			\begin{block}{c(ccccccc)c}
+				& 1 & \dotsc & 0 & \dotsc & 0 & \dotsc & 0 & \\
+				& \vdots & \ddots & \vdots & \ddots & \vdots & \ddots & \vdots & \\
+				& 0 & \dotsc & 0 & \dotsc & {\color{red}1} & \dotsc & 0 & i\\
+				U_{ij} =& \vdots & \ddots & \vdots & \ddots & \vdots & \ddots & \vdots & \\
+				&0 & \dotsc & {\color{red}1} & \dotsc & 0 & \dotsc & 0 & j\\
+				&\vdots & \ddots & \vdots & \ddots & \vdots & \ddots & \vdots &\\
+				&0 & \dotsc & 0 & \dotsc & 0 & \dotsc & 1 &\\
+			\end{block}
+			&&  & i &  & j &  &  &\\
+		\end{blockarray}
+	$$
+	\item Умножение $i$-ой строчки или $i$-го столбца на какое-то число $\lambda \neq0$:
+	$$
+	\begin{blockarray}{ccccccccc}
+		\begin{block}{(ccccccc)cc}
+			1 & \dotsc & 0 & \dotsc & 0 & \dotsc & 0 & &\\
+			\vdots & \ddots & \vdots & \ddots & \vdots & \ddots & \vdots & &\\
+			0 & \dotsc & 1 & \dotsc & 0 & \dotsc & 0 & i&\\
+			\vdots & \ddots & \vdots & \ddots & \vdots & \ddots & \vdots & &\Rightarrow\\
+			0 & \dotsc & 0 & \dotsc & 1 & \dotsc & 0 & j\\
+			\vdots & \ddots & \vdots & \ddots & \vdots & \ddots & \vdots &&\\
+			0 & \dotsc & 0 & \dotsc & 0 & \dotsc & 1 &&\\
+		\end{block}
+		&  & i &  & j &  &  &&\\
+	\end{blockarray}	
+	\begin{blockarray}{ccccccccc}
+		\begin{block}{c(ccccccc)c}
+			& 1 & \dotsc & 0 & \dotsc & 0 & \dotsc & 0 & \\
+			& \vdots & \ddots & \vdots & \ddots & \vdots & \ddots & \vdots & \\
+			& 0 & \dotsc & {\color{red}\lambda} & \dotsc & 0 & \dotsc & 0 & i\\
+			U_{i}(\lambda) =& \vdots & \ddots & \vdots & \ddots & \vdots & \ddots & \vdots & \\
+			&0 & \dotsc & 0 & \dotsc & 1 & \dotsc & 0 & j\\
+			&\vdots & \ddots & \vdots & \ddots & \vdots & \ddots & \vdots &\\
+			&0 & \dotsc & 0 & \dotsc & 0 & \dotsc & 1 &\\
+		\end{block}
+		&&  & i &  & j &  &  &\\
+	\end{blockarray}
+	$$
+\end{enumerate}
+
+\begin{theorem}(\textbf{основное свойство элементарных матриц}) Пусть $A \in \mat{m}{n}$, тогда:
+	\begin{enumerate}[label = \arabic*)]
+		\item Применив к $A$ одно ЭП строк мы получим матрицу: $A' = U{\cdot}A$, где $U$ - получается из $E$ с помощью того же ЭП строк;
+		\item Применив к $A$ одно ЭП столбцов мы получим матрицу: $A'' = A{\cdot}V$, где $V$ - получается из $E$ с помощью того же ЭП столбцов;
+	\end{enumerate}
+\end{theorem}
+\begin{proof}\hfill
+	\begin{enumerate}[label = \arabic*)]
+		\item Заметим, что при любом ЭП строк, строки новой матрицы линейно выражаются через строки исходной матрицы, это касается как матрицы $A$, так и матрицы $E$:
+		$$
+			A'_i = \ddsum{k = 1}{m}\lambda_{ik}A_k, \, U_i = \ddsum{k = 1}{m}\lambda_{ik}E_k
+		$$
+		Но $k$-ая строка единичной матрицы это $k$-ый вектор стандартного базиса в пространстве строк: 
+		$$
+			E_k = (0, \dotsc,0,\underset{k}{1},0,\dotsc,0) \Rightarrow U_i = \ddsum{k = 1}{m}\lambda_{ik}E_k = (\lambda_{i1}, \dotsc, \lambda_{im})
+		$$
+		Переходя от строк к конкретным координатам, мы получаем:
+		$$
+			a'_{ij} = \ddsum{k = 1}{m}\lambda_{ik}{\cdot}a_{kj} = (\lambda_{i1}, \dotsc, \lambda_{im}){\cdot}
+			\begin{pmatrix}
+				a_{1j}\\
+				\vdots\\
+				a_{mj}
+			\end{pmatrix} = U_i{\cdot}A^{(j)} \Rightarrow A' = U{\cdot}A
+		$$	
+		\item Формула доказывается аналогично: 
+		$$
+			A''^{(j)} =\ddsum{k = 1}{n}A^{(k)}{\cdot}\mu_{kj}, \, V^{(j)} = \ddsum{k = 1}{n}E^{(k)}{\cdot}\mu_{kj}
+		$$
+		Но $k$-ый столбец $E$ это $k$-ый вектор стандартного базиса в пространстве столбцов: 
+		$$
+			E^{(k)} =  
+			\begin{matrix}
+				\begin{pmatrix}
+					0 \\
+					\vdots\\
+					1\\
+					\vdots\\
+					0
+				\end{pmatrix}
+				\begin{matrix}
+					\\
+					\\
+					k\\
+					\\
+					\vphantom{0}
+				\end{matrix}
+			\end{matrix}
+			\Rightarrow V^{(j)} = \ddsum{k = 1}{n}E^{(k)}{\cdot}\mu_{kj}=
+			\begin{pmatrix}
+				\mu_{1j}\\
+				\vdots\\
+				\mu_{kj}\\
+				\vdots\\
+				\mu_{nj}
+			\end{pmatrix}
+		$$
+		Переходя от столбцов к конкретным координатам, мы получаем:
+		$$
+			a''_{ij} = \ddsum{k = 1}{n}a_{ij}\mu_{kj} = A_i{\cdot}V^{(j)} \Rightarrow A'' = A{\cdot}V
+		$$
+	\end{enumerate}
+\end{proof}
+\begin{corollary}
+	Элементарные матрицы обратимы и обратная матрица к элементарной матрице будет тоже элементарной матрицей, которая соответствует обратному ЭП (строк или столбцов).
+\end{corollary}
+\begin{proof}
+	Пусть $U$ - элементарная матрица, полученная ЭП одной строки $E$. Тогда применяя обратное ЭП строк мы из $U$ получим $E$: 
+	$$
+		E \xrightarrow{\text{ЭП строки}} U \Rightarrow U \xrightarrow{\text{ЭП}^{-1} \text{ строки}} E
+	$$
+	Применим это обратное ЭП не к $U$, а к $E$, то мы получим другую элементарную матрицу $V$:
+	$$
+		E \xrightarrow{\text{ЭП}^{-1} \text{ строки}} V \Rightarrow V \xrightarrow{(\text{ЭП}^{-1})^{-1} \text{ строки}} E
+	$$
+	где обратное к обратному ЭП строки есть просто ЭП строки:
+	$$
+		V \xrightarrow{(\text{ЭП}^{-1})^{-1} \text{ строки}} E \Leftrightarrow V \xrightarrow{\text{ЭП строки}} E
+	$$
+	Мы знаем, что ЭП над строками равносильно умножению слева на соответствующую элементарную матрицу $\Rightarrow$ применяя к матрице $U$ обратное ЭП к исходному, мы получаем $E \Rightarrow E = V{\cdot}U$. С другой стороны, матрица $E$ получается из матрицы $V$ применением исходного ЭП строк $\Rightarrow E = U{\cdot}V$, тогда:
+	$$
+		E = U{\cdot}V = V{\cdot}U \Rightarrow V = U^{-1}
+	$$
+	Для столбцов аналогично, меняется лишь порядок сомножителей.
+\end{proof}
+Отметим, что обратные преобразования выглядят так:
+\begin{enumerate}[label = \arabic*)]
+	\item $\left(U_{ij}(\lambda)\right)^{-1} = U_{ij}(-\lambda)$;
+	\item $\left(U_{ij}\right)^{-1} = U_{ij}$;
+	\item $\left(U_i(\lambda)\right)^{-1} = U_i\left(\frac{1}{\lambda}\right)$;
+\end{enumerate}
+\newpage
+\begin{theorem}
+	Всякая невырожденная матрица может быть разложена в произведение элементарных матриц. Обратное тоже верно в силу обратимости элементарных матриц.
+\end{theorem}
+\begin{proof}
+	Пусть $A$ - невырождена, тогда цепочкой ЭП строк можно привести её к улучшенному ступенчатому виду, который будет единичной матрицей: 
+	$$
+		A \xrightarrow{\text{ЭП}_1}\xrightarrow{\text{ЭП}_2}\dotsc \xrightarrow{\text{ЭП}_N}E
+	$$
+	Но каждое ЭП над строчкой $\Leftrightarrow$ умножению слева на матрицу ЭП:
+	$$
+		\forall i = \overline{1,N}, \, E\xrightarrow{\text{ЭП}_i}U_i \Rightarrow U_{N}{\cdot}\dotsc {\cdot}U_2{\cdot}U_1{\cdot}A = E \Rightarrow 
+	$$
+	$$
+		\Rightarrow A = (U_{N}{\cdot}\dotsc {\cdot}U_2{\cdot}U_1)^{-1}{\cdot}E = (U_{N}{\cdot}\dotsc {\cdot}U_2{\cdot}U_1)^{-1} = U_1^{-1}{\cdot}U_2^{-1}{\cdot} \dotsc{\cdot}U_N^{-1}
+	$$
+	Но как мы уже знаем, обратные к элементарным матрицам это тоже элементарные матрицы. Они соответствуют обратным ЭП.
+\end{proof}
+
+
+\subsection*{Умножение матрицы на диагональную матрицу}
+
+\begin{defn}
+	Квадратная матрица $D$ называется \uwave{диагональной}, если её элементы вне главной диагонали равны нулю: $d_{ij} = 0, \, \forall i \neq j$:
+	$$
+		D = 
+		\begin{pmatrix}
+			d_1  & 0 & \dotsc & 0\\
+			0 & d_2 & \dotsc & 0\\
+			\vdots & \vdots & \ddots & \vdots \\
+			0 & 0 & \dotsc & d_n
+		\end{pmatrix}
+	$$
+\end{defn}
+Рассмотрим умножение диагональной матрицы $D$ на матрицу $A$ слева:
+$$
+	D = \begin{pmatrix}
+		d_1  & 0 & \dotsc & 0\\
+		0 & d_2 & \dotsc & 0\\
+		\vdots & \vdots & \ddots & \vdots \\
+		0 & 0 & \dotsc & d_n
+	\end{pmatrix}, \, 
+	A = 
+	\begin{pmatrix}
+		a_{11} & a_{12} & \dotsc & a_{1m} \\
+		a_{21} & a_{22} & \dotsc & a_{2m}\\
+		\vdots & \vdots & \ddots & \vdots \\
+		a_{n1} & a_{n2} & \dotsc & a_{nm}
+	\end{pmatrix}
+$$
+$$
+	D{\cdot}A = 
+	\begin{pmatrix}
+		d_1 a_{11} & d_1 a_{12} & \dotsc & d_1 a_{1m}\\
+		d_2 a_{21} & d_2 a_{22} & \dotsc & d_2 a_{2m}\\
+		\vdots & \vdots & \ddots & \vdots\\
+		d_n a_{n1} & d_n a_{n2} & \dotsc & d_n a_{nm}\\
+	\end{pmatrix}
+$$
+То есть $i$-ая строчка $A$ умножилась на диагональный элемент $d_i$. 
+
+Умножим диагональную матрицу $D$ на матрицу $B$ справа:
+$$
+	D = 
+	\begin{pmatrix}
+		d_1  & 0 & \dotsc & 0\\
+		0 & d_2 & \dotsc & 0\\
+		\vdots & \vdots & \ddots & \vdots \\
+		0 & 0 & \dotsc & d_n
+	\end{pmatrix}, \, 
+	B = 
+	\begin{pmatrix}
+		b_{11} & b_{12} & \dotsc & b_{1n} \\
+		b_{21} & b_{22} & \dotsc & b_{2n}\\
+		\vdots & \vdots & \ddots & \vdots \\
+		b_{m1} & b_{m2} & \dotsc & b_{mn}
+	\end{pmatrix}
+$$
+$$
+	B{\cdot}D = 
+	\begin{pmatrix}
+		d_1 b_{11} & d_2 b_{12} & \dotsc & d_n b_{1n}\\
+		d_1 b_{21} & d_2 b_{22} & \dotsc & d_n b_{2n}\\
+		\vdots & \vdots & \ddots & \vdots\\
+		d_1 b_{m1} & d_2 b_{m2} & \dotsc & d_n b_{mn}\\
+	\end{pmatrix}
+$$
+То есть $i$-ый столбец умножился на диагональнаый элемент $d_i$.
+
+\begin{defn}
+	\uwave{Скалярной матрицей} называется диагональная матрица, в которой $d_1 = d_2 = \dotsc = d_n = \lambda$:
+	$$
+		\Lambda = \begin{pmatrix}
+			\lambda  & 0 & \dotsc & 0\\
+			0 & \lambda & \dotsc & 0\\
+			\vdots & \vdots & \ddots & \vdots \\
+			0 & 0 & \dotsc & \lambda
+		\end{pmatrix}
+	$$
+\end{defn}
+Домножим квадратную матрицу $A$ на скалярную матрицу $\Lambda$:
+$$
+	A{\cdot}\Lambda = 
+	\begin{pmatrix}
+		\lambda a_{11} &\lambda a_{12} & \dotsc &\lambda a_{1n} \\
+		\lambda a_{21} &\lambda a_{22} & \dotsc &\lambda a_{2n}\\
+		\vdots & \vdots & \ddots & \vdots \\
+		\lambda a_{n1} &\lambda a_{n2} & \dotsc &\lambda a_{nn}
+	\end{pmatrix}
+	= \Lambda {\cdot} A = \lambda{\cdot}A
+$$
+\subsection*{След матрицы}
+\begin{defn}
+	\uwave{След матрицы} $A$ это сумма её диагональных элементов.
+	
+	\textbf{\uline{Обозначение}}: $\tr{(A)} = a_{11} + a_{22} + \dotsc + a_{nn}$.
+\end{defn}
+\begin{prop}\textbf{(свойства следа матрицы)}
+	\begin{enumerate}[label = \arabic*)]
+		\item $\tr{(A+B)} = \tr{(A)} + \tr{(B)}$;
+		\item $\tr{(\lambda{\cdot}A)} = \lambda{\cdot}\tr{(A)}$;
+		\item $\tr{(A{\cdot}B)} = \tr{(B{\cdot}A)}$;
+		\item $\tr{(A{\cdot}B{\cdot}C)} \neq \tr{(A{\cdot}C{\cdot}B)}$
+	\end{enumerate}
+\end{prop}
+\begin{proof}\hfill	
+	\begin{enumerate}[label = \arabic*)]
+		\item Пусть: $\tr{(A)} = a_{11} + \dotsc + a_{nn}, \, \tr{(B)} = b_{11} + \dotsc + b_{nn}$, тогда: 
+		$$
+			\tr{(A+B)} = (a_{11} + b_{11}) + \dotsc + (a_{nn} + b_{nn}) = \tr{(A)} + \tr{(B)}
+		$$
+		\item Пусть: $\tr{(A)} = a_{11} + \dotsc + a_{nn}$:
+		$$
+			\tr{(\lambda{\cdot}A)} = \lambda{\cdot}a_{11} + \dotsc + \lambda{\cdot}a_{nn} = \lambda{\cdot}(a_{11} + \dotsc + a_{nn}) = \lambda{\cdot}\tr{(A)}
+		$$
+		\item $\tr{(AB)} = (AB)_{11} + (AB)_{22} + \dotsc + (AB)_{nn}$, распишем подробнее:
+		$$
+			(AB)_{ii} = \ddsum{j = 1}{n}a_{ij}b_{ji} \Rightarrow \tr{(AB)} = \ddsum{i = 1}{n} \ddsum{j = 1}{n}a_{ij}b_{ji} = \ddsum{j = 1}{n}\ddsum{i = 1}{n}b_{ji}a_{ij} = \ddsum{j = 1}{n}(BA)_{jj} = \tr{(BA)}
+		$$
+		\item Рассмотрим следующие матрицы:
+		$$
+			A = 
+			\begin{pmatrix}
+				0 & 1 \\
+				0 & 0
+			\end{pmatrix}, \, B = A^T, \,
+			C = 
+			\begin{pmatrix}
+				1 & 0 \\
+				0 & 0
+			\end{pmatrix}
+		$$
+		$$
+			\tr{(A{\cdot}B{\cdot}C)} =
+			\tr{
+				\begin{pmatrix}
+					1 & 0\\
+					0 & 0
+				\end{pmatrix}
+				} = 1 \neq 0 = 
+			\tr{
+			\begin{pmatrix}
+				0 & 0\\
+				0 & 0
+			\end{pmatrix}} = \tr{(A{\cdot}C{\cdot}B)}
+		$$
+	\end{enumerate}
+\end{proof}
+
+
+
+\end{document}

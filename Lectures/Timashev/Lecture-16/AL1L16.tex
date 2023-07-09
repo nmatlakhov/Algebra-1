@@ -1,0 +1,594 @@
+\documentclass[12pt]{article}
+\usepackage[left=1cm, right=1cm, top=2cm,bottom=1.5cm]{geometry} 
+
+\usepackage[parfill]{parskip}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage{enumitem}
+\usepackage[normalem]{ulem}
+\usepackage{amsfonts, amsmath, amsthm, amssymb, mathtools,xcolor}
+\usepackage{blkarray}
+
+\usepackage{tabularx}
+\usepackage{hhline}
+
+\usepackage{accents}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{1.5pt}
+\renewcommand{\footrulewidth}{1pt}
+
+\usepackage{graphicx}
+\usepackage[figurename=Рис.]{caption}
+\usepackage{subcaption}
+\usepackage{float}
+
+%%Наименование папки откуда забирать изображения
+\graphicspath{ {./images/} }
+
+%%Изменение формата для ввода доказательства
+\renewcommand{\proofname}{$\square$  \nopunct}
+\renewcommand\qedsymbol{$\blacksquare$}
+
+%%Изменение отступа на таблицах
+\addto\captionsrussian{%
+	\renewcommand{\proofname}{$\square$ \nopunct}%
+}
+%% Римские цифры
+\newcommand{\RN}[1]{%
+	\textup{\uppercase\expandafter{\romannumeral#1}}%
+}
+
+%% Для удобства записи
+\newcommand{\MR}{\mathbb{R}}
+\newcommand{\MC}{\mathbb{C}}
+\newcommand{\MQ}{\mathbb{Q}}
+\newcommand{\MN}{\mathbb{N}}
+\newcommand{\MZ}{\mathbb{Z}}
+\newcommand{\MTB}{\mathbb{T}}
+\newcommand{\MTI}{\mathbb{I}}
+\newcommand{\MI}{\mathrm{I}}
+\newcommand{\MCI}{\mathcal{I}}
+\newcommand{\MJ}{\mathrm{J}}
+\newcommand{\MH}{\mathrm{H}}
+\newcommand{\MT}{\mathrm{T}}
+\newcommand{\MU}{\mathcal{U}}
+\newcommand{\MV}{\mathcal{V}}
+\newcommand{\MB}{\mathcal{B}}
+\newcommand{\MF}{\mathcal{F}}
+\newcommand{\MW}{\mathcal{W}}
+\newcommand{\ML}{\mathcal{L}}
+\newcommand{\MP}{\mathcal{P}}
+\newcommand{\VN}{\varnothing}
+\newcommand{\VE}{\varepsilon}
+\newcommand{\dx}{\, dx}
+\newcommand{\dy}{\, dy}
+\newcommand{\dz}{\, dz}
+\newcommand{\dd}{\, d}
+
+
+\theoremstyle{definition}
+\newtheorem{defn}{Опр:}
+\newtheorem{rem}{Rm:}
+\newtheorem{prop}{Утв.}
+\newtheorem{exrc}{Упр.}
+\newtheorem{problem}{Задача}
+\newtheorem{lemma}{Лемма}
+\newtheorem{theorem}{Теорема}
+\newtheorem{corollary}{Следствие}
+
+\newenvironment{cusdefn}[1]
+{\renewcommand\thedefn{#1}\defn}
+{\enddefn}
+
+\DeclareRobustCommand{\divby}{%
+	\mathrel{\text{\vbox{\baselineskip.65ex\lineskiplimit0pt\hbox{.}\hbox{.}\hbox{.}}}}%
+}
+\DeclareRobustCommand{\ndivby}{\mkern-1mu\not\mathrel{\mkern4.5mu\divby}\mkern1mu}
+
+
+%Короткий минус
+\DeclareMathSymbol{\SMN}{\mathbin}{AMSa}{"39}
+%Длинная шапка
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+%Функция знака
+\DeclareMathOperator{\sgn}{sgn}
+
+%Функция ранга
+\DeclareMathOperator{\rk}{\text{rk}}
+\DeclareMathOperator{\diam}{\text{diam}}
+
+
+%Обозначение константы
+\DeclareMathOperator{\const}{\text{const}}
+
+\DeclareMathOperator{\codim}{\text{codim}}
+
+\DeclareMathOperator*{\dsum}{\displaystyle\sum}
+\newcommand{\ddsum}[2]{\displaystyle\sum\limits_{#1}^{#2}}
+
+%Интеграл в большом формате
+\DeclareMathOperator{\dint}{\displaystyle\int}
+\newcommand{\ddint}[2]{\displaystyle\int\limits_{#1}^{#2}}
+\newcommand{\ssum}[1]{\displaystyle \sum\limits_{n=1}^{\infty}{#1}_n}
+
+\newcommand{\smallerrel}[1]{\mathrel{\mathpalette\smallerrelaux{#1}}}
+\newcommand{\smallerrelaux}[2]{\raisebox{.1ex}{\scalebox{.75}{$#1#2$}}}
+
+\newcommand{\smallin}{\smallerrel{\in}}
+\newcommand{\smallnotin}{\smallerrel{\notin}}
+
+\newcommand*{\medcap}{\mathbin{\scalebox{1.25}{\ensuremath{\cap}}}}%
+\newcommand*{\medcup}{\mathbin{\scalebox{1.25}{\ensuremath{\cup}}}}%
+
+\makeatletter
+\newcommand{\vast}{\bBigg@{3.5}}
+\newcommand{\Vast}{\bBigg@{5}}
+\makeatother
+
+%Промежуточное значение для sup\inf, поскольку они имеют разную высоту
+\newcommand{\newsup}{\mathop{\smash{\mathrm{sup}}}}
+\newcommand{\newinf}{\mathop{\mathrm{inf}\vphantom{\mathrm{sup}}}}
+
+%Скалярное произведение
+\newcommand{\inner}[2]{\left\langle #1, #2 \right\rangle }
+\newcommand{\linsp}[1]{\left\langle #1 \right\rangle }
+\newcommand{\linmer}[2]{\left\langle #1 \vert #2\right\rangle }
+
+%Подпись символов снизу
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+
+%% Шапка для букв сверху
+\newcommand{\wte}[1]{\widetilde{#1}}
+\newcommand{\wht}[1]{\widehat{#1}}
+\newcommand{\ovl}[1]{\overline{#1}}
+
+%%Трансформация Фурье
+\newcommand{\fourt}[1]{\mathcal{F}\left(#1\right)}
+\newcommand{\ifourt}[1]{\mathcal{F}^{-1}\left(#1\right)}
+
+%%Символ вектора
+\newcommand{\vecm}[1]{\overrightarrow{#1\,}}
+
+%%Пространстов матриц
+\newcommand{\matsq}[1]{\operatorname{Mat}_{#1}}
+\newcommand{\mat}[2]{\operatorname{Mat}_{#1, #2}}
+
+%Оператор для действ и мнимых чисел
+\DeclareMathOperator{\IM}{\operatorname{Im}}
+\DeclareMathOperator{\RE}{\operatorname{Re}}
+\DeclareMathOperator{\li}{\operatorname{li}}
+\DeclareMathOperator{\GL}{\operatorname{GL}}
+\DeclareMathOperator{\SL}{\operatorname{SL}}
+\DeclareMathOperator{\Char}{\operatorname{char}}
+\DeclareMathOperator\Arg{Arg}
+
+%Делимость чисел
+\newcommand{\modn}[3]{#1 \equiv #2 \; (\bmod \; #3)}
+
+
+%%Взятие в скобки, модули и норму
+\newcommand{\parfit}[1]{\left( #1 \right)}
+\newcommand{\modfit}[1]{\left| #1 \right|}
+\newcommand{\sqparfit}[1]{\left\{ #1 \right\}}
+\newcommand{\normfit}[1]{\left\| #1 \right\|}
+
+%%Функция для обозначения равномерной сходимости по множеству
+\newcommand{\uconv}[1]{\overset{#1}{\rightrightarrows}}
+\newcommand{\uconvm}[2]{\overset{#1}{\underset{#2}{\rightrightarrows}}}
+
+
+%%Функция для обозначения нижнего и верхнего интегралов
+\def\upint{\mathchoice%
+	{\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	\int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+
+%%След матрицы
+\DeclareMathOperator*{\tr}{tr}
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+	\hskip -\arraycolsep
+	\let\@ifnextchar\new@ifnextchar
+	\array{#1}}
+\makeatother
+
+
+%% Переопределение функции хи, чтобы выглядела более приятно
+\makeatletter
+\@ifdefinable\@latex@chi{\let\@latex@chi\chi}
+\renewcommand*\chi{{\@latex@chi\smash[t]{\mathstrut}}} % want only bottom half of \mathstrut
+\makeatletter
+
+\setcounter{MaxMatrixCols}{20}
+
+\begin{document}
+\lhead{Алгебра-\RN{1}}
+\chead{Тимашев Д.А.}
+\rhead{Лекция - 16}
+
+\section*{Связь функционального и формального равенства}
+
+Пусть $K$ - поле. Два многочлена с коэффициентами в этом поле:
+$$
+	f = \ddsum{k \geq 0}{}a_k{\cdot}x^k, g = \ddsum{k \geq 0}{}b_k{\cdot}x^k \in K[x]
+$$
+\begin{defn}
+	Многочлены $f,g \in K[x]$ \uwave{функционально равны}, если верно: $f(x) = g(x) \Leftrightarrow f(c) = g(c), \, \forall c \in K$.
+\end{defn}
+\begin{defn}
+	Многочлены $f,g \in K[x]$ \uwave{формально равны}, если верно: $\forall k \geq 0, \, a_k = b_k$.
+\end{defn}
+
+\begin{prop}
+	Пусть $K$ - бесконечное поле, тогда функциональное равенство многочленов эквивалентно их формальному равенству: 
+	$$
+		f(c) = g(c), \, \forall c \in K \Leftrightarrow f = g, \, a_k = b_k, \, \forall k \geq 0
+	$$
+	Если $K$ - конечное поле, то из формального равенства следует функциональное.
+\end{prop}
+\begin{proof}\hfill\\
+	$(\Leftarrow)$ Если многочлены равны покоэффициентно, то подставляя вместо $x$ любое значение, мы получаем равенство значений - очевидно.
+	
+	$(\Rightarrow)$ Можно считать, что и $f$, и $g$ являются суммами одночленов до степени $n$:
+	$$
+		f = a_0 + a_1x + \dotsc + a_nx^n, \quad
+		g = b_0 + b_1x + \dotsc + b_nx^n
+	$$
+	Выберем $n+1$ различных элементов: $x_0, x_1,\dotsc, x_n \in K$, это всегда можно сделать для сколь угодно большого $n$, в силу бесконечности поля $K$. Положим: 
+	$$
+		\forall i = \overline{0,n}, \, y_i = f(x_i) = g(x_i)
+	$$
+	Поскольку $\deg(f), \deg(g) \leq n$, то по теореме об интерполяции $f = g$, поскольку существует ровно один многочлен степени меньше $n + 1$, который принимает в заданных $n+1$ точках заданные значения.
+\end{proof}
+
+\section*{Деление с остатком}
+
+\begin{theorem}(\textbf{О делении многочленов с остатком})
+	Пусть $K$ - поле, тогда: 
+	$$
+		\forall f,g \in K[x], \, g \neq 0, \, \exists ! \, q,r \in K[x] \colon f = g{\cdot}q + r, \, \deg(r) < \deg(g)
+	$$
+	где $f$ называется \uwave{делимым}, $g$ - \uwave{делителем}, $q$ - \uwave{неполным частным}, а $r$ - \uwave{остатком}. В частности, если остатка нет: $r = 0$, то тогда говорят, что $f$ \uwave{делится} на $g$, или $g$ \uwave{делит} $f$ (нацело, без остатка).
+	
+	\textbf{\uwave{Обозначение}}: $f \divby g$ или $g \mid f$.
+\end{theorem}
+\begin{rem}
+	Если степень нулевого многочлена не определена как $-\infty$, то последнее условие необходимо заменить на $\deg(r) < \deg(g) \vee r = 0$.
+\end{rem}
+\begin{proof}\hfill\\
+	\textbf{\uline{Существование}}: Рассмотрим несколько случаев:
+	
+	$1)$ Если $f = 0 \Rightarrow$ очевидно: $q = r = 0$. 
+	
+	$2)$ Пусть $f \neq 0$, обозначим: $\deg(f) = n, \, \deg(g) = m$, тогда:
+	$$
+		f = a_0 + a_1x + \dotsc + a_nx^n, \, a_n \neq 0,  \quad g = b_0 + b_1x+ \dotsc + b_m x^m , \, b_m \neq 0
+	$$
+	\newpage
+	Рассмотрим несколько случаев и воспользуемся индукцией.
+	
+	\uline{База индукции}: $n = 0$, рассмотрим случаи:
+	\begin{enumerate}[label=(\arabic*)]
+		\item Пусть $m > 0$, тогда: $q = 0, \, r = f \Rightarrow$ условие выполнено;
+		\item Пусть $m = 0 \Rightarrow f = a_0 \neq 0, \, g = b_0 \neq 0 \Rightarrow q = \dfrac{a_0}{b_0}, \, r = 0$;
+	\end{enumerate}
+	\uline{Шаг индукции}: Пусть верно для $n-1 > 0$, тогда покажем для $n$:
+	\begin{enumerate}[label=(\arabic*)]
+		\item Пусть $n < m$, тогда: $q = 0, \, r = f \Rightarrow$ условие выполнено;
+		\item Пусть $n \geq m$, тогда возьмем $g$ и умножим на одночлен $c{\cdot}x^{n-m}$ так, чтобы:
+		$$
+			g{\cdot}c{\cdot}x^{n - m} = a_n x^n + \text{младшие члены}	\Rightarrow c = \dfrac{a_n}{b_m}
+		$$
+		Возьмем соответствующую разность: 
+		$$
+			f - g{\cdot}\dfrac{a_n}{b_m}x^{n -m} = \wte{f} \Rightarrow \deg\big({\wte{f}\;}\big) \leq n - 1
+		$$
+		Следовательно, возможны две ситуации:
+		\begin{enumerate}[label=\alph*)]
+			\item $\wte{f} = 0 \Rightarrow q = \dfrac{a_n}{b_m}x^{n- m}, \, r = 0$;
+			\item $\wte{f} \neq 0 \Rightarrow$ по предположению индукции $\wte{f} \divby g$: $\wte{f} = g{\cdot}\wte{q} + \wte{r}, \, \deg(r) < \deg(g)$, тогда:
+			$$
+				f = \wte{f} + g{\cdot}\dfrac{a_n}{b_m}x^{n-m} = g{\cdot}\underbrace{\left(\dfrac{a_n}{b_m} + \wte{q}\right)}_{=q} + r
+			$$
+		\end{enumerate}
+	\end{enumerate}
+
+	\textbf{\uline{Единственность}}: Пусть $f = g{\cdot}q_1 + r_1 = g{\cdot}q_2 + r_2$, где $\deg(r_i) < \deg(g), \, i =1,2$. Вычтем одно выражение из другого, тогда:
+	$$
+		g{\cdot}(q_1 - q_2) = r_2 - r_1, \, \deg(r_2 - r_1) < \deg(g), \, \deg(g{\cdot}(q_1 - q_2)) = \deg(g) + \deg(q_1 - q_2) \Rightarrow
+	$$
+	$$
+		\Rightarrow \deg(g{\cdot}(q_1 - q_2)) \geq \deg(g) \vee g(q_1 - q_2) = 0, \, \deg(g{\cdot}(q_1 - q_2)) < \deg(g) \Rightarrow 
+	$$
+	$$
+		\Rightarrow g{\cdot}(q_1 - q_2) = r_2 - r_1 = 0 \Rightarrow r_1 = r_2, \quad \deg(g) \neq 0 \Rightarrow q_1 - q_2 = 0 \Rightarrow q_1 = q_2
+	$$
+\end{proof}
+
+\subsection*{Теорема Безу}
+Рассмотрим частный случай теоремы деления с остатком - деление на линейный двучлен.
+\begin{theorem}(\textbf{Безу})
+	Пусть $f \in K[x], \, x_0 \in K$, тогда 
+	$$
+		f(x) = (x - x_0){\cdot}q(x) + f(x_0)
+	$$
+\end{theorem}
+\begin{proof}
+	По теореме о делении с остатком, мы можем представить многочлен $f$ в виде:
+	$$
+		f(x) = (x - x_0){\cdot}q(x) + c, \, \deg(c) < \deg(x - x_0) = 1 \Rightarrow \deg(c) = 0 \vee \deg(c) = -\infty \Rightarrow c \in K
+	$$
+	Подставим в это равенство $x_0$, тогда мы получим:
+	$$
+		f(x_0) = (x_0 - x_0){\cdot}q(x_0) + c = c 
+	$$
+\end{proof}
+\begin{defn}
+	\uwave{Корнем многочлена} $f \in K[x]$ называется такой элемент $x_0 \in K$, что $f(x_0) = 0$.
+\end{defn}
+
+\begin{corollary}
+	$x_0$ это корень $f$ тогда и только тогда, когда $f(x) \divby (x- x_0)$.
+\end{corollary}
+\begin{proof}
+	Следует сразу из теоремы Безу.
+\end{proof}
+Данное следствие позволяет уточнить понятие корня многочлена, поскольку многочлен может делиться не только на $x- x_0$, но и на $(x - x_0)^2$, $(x - x_0)^3$ или вообще $(x - x_0)^k$.
+\begin{defn}
+	\uwave{Кратностью} $x_0$ в $f \in K[x]$ называется наибольшее $k \geq 0 $ такое, что:
+	$$
+		f(x) \divby (x-x_0)^k \wedge f(x) \ndivby (x - x_0)^{k + 1}
+	$$
+	Или по-другому:
+	$$
+		f(x) = (x - x_0)^k{\cdot}q(x), \, q(x_0) \neq 0
+	$$
+\end{defn}
+\begin{defn}
+	Корни многочлена $f$ кратности $1$ называются \uwave{простыми корнями} $f$.
+\end{defn}
+\begin{defn}
+	Корни многочлена $f$ кратности $\geq 1$ называются \uwave{кратными корнями} $f$.
+\end{defn}
+
+Отметим, что при $k = 0$, $x_0$ - не корень $f$, поскольку $(x - x_0)^0 = 1, \, f(x) \divby 1$ и $f(x) \ndivby (x - x_0)$.
+
+\begin{theorem}
+	Число корней многочлена $f \neq 0$, с учётом их кратностей (т.е. каждый корень считается столько раз, какова его кратность) не превосходит степени этого многочлена $\deg(f)$.
+\end{theorem}
+\begin{rem}
+	В частности, теорема говорит о том, что число корней - конечно.
+\end{rem}
+\begin{proof}
+	Индукцией по $\deg(f) = n$.
+	
+	\uline{База индукции}: $n = 0 \Rightarrow f \in K, \, f \neq 0 \Rightarrow f$ не имеет корней.
+	
+	\uline{Шаг индукции}: Если $f$ не имеет корней, то утверждение верно. Иначе, пусть $x_0 \in K$ - корень многочлена $f$, $k_0$ - его кратность, тогда:
+	$$
+		f(x) = (x - x_0)^{k_0}{\cdot}g(x), \, g(x_0) \neq 0, \, \deg(g) = \deg(f) - k_0 < n
+	$$
+	По индукции, многочлен $g$ имеет конечное число корней $x_1, \dotsc, x_m$ и если $k_1,\dotsc, k_m$ - их кратности, то: 
+	$$
+		k_1 + \dotsc + k_m \leq \deg(g) = n - k_0
+	$$
+	Следовательно, $x_0, x_1,\dotsc,x_m$ - это все корни многочлена $f$ и их суммарная кратность $\leq n$:
+	$$
+		k_0 + k_1 + \dotsc + k_m \leq k_0 + (n - k_0) = n = \deg(f)
+	$$
+\end{proof}
+
+\newpage
+\section*{Производные многочленов}
+Пусть $f = a_0 + a_1 x + a_2 x^2 + a_3x^3 + \dotsc + a_n x^n \in K[x]$.
+\begin{defn}
+	\uwave{Формальной производной} многочлена $f$ называется многочлен вида:
+	$$
+		f' = a_1 + 2a_2{\cdot}x + 3a_3{\cdot}x^2 + \dotsc + na_n{\cdot}x^{n-1} = \ddsum{k = 1}{n}k{\cdot}a_k{\cdot}x^{k-1}
+	$$
+\end{defn}
+Такая производная определяется над любыми полем $K$ по формуле выше. Но если $K = \MR$, то значение этой формальной производной в $x_0 \in \MR$ это настоящая производная полиномиальной функции $f(x)$ в смысле математического анализа:
+$$
+	f'(x_0) = \lim\limits_{\VE \to 0}\dfrac{f(x_0+\VE) - f(x_0)}{\VE}
+$$
+Но над произвольным полем $K$, понятие предела не имеет смысла $\Rightarrow f'$ над этим полем определяется формально. Далее, ``формально'' мы будем опускать и говорить просто производная.
+
+\begin{prop}\textbf{Свойства производной}
+	\begin{enumerate}[label=\arabic*)]
+		\item $\forall f,g \in K[x], \, (f + g)' = f' + g'$;
+		\begin{proof}
+			Пусть $n = \max(\deg(f),\deg(g))$, коэффициенты при степени больше своей будем считать нулевыми, тогда:
+			$$
+				f + g = (a_0 + b_0) + (a_1 + b_1)x + \dotsc + (a_n + b_n)x^n \Rightarrow 
+			$$
+			$$
+				\Rightarrow (f + g)' = (a_1 + b_1) + 2(a_2 + b_2)x + \dotsc + n(a_n + b_n)x^{n-1}
+			$$
+			$$
+				f' + g' = a_1 + 2a_2x + \dotsc + na_{n}x^{n-1} + b_1 + 2b_2x + \dotsc + nb_{n}x^{n-1} = (f + g)'
+			$$
+		\end{proof}
+		\item $\forall \lambda \in K, \, \forall f \in K[x], \, (\lambda{\cdot}f)' = \lambda{\cdot}f'$;
+		\begin{proof}
+			$$
+				(\lambda{\cdot}f)' = (\lambda{\cdot}a_1) + 2(\lambda{\cdot}a_2) + \dotsc + n(a_n{\cdot}\lambda)x^{n-1} = \lambda{\cdot}(a_1 + 2a_2x + \dotsc + na_{n}x^{n-1}) = \lambda{\cdot}f'
+			$$
+		\end{proof}
+		\item $\forall f,g \in K[x], \, (f{\cdot}g)' = f'{\cdot}g + f{\cdot}g'$ (\textbf{правило Лейбница});
+		\begin{proof}
+			Пусть $f = \ddsum{k \geq 0}{}a_kx^{k}, \, g = \ddsum{l \geq 0}{}b_l{\cdot}x^l$, перемножим их:
+			$$
+				f{\cdot}g = \ddsum{k,l \geq 0}{}a_kb_lx^{k + l} \Rightarrow (f{\cdot}g)' = \ddsum{k,l \geq 0}{}a_kb_l(k+l)x^{k+l -1} = 
+			$$
+			$$
+				= \left|a_kb_l(k+l)x^{k+l -1} = ka_kx^{k-1}b_lx^l + a_kx^klb_lx^{l-1}\right| = \ddsum{k > 0, l \geq0}{}ka_kx^{k-1}b_lx^l + \ddsum{k\geq0,l > 0}{}a_kx^klb_lx^{l-1} = 
+			$$
+			$$
+				= \ddsum{k > 0}{}ka_kx^{k-1}\ddsum{l \geq 0}{}b_lx^l + \ddsum{k\geq0}{}a_kx^k\ddsum{l > 0}{}lb_lx^{l-1} = f'{\cdot}g + f{\cdot}g'
+			$$
+		\end{proof}
+		\item $\forall f_1,\dotsc,f_k \in K[x], \, (f_1{\cdot}f_2{\cdot}\dotsc{\cdot}f_k)' = f'_1{\cdot}f_2{\cdot}\dotsc{\cdot}f_k + f_1{\cdot}f'_2{\cdot}\dotsc{\cdot}f_k + \dotsc + f_1{\cdot}f_2{\cdot}\dotsc{\cdot}f'_k$;
+		\begin{proof}
+			Индукцией по числу множителей:
+			
+			\uline{База индукции}: $n = 2 \Rightarrow$ верно по правилу Лейбница.
+			
+			\uline{Шаг индукции}: Пусть утверждение верно для $k$, покажем верность для $k+1$:
+			$$
+				(f_1{\cdot}f_2{\cdot}\dotsc{\cdot}f_k{\cdot}f_{k+1})' = (f_1{\cdot}f_2{\cdot}\dotsc{\cdot}f_k)'{\cdot}f_{k+1} + f_1{\cdot}f_2{\cdot}\dotsc{\cdot}f_k{\cdot}f'_{k+1} = 
+			$$
+			$$
+				= \left(f'_1{\cdot}f_2{\cdot}\dotsc{\cdot}f_k + f_1{\cdot}f'_2{\cdot}\dotsc{\cdot}f_k + \dotsc + f_1{\cdot}f_2{\cdot}\dotsc{\cdot}f'_k \right){\cdot}f_{k+1} + f_1{\cdot}f_2{\cdot}\dotsc{\cdot}f_k{\cdot}f'_{k+1} = 
+			$$
+			$$
+				= f'_1{\cdot}f_2{\cdot}\dotsc{\cdot}f_k{\cdot}f_{k+1} + f_1{\cdot}f'_2{\cdot}\dotsc{\cdot}f_k{\cdot}f_{k+1} + \dotsc + f_1{\cdot}f_2{\cdot}\dotsc{\cdot}f'_k{\cdot}f_{k+1} + f_1{\cdot}f_2{\cdot}\dotsc{\cdot}f_k{\cdot}f'_{k+1}
+			$$
+		\end{proof}
+		\item $\forall f \in K[x], \, (f^k)' = k{\cdot}f^{k-1}{\cdot}f'$;
+		\begin{proof}
+			Воспользуемся свойством $4)$, подставив $f_1 = f_2 = \dotsc = f_k = f$, тогда:
+			$$
+				(f^k)' = \underbrace{f'{\cdot}f^{k-1} + f'{\cdot}f^{k-1} + \dotsc+ f'{\cdot}f^{k-1}}_{k} = k{\cdot}f'{\cdot}f^{k-1}
+			$$
+		\end{proof}
+		\item $\left((x - x_0)^k\right)' = k(x - x_0)^{k-1}$;
+		\begin{proof}
+			Следует сразу из свойства $5)$ при подстановке $f = (x - x_0)$, поскольку $f' = 1$.
+		\end{proof}
+ 	\end{enumerate}
+\end{prop}
+\begin{rem}
+	Свойства $1)$ и $2)$ дают линейность производной.
+\end{rem}
+\begin{defn}
+	\uwave{Высшей производной} многочлена $f$ называется многочлен, получаемый по индукции:
+	$$
+		f^{(k)} = \left(f^{(k-1)}\right)', \, f^{(0)} = f
+	$$
+\end{defn}
+
+\subsection*{Связь производной с корнями многочлена и их кратностями}
+
+\begin{prop}\hfill
+	\begin{enumerate}[label=\arabic*)]
+		\item Для любого поля $K$, $x_0 \in K$ - кратный корень $f \in K[x] \Leftrightarrow f(x_0) = f'(x_0) = 0$;
+		\item Пусть $\Char{K} = 0$, тогда верно следующее: 
+		$$
+			x_0 \text{ - корень } f \text{ кратности }k \Leftrightarrow f(x_0) = f'(x_0) = \dotsc = f^{(k-1)}(x_0) = 0 \wedge f^{(k)}(x_0) \neq 0
+		$$
+		То есть, кратность корня многочлена над полем нулевой характеристики это наименьший порядок высшей производной этого многочлена, которая в этой точке не обращается в ноль;
+	\end{enumerate}
+\end{prop}
+\begin{rem}
+	Таким образом, с помощью высших производных можно найти кратность корня для поля нулевой характеристики, а над полем любой характеристики можно с помощью производной (первого порядка) выяснить является ли корень кратным или является простым корнем.
+\end{rem}
+\begin{proof}
+	Пусть $k$ - кратность $x_0$ в $f$, тогда $f$ представим в виде:
+	$$
+		f(x) = (x - x_0)^k{\cdot}g(x), \, g(x_0) \neq 0 \Rightarrow 
+	$$
+	$$
+		\Rightarrow f'(x) = k(x - x_0)^{k-1}{\cdot}g(x) + (x - x_0){\cdot}g'(x) = (x - x_0)^{k-1}{\cdot}(\underbrace{kg(x) + g'(x){\cdot}(x - x_0)}_{h(x)})
+	$$
+	\begin{enumerate}[label=\arabic*)]
+		\item Пусть $k > 1$, тогда: 
+		$$
+			k - 1> 0 \Rightarrow f'(x) \divby (x - x_0) \Rightarrow f'(x_0) = 0
+		$$ 
+		Пусть $k = 1$, тогда: 
+		$$
+			f'(x_0) = h(x_0) = 1{\cdot}g(x_0) + g'(x){\cdot}0 = g(x_0) \neq 0
+		$$
+		\item Рассмотрим $h(x_0)= k{\cdot}g(x_0)$, $k$ - это сумма $k$ единиц в нашем поле, поскольку характеристика поля нулевая, то $k \neq 0$ в $K$. Если бы $k = 0$, то мы получли бы $h(x_0) \Rightarrow x_0$ - корень для $h(x) \Rightarrow$ кратность была бы выше, чем $k-1$ у $x_0$ в многочлене $f'(x)$. 
+		
+		Следовательно, $h(x_0) \neq 0$ и кратность $x_0$ в $f'(x)$ равна $k-1$. Аналогично, кратность $x_0$ в $f''(x)$ равна $k-2$, в $f'''(x)$ равна $k-3$ и так далее. Кратность в $f^{(k-1)}(x)$ равна $1$ и кратность в $f^{(k)}(x)$ равна $0$. В результате, получим требуемое:
+		$$
+			f(x_0) = f'(x_0) = f''(x_0) = \dotsc = f^{(k-1)}(x_0) = 0 \wedge f^{(k)}(x_0) = 0
+		$$ 
+	\end{enumerate}
+\end{proof}
+
+\section*{Разложение многочлена по степеням линейного двучлена}
+
+\begin{prop}
+	$\forall x_0 \in K, \, K[x] = K[x - x_0]$, то есть $\forall f \in K[x], \, f \neq 0, \, \exists !$ разложение: $$
+		f(x) = c_0 + c_1(x - x_0) + c^2(x - x_0)^2 + \dotsc + c_n(x - x_0)^n, \, c_n \neq 0
+	$$ 
+\end{prop}
+\begin{proof}\hfill\\
+	\textbf{\uline{Существование}}: Предположим, что: 
+	$$
+		f(x) = a_0 + a_1x + a_2x^2 + \dotsc + a_n x^n
+	$$ 
+	где $a_n \neq 0$. Обозначим через $y = x - x_0 \Rightarrow x = y + x_0$, тогда:
+	$$
+		f(x) = a_0 + a_1(y + x_0) + a_2(y + x_0)^2 + \dotsc + a_n(y + x_0)^n = c_0 + c_1y + c_2 y^2 + \dotsc + c_ny^n
+	$$
+	где в последнем равенстве мы раскрыли скобки и привели подобные члены по $y$. Таким образом, мы выразили многочлен $f$ в виде линейной комбинации степеней $y= (x - x_0)$.
+	
+	\textbf{\uline{Единственность}}: Проведём индукцию по $n = \deg(f)$:
+	
+	\uline{База индукции}: $n = 0 \Rightarrow f(x) = a_0 = f(x - x_0) = c_0$ - очевидно. 
+	
+	\uline{Шаг индукции}: Пусть утверждение верно для $n-1$, покажем верность для $n$. Раскроем скобки и приведем подобные члены по $x$:
+	$$
+		f(x) = c_0 + c_1(x - x_0) + \dotsc + c_n(x - x_0)^n = c_n{\cdot}x^n + \text{младшие члены} \Rightarrow c_n = a_n \Rightarrow
+	$$
+	$$
+		\Rightarrow \wte{f}(x) = f(x) - c_n(x - x_0)^n = c_0 + c_1(x - x_0) + \dotsc + c_{n-1}(x - x_0)^{n-1}
+	$$
+	Многочлен $\wte{f}$ определён однозначно, поскольку $f(x)$ - определён однозначно и коэффициент $c_n$ также однозначно определён по $f \Rightarrow$ набор коэффициентов: $c_0, c_1,\dotsc, c_{n-1}$ - также определён однозначно по предположению индукции.
+\end{proof}
+\newpage
+\begin{prop}
+	Пусть $f(x) = \ddsum{l \geq 0 }{}c_l(x - x_0)^l$, тогда  $\forall k \geq 0, \, f^{(k)}(x_0) = c_k{\cdot}k!$.
+\end{prop}
+\begin{proof}
+	Продифференцируем наш многочлен $k$ раз, а поскольку операция дифференцирования - линейная, то достаточно продифференцировать каждый одночлен:
+	$$
+		\left[(x - x_0)^l\right]^{(k)} = 
+		\begin{cases}
+			l{\cdot}(l-1){\cdot}(l-2){\cdot}\dotsc{\cdot}(l - k +1){\cdot}(x - x_0)^{l - k}, & k > l\\
+			l{\cdot}(l-1){\cdot}(l-2){\cdot}\dotsc{\cdot}1 = k!, & k = l\\
+			0, & k < l
+		\end{cases}
+	$$
+	Тогда, продифференцировав сам многочлен, мы получим:
+	$$
+		f^{(k)}(x) = \ddsum{l}{}c_l{\cdot}\left[(x - x_0)^l\right]^{(k)} \Rightarrow f^{(k)}(x_0) = 0 + \dotsc + c_k{\cdot}k! + \dotsc + 0 = c_k{\cdot}k!
+	$$
+\end{proof}
+
+\begin{corollary}(\textbf{Формула Тейлора})
+	Если $\Char{K} = 0, \, f \in K[x], \, \deg(f) = n$, то его можно разложить по степеням линейного двухчлена в следующем виде:
+	$$
+		f(x) = f(x_0) + f'(x_0){\cdot}(x - x_0) +\dfrac{f''(x_0)}{2}{\cdot}(x - x_0)^2 + \dotsc + \dfrac{f^{(n)}(x_0)}{n!}{\cdot}(x - x_0)^n = \ddsum{k = 0}{n} \dfrac{f^{(k)}(x_0)}{k!}{\cdot}(x - x_0)^k
+	$$
+\end{corollary}
+\begin{proof}
+	Сразу следует из предыдущего утверждения, поскольку если $\Char{K} = 0$, то $k! \neq 0$ и на него можно поделить $\Rightarrow c_k = \tfrac{f^{(k)}(x_0)}{k!}, \, \forall k \geq 0$.
+\end{proof}
+
+\subsection*{Теорема о разложении на корни многочлена}
+\begin{theorem}
+	Пусть $K$ - произвольное поле и $f \in K[x]$, тогда: число корней многочлена $f(x)$ с учетом кратностей равно $\deg(f) \Leftrightarrow f(x)$ разлагается над полем $K$ на линейные множители.
+\end{theorem}
+\begin{proof}
+	Пусть $f(x)$ разложили в следующий вид:
+	$$
+		f(x) = (x - x_0)^{i_0}{\cdot}(x - x_1)^{i_1}{\cdot}\dotsc{\cdot}(x - x_k)^{i_k}{\cdot}q(x)
+	$$
+	где у $q(x)$ нет корней над полем $K$, потому что $x_1, \dotsc, x_k$ - не являются его корнями. Если у $q(x)$ был бы другой корень над $K$, то он был бы и корнем $f(x)$, а мы их все перечислили. Следовательно, чтобы $f(x)$ разлогался на линейные множители над полем $K$, необходимо:
+	$$
+		q(x) \in K \Leftrightarrow \deg(q) = 0 \Leftrightarrow \deg(f) = \ddsum{j = 1}{k}i_j
+	$$
+\end{proof}
+
+
+\end{document}

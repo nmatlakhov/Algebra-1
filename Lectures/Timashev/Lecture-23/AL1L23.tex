@@ -1,0 +1,618 @@
+\documentclass[12pt]{article}
+\usepackage[left=1cm, right=1cm, top=2cm,bottom=1.5cm]{geometry} 
+
+\usepackage[parfill]{parskip}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage{enumitem}
+\usepackage[normalem]{ulem}
+\usepackage{amsfonts, amsmath, amsthm, amssymb, mathtools,xcolor}
+\usepackage{blkarray}
+
+\usepackage{tabularx}
+\usepackage{hhline}
+
+\usepackage{accents}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{1.5pt}
+\renewcommand{\footrulewidth}{1pt}
+
+\usepackage{graphicx}
+\usepackage[figurename=Рис.]{caption}
+\usepackage{subcaption}
+\usepackage{float}
+
+%%Наименование папки откуда забирать изображения
+\graphicspath{ {./images/} }
+
+%%Изменение формата для ввода доказательства
+\renewcommand{\proofname}{$\square$  \nopunct}
+\renewcommand\qedsymbol{$\blacksquare$}
+
+%%Изменение отступа на таблицах
+\addto\captionsrussian{%
+	\renewcommand{\proofname}{$\square$ \nopunct}%
+}
+%% Римские цифры
+\newcommand{\RN}[1]{%
+	\textup{\uppercase\expandafter{\romannumeral#1}}%
+}
+
+%% Для удобства записи
+\newcommand{\MR}{\mathbb{R}}
+\newcommand{\MC}{\mathbb{C}}
+\newcommand{\MQ}{\mathbb{Q}}
+\newcommand{\MN}{\mathbb{N}}
+\newcommand{\MZ}{\mathbb{Z}}
+\newcommand{\MTB}{\mathbb{T}}
+\newcommand{\MTI}{\mathbb{I}}
+\newcommand{\MI}{\mathrm{I}}
+\newcommand{\MCI}{\mathcal{I}}
+\newcommand{\MJ}{\mathrm{J}}
+\newcommand{\MH}{\mathrm{H}}
+\newcommand{\MT}{\mathrm{T}}
+\newcommand{\MU}{\mathcal{U}}
+\newcommand{\MV}{\mathcal{V}}
+\newcommand{\MB}{\mathcal{B}}
+\newcommand{\MF}{\mathcal{F}}
+\newcommand{\MW}{\mathcal{W}}
+\newcommand{\ML}{\mathcal{L}}
+\newcommand{\MP}{\mathcal{P}}
+\newcommand{\VN}{\varnothing}
+\newcommand{\VE}{\varepsilon}
+\newcommand{\dx}{\, dx}
+\newcommand{\dy}{\, dy}
+\newcommand{\dz}{\, dz}
+\newcommand{\dd}{\, d}
+
+
+\theoremstyle{definition}
+\newtheorem{defn}{Опр:}
+\newtheorem{rem}{Rm:}
+\newtheorem{prop}{Утв.}
+\newtheorem{exrc}{Упр.}
+\newtheorem{problem}{Задача}
+\newtheorem{lemma}{Лемма}
+\newtheorem{theorem}{Теорема}
+\newtheorem{corollary}{Следствие}
+
+\newenvironment{cusdefn}[1]
+{\renewcommand\thedefn{#1}\defn}
+{\enddefn}
+
+\DeclareRobustCommand{\divby}{%
+	\mathrel{\text{\vbox{\baselineskip.65ex\lineskiplimit0pt\hbox{.}\hbox{.}\hbox{.}}}}%
+}
+\DeclareRobustCommand{\ndivby}{\mkern-1mu\not\mathrel{\mkern4.5mu\divby}\mkern1mu}
+
+
+%Короткий минус
+\DeclareMathSymbol{\SMN}{\mathbin}{AMSa}{"39}
+%Длинная шапка
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+%Функция знака
+\DeclareMathOperator{\sgn}{sgn}
+
+%Функция ранга
+\DeclareMathOperator{\rk}{\text{rk}}
+\DeclareMathOperator{\diam}{\text{diam}}
+
+
+%Обозначение константы
+\DeclareMathOperator{\const}{\text{const}}
+
+\DeclareMathOperator{\codim}{\text{codim}}
+
+\DeclareMathOperator*{\dsum}{\displaystyle\sum}
+\newcommand{\ddsum}[2]{\displaystyle\sum\limits_{#1}^{#2}}
+\newcommand{\ddssum}[2]{\displaystyle\smashoperator{\sum\limits_{#1}^{#2}}}
+\newcommand{\ddlsum}[2]{\displaystyle\smashoperator[l]{\sum\limits_{#1}^{#2}}}
+\newcommand{\ddrsum}[2]{\displaystyle\smashoperator[r]{\sum\limits_{#1}^{#2}}}
+
+%Интеграл в большом формате
+\DeclareMathOperator{\dint}{\displaystyle\int}
+\newcommand{\ddint}[2]{\displaystyle\int\limits_{#1}^{#2}}
+\newcommand{\ssum}[1]{\displaystyle \sum\limits_{n=1}^{\infty}{#1}_n}
+
+\newcommand{\smallerrel}[1]{\mathrel{\mathpalette\smallerrelaux{#1}}}
+\newcommand{\smallerrelaux}[2]{\raisebox{.1ex}{\scalebox{.75}{$#1#2$}}}
+
+\newcommand{\smallin}{\smallerrel{\in}}
+\newcommand{\smallnotin}{\smallerrel{\notin}}
+
+\newcommand*{\medcap}{\mathbin{\scalebox{1.25}{\ensuremath{\cap}}}}%
+\newcommand*{\medcup}{\mathbin{\scalebox{1.25}{\ensuremath{\cup}}}}%
+
+\makeatletter
+\newcommand{\vast}{\bBigg@{3.5}}
+\newcommand{\Vast}{\bBigg@{5}}
+\makeatother
+
+%Промежуточное значение для sup\inf, поскольку они имеют разную высоту
+\newcommand{\newsup}{\mathop{\smash{\mathrm{sup}}}}
+\newcommand{\newinf}{\mathop{\mathrm{inf}\vphantom{\mathrm{sup}}}}
+
+%Скалярное произведение
+\newcommand{\inner}[2]{\left\langle #1, #2 \right\rangle }
+\newcommand{\linsp}[1]{\left\langle #1 \right\rangle }
+\newcommand{\linmer}[2]{\left\langle #1 \vert #2\right\rangle }
+
+%Подпись символов снизу
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+
+%%Шапка для букв сверху
+\newcommand{\wte}[1]{\widetilde{#1}}
+\newcommand{\wht}[1]{\widehat{#1}}
+\newcommand{\ovl}[1]{\overline{#1}}
+
+
+%%Трансформация Фурье
+\newcommand{\fourt}[1]{\mathcal{F}\left(#1\right)}
+\newcommand{\ifourt}[1]{\mathcal{F}^{-1}\left(#1\right)}
+
+%%Символ вектора
+\newcommand{\vecm}[1]{\overrightarrow{#1\,}}
+
+%%Пространстов матриц
+\newcommand{\matsq}[1]{\operatorname{Mat}_{#1}}
+\newcommand{\mat}[2]{\operatorname{Mat}_{#1, #2}}
+
+%Оператор для действ и мнимых чисел
+\DeclareMathOperator{\IM}{\operatorname{Im}}
+\DeclareMathOperator{\RE}{\operatorname{Re}}
+\DeclareMathOperator{\li}{\operatorname{li}}
+\DeclareMathOperator{\GL}{\operatorname{GL}}
+\DeclareMathOperator{\SL}{\operatorname{SL}}
+\DeclareMathOperator{\Char}{\operatorname{char}}
+\DeclareMathOperator\Arg{Arg}
+
+%Делимость чисел
+\newcommand{\modn}[3]{#1 \equiv #2 \; (\bmod \; #3)}
+
+
+%%Взятие в скобки, модули и норму
+\newcommand{\parfit}[1]{\left( #1 \right)}
+\newcommand{\modfit}[1]{\left| #1 \right|}
+\newcommand{\sqparfit}[1]{\left\{ #1 \right\}}
+\newcommand{\normfit}[1]{\left\| #1 \right\|}
+
+%%Функция для обозначения равномерной сходимости по множеству
+\newcommand{\uconv}[1]{\overset{#1}{\rightrightarrows}}
+\newcommand{\uconvm}[2]{\overset{#1}{\underset{#2}{\rightrightarrows}}}
+
+
+%%Функция для обозначения нижнего и верхнего интегралов
+\def\upint{\mathchoice%
+	{\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	\int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+
+%%След матрицы
+\DeclareMathOperator*{\tr}{tr}
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+	\hskip -\arraycolsep
+	\let\@ifnextchar\new@ifnextchar
+	\array{#1}}
+\makeatother
+
+
+%% Переопределение функции хи, чтобы выглядела более приятно
+\makeatletter
+\@ifdefinable\@latex@chi{\let\@latex@chi\chi}
+\renewcommand*\chi{{\@latex@chi\smash[t]{\mathstrut}}} % want only bottom half of \mathstrut
+\makeatletter
+
+\setcounter{MaxMatrixCols}{20}
+
+\begin{document}
+\lhead{Алгебра-\RN{1}}
+\chead{Тимашев Д.А.}
+\rhead{Лекция - 23}
+\section*{Дискриминант}
+Пусть у нас есть многочлен $f(x)$ от одной переменной: 
+$$
+	f(x) = a_0 + a_1x + \dotsc + a_nx^n \in K[x]
+$$ 
+Он имеет $n = \deg(f)$ корней: $\alpha_1,\dotsc,\alpha_n$ с учётом кратности. Его дискриминант будет равен:
+$$
+	D(f) = a_n^{2n-2}{\cdot}\prod\limits_{i< j}(\alpha_i - \alpha_j)^2 = a_n^{2n-2}{\cdot}
+	\begin{vmatrix}
+		n &  \dotsc & s_{i-1} & \dotsc  & s_{n-1} \\
+		\vdots &  \ddots & \vdots & \ddots & \vdots\\
+		s_{j-1} &  \dotsc & s_{i+j - 2} & \dotsc & s_{n+j - 2}\\
+		\vdots &  \ddots & \vdots & \ddots & \vdots\\
+		s_{n-1} &  \dotsc & s_{i+n - 2} & \dotsc & s_{2n - 2}
+	\end{vmatrix}
+$$
+где $s_k= s_k(\alpha_1,\dotsc,\alpha_n) = \alpha_1^k + \alpha_2^k + \dotsc + \alpha_n^k$ и на месте $(i,j)$ стоит элемент $s_{i + j - 2}$. Из теории симметрических многочленов вытекает, что $D(f)$ это многочлен от коэффициентов $f$ и его основное свойство это то, что он обращается в ноль тогда и только тогда, когда $f$ имеет кратные корни.
+
+\textbf{Пример вычисления дискриминанта}:
+\begin{enumerate}[label=\arabic*)]
+	\item $f(x) = ax^2 + bx + c$, найдем дискриминант этого многочлена:
+	$$
+		D(f) = a^{4-2}{\cdot}
+		\begin{vmatrix}
+			2 & s_1 \\
+			s_1 & s_2
+		\end{vmatrix}
+		= a^2{\cdot}
+		\begin{vmatrix}
+			2 & \sigma_1 \\
+			\sigma_1 & \sigma_1^2 - 2\sigma_2
+		\end{vmatrix}
+	$$
+	Воспользуемся теоремой Виета:
+	$$
+		\sigma_1(\alpha_1,\alpha_2) = -\dfrac{b}{a}, \, \sigma_2(\alpha_1,\alpha_2) = \dfrac{c}{a} \Rightarrow D(f) = a^2{\cdot}
+		\begin{vmatrix}
+			2 & -\tfrac{b}{a}\\[5pt]
+			-\tfrac{b}{a} & \tfrac{b^2 - 2ac}{a^2}
+		\end{vmatrix} =
+		a^2{\cdot}\left(\dfrac{2b^2 - 4ac}{a^2} - \dfrac{b^2}{a^2}\right)= b^2 - 4ac
+	$$
+	\item Для вычисления дискриминантов высоких степеней полезно сделать замену переменной:
+	$$
+		y = x + c \Rightarrow f(x) = f(y - c) = g(y) = a_0 + a_1(y-c) + \dotsc + a_n(y - c)^n
+	$$
+	Корни многочлена $g(y)$ получаются из корней многочлена $f(x)$ сдвигом на $c$:
+	$$
+		g(\alpha_1 + c) = g(\alpha_2 + c) = \dotsc = g(\alpha_n + c) = 0
+	$$
+	При этом разности корней не меняются: $D(f) = D(g)$. Рассмотрим $g(y)$:
+	$$
+		g(y) = a_ny^n - a_n{\cdot}n{\cdot}c{\cdot}y^{n-1} + a_{n-1}y^{n-1} + \dotsc = a_ny^n + (a_{n-1} - na_nc)y^{n-1} + \dotsc 
+	$$
+	За счёт правильного подбора $c$ можно занулить слагаемое при $y^{n-1}$:
+	$$
+		c = \dfrac{a_{n-1}}{n{\cdot}a_n} \Rightarrow g(y) = a_ny^n + b_{n-2}y^{n-2} + \dotsc + b_0 = a_n{\cdot}(\underbrace{y^n + c_{n-2}y^{n-2} + \dotsc+ c_0}_{h(y)})
+	$$
+	Многочлены вида $h(y)$ называются \uwave{неполными} многочленами степени $n$. Отметим, что корни у $g$ и $h$ одинаковы, тогда:
+	$$
+		D(f) = D(g) = a_n^{2n-2}D(h)
+	$$
+	Таким образом, достаточно уметь вычислять дискриминант для неполного многочлена;
+	\item $f(x) = x^3 +px + q$ - неполный кубический трехчлен, найдем его дискриминант:
+	$$
+		D(f) = 
+		\begin{vmatrix}
+			3 & s_1 & s_2 \\
+			s_1 & s_2 & s_3 \\
+			s_2 & s_3 & s_4
+		\end{vmatrix}
+	$$
+	Пусть $\alpha_1,\alpha_2,\alpha_3$ - корни $f$, рассмотрим степенные суммы и их значения при $x_i = \alpha_i, \, i = 1,2,3$:
+	$$
+		s_1 = x_1 + x_2 + x_3, \, s_2 = x_1^2 + x_2^2 + x_3^2, \, s_3 = x_1^3 + x_2^3 + x_3^3, \, s_4 = x_1^4 + x_2^4 + x_3^4
+	$$
+	$$
+		\sigma_1(\alpha_1,\alpha_2,\alpha_3) = \dfrac{0}{1} = 0, \, \sigma_2(\alpha_1,\alpha_2,\alpha_3) = \dfrac{p}{1} = p, \, \sigma_3(\alpha_1,\alpha_2,\alpha_3) = -\dfrac{q}{1} = -q
+	$$
+	$$
+		s_1 = \sigma_1  = 0, \, s_2 = \sigma_1^2 - 2\sigma_2 = -2p, \, s_3 = \alpha_1^3 + \alpha_2^3 + \alpha_3^3
+	$$
+	Чтобы найти $s_3$ мы пойдем немного другим путём, вместо поиска в лоб. Поскольку $\alpha_1,\alpha_2,\alpha_3$ это корни нашего многочлена, то будут верны равенства:
+	$$
+		\forall i =\ovl{1,3}, \, \alpha_i^3 + p\alpha_i + q = 0 \Rightarrow \alpha_i^3 = -q - p\alpha_i \Rightarrow s_3 = -p(\alpha_1 + \alpha_2 + \alpha_3) - 3q = -p{\cdot}s_1 - 3q = -3q
+	$$
+	Аналогично для $s_4$, домножим предыдущие равенства на $\alpha_i$:
+	$$
+		\forall i =\ovl{1,3}, \, \alpha_i^4 + p\alpha_i^2 + q\alpha_i = 0 \Rightarrow \alpha_i^4 = -q\alpha_i -p\alpha_i^2 \Rightarrow s_4 = -p{\cdot}s_2 = 2p^2 \Rightarrow
+	$$
+	$$
+		D(f) = 		
+		\begin{vmatrix}
+			3 & 0 & -2p \\
+			0 & -2p & -3q \\
+			-2p & -3q & 2p^2
+		\end{vmatrix} 
+		= -12p^3 + 8p^3  -27q^2 = -4p^3 - 27q^2 
+	$$
+\end{enumerate}
+
+Пусть $f \in \MR[x], \, \deg(f) = 3$. Хотим понять сколько у него вещественных корней. Вспомним, что у многочлена с вещественными коэффициентами мнимые корни существуют парами такой же кратности. Тогда у кубического многочлена возможны следующие случаи (с точностью до перестановок корней):
+\begin{enumerate}[label=(\arabic*)]
+	\item $\alpha_1 = \alpha_2 \in \MR, \, \alpha_3 \in \MR$. Кратный корень не может быть мнимым, поскольку в этом случае было бы 4 мнимых корня $\Rightarrow$ он обязательно вещественный, тогда:
+	$$
+		\alpha_1 = \alpha_2 \neq \alpha_3  \vee \alpha_1 = \alpha_2 = \alpha_3 
+	$$
+	Поскольку есть кратный корень, то: 
+	$$
+		D(f) = a_3^4(\alpha_1 - \alpha_2)^2(\alpha_1 - \alpha_3)^2(\alpha_2 - \alpha_3)^2 = 0
+	$$
+	\item $\alpha_1,\alpha_2,\alpha_3 \in \MR$ попарно различные, тогда:
+	$$
+		D(f) = a_3^4(\alpha_1 - \alpha_2)^2(\alpha_1 - \alpha_3)^2(\alpha_2 - \alpha_3)^2 > 0
+	$$
+	\item $\alpha_1 \in \MR,\, \alpha_2,\alpha_3 \in \MC \setminus \MR, \, \alpha_2 = \ovl{\alpha}_3$, тогда:
+	$$
+		D(f) =  a_3^4(\alpha_1 - \alpha_2)^2(\alpha_1 - \ovl{\alpha_2})^2(\alpha_2 - \ovl{\alpha_2})^2  = a_3^4|\alpha_1 - \alpha_2|^4(2i\IM(\alpha_2))^2 = - 4a_3^4|\alpha_1 - \alpha_2|^4(\IM(\alpha_2))^2 < 0 
+	$$
+\end{enumerate}
+\textbf{\uline{Вывод}}: Если $D(f) > 0 \Rightarrow 3$ различных корня, если $D(f) < 0 \Rightarrow 1$ вещественный корень, если же\\$D(f) = 0 \Rightarrow$ либо $2$ корня из $\MR$: однократный и двухкратный, либо $1$ трехкратный корень из $\MR$. 
+
+\newpage
+\section*{Результант}
+С помощью дискриминанта можно выяснить, есть ли у многочлена кратные корни. Есть похожий инвариант, который  позволяет ответить на вопрос: есть ли у двух многочленов общие корни? Он называется результантом, попробуем его определить. Рассмотрим многочлен:
+$$
+	\rho(x_1,\dotsc,x_n,y_1,\dotsc,y_m) = \prod\limits_{\substack{i =1,\dotsc,n \\ j = 1,\dotsc,m}}(x_i - y_j) \in K[x_1,\dotsc,x_n,y_1,\dotsc,y_m]
+$$
+Видно, что этот многочлен симметричен по $x_1,\dotsc,x_n$: если мы их переставим, то разности переставятся, но произведение не изменится. Тогда, по основной теореме о симметрических многочленах, его можно выразить через элементарные симметрические многочлены от этой группы переменных: 
+$$
+	\rho = \ddsum{k_1,\dotsc,k_n \geq 0}{}\rho_{k_1,\dotsc,k_n}{\cdot}\sigma_1^{k_1}{\cdot}\dotsc{\cdot}\sigma_n^{k_n}, \quad \rho_{k_1,\dotsc,k_n} \in K[y_1,\dotsc,y_m]
+$$
+где $\sigma_i = \sigma_i(x_1,\dotsc,x_n), \, \forall i = \ovl{1,n}$. Грубо говоря, мы рассматриваем многочлен $\rho$, как многочлен от переменных $x_1,\dotsc,x_n$ с коэффициентами из $K[y_1,\dotsc,y_m]$: 
+$$
+	\rho \in \left(K[y_1,\dotsc,y_m]\right)[x_1,\dotsc,x_n]
+$$
+Переставляя $y_1,\dotsc,y_m$ местами $\rho$ не изменится, а поскольку полученное выражение по основной теореме  единственное, то и оно тоже не изменится $\Rightarrow \rho_{k_1,\dotsc,k_n}$ не изменятся $\Rightarrow$ они симметричны по переменным $y_1,\dotsc, y_m \Rightarrow$ к ним применима основная теорема. Следовательно, $\rho_{k_1,\dotsc,k_n}$ будут выражаться через элементарные симметрические многочлены: $\sigma'_1,\dotsc, \sigma'_m$ от $y_1,\dotsc,y_m$. Получаем: 
+$$
+	\rho = \rho(\sigma_1,\dotsc,\sigma_n,\sigma'_1,\dotsc,\sigma'_m)
+$$
+Кроме того, основная теорема говорит чему равна степень $\rho$ по $\sigma_1,\dotsc,\sigma_n$: 
+$$
+	\deg_{x_i}(\rho) = m
+$$ 
+Аналогично, степень $\rho$ по $\sigma'_1,\dotsc,\sigma'_m$: 
+$$
+	\deg_{y_j}(\rho) = n
+$$
+
+Пусть у нас есть два многчлена: 
+$$
+	f(x) = a_0 + a_1x + \dotsc+ a_n x^n \in K[x], \, g(x) = b_0 + b_1x + \dotsc+ b_m x^m \in K[x]
+$$ 
+где $f$ имеет $n = \deg(f)$ корней $\alpha_1,\dotsc,\alpha_n \in K$ и $g$ имеет $m = \deg(g)$ корней $\beta_1,\dotsc,\beta_m \in K$ и все корни указаны с учётом кратностей. Рассмотрим следующее выражение:
+$$
+	R(f,g) = a_n^m b_m^n\prod\limits_{\substack{i =1,\dotsc,n \\ j = 1,\dotsc,m}}(\alpha_i - \beta_j) \in K[a_0,\dotsc,a_n, b_0,\dotsc,b_m]
+$$
+Это выражение будет многочленом от коэффициентов $f$ и $g$, поскольку само произведение выражается через элементарные симметрические многочлены от этих корней, они в свою очередь выражаются через коэффициенты $f$ и $g$, деленные на старший коэффициент $\Rightarrow$ домножая на старший коэффициент в нужных степенях все знаменатели пропадут и останется многочлен от коэффициентов $f$ и $g$.
+\begin{defn}
+	Многочлен от коэффициентов $f$ и $g$, выраженный через их корни в виде:
+	$$
+		R(f,g) = a_n^m b_m^n\prod\limits_{\substack{i =1,\dotsc,n \\ j = 1,\dotsc,m}}(\alpha_i - \beta_j) \in K[a_0,\dotsc,a_n, b_0,\dotsc,b_m]
+	$$
+	называется \uwave{результантом} многочленов $f$ и $g$.
+\end{defn}
+\begin{rem}
+	Как и в случае дискриминанта, чтобы посчитать результант не нужно знать корни многочленов, надо знать выражение результанта в виде многочлена от коэффициентов, получаемых через элементарных симметрических многочленов.
+\end{rem}
+
+\subsection*{Свойства результанта}
+\begin{enumerate}[label=\arabic*)]
+	\item $R(f,g) = 0 \Leftrightarrow f$ и $g$ имеют общий корень;
+	\begin{proof}
+		$f,g$ имеют общий корень $\Leftrightarrow \exists \, i,j \colon \alpha_i = \beta_j \Leftrightarrow \alpha_i - \beta_j = 0 \Leftrightarrow R(f,g) = 0$;
+	\end{proof}
+	\item $R(g,f) = (-1)^{m {\cdot} n}{\cdot}R(f,g)$;
+	\begin{proof}
+		$$
+			R(g,f) = b_m^na_n^m \prod\limits_{\substack{i =1,\dotsc,n \\ j = 1,\dotsc,m}}( \beta_j - \alpha_i) = a_n^m  b_m^n (-1)^{m {\cdot} n}\prod\limits_{\substack{i =1,\dotsc,n \\ j = 1,\dotsc,m}}( \alpha_i- \beta_j) = (-1)^{m {\cdot} n} R(f,g)
+		$$
+	\end{proof}
+	\item $R(f,g) = a_n^m{\cdot}g(\alpha_1){\cdot}\dotsc{\cdot}g(\alpha_n) = (-1)^{m{\cdot}n}{\cdot}b_m^n{\cdot} f(\beta_1){\cdot}\dotsc{\cdot}f(\beta_m)$;
+	\begin{proof}
+		$$
+			g(x) = b_m{\cdot}(x - \beta_1){\cdot}\dotsc{\cdot}(x - \beta_m) \Rightarrow g(\alpha_i) = b_m{\cdot}(\alpha_i - \beta_1){\cdot}\dotsc{\cdot}(\alpha_i - \beta_m) \Rightarrow
+		$$
+		$$
+			\Rightarrow g(\alpha_1){\cdot}\dotsc{\cdot}g(\alpha_n) = b_m^n{\cdot}\prod\limits_{i,j}( \alpha_i- \beta_j) \Rightarrow a_n^m{\cdot}g(\alpha_1){\cdot}\dotsc{\cdot}g(\alpha_n) = R(f,g)
+		$$
+		Используем второе свойство, тогда:
+		$$
+			R(f,g) = (-1)^{mn}R(g,f) = (-1)^{mn}b_m^n{\cdot}f(\beta_1){\cdot}\dotsc{\cdot}f(\beta_m)
+		$$
+	\end{proof}
+\end{enumerate}
+Как уже поняли ранее, результант двух многочленов можно выразить в виде многочлена от их коэффициентов. Встает вопрос: есть ли какая-то явная формула для этого? Оказывается есть.
+
+\begin{prop}
+	$$
+		R(f,g) = 
+		\begin{vmatrix}
+			a_{n} & a_{n-1} & a_{n-2}  & \dotsc   & * & * & * &  \dotsc & 0 & 0 & 0\\
+			0 & a_{n} & a_{n-1}  & \dotsc & * & * & * & \dotsc & 0 & 0& 0\\
+			\vdots & \vdots  & \vdots & \ddots& \vdots & \vdots &\vdots & \ddots & \vdots & \vdots & \vdots \\
+			0 & 0 & 0 & \dotsc & a_{n-1} &  a_{n-2} & a_{n-3}& \dotsc & a_1 & a_0& 0\\
+			0 & 0 & 0 & \dotsc & a_n & a_{n-1} & a_{n-2} & \dotsc & a_2 & a_1 & a_0\\
+			b_m & b_{m-1} & b_{m-2} & \dotsc & b_1 & b_0 & 0 & \dotsc  & 0 & 0& 0 \\
+			0   & b_m & b_{m-1} & \dotsc & b_2 & b_1 & b_0 & \dotsc  & 0 & 0& 0 \\
+			\vdots & \vdots  & \vdots & \ddots& \vdots & \vdots &\vdots & \ddots & \vdots & \vdots & \vdots \\
+			0 & 0 & 0 & \dotsc & * & * & * & \dotsc & b_1 & b_0 & 0\\
+			0 & 0 & 0 & \dotsc & * & * & * & \dotsc & b_2 & b_1 & b_0
+		\end{vmatrix}
+		\begin{matrix}
+			1\\
+			2\\
+			\vdots \\
+			m-1\\
+			m\\
+			1\\
+			2\\
+			\vdots \\
+			n-1\\
+			n
+		\end{matrix}
+	$$
+\end{prop}
+\begin{rem}
+	Заметим, что этот определитель это многочлен от коэффициентов $f$ и $g$, а поэтому и явная формула для результанта. Также отметим, что определитель выше имеет размеры $(m + n) \times (m + n)$.
+\end{rem}
+\begin{proof}
+	Рассмотрим частный случай, когда все корни $\alpha_i, \beta_j$ попарно различные. Обозначим определитель в формуле для краткости через $R$. Переставим в $R$ первые $m$ строк и последние $n$ строк, затем заменим порядок строк и порядок столбцов на обратный. Поскольку со столбцами будет происходить столько же операций сколько и со строками, то знак поменяется чётное число раз. Тогда:
+	$$
+		R = (-1)^{mn}
+		\begin{vmatrix}
+			b_m & b_{m-1} & b_{m-2} & \dotsc & b_1 & b_0 & 0 & \dotsc  & 0 & 0& 0 \\
+			0   & b_m & b_{m-1} & \dotsc & b_2 & b_1 & b_0 & \dotsc  & 0 & 0& 0 \\
+			\vdots & \vdots  & \vdots & \ddots& \vdots & \vdots &\vdots & \ddots & \vdots & \vdots & \vdots \\
+			0 & 0 & 0 & \dotsc & * & * & * & \dotsc & b_1 & b_0 & 0\\
+			0 & 0 & 0 & \dotsc & * & * & * & \dotsc & b_2 & b_1 & b_0\\
+			a_{n} & a_{n-1} & a_{n-2}  & \dotsc   & * & * & * &  \dotsc & 0 & 0 & 0\\
+			0 & a_{n} & a_{n-1}  & \dotsc & * & * & * & \dotsc & 0 & 0& 0\\
+			\vdots & \vdots  & \vdots & \ddots& \vdots & \vdots &\vdots & \ddots & \vdots & \vdots & \vdots \\
+			0 & 0 & 0 & \dotsc & a_{n-1} &  a_{n-2} & a_{n-3}& \dotsc & a_1 & a_0& 0\\
+			0 & 0 & 0 & \dotsc & a_n & a_{n-1} & a_{n-2} & \dotsc & a_2 & a_1 & a_0
+		\end{vmatrix} =
+	$$
+	$$
+		= (-1)^{mn}
+		\begin{vmatrix}
+			a_{0} & a_{1} & a_{2}  & \dotsc   & * & * & * &  \dotsc & 0 & 0 & 0\\
+			0 & a_{0} & a_{1}  & \dotsc & * & * & * & \dotsc & 0 & 0& 0\\
+			\vdots & \vdots  & \vdots & \ddots& \vdots & \vdots &\vdots & \ddots & \vdots & \vdots & \vdots \\
+			0 & 0 & 0 & \dotsc & a_{1} &  a_{2} & a_{3}& \dotsc & a_{n-1} & a_n& 0\\
+			0 & 0 & 0 & \dotsc & a_0 & a_1 & a_{2} & \dotsc & a_{n-2} & a_{n-1} & a_n\\
+			b_0 & b_{1} & b_{2} & \dotsc & b_{n-1} & b_n & 0 & \dotsc  & 0 & 0& 0 \\
+			0   & b_0 & b_{1} & \dotsc & b_{n-2} & b_{n-1} & b_n & \dotsc  & 0 & 0& 0 \\
+			\vdots & \vdots  & \vdots & \ddots& \vdots & \vdots &\vdots & \ddots & \vdots & \vdots & \vdots \\
+			0 & 0 & 0 & \dotsc & * & * & * & \dotsc & b_{n-1} & b_n & 0\\
+			0 & 0 & 0 & \dotsc & * & * & * & \dotsc & b_{n-2} & b_{n-1} & b_n
+		\end{vmatrix} = (-1)^{mn}{\cdot}|R'|
+	$$
+	Домножим $R$ на определитель Вандермонда от корней в обратном порядке (сначала $\beta$ затем $\alpha$):
+	$$
+		R{\cdot}V(\beta_1,\dotsc,\beta_m,\alpha_1,\dotsc,\alpha_n) = (-1)^{mn}|R'|{\cdot}
+		\begin{vmatrix}
+			1 & \dotsc & 1 & 1 & \dotsc & 1\\
+			\beta_1 & \dotsc & \beta_m & \alpha_1 & \dotsc & \alpha_n \\
+			\vdots & \ddots & \vdots & \vdots & \ddots & \vdots \\
+			\beta_1^n & \dotsc & \beta_m^n & \alpha_1^n & \dotsc & \alpha_n^n \\
+			\vdots & \ddots & \vdots & \vdots & \ddots & \vdots \\
+			\beta_1^{m + n - 1} & \dotsc & \beta_m^{m + n - 1} & \alpha_1^{m + n - 1} & \dotsc & \alpha_n^{m + n - 1}
+		\end{vmatrix} =
+	$$ 
+	$$
+		= (-1)^{mn} 
+		\begin{vmatrix}[ccc|ccc]
+			f(\beta_1) & \dotsc & f(\beta_m) & f(\alpha_1) & \dotsc & f(\alpha_n)\\
+			f(\beta_1)\beta_1 & \dotsc & f(\beta_m)\beta_m & f(\alpha_1)\alpha_1 & \dotsc & f(\alpha_n)\alpha_n\\
+			\vdots & \ddots & \vdots & \vdots  & \ddots  & \vdots \\
+			f(\beta_1)\beta_1^{m - 1} & \dotsc & f(\beta_m)\beta_m^{m - 1} & f(\alpha_1)\alpha_1^{m - 1} & \dotsc & f(\alpha_n)\alpha_n^{m - 1}\\ \hline
+			g(\beta_1) & \dotsc & g(\beta_m) & g(\alpha_1) & \dotsc & g(\alpha_n)\\
+			g(\beta_1)\beta_1 & \dotsc & g(\beta_m)\beta_m & g(\alpha_1)\alpha_1 & \dotsc & g(\alpha_n)\alpha_n\\
+			\vdots & \ddots & \vdots & \vdots  & \ddots  & \vdots \\
+			g(\beta_1)\beta_1^{n - 1} & \dotsc & g(\beta_m)\beta_m^{n - 1} & g(\alpha_1)\alpha_1^{n - 1} & \dotsc & g(\alpha_n)\alpha_n^{n - 1}
+		\end{vmatrix}
+	$$
+	Визуально, можно разбить полученный определитель на $4$ части. На побочной диагонали будут нулевые блоки, поскольку $f(\alpha_i) = 0, \, \forall i$ и $g(\beta_j) = 0, \, \forall j$, тогда:
+	$$
+		R{\cdot}V(\beta_1,\dotsc,\beta_m,\alpha_1,\dotsc,\alpha_n) = 
+		(-1)^{mn} 
+		\begin{vmatrix}
+			f(\beta_1) & \dotsc & f(\beta_m) & 0 & \dotsc &0\\
+			f(\beta_1)\beta_1 & \dotsc & f(\beta_m)\beta_m & 0 & \dotsc & 0\\
+			\vdots & \ddots & \vdots & \vdots  & \ddots  & \vdots \\
+			f(\beta_1)\beta_1^{m - 1} & \dotsc & f(\beta_m)\beta_m^{m - 1} & 0 & \dotsc & 0\\
+			0 & \dotsc & 0 & g(\alpha_1) & \dotsc & g(\alpha_n)\\
+			0 & \dotsc & 0 & g(\alpha_1)\alpha_1 & \dotsc & g(\alpha_n)\alpha_n\\
+			\vdots & \ddots & \vdots & \vdots  & \ddots  & \vdots \\
+			0 & \dotsc & 0 & g(\alpha_1)\alpha_1^{n - 1} & \dotsc & g(\alpha_n)\alpha_n^{n - 1}
+		\end{vmatrix} =
+	$$
+	$$
+		= (-1)^{mn} f(\beta_1){\cdot}\dotsc{\cdot}f(\beta_m){\cdot}V(\beta_1,\dotsc,\beta_m){\cdot}g(\alpha_1){\cdot}\dotsc{\cdot}g(\alpha_n){\cdot}V(\alpha_1,\dotsc,\alpha_n) \Rightarrow
+	$$
+	$$
+		\Rightarrow R{\cdot}\prod\limits_{i > j}(\beta_i - \beta_j)\prod\limits_{i > j}(\alpha_i - \alpha_j)\prod\limits_{i, j}(\beta_i - \alpha_j) = 
+	$$
+	$$
+		= (-1)^{mn} f(\beta_1){\cdot}\dotsc{\cdot}f(\beta_m){\cdot}\prod\limits_{i > j}(\beta_i - \beta_j){\cdot}g(\alpha_1){\cdot}\dotsc{\cdot}g(\alpha_n){\cdot}\prod\limits_{i > j}(\alpha_i - \alpha_j) \Rightarrow
+	$$
+	$$
+		\Rightarrow R{\cdot}\prod\limits_{i, j}(\beta_i - \alpha_j) = (-1)^{mn}f(\beta_1){\cdot}\dotsc{\cdot}f(\beta_m){\cdot}g(\alpha_1){\cdot}\dotsc{\cdot}g(\alpha_n) \Rightarrow
+	$$
+	$$
+		\Rightarrow R{\cdot}\prod\limits_{i, j}(\beta_i - \alpha_j){\cdot}a_n^mb_m^n =   \underbrace{(-1)^{mn}{\cdot}b_m^n{\cdot}f(\beta_1){\cdot}\dotsc{\cdot}f(\beta_m)}_{R(f,g)}{\cdot}\underbrace{a_n^m{\cdot}g(\alpha_1){\cdot}\dotsc{\cdot}g(\alpha_n)}_{R(f,g)}\Rightarrow
+	$$
+	$$
+		\Rightarrow R{\cdot}R(f,g) = R(f,g){\cdot}R(f,g) \Rightarrow R = R(f,g)
+	$$
+	В общем случае, вместо $f$ и $g$ рассмотрим многочлены $\wte{f}, \wte{g} \in K[x_1,\dotsc,x_n,y_1,\dotsc,y_m,x]$:
+	$$
+		\wte{f} = a_n(x - x_1){\cdot}(x- x_2){\cdot}\dotsc{\cdot}(x - x_n) = \wte{a}_0 + \wte{a}_1x + \dotsc + \wte{a}_nx^n, \, \forall i =\ovl{0,n}, \, \wte{a}_i \in K[x_1,\dotsc,x_n]
+	$$
+	$$
+		\wte{g} = b_m(x - y_1){\cdot}(x - y_2){\cdot}\dotsc{\cdot}(x - y_m) = \wte{b}_0 + \wte{b}_1x + \dotsc + \wte{b}_mx^m, \, \forall j =\ovl{0,m}, \,  \wte{b}_j \in K[y_1,\dotsc,y_m]
+	$$
+	Эти многочлены можно рассматривать как многочлены от $n + m + 1$ переменной, а можно рассматривать как многочлены от $1$ переменной, но с коэффициентами из кольца многочленов от $n + m$ переменных. Во втором случае мы можем к этим двум многочленам от переменной $x$ применить предыдущий случай, потому что у $\wte{f}$ и $\wte{g}$ все корни различные: корни $\wte{f}$: $x_1,\dotsc,x_n$ это разные переменные, корни $\wte{g}$: $y_1,\dotsc, y_m$ это тоже разные переменные и $x_i$ отличаются от $y_j$, то есть $n + m$ различных переменных. Тогда:
+	$$
+		R(\wte{f},\wte{g}) = \wte{R}
+	$$
+	где $\wte{R}$ - определитель, составленный из коэффициентов $\wte{a}_i, \wte{b}_j$ аналогично определителю $R$. Подставим значения: $\forall i =\ovl{1,n}, \, x_i = \alpha_i, \, \forall j = \ovl{1,m}, \, y_j = \beta_j$, тогда: 
+	$$
+		\wte{f} =f, \, \wte{g} = g, \, \wte{a}_i = a_i, \, \wte{b}_j = b_j \Rightarrow R(\wte{f},\wte{g}) = R(f,g), \, \wte{R} = R \Rightarrow R(f,g) = R
+	$$
+	Таким образом, мы свели общий случай к частному.
+\end{proof}
+\newpage
+\subsection*{Связь результанта с дискриминантом}
+\begin{prop}
+	Пусть  $f(x) \in K[x]$, тогда:
+	$$
+		R(f,f') = (-1)^{\tfrac{n(n-1)}{2}}{\cdot}a_n{\cdot}D(f)
+	$$
+	где $f'$ - это производная многочлена $f$.
+\end{prop}
+\begin{proof}
+	Разложим многочлен $f$ на множители:
+	$$
+		f(x) = a_n(x - \alpha_1){\cdot}\dotsc{\cdot}(x - \alpha_i){\cdot}\dotsc{\cdot}(x - \alpha_n) \Rightarrow
+	$$
+	$$
+		\Rightarrow f'(x) = a_n{\cdot}\ddsum{i = 1}{n}(x - \alpha_1){\cdot}\dotsc{\cdot}(x - \alpha_i)'{\cdot}\dotsc{\cdot}(x - \alpha_n) = 
+	$$
+	$$	
+		= a_n{\cdot}\ddsum{i = 1 }{n}{\cdot}(x - \alpha_1){\cdot}\dotsc{\cdot}(x - \alpha_{i-1}){\cdot}(x - \alpha_{i+1}){\cdot}\dotsc{\cdot}(x - \alpha_n)
+	$$
+	Подставим корни многочлена в производную:
+	$$
+		\forall i = \ovl{1,n}, \, f'(\alpha_i) = a_n{\cdot}\prod\limits_{j \neq i}(\alpha_i - \alpha_j)
+	$$
+	По свойству $3)$ результанта будет верно:
+	$$
+		R(f,f') = a_n^{n-1}{\cdot}f'(\alpha_1){\cdot}\dotsc{\cdot}f'(\alpha_i){\cdot}\dotsc{\cdot}f'(\alpha_n) = a_n^{2n - 1}{\cdot}\prod\limits_{\substack{i =1\\ j \neq i}}^{n}(\alpha_i - \alpha_j) =  a_n^{2n-1}{\cdot}\prod\limits_{i <j}(\alpha_i - \alpha_j){\cdot}\prod\limits_{j < i}(\alpha_i - \alpha_j) = 
+	$$
+	$$
+		=a_n^{2n-1}{\cdot}\prod\limits_{i < j}(\alpha_i - \alpha_j){\cdot}(-1)^{\tfrac{n(n-1)}{2}}{\cdot}\prod\limits_{j < i}(\alpha_j - \alpha_i) = (-1)^{\tfrac{n(n-1)}{2}}{\cdot}a_n^{2n-1}{\cdot}\prod\limits_{i < j}(\alpha_i - \alpha_j)^2 = 
+	$$
+	$$
+		= (-1)^{\tfrac{n(n-1)}{2}}{\cdot}a_n{\cdot}\underbrace{a_n^{2n - 2}{\cdot}\prod\limits_{i < j}(\alpha_i - \alpha_j)^2}_{D(f)} = (-1)^{\tfrac{n(n-1)}{2}}{\cdot}a_n{\cdot}D(f)
+	$$
+\end{proof}
+\begin{corollary}
+	Пусть $f \in K[x]$, тогда: $D(f) = (-1)^{\tfrac{n(n-1)}{2}}{\cdot}a_n^{-1}{\cdot}R(f,f')$.
+\end{corollary}
+
+\begin{rem}
+	Отметим, что общей формулы для выражения дискриминанта через коэффициенты нет, при этом используя результант можно находить дискриминант через коэффициенты многочлена и его производной (которые также легко выражаются через коэффициенты многочлена). Формало это и есть искомая формула, но по такому определителю всё ещё сложно оценить, входит ли некоторый член в определитель и если да, то с каким коэффициентом.
+\end{rem}
+\textbf{Пример}: Рассмотрим многочлен $f(x) = ax^2 + bx + c, \, n = 2$, тогда: $f'(x) = 2ax + b$, найдем $R(f,f')$:
+$$
+	 R(f,f') = 
+	\begin{vmatrix}
+		a & b & c\\
+		2a & b & 0\\
+		0& 2a & b
+	\end{vmatrix} = a
+	\begin{vmatrix}
+		b & 0 \\
+		2a & b
+	\end{vmatrix} - 2a
+	\begin{vmatrix}
+		b & c \\
+		2a & b
+	\end{vmatrix} = ab^2 -2ab^2 + 4a^2c = - a(b^2 - 4ac) \Rightarrow
+$$
+$$
+	\Rightarrow D(f) = (-1)^{1}{\cdot}a^{-1}{\cdot}(-a)(b^2 - 4ac) = b^2 - 4ac
+$$
+
+
+\end{document}

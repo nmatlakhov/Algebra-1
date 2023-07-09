@@ -1,0 +1,545 @@
+\documentclass[12pt]{article}
+\usepackage[left=1cm, right=1cm, top=2cm,bottom=1.5cm]{geometry} 
+
+\usepackage[parfill]{parskip}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage{enumitem}
+\usepackage[normalem]{ulem}
+\usepackage{amsfonts, amsmath, amsthm, amssymb, mathtools,xcolor}
+\usepackage{blkarray}
+
+\usepackage{tabularx}
+\usepackage{hhline}
+
+\usepackage{accents}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{1.5pt}
+\renewcommand{\footrulewidth}{1pt}
+
+\usepackage{graphicx}
+\usepackage[figurename=Рис.]{caption}
+\usepackage{subcaption}
+\usepackage{float}
+
+%%Наименование папки откуда забирать изображения
+\graphicspath{ {./images/} }
+
+%%Изменение формата для ввода доказательства
+\renewcommand{\proofname}{$\square$  \nopunct}
+\renewcommand\qedsymbol{$\blacksquare$}
+
+%%Изменение отступа на таблицах
+\addto\captionsrussian{%
+	\renewcommand{\proofname}{$\square$ \nopunct}%
+}
+%% Римские цифры
+\newcommand{\RN}[1]{%
+	\textup{\uppercase\expandafter{\romannumeral#1}}%
+}
+
+%% Для удобства записи
+\newcommand{\MR}{\mathbb{R}}
+\newcommand{\MC}{\mathbb{C}}
+\newcommand{\MQ}{\mathbb{Q}}
+\newcommand{\MN}{\mathbb{N}}
+\newcommand{\MZ}{\mathbb{Z}}
+\newcommand{\MTB}{\mathbb{T}}
+\newcommand{\MTI}{\mathbb{I}}
+\newcommand{\MI}{\mathrm{I}}
+\newcommand{\MCI}{\mathcal{I}}
+\newcommand{\MJ}{\mathrm{J}}
+\newcommand{\MH}{\mathrm{H}}
+\newcommand{\MT}{\mathrm{T}}
+\newcommand{\MU}{\mathcal{U}}
+\newcommand{\MV}{\mathcal{V}}
+\newcommand{\MB}{\mathcal{B}}
+\newcommand{\MF}{\mathcal{F}}
+\newcommand{\MW}{\mathcal{W}}
+\newcommand{\ML}{\mathcal{L}}
+\newcommand{\MP}{\mathcal{P}}
+\newcommand{\VN}{\varnothing}
+\newcommand{\VE}{\varepsilon}
+\newcommand{\dx}{\, dx}
+\newcommand{\dy}{\, dy}
+\newcommand{\dz}{\, dz}
+\newcommand{\dd}{\, d}
+
+
+\theoremstyle{definition}
+\newtheorem{defn}{Опр:}
+\newtheorem{rem}{Rm:}
+\newtheorem{prop}{Утв.}
+\newtheorem{exrc}{Упр.}
+\newtheorem{problem}{Задача}
+\newtheorem{lemma}{Лемма}
+\newtheorem{theorem}{Теорема}
+\newtheorem{corollary}{Следствие}
+
+\newenvironment{cusdefn}[1]
+{\renewcommand\thedefn{#1}\defn}
+{\enddefn}
+
+\DeclareRobustCommand{\divby}{%
+	\mathrel{\text{\vbox{\baselineskip.65ex\lineskiplimit0pt\hbox{.}\hbox{.}\hbox{.}}}}%
+}
+\DeclareRobustCommand{\ndivby}{\mkern-1mu\not\mathrel{\mkern4.5mu\divby}\mkern1mu}
+
+
+%Короткий минус
+\DeclareMathSymbol{\SMN}{\mathbin}{AMSa}{"39}
+%Длинная шапка
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+%Функция знака
+\DeclareMathOperator{\sgn}{sgn}
+
+%Функция ранга
+\DeclareMathOperator{\rk}{\text{rk}}
+\DeclareMathOperator{\diam}{\text{diam}}
+
+
+%Обозначение константы
+\DeclareMathOperator{\const}{\text{const}}
+
+\DeclareMathOperator{\codim}{\text{codim}}
+
+\DeclareMathOperator*{\dsum}{\displaystyle\sum}
+\newcommand{\ddsum}[2]{\displaystyle\sum\limits_{#1}^{#2}}
+\newcommand{\ddssum}[2]{\displaystyle\smashoperator{\sum\limits_{#1}^{#2}}}
+\newcommand{\ddlsum}[2]{\displaystyle\smashoperator[l]{\sum\limits_{#1}^{#2}}}
+\newcommand{\ddrsum}[2]{\displaystyle\smashoperator[r]{\sum\limits_{#1}^{#2}}}
+
+%Интеграл в большом формате
+\DeclareMathOperator{\dint}{\displaystyle\int}
+\newcommand{\ddint}[2]{\displaystyle\int\limits_{#1}^{#2}}
+\newcommand{\ssum}[1]{\displaystyle \sum\limits_{n=1}^{\infty}{#1}_n}
+
+\newcommand{\smallerrel}[1]{\mathrel{\mathpalette\smallerrelaux{#1}}}
+\newcommand{\smallerrelaux}[2]{\raisebox{.1ex}{\scalebox{.75}{$#1#2$}}}
+
+\newcommand{\smallin}{\smallerrel{\in}}
+\newcommand{\smallnotin}{\smallerrel{\notin}}
+
+\newcommand*{\medcap}{\mathbin{\scalebox{1.25}{\ensuremath{\cap}}}}%
+\newcommand*{\medcup}{\mathbin{\scalebox{1.25}{\ensuremath{\cup}}}}%
+
+\makeatletter
+\newcommand{\vast}{\bBigg@{3.5}}
+\newcommand{\Vast}{\bBigg@{5}}
+\makeatother
+
+%Промежуточное значение для sup\inf, поскольку они имеют разную высоту
+\newcommand{\newsup}{\mathop{\smash{\mathrm{sup}}}}
+\newcommand{\newinf}{\mathop{\mathrm{inf}\vphantom{\mathrm{sup}}}}
+
+%Скалярное произведение
+\newcommand{\inner}[2]{\left\langle #1, #2 \right\rangle }
+\newcommand{\linsp}[1]{\left\langle #1 \right\rangle }
+\newcommand{\linmer}[2]{\left\langle #1 \vert #2\right\rangle }
+
+%Подпись символов снизу
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+
+%%Шапка для букв сверху
+\newcommand{\wte}[1]{\widetilde{#1}}
+\newcommand{\wht}[1]{\widehat{#1}}
+\newcommand{\ovl}[1]{\overline{#1}}
+
+
+%%Трансформация Фурье
+\newcommand{\fourt}[1]{\mathcal{F}\left(#1\right)}
+\newcommand{\ifourt}[1]{\mathcal{F}^{-1}\left(#1\right)}
+
+%%Символ вектора
+\newcommand{\vecm}[1]{\overrightarrow{#1\,}}
+
+%%Пространстов матриц
+\newcommand{\matsq}[1]{\operatorname{Mat}_{#1}}
+\newcommand{\mat}[2]{\operatorname{Mat}_{#1, #2}}
+
+%Оператор для действ и мнимых чисел
+\DeclareMathOperator{\IM}{\operatorname{Im}}
+\DeclareMathOperator{\RE}{\operatorname{Re}}
+\DeclareMathOperator{\li}{\operatorname{li}}
+\DeclareMathOperator{\GL}{\operatorname{GL}}
+\DeclareMathOperator{\SL}{\operatorname{SL}}
+\DeclareMathOperator{\Char}{\operatorname{char}}
+\DeclareMathOperator\Arg{Arg}
+
+%Делимость чисел
+\newcommand{\modn}[3]{#1 \equiv #2 \; (\bmod \; #3)}
+
+
+%%Взятие в скобки, модули и норму
+\newcommand{\parfit}[1]{\left( #1 \right)}
+\newcommand{\modfit}[1]{\left| #1 \right|}
+\newcommand{\sqparfit}[1]{\left\{ #1 \right\}}
+\newcommand{\normfit}[1]{\left\| #1 \right\|}
+
+%%Функция для обозначения равномерной сходимости по множеству
+\newcommand{\uconv}[1]{\overset{#1}{\rightrightarrows}}
+\newcommand{\uconvm}[2]{\overset{#1}{\underset{#2}{\rightrightarrows}}}
+
+
+%%Функция для обозначения нижнего и верхнего интегралов
+\def\upint{\mathchoice%
+	{\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	\int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+
+%%След матрицы
+\DeclareMathOperator*{\tr}{tr}
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+	\hskip -\arraycolsep
+	\let\@ifnextchar\new@ifnextchar
+	\array{#1}}
+\makeatother
+
+
+%% Переопределение функции хи, чтобы выглядела более приятно
+\makeatletter
+\@ifdefinable\@latex@chi{\let\@latex@chi\chi}
+\renewcommand*\chi{{\@latex@chi\smash[t]{\mathstrut}}} % want only bottom half of \mathstrut
+\makeatletter
+
+\setcounter{MaxMatrixCols}{20}
+
+\begin{document}
+\lhead{Алгебра-\RN{1}}
+\chead{Тимашев Д.А.}
+\rhead{Лекция - 22}
+\section*{Симметрические многочлены}
+
+Пусть $K$ это поле. Рассмотрим специальный тип многочленов в $K[x_1,\dotsc,x_n]$.
+\begin{defn}
+	Многочлен $f \in K[x_1,\dotsc,x_n]$ называется \uwave{симметрическим}, если $f(x_1,\dotsc,x_n) = f(x_{i_1}, \dotsc, x_{i_n})$, для любой перестановки $(i_1,i_2, \dotsc, i_n)$ номеров $(1,2,\dotsc, n)$.
+\end{defn}
+\begin{rem}
+	В терминах перестановок: $f(x_1,\dotsc,x_n) \in K[x_1,\dotsc,x_n]$ - симметрический, если:
+	$$
+		f(x_1,\dotsc,x_n) = f(x_{\sigma(1)},\dotsc,x_{\sigma(n)}), \, \forall \sigma \in S_n
+	$$
+\end{rem}
+
+\textbf{Примеры симметрических и несимметрических многочленов}:
+\begin{enumerate}[label=\arabic*)]
+	\item $f(x_1,x_2,x_3,x_4) = x_1x_2 + x_3x_4$ - не будет симметрическим: поменяем местами $x_2$ и $x_3$:
+	$$
+		f(x_1, x_3,x_2,x_4) = x_1x_3 + x_2 x_4 \neq x_1x_2 + x_3x_4 = f(x_1,x_2,x_3,x_4)
+	$$ 
+	\item \textbf{Константы}: 
+	$$
+		f(x_1,\dotsc,x_n) = \lambda \in K
+	$$  
+	Очевидно, это симметрические многочлены;
+	\item \textbf{Степенные суммы}: 
+	$$
+		s_k(x_1,\dotsc,x_n) = x_1^k + x_2^k  + \dotsc + x_n^k,\, \forall k \in \MN
+	$$ 
+	Очевидно, это симметрические многочлены;
+	\item \textbf{Элементарные симметрические многочлены}: 
+	$$
+		\sigma_k(x_1,\dotsc,x_n) = \ddsum{1\leq i_1 < i_2<\dotsc<i_k \leq n}{}x_{i_1}{\cdot}x_{i_2}{\cdot}\dotsc{\cdot}x_{i_k}
+	$$
+	Они симметрические. Отметим, что в сумме $C_n^k$ слагаемых $\Rightarrow$ количество слагаемых в сумме $\sigma_k(x_1,\dotsc,x_n)$ равно количеству слагаемых в сумме $\sigma_{n-k}(x_1,\dotsc,x_n)$. Рассмотрим частные случаи:
+	$$
+		k = 1 \Rightarrow \sigma_1(x_1,\dotsc,x_n) = x_1 + x_2 + \dotsc + x_n
+	$$
+	$$
+		k = 2 \Rightarrow \sigma_2(x_1,\dotsc, x_n) = x_1x_2 + x_1x_3 + \dotsc + x_ix_j + \dotsc + x_{n-1}x_n, \quad \forall i,j = \ovl{1,n}, \, i < j
+	$$
+	$$
+		k = n \Rightarrow \sigma_n(x_1,\dotsc,x_n) = x_1{\cdot}x_2{\cdot}\dotsc{\cdot}x_n
+	$$
+	$$
+		\forall k > n, \, \sigma_k(x_1,\dotsc,x_n) = 0, \, \forall k \leq 0 , \, \sigma_k(x_1,\dotsc,x_n) = 0
+	$$
+	\item \textbf{Определитель Вандермонда}: $V(x_1,\dotsc,x_n)$ не является симметрическим, поскольку:
+	$$
+		V(x_1,\dotsc,x_n) = 
+		\begin{vmatrix}
+			1 & x_1 & x_1^2 & \dotsc & x_1^{n-1}\\
+			1 & x_2 & x_2^2 & \dotsc & x_2^{n-1}\\
+			\vdots & \vdots & \vdots & \ddots & \vdots \\
+			1 & x_n & x_n^2 & \dotsc & x_n^{n-1}
+		\end{vmatrix} = \prod\limits_{n\geq j > i \geq 1}(x_j - x_i)
+	$$
+	Переставить аргументы означает поменять местами столбцы, при этом определитель умножится на знак подстановки. Такие многочлены называются кососимметрическими. Сделать его симметрическим можно следующим образом:
+	$$
+		V(x_1,\dotsc,x_n)^2 = \prod\limits_{n\geq j > i \geq 1}(x_j - x_i)^2
+	$$
+\end{enumerate}
+
+\begin{prop}
+	Сумма/произведение симметрических многочленов дает симметрический многочлен, то есть множество симметрических многочленов замкнуто относительно сложения/умножения. Другими словами, множество симметрических многочленов это подкольцо в $K[x_1,\dotsc,x_n]$.
+\end{prop}
+\begin{proof}
+	Сумма симметрических многочленов дают симметрический многочлен, поскольку перестановка аргументов не влияет на сумму. Аналогично, произведение симметрических многочленов дают симметрический многочлен, поскольку перестановка аргументов не влияет на произведение.
+\end{proof}
+
+\begin{theorem}(\textbf{Виета})
+	Пусть $f(x) = a_0 + a_1x + \dotsc + a_n x^n \in K[x]$ имеет  $n = \deg(f)$ корней с учётом кратностей: $\alpha_1,\dotsc,\alpha_n \in K$. Тогда имеют место следующие формулы:
+	$$
+		\forall k = \ovl{1,n}, \, \sigma_k(\alpha_1,\dotsc,\alpha_n) = (-1)^k{\cdot}\dfrac{a_{n-k}}{a_n}
+	$$
+	Эти формулы называются \uwave{формулами Виета}.
+\end{theorem}
+\begin{proof}
+	Разложим наш многочлен на линейные множители (поскольку он имеет столько же корней, сколько его степень) и раскроем скобки:
+	$$
+		f(x) = a_n{\cdot}(x - \alpha_1){\cdot}(x - \alpha_2){\cdot}\dotsc{\cdot}(x - \alpha_n) = a_n {\cdot} \ddssum{\substack{k =0,\dotsc,n \\1\leq i_1 < i_2 < \dotsc < i_k \leq n}}{}\underset{1}{x}{\cdot}\underset{2}{x}{\cdot}\dotsc{\cdot}\underset{i_1}{(-\alpha_{i_1})}{\cdot}\dotsc{\cdot}\underset{i_2}{(-\alpha_{i_2})}{\cdot}\dotsc{\cdot}\underset{n}{x}
+	$$
+	Заметим, что у нас $n$ множителей в произведении и в каждом множителе у нас два члена $\Rightarrow$ всего будет $2^n$ слагаемых в  сумме. Номера $i_1,\dotsc,i_k$ будем считать расположенными в порядке возрастания. Соберём слагаемые в сумме, тогда:
+	$$
+		f(x) = a_n{\cdot}\ddsum{k = 0}{n}x^{n-k}{\cdot}\ddssum{i_1 < i_2 < \dotsc < i_k}{}(-1)^k{\cdot}\alpha_{i_1}{\cdot}\alpha_{i_2}{\cdot}\dotsc{\cdot}\alpha_{i_k} = a_n{\cdot}\ddsum{k = 0}{n}(-1)^k{\cdot}\sigma_k(\alpha_1,\dotsc,\alpha_n){\cdot}x^{n-k} \Rightarrow
+	$$
+	$$
+		\Rightarrow \forall k = \ovl{0,n}, \, (-1)^k{\cdot}a_n{\cdot}\sigma_k(\alpha_1,\dotsc,\alpha_n){\cdot}x^{n-k} = a_{n-k}x^{n-k} \Rightarrow \sigma_k(\alpha_1,\dotsc,\alpha_n) = (-1)^{k}{\cdot}\dfrac{a_{n-k}}{a_n}
+	$$
+\end{proof}
+\begin{rem}
+	Теорема Виета применима к любым многочленам над полем $K = \MC$. Более того, теорема Виета применима над любым алгебраически замкнутым полем $K$. В общем случае, если $K$ - произвольно, то существует расширение поля $K \subset L$, которое уже будет алгебраически замкнуто и тогда можно будет применить теорему Виета считая, что  $\alpha_1,\dotsc,\alpha_n \in L$. Например, $\MR$ можно расширить до $\MC$.
+\end{rem}
+
+\begin{theorem}(\textbf{Основная теорема о симметрических многочленах})
+	Для любого симметрического многочлена $f \in K[x_1,\dotsc,x_n]$ существует единственный многочлен $F \in K[x_1,\dotsc,x_n]$ такой, что:
+	$$
+		f = F(\sigma_1,\dotsc,\sigma_n)
+	$$
+	При этом $\deg(F) = \deg_{x_i}(f), \, \forall i = \ovl{1,n}$.
+\end{theorem}
+\begin{rem}
+	Другими словами: кольцо симметрических многочленов есть $K[\sigma_1,\dotsc,\sigma_n]$.
+\end{rem}
+
+\textbf{Примеры применения основной теоремы о симметрических многочленах}:
+\begin{enumerate}[label=\arabic*)]
+	\item $s_1 = x_1 + x_2 + \dotsc + x_n = \sigma_1$;
+	\item $s_2 = x_1^2 + x_2^2 + \dotsc + x_n^2 = (x_1 + x_2 + \dotsc + x_n)^2 - 2\ddsum{i < j}{}x_ix_j = \sigma_1^2 -2\sigma_2$;
+\end{enumerate}
+
+\begin{lemma}
+	Старший член $\wht{f} = x_1^{k_1}x_2^{k_2}\dotsc x_n^{k_n}$ симметрического многочлена $f$ обладает свойством:
+	$$
+		k_1 \geq k_2 \geq \dots \geq k_n
+	$$
+\end{lemma}
+\begin{proof}
+	(От противного) Если $\exists\, i,j \colon k_i < k_j$, то в $\wht{f}$ при перестановке $x_i$ и $x_j$ местами:
+	$$
+		\wht{f} = x_1^{k_1}\dotsc x_i^{k_i}\dotsc x_j^{k_j}\dotsc x_n^{k_n} \prec x_1^{k_1}\dotsc x_i^{k_j}\dotsc x_j^{k_i}\dotsc x_n^{k_n}
+	$$
+	Последний многочлен тоже входит в $f$ с ненулевым коэффициентом, поскольку $f$ - симметрический и от перестановки переменных он не изменится, просто его одночлены как-то переставятся. Подробнее, если старший член $\wht{f}$ был в $f$, то после перестановки и $x_1^{k_1}\dotsc x_i^{k_j}\dotsc x_j^{k_i}\dotsc x_n^{k_n}$ должен быть в $f$. Получили противоречие с тем, что $\wht{f}$ - самый старший среди одночленов, входящих в $f$.
+\end{proof}
+\begin{lemma}
+	Для любого набора целых неотрицательных чисел: $k_1 \geq k_2 \geq \dotsc \geq k_n \geq 0$ существует единственный набор целых неотрицательных чисел: $l_1,\dotsc, l_n \geq 0$ такой, что:
+	$$
+		x_1^{k_1}x_2^{k_2}\dotsc x_n^{k_n} = \wht{g}, \quad g = \sigma_1^{l_1}\sigma_2^{l_2}\dotsc \sigma_n^{l_n}
+	$$
+\end{lemma}
+\begin{proof}
+	Рассмотрим произведение: $g =\sigma_1^{l_1}\sigma_2^{l_2}\dotsc \sigma_n^{l_n}$ и его старший член $\wht{g}$. Старший член произведения равен произведению старших членов сомножителей (по утверждению лекции $21$):
+	$$
+		\wht{g} = \wht{\sigma_1}^{l_1}{\cdot}\wht{\sigma_2}^{l_2}{\cdot}\dotsc{\cdot}\wht{\sigma_j}^{l_j}{\cdot}\dotsc{\cdot}\wht{\sigma_n}^{l_n}
+	$$
+	$$
+		\sigma_j(x_1,\dotsc,x_n) = \ddsum{i_1 < i_2<\dotsc<i_j}{}x_{i_1}{\cdot}x_{i_2}{\cdot}\dotsc{\cdot}x_{i_j} \Rightarrow \wht{\sigma_j} = x_1{\cdot}x_2{\cdot}\dotsc{\cdot}x_j \Rightarrow
+	$$
+	$$
+		\Rightarrow \wht{g} = x_1^{l_1}{\cdot}(x_1{\cdot}x_2)^{l_2}{\cdot}\dotsc{\cdot}(x_1{\cdot}x_2{\cdot}\dotsc{\cdot}x_j)^{l_j}{\cdot}\dotsc{\cdot}(x_1{\cdot}x_2{\cdot}\dotsc{\cdot}x_n)^{l_n}
+	$$
+	Чтобы старший член $g$ был равен требуемому многочлену необходимо и достаточно:
+	$$
+		\left\{
+		\begin{array}{ccccccc}
+			k_1 &=& l_1 &+& \dotsc &+& l_n\\
+			k_2 &=& l_2 &+& \dotsc &+& l_n\\
+			\vdots &\vdots& \vdots&\vdots& \ddots&\vdots& \vdots\\
+			k_j &=& l_j &+& \dotsc &+& l_n\\
+			\vdots &\vdots& \vdots&\vdots& \ddots&\vdots& \vdots\\
+			k_n &=& l_n & & & &
+		\end{array}
+		\right. \Leftrightarrow
+		\left\{
+		\begin{array}{ccccccc}
+			l_1 &=& k_1 &-& k_2 & \geq &0\\
+			l_2 &=& k_2 &-& k_3 & \geq &0\\
+			\vdots &\vdots& \vdots & \vdots & \vdots & \vdots  & \vdots\\
+			l_j &=& k_j &-& k_{j+1}& \geq &0\\
+			\vdots &\vdots& \vdots & \vdots & \vdots & \vdots  & \vdots\\
+			l_n &=& k_n & & & \geq &0
+		\end{array}
+	\right.
+	$$
+	Видим, что существует ровно один набор $l_1,\dotsc,l_n$ для которых выполнены равенства выше.
+\end{proof}
+
+\begin{proof}(\textbf{Доказательство основной теоремы о симметрических многочленах})
+	\begin{enumerate}[label=\arabic*)]
+		\item \textbf{\uline{Существование}}: Рассмотрим разложение многочлена $f \in K[x_1,\dotsc, x_n]$ в сумму однородных компонент (многочленов):
+		$$
+			f = f_0 + f_1 + \dotsc + f_d, \, d = \deg(f)
+		$$
+		Заметим, что $f_i$ будут симметрическими многочленами, так как при перестановке переменных полная степень одночлена не меняется $\Rightarrow$ можно считать дальше, что наш многочлен $f$ однороден. Выделим в нём старший член и применим леммы $1$ и $2$:
+		$$
+			f = a_0{\cdot}\wht{f} + \ddsum{i}{}p_i, \, \forall i, \, \wht{f}\succ p_i \Rightarrow \exists \, l_1,\dotsc, l_n \colon \wht{f} = \wht{g}, \, g = \sigma_1^{l_1}\sigma_2^{l_2}\dotsc \sigma_n^{l_n} \Rightarrow
+		$$
+		$$
+			\Rightarrow f_1 = f - a_0{\cdot}\sigma_1^{l_1}\dotsc \sigma_n^{l_n} \Rightarrow \wht{f_1} \prec \wht{f} \Rightarrow f_1 = a_1{\cdot}\wht{f_1} + \ddsum{i}{}q_i, \, \forall i, \, \wht{f_1}\succ q_i
+		$$
+		Снова применяем леммы $1$ и $2$:
+		$$
+			\exists\, m_1,\dotsc, m_n \colon \wht{f_1} = \wht{g_1}, \, g_1 = \sigma_1^{m_1}\sigma_2^{m_2}\dotsc\sigma_n^{m_n} \Rightarrow f_2 = f_1 - a_1{\cdot}\sigma_1^{m_1}\sigma_2^{m_2}\dotsc\sigma_n^{m_n} \Rightarrow \wht{f_2} \prec \wht{f_1}
+		$$
+		И так далее $\Rightarrow$ получаем последовательность однородных симметрических многочленов одинаковой степени: $f, f_1, f_2,\dotsc$ у которых $\wht{f} \succ \wht{f_1} \succ \wht{f}_2 \succ \dotsc$. Последовательность не может продолжаться бесконечно, так как существует лишь конечное число одночленов данной степени, тогда: 
+		$$
+			\exists \, s \colon f_s \neq 0, \, f_{s + 1} = f_s - a_s{\cdot}\sigma_1^{p_1}\sigma_2^{p_2}\dotsc\sigma_n^{p_n} = 0 \Rightarrow
+		$$
+		$$
+			\Rightarrow f = a_0{\cdot}\sigma_1^{l_1}\dotsc\sigma_n^{l_n} + f_1 = a_0{\cdot}\sigma_1^{l_1}\dotsc\sigma_n^{l_n} + a_1{\cdot}\sigma_1^{m_1}\dotsc\sigma_n^{m_n} + f_2 = \dotsc = 
+		$$
+		$$
+			= a_0{\cdot}\sigma_1^{l_1}\dotsc\sigma_n^{l_n} + a_1{\cdot}\sigma_1^{m_1}\dotsc\sigma_n^{m_n} + \dotsc + a_s{\cdot}\sigma_1^{p_1}\dotsc\sigma_n^{p_n} = F(\sigma_1,\dotsc,\sigma_n)
+		$$
+		\item Рассмотрим степень нашего многочлена по какой-либо переменной. Поскольку многочлен симметрический, то нам не важно по какой конкретно, пусть это будет $x_1$:
+		$$
+			\deg_{x_1}(f) = \deg_{x_1}(\wht{f}\;) \geq \deg_{x_1}(\wht{f_1}\;)\geq \deg_{x_1}(\wht{f_2}\;) \geq \dotsc \geq  \deg_{x_1}(\wht{f_s}\;) 
+		$$
+		Из леммы $2$ степень $x_1$ в старших членах $\wht{f_i}$ будет равна степени старшего члена $\sigma_1^{r_1}\dotsc\sigma_n^{r_n}$:
+		$$
+			\deg_{x_1}(\wht{f}\;) = l_1 + l_2 + \dotsc + l_n, \, \deg_{x_1}(\wht{f_1}\;) = m_1 + m_2 + \dotsc + m_n, \dotsc, \deg_{x_1}(\wht{f_s}\;) = p_1 + p_2 + \dotsc + p_n
+		$$
+		Видно, что самая большая из перечисленных выше степеней: $l_1 + \dotsc + l_n$ есть ничто иное, как степень  $F(\sigma_1,\dotsc,\sigma_n)$:
+		$$
+			\deg(F) = l_1 + \dotsc + l_n = \deg_{x_1}(f)
+		$$
+		\item \textbf{\uline{Единственность}}: Пусть многочлен: $f = F(\sigma_1,\dotsc,\sigma_n) = G(\sigma_1,\dotsc,\sigma_n), \, F,G \in K[x_1,\dotsc,x_n]$. Рассмотрим разность многочленов $F$ и $G$:
+		$$
+			H = F - G \in K[x_1,\dotsc,x_n], \, H(\sigma_1,\dotsc,\sigma_n) = 0
+		$$
+		Нужно доказать, что $H = 0$. От противного, пусть $H \neq 0$, тогда:
+		$$
+			H = c_0x_1^{l_1}\dotsc x_n^{l_n} + c_1x_1^{m_1}\dotsc x_n^{m_n} + \dotsc + c_sx_1^{p_1}\dotsc x_n^{p_n}, \, c_0,c_1, \dotsc, c_s \neq 0 \Rightarrow
+		$$
+		$$
+			\Rightarrow H(\sigma_1,\dotsc,\sigma_n) =  c_0\sigma_1^{l_1}\dotsc \sigma_n^{l_n} + c_1\sigma_1^{m_1}\dotsc \sigma_n^{m_n} + \dotsc + c_s\sigma_1^{p_1}\dotsc \sigma_n^{p_n}
+		$$
+		Рассмотрим произведения как сумму старших членов и остальных:
+		$$
+			\sigma_1^{l_1}\dotsc \sigma_n^{l_n} = x_1^{k_1}\dotsc x_n^{k_n} + \dotsc, \sigma_1^{m_1}\dotsc \sigma_n^{m_n} = x_1^{i_1}\dotsc x_n^{i_n} + \dotsc, \dotsc, \sigma_1^{p_1}\dotsc \sigma_n^{p_n} = x_1^{j_1}\dotsc x_n^{j_n} + \dotsc
+		$$
+		По лемме $2$, если у нас есть одночлен с нестрого убывающими степенями, то существует ровно одно произведение сигм в каких-то степенях для которого этот одночлен является старшим членом. Следовательно, самый старший из старших членов ни с кем не сокращается $\Rightarrow H(\sigma_1,\dotsc,\sigma_n) \neq 0$ и мы получаем противоречие с тем, что $H(\sigma_1, \dotsc,\sigma_n) = 0 \Rightarrow H = 0$.
+	\end{enumerate}
+\end{proof}
+
+\begin{rem}
+	Заметим, что основная теорема и её доказательство переносится без любых изменений на случай, когда $K$ это произвольное коммутатиное, ассоциативное кольцо с единицей, например, $K = \MZ$.
+\end{rem}
+\newpage
+\subsection*{Применение симметрических многочленов}
+Пусть у нас есть многочлен $f(x)$ от одной переменной: 
+$$
+	f(x) = a_0 + a_1x + \dotsc + a_nx^n \in K[x]
+$$ 
+Он имеет $n = \deg(f)$ корней: $\alpha_1,\dotsc,\alpha_n$ с учётом кратности. Тогда значение любого симметрического многочлена от $\alpha_1,\dotsc,\alpha_n$ представляется в виде многочлена от коэффициентов:
+$$
+	\dfrac{a_0}{a_n}, \dfrac{a_1}{a_n},\dotsc, \dfrac{a_{n-1}}{a_n}
+$$
+Это следует из основной теоремы о симметрических многочленах и теоремы Виета: 
+\begin{enumerate}[label=\arabic*)]
+	\item По основной теореме, симметрический многочлен выражается в виде многочлена от элементарных симметрических многочленов;
+	\item Значения этого многочлена на корнях $f$ выражаются в виде многочлена от значений элементарных симметрических многочленов на этих корнях, которые по теореме Виета с точностью до знака равны коэффициентам выше;
+\end{enumerate}
+Это важно, поскольку чтобы вычислить значение симметрического многочлена на корнях $f$, то не обязательно знать сами корни, достаточно знать элементарные симметрические многочлены от этих корней. Корни многочлена не всегда просто найти, а вот элементарные симметрические многочлены от них найти всегда можно: они выражаются через коэффициенты исходного многочлена.
+
+\section*{Дискриминант}
+В условиях заданных выше, рассмотрим следующий симметрический многочлен от $n$ переменных:
+$$
+	\delta(x_1,\dotsc,x_n) = \prod\limits_{1 \leq i< j \leq n}(x_i - x_j)^2 \Rightarrow \exists \, \Delta \in K[x_1,\dotsc, x_n] \colon \delta = \Delta(\sigma_1,\dotsc, \sigma_n)
+$$
+При этом, по основной теореме о симметрических многочленах будет верно:
+$$
+	\deg(\Delta) = \deg_{x_1}(\delta) = 2(n-1) = 2n - 2
+$$ 
+Подставим корни $f(x)$ в $\delta$, тогда получим:
+$$
+	\delta(\alpha_1,\dotsc,\alpha_n) = \prod\limits_{1 \leq i< j \leq n}(\alpha_i - \alpha_j)^2 = \Delta\left(-\dfrac{a_{n-1}}{a_n}, \dfrac{a_{n-2}}{a_n}, \dotsc, (-1)^n\dfrac{a_0}{a_n}\right)
+$$
+где последнее равенство верно по теореме Виета. Поскольку: $\deg(\Delta) = 2(n-1) = 2n - 2$, то:
+$$
+	\Delta\left(-\dfrac{a_{n-1}}{a_n}, \dfrac{a_{n-2}}{a_n}, \dotsc, (-1)^n\dfrac{a_0}{a_n}\right) = \dfrac{D}{a_n^{2n-2}} \Rightarrow D = a_n^{2n-2}{\cdot}\prod\limits_{i< j}(\alpha_i - \alpha_j)^2
+$$
+где $D = D(a_0,a_1,\dotsc, a_n)$ - многочлен от $a_0,a_1,\dotsc,a_n$.
+
+\begin{defn}
+	\uwave{Дискриминантом} $D$ многочлена $f = a_0 + a_1x + \dotsc + a_n x^n \in K[x]$ называется многочлен от коэффициентов $f$, который выражается через его корни следующим образом:
+	$$
+		D = D(a_0,a_1,\dotsc, a_n) = D(f) = a_n^{2n-2}{\cdot}\prod\limits_{i< j}(\alpha_i - \alpha_j)^2
+	$$
+\end{defn}
+
+\newpage
+\begin{prop}(\textbf{Основное свойство дискриминанта})
+	$D(f) = 0 \Leftrightarrow f$ имеет кратные корни.
+\end{prop}
+\begin{proof}
+	$f$ имеет кратные корни $\Leftrightarrow \exists\, i,j \colon 1\leq i < j\leq n, \, \alpha_i = \alpha_j \Leftrightarrow D(f) = 0$.
+\end{proof}
+Таким образом, вычислив дискриминант мы можем выяснить: есть ли у многочлена кратные корни или нет, а дискриминант, в свою очередь, можно вычислить не зная этих корней, поскольку он выражается в виде многочлена от коэффициентов $\Rightarrow$ надо только найти этот многочлен.
+
+\subsection*{Вычисление дискриминанта}
+Рассмотрим один из способов вычисления Дискриминанта: 
+$$
+	\delta(x_1,\dotsc,x_n) = V(x_1,\dotsc,x_n)^2 = 
+	\begin{vmatrix}
+		1 & 1 &  \dotsc & 1\\
+		x_1 & x_2 & \dotsc & x_n\\
+		\vdots & \vdots & \ddots& \vdots \\
+		x_1^{i-1} & x_2^{i-1} & \dotsc & x_n^{i-1}\\
+		\vdots & \vdots & \ddots& \vdots \\
+		x_1^{n-1} & x_2^{n-1} & \dotsc & x_n^{n-1}\\
+	\end{vmatrix}{\cdot}
+	\begin{vmatrix}
+		1 & x_1 & \dotsc & x_1^{j-1 } & \dotsc & x_1^{n-1}\\
+		1 & x_2 & \dotsc & x_2^{j-1 } & \dotsc & x_2^{n-1}\\
+		\vdots & \vdots & \ddots & \vdots & \ddots & \vdots \\
+		1 & x_n & \dotsc & x_n^{j-1 } & \dotsc & x_n^{n-1}
+	\end{vmatrix} =
+$$
+$$
+	=	
+	\begin{vmatrix}
+		n & s_1 & s_2 & \dotsc & s_{i-1} & \dotsc  & s_{n-1} \\
+		s_1 & s_2 & s_3& \dotsc & s_{i} & \dotsc & s_n \\
+		s_2 & s_3 & s_4 & \dotsc & s_{i+1} & \dotsc & s_{n+1}\\
+		\vdots & \vdots & \vdots & \ddots & \vdots & \ddots & \vdots\\
+		s_{j-1} & s_{j} & s_{j + 1} & \dotsc & s_{i+j - 2} & \dotsc & s_{n+j - 2}\\
+		\vdots & \vdots & \vdots & \ddots & \vdots & \ddots & \vdots\\
+		s_{n-1} & s_{n} & s_{n + 1} & \dotsc & s_{i+n - 2} & \dotsc & s_{2n - 2}\\
+	\end{vmatrix}
+$$
+Заметим, что на каждой побочной диагонали стоят одинаковые суммы и номера сумм при сдвиге вправо или вниз увеличиваются на единицу. Отсюда получаем выражение для дискриминанта:
+$$
+	D(f) = a_n^{2n-2}{\cdot}
+	\begin{vmatrix}
+		n &  \dotsc & s_{i-1}(\alpha_1,\dotsc,\alpha_n) & \dotsc  & s_{n-1}(\alpha_1,\dotsc,\alpha_n) \\
+		\vdots &  \ddots & \vdots & \ddots & \vdots\\
+		s_{j-1}(\alpha_1,\dotsc,\alpha_n) &  \dotsc & s_{i+j - 2}(\alpha_1,\dotsc,\alpha_n) & \dotsc & s_{n+j - 2}(\alpha_1,\dotsc,\alpha_n)\\
+		\vdots &  \ddots & \vdots & \ddots & \vdots\\
+		s_{n-1}(\alpha_1,\dotsc,\alpha_n) &  \dotsc & s_{i+n - 2}(\alpha_1,\dotsc,\alpha_n) & \dotsc & s_{2n - 2}(\alpha_1,\dotsc,\alpha_n)
+	\end{vmatrix}
+$$
+Чтобы выразить дискриминант в виде многочлена от коэффициентов $f(x)$ надо каждую из степенных сумм выразить в виде многочлена от значений элементарных симметрических многочленов: 
+$$
+	\sigma_k(\alpha_1,\dotsc,\alpha_n) = (-1)^k\dfrac{a_{n-k}}{a_n}
+$$
+Соответственно, элементы матрицы выше будут состоять из многочленов таких дробей $\Rightarrow$ домножая определитель на $a_n^{2n-2}$ все знаменатели пропадут и останется многочлен от $a_0,a_1,\dotsc, a_n$, который и будет дискриминантом нашего многочлена $f$.
+
+\end{document}

@@ -1,0 +1,554 @@
+\documentclass[12pt]{article}
+\usepackage[left=1cm, right=1cm, top=2cm,bottom=1.5cm]{geometry} 
+
+\usepackage[parfill]{parskip}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage{enumitem}
+\usepackage[normalem]{ulem}
+\usepackage{amsfonts, amsmath, amsthm, amssymb, mathtools,xcolor}
+\usepackage{blkarray}
+
+\usepackage{tabularx}
+\usepackage{hhline}
+
+\usepackage{accents}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{1.5pt}
+\renewcommand{\footrulewidth}{1pt}
+
+\usepackage{graphicx}
+\usepackage[figurename=Рис.]{caption}
+\usepackage{subcaption}
+\usepackage{float}
+
+%%Наименование папки откуда забирать изображения
+\graphicspath{ {./images/} }
+
+%%Изменение формата для ввода доказательства
+\renewcommand{\proofname}{$\square$  \nopunct}
+\renewcommand\qedsymbol{$\blacksquare$}
+
+%%Изменение отступа на таблицах
+\addto\captionsrussian{%
+	\renewcommand{\proofname}{$\square$ \nopunct}%
+}
+%% Римские цифры
+\newcommand{\RN}[1]{%
+	\textup{\uppercase\expandafter{\romannumeral#1}}%
+}
+
+%% Для удобства записи
+\newcommand{\MR}{\mathbb{R}}
+\newcommand{\MC}{\mathbb{C}}
+\newcommand{\MQ}{\mathbb{Q}}
+\newcommand{\MN}{\mathbb{N}}
+\newcommand{\MZ}{\mathbb{Z}}
+\newcommand{\MTB}{\mathbb{T}}
+\newcommand{\MTI}{\mathbb{I}}
+\newcommand{\MI}{\mathrm{I}}
+\newcommand{\MCI}{\mathcal{I}}
+\newcommand{\MJ}{\mathrm{J}}
+\newcommand{\MH}{\mathrm{H}}
+\newcommand{\MT}{\mathrm{T}}
+\newcommand{\MA}{\mathcal{A}}
+\newcommand{\MCB}{\mathcal{B}}
+\newcommand{\MCC}{\mathcal{C}}
+\newcommand{\MCE}{\mathcal{E}}
+\newcommand{\MU}{\mathcal{U}}
+\newcommand{\MV}{\mathcal{V}}
+\newcommand{\MB}{\mathcal{B}}
+\newcommand{\MF}{\mathcal{F}}
+\newcommand{\MW}{\mathcal{W}}
+\newcommand{\ML}{\mathcal{L}}
+\newcommand{\MP}{\mathcal{P}}
+\newcommand{\VN}{\varnothing}
+\newcommand{\VE}{\varepsilon}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Опр:}
+\newtheorem{rem}{Rm:}
+\newtheorem{prop}{Утв.}
+\newtheorem{exrc}{Упр.}
+\newtheorem{problem}{Задача}
+\newtheorem{lemma}{Лемма}
+\newtheorem{theorem}{Теорема}
+\newtheorem{corollary}{Следствие}
+
+\newenvironment{cusdefn}[1]
+{\renewcommand\thedefn{#1}\defn}
+{\enddefn}
+
+\DeclareRobustCommand{\divby}{%
+	\mathrel{\text{\vbox{\baselineskip.65ex\lineskiplimit0pt\hbox{.}\hbox{.}\hbox{.}}}}%
+}
+%Короткий минус
+\DeclareMathSymbol{\SMN}{\mathbin}{AMSa}{"39}
+%Длинная шапка
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+%Функция знака
+\DeclareMathOperator{\sgn}{sgn}
+
+%Функция ранга
+\DeclareMathOperator{\rk}{\text{rk}}
+\DeclareMathOperator{\diam}{\text{diam}}
+
+
+%Обозначение константы
+\DeclareMathOperator{\const}{\text{const}}
+
+\DeclareMathOperator{\codim}{\text{codim}}
+
+\DeclareMathOperator*{\dsum}{\displaystyle\sum}
+\newcommand{\ddsum}[2]{\displaystyle\sum\limits_{#1}^{#2}}
+
+%Интеграл в большом формате
+\DeclareMathOperator{\dint}{\displaystyle\int}
+\newcommand{\ddint}[2]{\displaystyle\int\limits_{#1}^{#2}}
+\newcommand{\ssum}[1]{\displaystyle \sum\limits_{n=1}^{\infty}{#1}_n}
+
+\newcommand{\smallerrel}[1]{\mathrel{\mathpalette\smallerrelaux{#1}}}
+\newcommand{\smallerrelaux}[2]{\raisebox{.1ex}{\scalebox{.75}{$#1#2$}}}
+
+\newcommand{\smallin}{\smallerrel{\in}}
+\newcommand{\smallnotin}{\smallerrel{\notin}}
+
+\newcommand*{\medcap}{\mathbin{\scalebox{1.25}{\ensuremath{\cap}}}}%
+\newcommand*{\medcup}{\mathbin{\scalebox{1.25}{\ensuremath{\cup}}}}%
+
+\makeatletter
+\newcommand{\vast}{\bBigg@{3.5}}
+\newcommand{\Vast}{\bBigg@{5}}
+\makeatother
+
+%Промежуточное значение для sup\inf, поскольку они имеют разную высоту
+\newcommand{\newsup}{\mathop{\smash{\mathrm{sup}}}}
+\newcommand{\newinf}{\mathop{\mathrm{inf}\vphantom{\mathrm{sup}}}}
+
+%Скалярное произведение
+\newcommand{\inner}[2]{\left\langle #1, #2 \right\rangle }
+\newcommand{\linsp}[1]{\left\langle #1 \right\rangle }
+\newcommand{\linmer}[2]{\left\langle #1 \vert #2\right\rangle }
+
+%Подпись символов снизу
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+
+%% Шапка для букв сверху
+\newcommand{\wte}[1]{\widetilde{#1}}
+\newcommand{\wht}[1]{\widehat{#1}}
+
+%%Трансформация Фурье
+\newcommand{\fourt}[1]{\mathcal{F}\left(#1\right)}
+\newcommand{\ifourt}[1]{\mathcal{F}^{-1}\left(#1\right)}
+
+%%Символ вектора
+\newcommand{\vecm}[1]{\overrightarrow{#1\,}}
+
+%%Пространстов матриц
+\newcommand{\matsq}[1]{\operatorname{Mat}_{#1}}
+\newcommand{\mat}[2]{\operatorname{Mat}_{#1, #2}}
+
+
+%%Взятие в скобки, модули и норму
+\newcommand{\parfit}[1]{\left( #1 \right)}
+\newcommand{\modfit}[1]{\left| #1 \right|}
+\newcommand{\sqparfit}[1]{\left\{ #1 \right\}}
+\newcommand{\normfit}[1]{\left\| #1 \right\|}
+
+%%Функция для обозначения равномерной сходимости по множеству
+\newcommand{\uconv}[1]{\overset{#1}{\rightrightarrows}}
+\newcommand{\uconvm}[2]{\overset{#1}{\underset{#2}{\rightrightarrows}}}
+
+
+%%Функция для обозначения нижнего и верхнего интегралов
+\def\upint{\mathchoice%
+	{\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	\int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+
+%%След матрицы
+\DeclareMathOperator*{\tr}{tr}
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+	\hskip -\arraycolsep
+	\let\@ifnextchar\new@ifnextchar
+	\array{#1}}
+\makeatother
+
+
+%% Переопределение функции хи, чтобы выглядела более приятно
+\makeatletter
+\@ifdefinable\@latex@chi{\let\@latex@chi\chi}
+\renewcommand*\chi{{\@latex@chi\smash[t]{\mathstrut}}} % want only bottom half of \mathstrut
+\makeatletter
+
+\begin{document}
+\lhead{Алгебра-\RN{1}}
+\chead{Тимашев Д.А.}
+\rhead{Лекция - 10}
+\section*{Применение теории определителей}
+	
+\subsection*{Нахождение обратной матрицы}
+
+Пусть $A$ - произвольная квадратная  матрица:
+$$
+	A = 
+	\begin{pmatrix}
+		a_{11} & a_{12} & \dotsc & a_{1n}\\
+		a_{21} & a_{22} & \dotsc & a_{2n}\\
+		\vdots & \vdots & \ddots& \vdots \\
+		a_{n1} & a_{n2} & \dotsc & a_{nn}
+	\end{pmatrix}
+$$
+
+\begin{defn}
+	\uwave{Присоединенной матрицей} к $A$ называется матрица из алгебраических дополнений вида:
+	$$
+		\wht{A} = 
+		\begin{pmatrix}
+			A_{11} & A_{21} & \dotsc & A_{n1}\\
+			A_{12} & A_{22} & \dotsc & A_{n2}\\
+			\vdots & \vdots & \ddots & \vdots \\
+			A_{1n} & A_{2n} & \dotsc & A_{nn} 
+		\end{pmatrix}
+	$$
+	где $\wht{a}_{ij} = A_{ji}$ - алгебраическое дополнение к симметричному элементу $a_{ji} = a^T_{ij}$ исходной матрицы $A$.
+\end{defn}
+
+\begin{theorem}
+	Пусть $A$ - обратима, тогда будет верно:
+	$$
+		A^{-1} = \dfrac{1}{\det{A}}{\cdot}\wht{A}
+	$$
+\end{theorem}
+\begin{proof}
+	Рассмотрим матрицу $A{\cdot}\wht{A}$, её элемент на месте $(i,j)$:
+	$$
+		a_{i1}{\cdot}\wht{a}_{1j} + a_{i2}{\cdot}\wht{a}_{2j} + \dotsc + a_{in}{\cdot}\wht{a}_{nj} = a_{i1}{\cdot}A_{j1} + a_{i2}{\cdot}A_{j2} + \dotsc + a_{in}{\cdot}A_{jn} 
+	$$
+	Если $i = j$, то эта сумма есть разложение по $i$-ой строке определителя матрицы $A$ и равна $\det{A}$. Если же $i \neq j$, то эта сумма есть фальшивое разложение определителя и равна $0$. Тогда:
+	$$
+		A{\cdot}\wht{A} = 
+		\begin{pmatrix}
+			\det{A} & 0 & \dotsc & 0\\
+			0 & \det{A} & \dotsc & 0\\
+			\vdots & \vdots & \ddots & \vdots \\
+			0 & 0 & \dotsc & \det{A}
+		\end{pmatrix} = \det{A}{\cdot}E
+	$$
+	Аналогично для $\wht{A}{\cdot}A$, её элемент на месте $(i,j)$:
+	$$
+		\wht{a}_{i1}{\cdot}a_{1j} + \wht{a}_{i2}{\cdot}a_{2j} + \dotsc + \wht{a}_{in}{\cdot}a_{nj} = A_{1i}{\cdot}a_{1j} + A_{2i}{\cdot}a_{2j} + \dotsc + A_{ni}{\cdot}a_{nj} = 
+		\left\{
+			\begin{array}{rl}
+				\det{A}, & i = j\\
+				0, & i \neq j
+			\end{array}
+		\right.
+	$$
+	где опять, если $i=j$, то получаем разложение по $i$-ому столбцу, если $i\neq j$, то получаем фальшивое разложение по столбцу. Тогда:
+	$$
+		\wht{A}{\cdot}A = 		
+		\begin{pmatrix}
+			\det{A} & 0 & \dotsc & 0\\
+			0 & \det{A} & \dotsc & 0\\
+			\vdots & \vdots & \ddots & \vdots \\
+			0 & 0 & \dotsc & \det{A}
+		\end{pmatrix} = \det{A}{\cdot}E
+	$$
+	Пусть $A$ - обратима $\Rightarrow$ невырождена $\Rightarrow \det{A} \neq 0$. Тогда, каждую формулу поделим на $\det{A}$ и получим:
+	$$
+		A{\cdot}\dfrac{\wht{A}}{\det{A}} = \dfrac{\wht{A}}{\det{A}}{\cdot}A = E \Rightarrow A^{-1} = \dfrac{\wht{A}}{\det{A}}
+	$$
+\end{proof}
+
+\textbf{Пример}: пусть $A$ - квадратная матрица $2 \times 2$, тогда:
+$$
+	A = \begin{pmatrix}
+			a & b \\
+			c & d
+		\end{pmatrix} \Rightarrow 
+		\wht{A} = 
+		\begin{pmatrix}
+			d & -b \\
+			-c & a
+		\end{pmatrix} \Rightarrow |A| = ad - bc \Rightarrow A^{-1} = 
+		\begin{pmatrix}
+			\tfrac{d}{ad - bc} & \tfrac{-b}{ad - bc}\\
+			\tfrac{-c}{ad - bc} & \tfrac{a}{ad - bc}
+		\end{pmatrix}
+$$
+
+\subsection*{Метод Крамера}
+
+Рассмотрим квадратную СЛУ (число уравнений $=$ числу неизвестных):
+$$
+	\left\{
+		\begin{matrix}
+			a_{11}x_1 & + & \dotsc & + & a_{1n}x_n & = & b_1 \\
+			a_{21}x_1 & + & \dotsc & + & a_{2n}x_n & = & b_2 \\
+			\vdots & \vdots & \ddots & \vdots & \vdots & \vdots & \vdots \\
+			a_{n1}x_1 & + & \dotsc & + & a_{nn}x_n & = & b_n \\
+		\end{matrix}
+	\right.
+$$
+Запишем её в матричном виде:
+$$
+	A{\cdot}x = b, \, A = 
+	\begin{pmatrix}
+		a_{11} & \dotsc & a_{1n}\\
+		\vdots & \ddots & \vdots \\
+		a_{n1} & \dotsc & a_{nn}
+	\end{pmatrix}, \, x = 
+	\begin{pmatrix}
+		x_1 \\
+		\vdots \\
+		x_n
+	\end{pmatrix}, \, 
+	b = \begin{pmatrix}
+		b_1 \\
+		\vdots \\
+		b_n
+	\end{pmatrix}
+$$
+Мы умеем решать системы методом Гаусса, правда у него есть большой недостаток в том, что он не дает явных формул. Метод решения квадратной СЛУ, называемый \uwave{методом Крамера}, позволяет дать явные формулы для решения квадратной СЛУ. Введем обозначения:
+$$
+	\Delta = |A| = \det{A}, \quad \Delta_j = 
+	\begin{vmatrix}
+		a_{11} & a_{12} & \dotsc & a_{1j-1} & b_1 & a_{1 j+ 1} & \dotsc & a_{1n}\\
+		a_{21} & a_{22} & \dotsc & a_{2j-1} & b_2 & a_{2 j+ 1} & \dotsc & a_{2n}\\
+		\vdots & \vdots & \ddots & \vdots   & \vdots& \vdots   & \ddots & \vdots \\
+		a_{n1} & a_{n2} & \dotsc & a_{nj-1} & b_n & a_{n j+ 1} & \dotsc & a_{nn}\\
+	\end{vmatrix}, \, \forall j = \overline{1,n}
+$$
+\begin{prop}(\textbf{правило Крамера})
+	\begin{enumerate}[label=\arabic*)]
+		\item \textbf{Критерий определенности}: Квадратная СЛУ определена $\Leftrightarrow \Delta \neq 0$;
+		\item \textbf{Условие несовместности}: Если $\Delta = 0$, но $\exists \, j \in \{1,\dotsc,n\}\colon \Delta_j \neq 0$, то тогда система несовместна;
+		\item \textbf{Формулы Крамера}: В случае, если СЛУ определена (т.е. имеет единственное решение) её единственное решение имеет вид:
+		$$
+			x_j = \dfrac{\Delta_j}{\Delta}, \, \forall j = \overline{1,n}
+		$$
+		эти формулы называются \uwave{формулами Крамера};
+	\end{enumerate}
+\end{prop}
+\begin{rem}
+	В случае если $\Delta = 0$ и $\forall j =\overline{1,n}, \, \Delta_j = 0$ правило Крамера ничего не говорит.
+\end{rem}
+\begin{proof}
+	Заметим, что $A$ это матрица $n\times n$, а расширенная матрица $\wte{A}$ это матрица $n \times n+1$, тогда мы получаем:
+	$$
+		\rk{A} \leq \rk{\wte{A}}\leq n
+	$$
+	\begin{enumerate}[label=\arabic*)]
+		\item \textbf{Критерий определенности}: у нас есть этот критерий в терминах рангов:
+		$$
+			\text{СЛУ определена} \Leftrightarrow \rk{A} = \rk{\wte{A}} = n \Leftrightarrow \rk{A}
+		$$
+		где последнее следует из нашего замечания выше. Мы знаем, что $\rk{A} = n$ означает, что матрица невырождена, тогда:
+		$$
+			\rk{A} = n \Leftrightarrow \det{A} = \Delta \neq 0
+		$$
+		\item \textbf{Условие несовместности}: по условию $\Delta = 0 \Rightarrow \rk{A} < n$, вместе с этим $\exists \, j \in \{1,\dotsc,n\}\colon \Delta_j \neq 0$, тогда соответствующая матрица невырождена $\Rightarrow$ её столбцы линейно независимы:
+		$$
+			\rk{\left\{A^{(1)}, \dotsc, A^{(j-1)}, b, A^{(j+1)}, \dotsc, A^{(n)}\right\}} = n 
+		$$
+		Если мы добавим к этой системе $j$-ый столбец матрицы $A$, то ранг может только увеличиться:
+ 		$$
+			\rk{\left\{A^{(1)}, \dotsc, A^{(j-1)}, b, A^{(j+1)}, \dotsc, A^{(n)}\right\}} \leq \rk{\left\{A^{(1)}, \dotsc, A^{(j)}, \dotsc, A^{(n)}, b\right\}} = \rk{\wte{A}} \Rightarrow \rk{\wte{A}} \geq n
+		$$
+		А в силу нашего замечания, ранг расширенной матрицы не может быть больше $n$, тогда: 
+		$$
+			\rk{\wte{A}} =n > \rk{A}
+		$$ 
+		Следовательно, по теореме Кронекера-Капелли эта СЛУ несовместна;
+		\item \textbf{Формулы Крамера}: по условию $\Delta \neq 0 \Rightarrow \exists \, A^{-1} = \tfrac{\wht{A}}{\det{A}}$, тогда:
+		$$
+			Ax = b \Rightarrow A^{-1}{\cdot}Ax = E{\cdot}x = x = A^{-1}{\cdot}b = \dfrac{\wht{A}}{\det{A}}{\cdot}b
+		$$
+		$$
+			\forall j = \overline{1,n}, \, x_j = \dfrac{\wht{a}_{j1}{\cdot}b_1 + \wht{a}_{j2}{\cdot}b_2 + \dotsc + \wht{a}_{jn}{\cdot}b_n}{\Delta} = \dfrac{b_1{\cdot}A_{1j} + b_2{\cdot}A_{2j} + \dotsc + b_n{\cdot}A_{nj}}{\Delta}
+		$$
+		Заметим, что в числителе записано разложение $\Delta_j$ по $j$-ому столбцу, тогда:
+		$$
+			\forall j = \overline{1,n}, \, x_j =  \dfrac{b_1{\cdot}A_{1j} + b_2{\cdot}A_{2j} + \dotsc + b_n{\cdot}A_{nj}}{\Delta} = \dfrac{\Delta_j}{\Delta}
+		$$
+	\end{enumerate}
+\end{proof}
+
+\subsection*{Вычисление ранга матрицы}
+Рассмотрим определения миноров в произвольной матрице $A$ размера $m \times n$.
+\begin{defn}
+	\uwave{Минором порядка $k$} матрицы $A$, стоящего на пересечении строк с номерами $i_1,\dotsc,i_k$ и столбцов с номерами $j_1,\dotsc, j_k$, называется определитель соответствующей подматрицы:
+	$$
+		M_{i_1 \dotsc i_k}^{j_1 \dotsc j_k} = 
+		\begin{vmatrix}
+			a_{i_1 j_1} & a_{i_1 j_2} & \dotsc & a_{i_1 j_k}\\
+			a_{i_2 j_1} & a_{i_2 j_2} & \dotsc & a_{i_2 j_k}\\
+			\vdots & \vdots & \ddots & \vdots\\
+			a_{i_k j_1} & a_{i_k j_2} & \dotsc & a_{i_k j_k}\\
+		\end{vmatrix} = |\wht{A}|, \quad 
+		\begin{pmatrix}
+			\cdot & \cdot & \dotsc & \cdot  & \cdot& \dotsc & \cdot\\
+			\cdot & \color{red}a_{i_1 j_1} & \dotsc & \color{red}a_{i_1 j_2}  & \color{red}a_{i_1 j_k} & \dotsc & \cdot\\
+			\cdot & \color{red}a_{i_2 j_1} & \dotsc & \color{red}a_{i_2 j_2}  & \color{red}a_{i_2 j_k} & \dots & \cdot\\
+			\vdots & \vdots & \ddots & \vdots  & \vdots& \dotsc & \cdot\\
+			\cdot & \color{red}a_{i_k j_1} & \dotsc & \color{red}a_{i_k j_2}  & \color{red}a_{i_k j_k} & \dotsc & \cdot\\
+			\vdots & \vdots & \ddots & \vdots  & \vdots& \ddots & \vdots\\
+			\cdot & \cdot & \dotsc & \cdot  & \cdot & \dotsc & \cdot
+		\end{pmatrix}
+	$$
+\end{defn}
+\begin{defn}
+	\uwave{Главным минором порядка $k$} матрицы $A$ называется минор порядка $k$ такой, что номера столбцов и строк соответствующей подматрицы совпадают: 
+	$$
+		i_1 = j_1, \dotsc, i_k = j_k, \, M_{i_1\dotsc i_k}^{i_1\dotsc i_k} = 	\begin{vmatrix}
+			a_{i_1 i_1} & a_{i_1 i_2} & \dotsc & a_{i_1 i_k}\\
+			a_{i_2 i_1} & a_{i_2 i_2} & \dotsc & a_{i_2 i_k}\\
+			\vdots & \vdots & \ddots & \vdots\\
+			a_{i_k i_1} & a_{i_k i_2} & \dotsc & a_{i_k i_k}\\
+		\end{vmatrix} , \quad
+		\begin{pmatrix}
+			\cdot & \cdot & \dotsc & \cdot & \dotsc & \cdot& \dotsc & \cdot\\
+			\cdot & \color{red}a_{i_1 i_1} & \dotsc & \color{red}a_{i_1 i_2} & \dotsc & \color{red}a_{i_1 i_k} & \dotsc & \cdot\\
+			\vdots & \vdots & \ddots & \vdots & \ddots & \vdots& \ddots & \vdots\\
+			\cdot & \color{red}a_{i_2 i_1} & \dotsc & \color{red}a_{i_2 i_2} & \dotsc & \color{red}a_{i_2 i_k} & \dots & \cdot\\
+			\vdots & \vdots & \ddots & \vdots & \ddots & \vdots& \dotsc & \cdot\\
+			\cdot & \color{red}a_{i_k i_1} & \dotsc & \color{red}a_{i_k i_2} & \dotsc & \color{red}a_{i_k i_k} & \dotsc & \cdot\\
+			\vdots & \vdots & \ddots & \vdots & \ddots & \vdots& \ddots & \vdots\\
+			\cdot & \cdot & \dotsc & \cdot & \dotsc & \cdot & \dotsc & \cdot
+		\end{pmatrix}
+	$$
+\end{defn}
+\begin{defn}
+	\uwave{Угловым минором порядка $k$} матрицы $A$ называется главный минор порядка $k$ такой, что номера столбцов и строк соответствующей подматрицы идут по порядку от $1$ до $k$: 
+	$$
+		i_1 = j_1 = 1, \dotsc, i_k = j_k = k, \, M_{1\dotsc k}^{1\dotsc k} = 	\begin{vmatrix}
+			a_{11} & a_{12} & \dotsc & a_{1k}\\
+			a_{21} & a_{22} & \dotsc & a_{2k}\\
+			\vdots & \vdots & \ddots & \vdots\\
+			a_{k1} & a_{k2} & \dotsc & a_{kk}\\
+		\end{vmatrix} , \quad
+		\begin{pmatrix}
+			\color{red}a_{11} & \color{red}a_{12} & \dotsc & \color{red}a_{1k} & \dotsc & \cdot\\
+			\color{red}a_{21} & \color{red}a_{22} & \dotsc & \color{red}a_{2k} & \dotsc & \cdot\\
+			\vdots & \vdots & \ddots & \vdots & \ddots & \vdots\\
+			\color{red}a_{k1} & \color{red}a_{k2} & \dotsc & \color{red}a_{kk} & \dotsc & \cdot\\
+			\vdots & \vdots & \ddots & \vdots & \ddots & \vdots\\
+			\cdot & \cdot & \dotsc & \cdot & \dotsc &\cdot
+		\end{pmatrix}
+	$$
+\end{defn}
+
+\begin{theorem}(\textbf{о ранге матрицы})
+	Ранг произвольной матрицы равен наибольшему порядку её ненулевого минора.
+\end{theorem}
+
+\begin{proof}
+	Пусть $r$ - наибольший порядок ненулевого минора в $A$:
+	$$
+		M_{i_1 \dotsc i_r}^{j_1 \dotsc j_r} \neq 0
+	$$
+	Переставим строки и столбцы в $A$ (такая операция может повлиять на миноры только сменой знака) так, чтобы этот минор был сосредоточен в верхнем левом углу матрицы:
+	$$
+		\begin{pmatrix}[ccc|ccc]
+			& & & a_{1 r+ 1} &\dotsc & a_{1n}\\
+			& \overline{A} & & \vdots & \ddots & \vdots \\
+			& & & a_{r r + 1} & \dotsc & a_{r n}\\ \hline
+			a_{r+1 1} & \dotsc & a_{r + 1 r} & a_{r+1 r + 1} & \dotsc & a_{r+1 n}\\
+			\vdots & \ddots & \vdots & \vdots & \ddots & \vdots \\
+			a_{m1} & \dotsc & a_{m r} & a_{m r+1} & \dotsc & a_{mn}			 
+		\end{pmatrix}, \quad M_{1 \dotsc r}^{1 \dotsc r} = \det{\overline{A}}\neq 0
+	$$
+	следовательно $\overline{A}$ - невырождена $\Rightarrow$ её строки линейно независимы. Введем обозначение:
+	$$
+		\forall i = 1,\dotsc,m , \, \overline{A}_i = (a_{i1}, \dotsc , a_{ir}) \in \MR^r
+	$$
+	Тогда $\overline{A}_1, \dotsc, \overline{A}_r$ - линейно независимы и их $r$ штук $\Rightarrow$ они образуют базис $\MR^r$. Тогда:
+	$$
+		\forall i > r, \, \exists! \, \lambda_1, \dotsc, \lambda_r \colon \overline{A}_i = \lambda_1 \overline{A}_1 + \dotsc + \lambda_r \overline{A}_r 
+	$$
+	Строки $A_1,\dotsc,A_r$ тем более линейно независимы, поскольку иначе:
+	$$
+		\exists \, \mu_1, \dotsc, \mu_r \colon \mu_i \neq 0, \,  \mu_1 A_1 + \dotsc \mu_r A_r = 0 \Rightarrow \mu_1 \overline{A}_1 + \dotsc + \mu_r \overline{A}_r =0  
+	$$
+	Добавим к первым $r$ строкам и первым $r$ столбцам ещё $i$-ую строку и $j$-ый столбец. Тогда на пересечении этих строк и столбцов мы получим минор порядка $r+1$, называемый \uwave{окаймляющим} для исходного:
+	$$
+		\begin{pmatrix}[ccc|ccccc]
+			& & & a_{1 r+ 1} &\dotsc & a_{1j} & \dotsc & a_{1n}\\
+			& \overline{A} & & \vdots & \ddots & \vdots & \ddots& \vdots \\
+			& & & a_{r r + 1} & \dotsc & a_{r j} & \dotsc & a_{r n} \\ \hline
+			a_{r+1 1} & \dotsc & a_{r + 1 r} & a_{r+1 r + 1} & \dotsc & a_{r + 1j} & \dotsc & a_{r+1 n}\\
+			\vdots & \ddots & \vdots & \vdots & \ddots & \vdots & \ddots& \vdots \\
+			a_{i1} & \dotsc & a_{i r} & a_{i r+1} & \dotsc & a_{i j}& \dotsc & a_{in}	\\
+			\vdots & \ddots & \vdots & \vdots & \ddots & \vdots & \ddots& \vdots \\
+			a_{m1} & \dotsc & a_{m r} & a_{m r+1} & \dotsc & a_{m j}& \dotsc & a_{mn}			 
+		\end{pmatrix}, \quad \overline{\overline{A}} = 
+		\begin{pmatrix}[ccc|c]
+			& & & a_{1 j} \\
+			& \overline{A} & & \vdots \\
+			& & & a_{r j} \\ \hline
+			a_{i1} & \dotsc & a_{ir} & a_{ij}
+		\end{pmatrix}
+	$$
+	Он равен нулю в силу того, что наибольший порядок ненулевого минора равен $r$:
+	$$
+		\forall i,j > r, \, M_{1\dotsc r i}^{1\dotsc r j} = \det{\overline{\overline{A}}} = 0
+	$$
+	Строки $\overline{\overline{A}}_1, \dotsc, \overline{\overline{A}}_r$ - линейно независимы, иначе строки $\overline{A}_1, \dotsc, \overline{A}_r$ были бы линейно зависимы. При этом все строки $\overline{\overline{A}}_1, \dotsc, \overline{\overline{A}}_r, \overline{\overline{A}}_{r+1}$ - линейно зависимы, так как определитель равен $0$. По свойствам линейной зависимости отсюда следует:
+	$$
+		\overline{\overline{A}}_{r+1} = \lambda'_1{\cdot}\overline{\overline{A}}_{1} + \dotsc + \lambda'_r{\cdot}\overline{\overline{A}}_{r} \Rightarrow  \overline{A}_{r+1} = \lambda'_1{\cdot}\overline{A}_{1} + \dotsc + \lambda'_r{\cdot}\overline{A}_{r}
+	$$
+	где последнее верно при отбрасывании последнего столбца. Но в силу однозначности разложения коротких строк по базису, коэффициенты будут такими же, как и в этом разложении:
+	$$
+		\lambda'_1 = \lambda_1, \dotsc, \lambda'_r = \lambda_r
+	$$
+	Следовательно, если мы добавляем $i$-ую строку к матрице $\overline{A}$ и любой столбец $j$, то строка $i$ будет выражаться через первые $r$ строк всегда с одними и теми же коэффициентами. Таким образом:
+	$$
+		\forall j = 1,\dotsc, n, \, a_{ij} = \lambda_1 a_{1j} + \lambda_2 a_{2j} + \dotsc + \lambda_r a_{rj}
+	$$
+	Это будет верно $\forall j = 1,\dotsc, n$, поскольку $\lambda_1,\dotsc, \lambda_r$ от выбора столбца $j$ не зависят, тогда:
+	$$
+		\forall i > r, \, A_i = \lambda_1 A_1 + \lambda_2 A_2 + \dotsc + \lambda_r A_r
+	$$
+	В результате, $\{A_1,\dotsc, A_r\}$ это базис системы строк матрицы $A$ и тогда $\rk{A} = r$.
+\end{proof}
+
+\begin{rem}
+	Доказательство теоремы показывает, что ранг матрицы равен $r$, если $\exists \, M_{i_1 \dotsc i_r}^{j_1 \dotsc j_r} \neq 0$ такой, что:
+	$$
+		\forall i \neq i_1, \dotsc, i_r, \, \forall j \neq j_1 ,\dotsc, j_r,\, M_{i_1 \dotsc i_r i}^{j_1 \dotsc j_r j} = 0
+	$$
+	то есть, все окаймляющие миноры равны нулю.
+\end{rem}
+Из этого замечания получается метод нахождения ранга матрицы, который теоретически бывает полезен (хотя и не очень полезен на практике).
+
+\subsection*{Метод окаймляющих миноров}
+
+$1)$ Если $A = 0$, то $\rk{A} = 0$.
+
+$2)$ Если $A \neq 0$, то возьмем в ней $a_{i_1 j_1} \neq 0$, это минор первого порядка, отличный от нуля. Рассмотрим ещё какую-нибудь строку $i$ и какой-нибудь столбец $j$. Посмотрим на окаймляющий минор:
+$$
+	\forall i \neq i_1, \, \forall j \neq j_1, \, M_{i_1 i}^{j_1 j} = ?
+$$
+Если все такие миноры равны нулю, то $\rk{A} = 1$. Если же нашелся окаймляющий минор не равный нулю, то возьмем его для следующего шага.
+
+$3)$ Обозначим минор с шага $2)$ как $M_{i_1 i_2}^{j_1 j_2} \neq 0$. Рассмотрим ещё какую-нибудь строку $i$ и какой-нибудь столбец $j$. Посмотрим на окаймляющий минор:
+$$
+	\forall i \neq i_1,i_2, \, \forall j \neq j_1,j_2, \, M_{i_1 i_2 i}^{j_1 j_2 j} = ?
+$$
+Если все такие миноры равны нулю, то $\rk{A} = 2$. Если же нашелся окаймляющий минор не равный нулю, то возьмем его для следующего шага. И так далее. 
+
+В конце получим ненулевой минор порядка $r$ такой, что все окаймляющие миноры $r+1$-го порядка равны нулю: 
+$$
+	\forall i \neq i_1,i_2, \, \forall j \neq j_1,j_2, \, M_{i_1 \dotsc i_r i}^{j_1 \dotsc j_r j} =0
+$$
+Тогда можем сделать вывод, что $\rk{A} = r$.
+
+\end{document}

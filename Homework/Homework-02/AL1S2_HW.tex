@@ -1,0 +1,806 @@
+\documentclass[12pt]{article}
+\usepackage[left=1cm, right=1cm, top=2cm,bottom=1.5cm]{geometry} 
+
+\usepackage[parfill]{parskip}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage{enumitem}
+\usepackage[normalem]{ulem}
+\usepackage{amsfonts, amsmath, amsthm, amssymb, mathtools,xcolor}
+\usepackage{blkarray}
+
+\usepackage{tabularx}
+\usepackage{hhline}
+
+\usepackage{accents}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{1.5pt}
+\renewcommand{\footrulewidth}{1pt}
+
+\usepackage{graphicx}
+\usepackage[figurename=Рис.]{caption}
+\usepackage{subcaption}
+\usepackage{float}
+
+%Добавление русской азбуки
+\AddEnumerateCounter{\asbuk}{\russian@alph}{щ}
+
+%%Наименование папки откуда забирать изображения
+\graphicspath{ {./images/} }
+
+%%Изменение формата для ввода доказательства
+\renewcommand{\proofname}{$\square$  \nopunct}
+\renewcommand\qedsymbol{$\blacksquare$}
+
+%%Изменение отступа на таблицах
+\addto\captionsrussian{%
+	\renewcommand{\proofname}{$\square$ \nopunct}%
+}
+%% Римские цифры
+\newcommand{\RN}[1]{%
+	\textup{\uppercase\expandafter{\romannumeral#1}}%
+}
+
+%% Для удобства записи
+\newcommand{\MR}{\mathbb{R}}
+\newcommand{\MC}{\mathbb{C}}
+\newcommand{\MQ}{\mathbb{Q}}
+\newcommand{\MN}{\mathbb{N}}
+\newcommand{\MZ}{\mathbb{Z}}
+\newcommand{\MTB}{\mathbb{T}}
+\newcommand{\MTI}{\mathbb{I}}
+\newcommand{\MI}{\mathrm{I}}
+\newcommand{\MCI}{\mathcal{I}}
+\newcommand{\MJ}{\mathrm{J}}
+\newcommand{\MH}{\mathrm{H}}
+\newcommand{\MT}{\mathrm{T}}
+\newcommand{\MU}{\mathcal{U}}
+\newcommand{\MV}{\mathcal{V}}
+\newcommand{\MB}{\mathcal{B}}
+\newcommand{\MF}{\mathcal{F}}
+\newcommand{\MW}{\mathcal{W}}
+\newcommand{\ML}{\mathcal{L}}
+\newcommand{\MP}{\mathcal{P}}
+\newcommand{\VN}{\varnothing}
+\newcommand{\VE}{\varepsilon}
+\newcommand{\dx}{\, dx}
+\newcommand{\dy}{\, dy}
+\newcommand{\dz}{\, dz}
+\newcommand{\dd}{\, d}
+
+
+\theoremstyle{definition}
+\newtheorem{defn}{Опр:}
+\newtheorem{rem}{Rm:}
+\newtheorem{prop}{Утв.}
+\newtheorem{exrc}{Упр.}
+\newtheorem{problem}{Задача}
+\newtheorem{lemma}{Лемма}
+\newtheorem{theorem}{Теорема}
+\newtheorem{corollary}{Следствие}
+
+\newenvironment{cusdefn}[1]
+{\renewcommand\thedefn{#1}\defn}
+{\enddefn}
+
+\DeclareRobustCommand{\divby}{%
+	\mathrel{\text{\vbox{\baselineskip.65ex\lineskiplimit0pt\hbox{.}\hbox{.}\hbox{.}}}}%
+}
+\DeclareRobustCommand{\ndivby}{\mkern-1mu\not\mathrel{\mkern4.5mu\divby}\mkern1mu}
+
+
+%Короткий минус
+\DeclareMathSymbol{\SMN}{\mathbin}{AMSa}{"39}
+%Длинная шапка
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+%Функция знака
+\DeclareMathOperator{\sgn}{sgn}
+
+%Функция ранга
+\DeclareMathOperator{\rk}{\text{rk}}
+\DeclareMathOperator{\diam}{\text{diam}}
+
+
+%Обозначение константы
+\DeclareMathOperator{\const}{\text{const}}
+
+\DeclareMathOperator{\codim}{\text{codim}}
+
+\DeclareMathOperator*{\dsum}{\displaystyle\sum}
+\newcommand{\ddsum}[2]{\displaystyle\sum\limits_{#1}^{#2}}
+
+%Интеграл в большом формате
+\DeclareMathOperator{\dint}{\displaystyle\int}
+\newcommand{\ddint}[2]{\displaystyle\int\limits_{#1}^{#2}}
+\newcommand{\ssum}[1]{\displaystyle \sum\limits_{n=1}^{\infty}{#1}_n}
+
+\newcommand{\smallerrel}[1]{\mathrel{\mathpalette\smallerrelaux{#1}}}
+\newcommand{\smallerrelaux}[2]{\raisebox{.1ex}{\scalebox{.75}{$#1#2$}}}
+
+\newcommand{\smallin}{\smallerrel{\in}}
+\newcommand{\smallnotin}{\smallerrel{\notin}}
+
+\newcommand*{\medcap}{\mathbin{\scalebox{1.25}{\ensuremath{\cap}}}}%
+\newcommand*{\medcup}{\mathbin{\scalebox{1.25}{\ensuremath{\cup}}}}%
+
+\makeatletter
+\newcommand{\vast}{\bBigg@{3.5}}
+\newcommand{\Vast}{\bBigg@{5}}
+\makeatother
+
+%Промежуточное значение для sup\inf, поскольку они имеют разную высоту
+\newcommand{\newsup}{\mathop{\smash{\mathrm{sup}}}}
+\newcommand{\newinf}{\mathop{\mathrm{inf}\vphantom{\mathrm{sup}}}}
+
+%Скалярное произведение
+\newcommand{\inner}[2]{\left\langle #1, #2 \right\rangle }
+\newcommand{\linsp}[1]{\left\langle #1 \right\rangle }
+\newcommand{\linmer}[2]{\left\langle #1 \vert #2\right\rangle }
+
+%Подпись символов снизу
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+
+%% Шапка для букв сверху
+\newcommand{\wte}[1]{\widetilde{#1}}
+\newcommand{\wht}[1]{\widehat{#1}}
+\newcommand{\ovl}[1]{\overline{#1}}
+
+%%Трансформация Фурье
+\newcommand{\fourt}[1]{\mathcal{F}\left(#1\right)}
+\newcommand{\ifourt}[1]{\mathcal{F}^{-1}\left(#1\right)}
+
+%%Символ вектора
+\newcommand{\vecm}[1]{\overrightarrow{#1\,}}
+
+%%Пространстов матриц
+\newcommand{\matsq}[1]{\operatorname{Mat}_{#1}}
+\newcommand{\mat}[2]{\operatorname{Mat}_{#1, #2}}
+
+%Оператор для действ и мнимых чисел
+\DeclareMathOperator{\IM}{\operatorname{Im}}
+\DeclareMathOperator{\RE}{\operatorname{Re}}
+\DeclareMathOperator{\li}{\operatorname{li}}
+\DeclareMathOperator{\GL}{\operatorname{GL}}
+\DeclareMathOperator{\SL}{\operatorname{SL}}
+\DeclareMathOperator{\Char}{\operatorname{char}}
+\DeclareMathOperator\Arg{Arg}
+
+%Делимость чисел
+\newcommand{\modn}[3]{#1 \equiv #2 \; (\bmod \; #3)}
+
+
+%%Взятие в скобки, модули и норму
+\newcommand{\parfit}[1]{\left( #1 \right)}
+\newcommand{\modfit}[1]{\left| #1 \right|}
+\newcommand{\sqparfit}[1]{\left\{ #1 \right\}}
+\newcommand{\normfit}[1]{\left\| #1 \right\|}
+
+%%Функция для обозначения равномерной сходимости по множеству
+\newcommand{\uconv}[1]{\overset{#1}{\rightrightarrows}}
+\newcommand{\uconvm}[2]{\overset{#1}{\underset{#2}{\rightrightarrows}}}
+
+
+%%Функция для обозначения нижнего и верхнего интегралов
+\def\upint{\mathchoice%
+	{\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	\int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+
+%%След матрицы
+\DeclareMathOperator*{\tr}{tr}
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+	\hskip -\arraycolsep
+	\let\@ifnextchar\new@ifnextchar
+	\array{#1}}
+\makeatother
+
+
+%% Переопределение функции хи, чтобы выглядела более приятно
+\makeatletter
+\@ifdefinable\@latex@chi{\let\@latex@chi\chi}
+\renewcommand*\chi{{\@latex@chi\smash[t]{\mathstrut}}} % want only bottom half of \mathstrut
+\makeatletter
+
+\setcounter{MaxMatrixCols}{20}
+
+\begin{document}
+\lhead{Алгебра-\RN{1}}
+\chead{Канунников А.Л.}
+\rhead{Семинар - 2: ДЗ}
+\textbf{ДЗ}: $20.8$б, $20.10$б, $21.1$влух, $21.2$вж, $21.9$вг, $21.10$, $22.1$, $22.2$, $22.5$, $22.6$, $22.7$aвзио
+\section*{Комплексные числа в тригонометрической форме}
+\begin{problem}(\textbf{К21.1}) Найти тригонометрическую форму чисал:
+	\begin{enumerate}[label=\asbuk*)]
+		\item $5$;
+		\begin{proof}
+			$5 = 5(1 + i{\cdot}0) = 5(\cos0 + i\sin0)$;
+		\end{proof}
+		\item $i$;
+		\begin{proof}
+			$i = 1(0 + i{\cdot}1) = 1\left(\cos\dfrac{\pi}{2} + i\sin{\dfrac{\pi}{2}}\right)$;
+		\end{proof}
+		\item $-2$;
+		\begin{proof}
+			$-2 = 2(-1 + i{\cdot}0) = 2(\cos\pi + i\sin\pi)$;
+		\end{proof}
+		\item $-3i$;
+		\begin{proof}
+			$-3i = 3{\cdot}(0 + i{\cdot}(-1)) = 3\left(\cos\dfrac{3\pi}{2} + i\sin\dfrac{3\pi}{2}\right)$;
+		\end{proof}
+		\item $1 + i$;
+		\begin{proof}
+			$1 + i = \sqrt{2}\left(\cos\dfrac{\pi}{4} + i \sin\dfrac{\pi}{4}\right)$;
+		\end{proof}
+		\item $1 - i$;
+		\begin{proof}
+			$1 - i = \sqrt{2}\left(\dfrac{\sqrt{2}}{2} -i\dfrac{\sqrt{2}}{2}\right) = \sqrt{2}\left(\cos\dfrac{3\pi}{4} + i\sin\dfrac{3\pi}{4}\right)$;
+		\end{proof}
+		\item $1 + i\sqrt{3}$;
+		\begin{proof}
+			$1 + i\sqrt{3} = 2\left(\dfrac{1}{2} + i\dfrac{\sqrt{3}}{2}\right) = 2\left(\cos\dfrac{\pi}{3} + i\sin\dfrac{\pi}{3}\right)$;
+		\end{proof}
+		\item $-1 + \sqrt{3}$;
+		\begin{proof}
+			$-1 + i\sqrt{3} = 2\left(\cos\dfrac{2\pi}{3} + i \sin\dfrac{2\pi}{3}\right)$;
+		\end{proof}
+		\item $-1-i\sqrt{3}$;
+		\begin{proof}
+			$-1-i\sqrt{3} = 2\left(\cos\dfrac{4\pi}{3} + i\sin\dfrac{4\pi}{3}\right)$;
+		\end{proof}
+		\item $1 -i\sqrt{3}$;
+		\begin{proof}
+			$1 - i\sqrt{3} = 2\left(\cos\dfrac{5\pi}{3} + i\sin\dfrac{5\pi}{3}\right)$;
+		\end{proof}
+		\item $\sqrt{3} + i$;
+		\begin{proof}
+			$\sqrt{3} + i = 2\left(\dfrac{\sqrt{3}}{2} + i \dfrac{1}{2}\right) = 2\left(\cos\dfrac{\pi}{6} + i\sin\dfrac{\pi}{6}\right)$;
+		\end{proof}
+		\item $-\sqrt{3} + i$;
+		\begin{proof}
+			$-\sqrt{3} + i = 2\left(-\dfrac{\sqrt{3}}{2}+ i \dfrac{1}{2}\right) =2 \left(\cos\dfrac{5\pi}{6} + i\sin\dfrac{5\pi}{6}\right)$;
+		\end{proof}
+		\item $-\sqrt{3} -i$;
+		\begin{proof}
+			$-\sqrt{3} -i = -(\sqrt{3} + i) = -2\left(\cos\dfrac{\pi}{6} + i\sin\dfrac{\pi}{6}\right) = 2\left(\cos\dfrac{7\pi}{6} + i\sin\dfrac{7\pi}{6}\right)$;
+		\end{proof}
+		\item $\sqrt{3} - i$;
+		\begin{proof}
+			$\sqrt{3} - i = 2\left(\dfrac{\sqrt{3}}{2} - i\dfrac{1}{2}\right) = 2\left(\cos\dfrac{11\pi}{6} + i\sin\dfrac{11\pi}{6}\right)$;
+		\end{proof}
+		\item $1 + i\dfrac{\sqrt{3}}{3}$;
+		\begin{proof}
+			$\left| 1 + i\dfrac{\sqrt{3}}{3}\right| = \sqrt{1 + \dfrac{1}{3}} = \dfrac{2}{\sqrt{3}} \Rightarrow 1 + i\dfrac{\sqrt{3}}{3} = \dfrac{2}{\sqrt{3}}\left(\dfrac{\sqrt{3}}{2} + \dfrac{i}{2}\right) = \dfrac{2}{\sqrt{3}}(\cos\dfrac{\pi}{6} + i\sin\dfrac{\pi}{6})$;
+		\end{proof}
+		\item $2 + \sqrt{3} + i$;
+		\begin{proof}
+			$$
+				|2 + \sqrt{3} + i| = \sqrt{4 + 4\sqrt{3} + 3 + 1} = 2\sqrt{2 + \sqrt{3}} \Rightarrow 2 + \sqrt{3} + i = 2\sqrt{2 + \sqrt{3}}{\cdot}\left(\dfrac{\sqrt{2 + \sqrt{3}}}{2} + \dfrac{i}{2\sqrt{2 + \sqrt{3}}}\right)
+			$$
+			$$
+				\tg\varphi = \dfrac{1}{2\sqrt{2 + \sqrt{3}}}{\cdot}\dfrac{2}{\sqrt{2 + \sqrt{3}}} = \dfrac{1}{2 + \sqrt{3}} = 2 - \sqrt{3} \Rightarrow \varphi = 15^{\circ} = \dfrac{-15}{180}\pi = \dfrac{\pi}{12} \Rightarrow 
+			$$
+			$$
+				\Rightarrow 2 + \sqrt{3} + i = 2\sqrt{2 + \sqrt{3}}{\cdot} \left(\cos\dfrac{\pi}{12} + i\sin\dfrac{\pi}{12}\right)
+			$$
+		\end{proof}
+		\item $1 - (2 + \sqrt{3})i$;
+		\begin{proof}
+			$$
+				|1 - (2 + \sqrt{3})i| =  2\sqrt{2 + \sqrt{3}} \Rightarrow 1 - (2 + \sqrt{3})i = 2\sqrt{2 + \sqrt{3}}{\cdot}\left(\dfrac{1}{2\sqrt{2 + \sqrt{3}}} - \dfrac{i\sqrt{2 + \sqrt{3}}}{2}\right)
+			$$
+			$$
+				\tg\varphi = -\dfrac{\sqrt{2 + \sqrt{3}}}{2}{\cdot}\dfrac{2\sqrt{2 + \sqrt{3}}}{1} = -(2 + \sqrt{3}) \Rightarrow \varphi = -75^{\circ} = \dfrac{-75}{180}\pi = \dfrac{-5\pi}{12} = \dfrac{7\pi}{12} \Rightarrow 
+			$$
+			$$
+				\Rightarrow 1 - (2 + \sqrt{3})i = 2\sqrt{2 + \sqrt{3}}{\cdot}\left(\cos\left(\dfrac{-5\pi}{12}\right) + i\sin\left(\dfrac{-5\pi}{12}\right)\right)
+			$$
+		\end{proof}
+		
+		\item $\cos(\alpha) - i\sin(\alpha)$;
+		\begin{proof}
+			$\cos(\alpha) - i\sin(\alpha) \Rightarrow \cos(\alpha) - i\sin(\alpha) = \cos(-\alpha) + i\sin(-\alpha)$;
+		\end{proof}
+		\item $\sin\alpha + i \cos\alpha$;
+		\begin{proof}
+			$|\sin\alpha + i \cos\alpha| = 1, \, \sin\alpha + i \cos\alpha = \cos\left(\dfrac{\pi}{2} - \alpha\right) + i\sin\left(\dfrac{\pi}{2} - \alpha\right)$;
+		\end{proof}
+		\item $\dfrac{ 1 + i\tg\alpha}{1 - i\tg\alpha}$;
+		\begin{proof}
+			$\dfrac{ 1 + i\tg\alpha}{1 - i\tg\alpha} = \dfrac{\cos\alpha + i\sin\alpha}{\cos\alpha - i\sin\alpha} = (\cos\alpha + i\sin\alpha)^2 = \cos(2\alpha) + i\sin(2\alpha)$;
+		\end{proof}
+		\item $1+ \cos\varphi + i\sin\varphi, \, \varphi \in (-\pi, \pi)$;
+		\begin{proof}
+			$$
+				|1+ \cos\varphi + i\sin\varphi| = \sqrt{1 + 2\cos\varphi + 1} = \sqrt{2(1 + \cos\varphi)} = \sqrt{4\cos^2\tfrac{\varphi}{2}} = \pm2\cos\tfrac{\varphi}{2}
+			$$
+			$$
+				\varphi \in (-\pi,\pi) \Rightarrow \tfrac{\varphi}{2} \in \left(-\tfrac{\pi}{2}, \tfrac{\pi}{2}\right) \Rightarrow \sqrt{4\cos^2\tfrac{\varphi}{2}} = 2\cos\tfrac{\varphi}{2} \Rightarrow
+			$$
+			$$
+				\Rightarrow 1+ \cos\varphi + i\sin\varphi = 2\cos\tfrac{\varphi}{2}{\cdot}\left(\cos\tfrac{\varphi}{2} + i \dfrac{2\sin\tfrac{\varphi}{2}\cos\tfrac{\varphi}{2}}{2\cos\tfrac{\varphi}{2}}\right) =2\cos\tfrac{\varphi}{2}{\cdot}\left(\cos\tfrac{\varphi}{2} + i \sin\tfrac{\varphi}{2}\right)
+			$$
+		\end{proof}
+		
+		\item $\dfrac{\cos\varphi + i \sin\varphi}{\cos\psi + i\sin\psi}$;
+		\begin{proof}
+			$$
+				\dfrac{\cos\varphi + i \sin\varphi}{\cos\psi + i\sin\psi} = \dfrac{e^{i\varphi}}{e^{i\psi}} = e^{i\varphi}{\cdot}e^{-i\psi} =e^{i(\varphi - \psi)} =\cos(\varphi - \psi) + i\sin(\varphi - \psi)
+			$$
+		\end{proof}
+	\end{enumerate}
+\end{problem}
+
+\begin{problem}(\textbf{К21.2})
+	\begin{enumerate}[label=\asbuk*)]
+		\item $(1 + i)^{1000}$;
+		\begin{proof}
+			$$
+				(1 + i)^{1000} = \left(\sqrt{2}\left(\cos\tfrac{\pi}{4} + i\sin{\pi}{4} \right)\right)^{1000} = 2^{500}(\cos(250\pi) + i\sin(250\pi)) = 2^{500}
+			$$
+		\end{proof}
+		\item $(1 + i\sqrt{3})^{150}$;
+		\begin{proof}
+			$$
+				(1 + i\sqrt{3})^{150} = \left(2\left(\cos\tfrac{\pi}{3} + i\sin\tfrac{\pi}{3}\right)\right)^{150} = 2^{150}\left(\cos(50\pi) + i\sin(50\pi)\right) = 2^{150}
+			$$
+		\end{proof}
+		\item $(\sqrt{3} + i)^{30}$;
+		\begin{proof}
+			$$
+				(\sqrt{3} + i)^{30} = \left(2\left(\cos\tfrac{\pi}{6} + i\sin\tfrac{\pi}{6}\right)\right)^{30} =2^{30}\left(\cos(5\pi) + i\sin(5\pi) \right) = -2^{30}
+			$$	
+		\end{proof}
+		\item $\left(1 + \tfrac{\sqrt{3}}{2} + \tfrac{i}{2}\right)^{24}$;
+		\begin{proof}
+			$$
+				\left|1 + \tfrac{\sqrt{3}}{2} + \tfrac{i}{2}\right| = \sqrt{1 + \sqrt{3} + \tfrac{3}{4} + \tfrac{1}{4}} = \sqrt{2 + \sqrt{3}} \Rightarrow 1 + \tfrac{\sqrt{3}}{2} + \tfrac{i}{2} = \sqrt{2 + \sqrt{3}}{\cdot}\left(\tfrac{\sqrt{2 + \sqrt{3}}}{2} + \tfrac{i}{2\sqrt{2 + \sqrt{3}}}\right)
+			$$
+			$$
+				\tg\varphi = \dfrac{1}{2\sqrt{2 + \sqrt{3}}}{\cdot}\dfrac{2}{\sqrt{2 + \sqrt{3}}} = \dfrac{1}{2 + \sqrt{3}}= -2 + \sqrt{3} \Rightarrow -\tg 15^{\circ} = -2 + \sqrt{3} \Rightarrow \varphi = -\dfrac{\pi}{12}
+			$$
+			$$
+				\left(1 + \tfrac{\sqrt{3}}{2} + \tfrac{i}{2}\right)^{24} = (2 + \sqrt{3})^{12}{\cdot}\left(\cos(-2\pi) + i\sin(-2\pi)\right)= (2 + \sqrt{3})^{12}
+			$$
+		\end{proof}
+		\item $(2 - \sqrt{3} + i)^{12}$;
+		\begin{proof}
+			$$
+				\left|2 - \sqrt{3} + i\right| = \sqrt{4 -4\sqrt{3} + 3 + 1} = 2\sqrt{2 - \sqrt{3}} \Rightarrow 2 - \sqrt{3} + i = 2\sqrt{2 - \sqrt{3}}{\cdot}\left(\tfrac{\sqrt{2 - \sqrt{3}}}{2} + \tfrac{i}{2\sqrt{2 - \sqrt{3}}}\right)
+			$$
+			$$
+				\tg\varphi = \dfrac{1}{2\sqrt{2 - \sqrt{3}}}{\cdot}\dfrac{2}{\sqrt{2 - \sqrt{3}}} = \dfrac{1}{2 - \sqrt{3}} = - (2 + \sqrt{3}) \Rightarrow \varphi = -75^{\circ} = - \dfrac{75}{180}\pi = -\dfrac{5\pi}{12}
+			$$
+			$$
+				(2 - \sqrt{3} + i)^{12} = 2^{12}(2 - \sqrt{3})^6{\cdot}(\cos(-5\pi) + i\sin(-5\pi)) = -2^{12}(2 - \sqrt{3})^6
+			$$
+		\end{proof}
+		\item $\left(\tfrac{1 - i\sqrt{3}}{1 + i}\right)^{12}$;
+		\begin{proof}
+			$$
+				|z| = \tfrac{|1 - i\sqrt{3}|}{|1 + i|} = \sqrt{2} \Rightarrow |z|^{12} = 2^6 = 64
+			$$
+			$$
+				\tfrac{\cos\alpha + i\sin\alpha}{\cos\beta + i\sin\beta} = (\cos\alpha + i \sin\alpha)(\cos(-\beta) + i\sin(-\beta)) = \cos(\alpha - \beta) + i\sin(\alpha - \beta) \Rightarrow
+			$$
+			$$
+				\Rightarrow \arg(1 - i\sqrt{3}) = - \dfrac{\pi}{3}, \, \arg(1 + i) = \dfrac{\pi}{4}, \, \arg\left(\tfrac{1 - i\sqrt{3}}{1 + i}\right) = -\dfrac{\pi}{3} - \dfrac{\pi}{4} = -\dfrac{7\pi}{12} \Rightarrow 
+			$$
+			$$	
+				\Rightarrow \left(\tfrac{1 - i\sqrt{3}}{1 + i}\right)^{12}  =64(\cos(-7\pi) + i\sin(-7\pi)) = 64(\cos\pi + i\sin\pi)= -2^6
+			$$
+			где $\modn{-7\pi}{\pi}{2\pi}$.
+		\end{proof}
+		\item $\left(\tfrac{\sqrt{3} + i}{1 - i}\right)^{30}$;
+		\begin{proof}
+			$$
+				\left(\tfrac{\sqrt{3} + i}{1 - i}\right)^{30} = \tfrac{(\sqrt{3} + i)^{30}}{(1 - i)^{30}}
+			$$
+			$$
+				(1 - i)^{30} = 2^{15}(\cos\left(\tfrac{90\pi}{4}\right) + i\sin\left(\tfrac{90\pi}{4}\right)) = 2^{15}(\cos\tfrac{\pi}{2} + i\sin\tfrac{\pi}{2})= i2^{15}
+			$$
+			$$
+				(\sqrt{3} + i)^{30} = 2^{30}\left(\cos(5\pi) + i\sin(5\pi)\right) = -2^{30}
+			$$
+			$$
+				\left(\tfrac{\sqrt{3} + i}{1 - i}\right)^{30} = \tfrac{-2^{30}}{i2^{15}} = 2^{15}i
+			$$
+		\end{proof}
+		\item $\tfrac{(-1 + i\sqrt{3})^{15}}{(1 - i)^{20}} + \tfrac{(-1-i\sqrt{3})^{15}}{(1 + i)^{20}}$;
+		\begin{proof}
+			$$
+				(1 - i)^{20} = 2^{10}(\cos(15\pi) + i\sin(15\pi)) = -2^{10}
+			$$
+			$$
+				(1 + i)^{20} = 2^{10}(\cos(5\pi) + i\sin(5\pi)) = -2^{10}
+			$$
+			$$
+				(-1 + i\sqrt{3})^{15} = 2^{15}(\cos(10\pi) + i\sin(10\pi)) = 2^{15}
+			$$
+			$$
+				(-1-i\sqrt{3})^{15} = 2^{15}(\cos(20\pi)) + i\sin(20\pi)) = 2^{15}
+			$$
+			$$
+				\tfrac{(-1 + i\sqrt{3})^{15}}{(1 - i)^{20}} + \tfrac{(-1-i\sqrt{3})^{15}}{(1 + i)^{20}} = \tfrac{2^15}{-2^{10}} + \tfrac{2^{15}}{-2^{10}} = -2^5 - 2^5 = -2^6
+			$$	
+		\end{proof}
+	\end{enumerate}
+\end{problem}
+
+\begin{problem}(\textbf{К21.3}) Решить уравнения:
+	\begin{enumerate}[label=\asbuk*)]
+		\item $|z| + z = 8 + 4i$;
+		\begin{proof}
+			$$
+				|z| + z = |z|{\cdot}(1 +\cos\alpha + i \sin\alpha) = |z|((1+\cos\alpha) + i \sin\alpha) \Rightarrow 
+			$$
+			$$
+				\Rightarrow |z| + z = |z|{\cdot}\sqrt{2(1 + \cos\alpha)}{\cdot}\left(\dfrac{\sqrt{1 + \cos\alpha}}{\sqrt{2}} + i\dfrac{\sin{\alpha}}{\sqrt{2 + 2\cos\alpha}}\right)
+			$$
+			$$
+				8 + 4i = 4(2 + i) = 4\sqrt{5}\left(\dfrac{2}{\sqrt{5}} + \dfrac{i}{\sqrt{5}}\right) \Rightarrow \dfrac{\sqrt{1 + \cos\alpha}}{\sqrt{2}}= \dfrac{2}{\sqrt{5}}, \, |z|{\cdot}\sqrt{2(1 + \cos\alpha)} = 4\sqrt{5} \Rightarrow
+			$$
+			$$
+				\Rightarrow 1 + \cos\alpha = \dfrac{8}{5}\Rightarrow \cos\alpha = \dfrac{3}{5},\, |z| = \dfrac{4\sqrt{5}}{\sqrt{2{\cdot}\tfrac{8}{5}}} = 5 \Rightarrow z = 5{\cdot}\left(\dfrac{3}{5} + i\sqrt{\dfrac{25 - 9}{5}}\right) = 3 + 4i
+			$$
+		\end{proof}
+		\item $|z| - z = 8 + 12i$;
+		\begin{proof}
+			$$
+				|z| - z = |z|{\cdot}(1 -\cos\alpha - i \sin\alpha) = |z|((1-\cos\alpha) - i \sin\alpha) \Rightarrow 
+			$$
+			$$
+				\Rightarrow |z| - z = |z|{\cdot}\sqrt{2(1 - \cos\alpha)}{\cdot}\left(\dfrac{\sqrt{1 - \cos\alpha}}{\sqrt{2}} - i\dfrac{\sin{\alpha}}{\sqrt{2 - 2\cos\alpha}}\right)
+			$$
+			$$
+				8 + 12i = 4(2 + 3i) = 4\sqrt{13}\left(\dfrac{2}{\sqrt{13}} + \dfrac{i3}{\sqrt{13}}\right) \Rightarrow \dfrac{\sqrt{1 - \cos\alpha}}{\sqrt{2}}= \dfrac{2}{\sqrt{13}}, \, |z|{\cdot}\sqrt{2(1 - \cos\alpha)} = 4\sqrt{13} \Rightarrow
+			$$
+			$$
+				\Rightarrow 1 - \cos\alpha = \dfrac{8}{13}\Rightarrow \cos\alpha = \dfrac{5}{13},\, |z| = \dfrac{4\sqrt{13}}{\sqrt{2{\cdot}\tfrac{8}{13}}} = 13 \Rightarrow z = 13{\cdot}\left(\dfrac{5}{13} - i\sqrt{\dfrac{169 - 25}{13}}\right) = 5 - 12i
+			$$
+		\end{proof}
+	\end{enumerate}
+\end{problem}
+\begin{problem}(\textbf{К21.4}) Доказать следующие свойства модуля комплексных чисел:
+	\begin{enumerate}[label=\asbuk*)]
+		\item $|z_1 \pm z_2| \leq |z_1| + |z_2|$;
+		\begin{proof}
+			Пусть $z_1 = |z_1|(\cos\alpha + i \sin\alpha)$, $z_2 = |z_2|(\cos\beta + i \sin \beta)$. Тогда:
+			$$
+				z_1 \pm z_2 = |z_1|\cos\alpha \pm |z_2|\cos\beta + i(|z_1|\sin\alpha \pm |z_2|\sin\beta) \Rightarrow
+			$$
+			$$
+				\Rightarrow |z_1 \pm z_2| = \sqrt{(|z_1|\cos\alpha \pm |z_2|\cos\beta)^2 + (|z_1|\sin\alpha \pm |z_2|\sin\beta)^2} = 
+			$$
+			$$
+				=	\sqrt{|z_1|^2 + |z_2|^2 \pm 2|z_1||z_2|(\cos\alpha\cos\beta + \sin\alpha\sin\beta) } = \sqrt{|z_1|^2 + |z_2|^2 \pm 2|z_1||z_2|\cos(\alpha - \beta)}
+			$$
+			$$
+				|z_1|^2 + |z_2|^2 + 2|z_1||z_2|\cos(\alpha - \beta) \leq  |z_1|^2 + |z_2|^2 + 2|z_1||z_2|{\cdot}(1) \Rightarrow 
+			$$
+			$$
+				|z_1|^2 + |z_2|^2 - 2|z_1||z_2|\cos(\alpha - \beta) \leq  |z_1|^2 + |z_2|^2 - 2|z_1||z_2|{\cdot}(-1) \Rightarrow
+			$$
+			$$
+				\Rightarrow \sqrt{|z_1|^2 + |z_2|^2 \pm 2|z_1||z_2|\cos(\alpha - \beta)} \leq \sqrt{|z_1|^2 + |z_2|^2 + 2|z_1||z_2|} = \sqrt{(|z_1| + |z_2|)^2} = |z_1| + |z_2|
+			$$
+		\end{proof}
+		\item $||z_1| - |z_2|| \leq |z_1 \pm z_2|$;
+		\begin{proof}
+			Воспользуемся доказательством предыдущей задачи:
+			$$
+				|z_1 \pm z_2| = \sqrt{|z_1|^2 + |z_2|^2 \pm 2|z_1||z_2|\cos(\alpha - \beta)} \Rightarrow
+			$$
+			$$
+				\Rightarrow |z_1|^2 + |z_2|^2 + 2|z_1||z_2|\cos(\alpha - \beta) \geq  |z_1|^2 + |z_2|^2 + 2|z_1||z_2|{\cdot}(-1) = (|z_1| - |z_2|)^2
+			$$
+			$$
+				\Rightarrow |z_1|^2 + |z_2|^2 - 2|z_1||z_2|\cos(\alpha - \beta) \geq  |z_1|^2 + |z_2|^2 - 2|z_1||z_2|{\cdot}1 = (|z_1| - |z_2|)^2 \Rightarrow
+			$$
+			$$
+				\Rightarrow |z_1 \pm z_2| \geq \sqrt{(|z_1| - |z_2|)^2} = ||z_1| - |z_2||
+			$$
+		\end{proof}
+		\item $|z_1 + z_2| = |z_1| + |z_2| \Leftrightarrow z_1$ и $z_2$ имеют одинаковые направления;
+		\begin{proof}
+			Воспользуемся результатом пункта a). Если $z_1$ и $z_2$ имеют одинаковые направления, то угол между положительной действительной осью и векторами $z_1,z_2$ будет одинаковым, тогда:
+			$$
+				\alpha = \beta \Rightarrow \cos(\alpha - \beta) = \cos(0) = 1 \Rightarrow 
+			$$
+			$$
+				\Rightarrow \sqrt{|z_1|^2 + |z_2|^2 + 2|z_1||z_2|\cos(\alpha - \beta)} = \sqrt{(|z_1| + |z_2|)^2} = |z_1| + |z_2|
+			$$
+		\end{proof}
+		\item $|z_1 + z_2| = ||z_1| - |z_2|| \Leftrightarrow z_1$ и $z_2$ имеют противоположные направления;
+		\begin{proof}
+			Воспользуемся результатом пункта б). Если $z_1$ и $z_2$ имеют противоположные направления, то угол между векторами будет равен $\pi$, тогда:
+			$$
+				\alpha = \pi + \beta \Rightarrow \cos(\alpha - \beta) = \cos(0 + \pi) = -1 \Rightarrow 
+			$$
+			$$
+				\Rightarrow \sqrt{|z_1|^2 + |z_2|^2 + 2|z_1||z_2|\cos(\alpha - \beta)} = \sqrt{(|z_1| - |z_2|)^2} = ||z_1| - |z_2||
+			$$
+		\end{proof}
+	\end{enumerate}
+\end{problem}
+
+\begin{problem}(\textbf{К21.5}) Доказать, что:
+	\begin{enumerate}[label=\asbuk*)]
+		\item Если $|z| < 1$, то $|z^2 - z + i| < 3$;
+		\begin{proof}
+			Воспользуемся результатами предыдущей задачи:
+			$$
+				|z^2 - z + i| \leq |z^2| + |z + i| \leq |z^2|+ |z| + |i| = |z|^2 + |z| + |i| < 1 + 1 + 1 = 3
+			$$
+		\end{proof}
+		\item Если $|z| \leq 2$, то $1 \leq |z^2 - 5| \leq 9$;
+		\begin{proof}
+			Воспользуемся результатами предыдущей задачи:
+			$$
+				|z^2-5| \leq |z^2| + |5| = |z|^2 + 5 \leq 4 + 5 = 9
+			$$
+			$$
+				|z^2 - 5| \geq ||z^2| - |5|| = ||z|^2 - 5| = 5 - |z|^2 \geq 5 - 4 = 1
+			$$
+		\end{proof}
+		\item Если $|z| < 1/2$, то $|(1 + i)z^3 + iz| < 3/4$;
+		\begin{proof}
+			Воспользуемся результатами предыдущей задачи:
+			$$
+				|(1 + i)z^3 + iz| \leq |z^3 + iz^3| + |iz| \leq |z|^3 + |i|{\cdot}|z|^3 + |i|{\cdot}|z| < \dfrac{1}{8} + 1{\cdot}\dfrac{1}{8} + 1{\cdot}\dfrac{1}{2} = \dfrac{6}{8} = \dfrac{3}{4} 
+			$$
+		\end{proof}
+	\end{enumerate}
+\end{problem}
+
+\begin{problem}(\textbf{К21.6}) Доказать неравенство:
+	$$
+		|z_1 - z_2| \leq ||z_1| - |z_2|| + \min\{|z_1|,|z_2|\}{\cdot}|\arg z_1 -\arg z_2|
+	$$
+	В каком случае неравенство обращается в равенство?
+\end{problem}
+\begin{proof}
+	Воспользуемся задачей $21.4$:
+	$$
+		|z_1 - z_2| = \sqrt{|z_1|^2 + |z_2|^2 - 2|z_1||z_2|\cos(\alpha - \beta)}
+	$$
+\end{proof}
+
+\begin{problem}(\textbf{К21.9}) При $n \in \MZ$ вычислить выражения:
+	\begin{enumerate}[label=\asbuk*)]
+		\item $(1 + i)^n$;
+		\begin{proof}
+			$1 +i = \sqrt{2}\sqrt{2}\left(\cos\tfrac{\pi}{4} + i \sin\tfrac{\pi}{4}\right) \Rightarrow (1 + i)^n = 2^{\tfrac{n}{2}}\left(\cos\tfrac{\pi n}{4} + i \sin \tfrac{\pi n}{4}\right)$;
+		\end{proof}
+		\item $\left(\dfrac{1 -i\sqrt{3}}{2}\right)^n$;
+		\begin{proof}
+			$\left(\dfrac{1 -i\sqrt{3}}{2}\right)^n = \cos\tfrac{\pi n}{6} + i \sin\tfrac{\pi n}{6}$.
+		\end{proof}
+		\item $\left(\dfrac{1 - i \tg\alpha}{1 + i\tg\alpha}\right)^n$;
+		\begin{proof}
+			$$
+				\dfrac{1 - i \tg\alpha}{1 + i\tg\alpha} = \dfrac{\cos\alpha - i\sin\alpha}{\cos\alpha + i \sin\alpha} = (\cos\alpha - i\sin\alpha)^2 = \cos(2\alpha) - i\sin(2\alpha) \Rightarrow
+			$$
+			$$
+				\Rightarrow \left(\dfrac{1 - i \tg\alpha}{1 + i\tg\alpha}\right)^n = \cos(2n\alpha) - i\sin(2n\alpha) 
+			$$
+		\end{proof}
+		\item $(1 + \cos{\varphi} + i\sin\varphi)^n$;
+		\begin{proof}
+			
+		\end{proof}
+	\end{enumerate}
+\end{problem}
+
+\begin{problem}(\textbf{К21.10})
+	Доказать, что если $z + z^{-1} = 2\cos\varphi$, то $z^n + z^{-n} = 2\cos(n\varphi)$, где $n \in \MZ$.
+\end{problem}
+\begin{proof}
+	$$
+		z = r(\cos\alpha + i \sin\alpha) \Rightarrow z^{-1} = \dfrac{1}{r}\dfrac{1}{\cos\alpha + i\sin\alpha} = \dfrac{1}{r}(\cos\alpha - i\sin\alpha)
+	$$
+	$$
+		z + z^{-1} = \left(r + \dfrac{1}{r}\right)\cos\alpha + i\left(r - \dfrac{1}{r}\right)\sin\alpha = 2\cos\varphi \Rightarrow r = 1, \, \alpha = \pm\varphi \Rightarrow
+	$$
+	$$
+		\Rightarrow z^n = \cos(n\varphi) + i\sin(n\varphi), \, z^{-n} = \cos(n\varphi) - i\sin(n\varphi) \Rightarrow z^n + z^{-n} = 2\cos(n\varphi)
+	$$
+\end{proof}
+\begin{problem}(\textbf{К21.11})
+	Представить в виде многочленов от $\sin{x}$ и $\cos{x}$ функции:
+	\begin{enumerate}[label=\asbuk*)]
+		\item $\sin(4x)$
+		\begin{proof}
+			Воспользуемся формулой Муавра и биномом Ньютона:
+			$$
+				(\cos{x} + i\sin{x})^4 = \cos^4x + 4i\cos^3{x}\sin{x} -6\cos^2{x}\sin^2{x} -4i\cos{x}\sin^3{x} +\sin^4{x}
+			$$
+			$$
+				(\cos{x} + i\sin{x})^4 = \cos(4x) + i\sin(4x) \Rightarrow \sin(4x) = 4\cos^3{x}\sin{x} - 4\cos{x}\sin^3{x} 
+			$$
+		\end{proof}
+		\item $\cos(4x)$
+		\begin{proof}
+			Воспользуемся результатами предыдущего пункта:
+			$$
+				\cos(4x) = \cos^4x-6\cos^2{x}\sin^2{x}+\sin^4{x}
+			$$
+		\end{proof}
+		\item $\sin(5x)$
+		\begin{proof}
+			Воспользуемся формулой Муавра и биномом Ньютона:
+			$$
+				(\cos{x} + i\sin{x})^5 = \cos^5x + 5i\cos^4{x}\sin{x} -10\cos^3{x}\sin^2{x} - 10i\cos^2{x}\sin^3{x} +5\cos{x}\sin^4{x} +i\sin^5{x}
+			$$
+			$$
+				(\cos{x} + i\sin{x})^5 = \cos(5x) + i\sin(5x) \Rightarrow \sin(5x) = 5\cos^4x\sin{x} -10\cos^2{x}\sin^3{x}+\sin^5{x}
+			$$
+		\end{proof}
+		\item $\cos(5x)$
+		\begin{proof}
+			Воспользуемся результатами предыдущего пункта:
+			$$
+				\cos(5x) = \cos^5{x} - 10\cos^3{x}\sin^2{x} + 5\cos{x}\sin^4{x}
+			$$
+		\end{proof}
+	\end{enumerate}
+\end{problem}
+
+
+\begin{problem}(\textbf{К21.13})
+	Выразить через первые степени синуса и косинуса аргументов, кратных $x$ функции:
+	\begin{enumerate}[label=\asbuk*)]
+		\item $\sin^4{x}$;
+		\begin{proof}
+			$$
+				z = \cos x + i \sin x = e^{ix}, \, \ovl{z} = \cos x - i \sin x = e^{-ix} \Rightarrow \sin x = \dfrac{e^{ix} - e^{-ix}}{2i} \Rightarrow 
+			$$	
+			$$	
+				\Rightarrow \sin^4x = \left(\dfrac{e^{ix} - e^{-ix}}{2i}\right)^4 = \dfrac{e^{4ix} - 4e^{2ix} + 6 - 4e^{-2ix} +  e^{-4ix}}{16} = 
+			$$
+			$$
+				= \dfrac{\cos(4x) - 4\cos(2x) + 6 - 4\cos(-2x) + \cos(-4x)}{16} = \dfrac{\cos(4x) - 4\cos(2x) + 3}{8}
+			$$
+		\end{proof}
+		\item $\cos^4x$;
+		\begin{proof}
+			$$
+				z = \cos x + i\sin x = e^{ix} \Rightarrow \cos{x} = \dfrac{e^{ix} + e^{-ix}}{2} \Rightarrow \cos^4x = \left(\dfrac{e^{ix} + e^{-ix}}{2}\right)^4 = 
+			$$
+			$$
+				= \dfrac{e^{4ix} + 4e^{2ix} + 6 + 4e^{-ix} + e^{-4ix}}{16} = \dfrac{\cos(4x) + 4\cos(2x) + 6 + 4\cos(2x) + \cos(4x)}{16} = 
+			$$
+			$$
+				= \dfrac{1}{8}\left(\cos(4x) + 4\cos(2x) +  3\right)
+			$$
+		\end{proof}
+		\item $\sin^5{x}$;
+		\begin{proof}
+			$$
+				\sin^5{x} = \left(\dfrac{e^{ix} - e^{-ix}}{2i}\right)^5 = \dfrac{e^{5ix} - 5e^{3ix} + 10e^{ix} - 10e^{-ix} + 5e^{-3ix} -e^{-5ix}}{32i} = 
+			$$
+			$$
+				= \dfrac{\sin(5x) - 5\sin(3x) + 10\sin x - 10 \sin(-x) + 5 \sin(-3x) - \sin(-5x)}{32} = 
+			$$
+			$$
+				= \dfrac{1}{16}\left(\sin(5x) - 5\sin(3x) + 10\sin x\right)
+			$$
+		\end{proof}
+		\item $\cos^5{x}$;
+		\begin{proof}
+			$$
+				\sin^5{x} = \left(\dfrac{e^{ix} + e^{-ix}}{2}\right)^5 = \dfrac{e^{5ix} + 5e^{3ix} + 10e^{ix} + 10e^{-ix} + 5e^{-3ix} +e^{-5ix}}{32} =
+			$$
+			$$
+				=	\dfrac{2\cos(5x) + 10\cos(3x) + 20\cos(x)}{32} = \dfrac{1}{16}(\cos(5x) + 5\cos(3x) + 10\cos x)
+			$$
+		\end{proof}
+	\end{enumerate}
+\end{problem}
+
+\begin{problem}(\textbf{К22.1})
+	Доказать, что если комплексное число $z$ является одним из корней степени $n$ из числа вещественного $a$, то и сопряженное число $\ovl{z}$ является одним из корней степени $n$ из $a$.
+\end{problem}
+\begin{proof}
+	Пусть $z = \sqrt[n]{a}$ и $z = r(\cos\varphi + i\sin\varphi)$, тогда:
+	$$
+		z^n = a \Leftrightarrow r^n(\cos(n\varphi) + i\sin(n\varphi)) = a \Leftrightarrow 
+		\begin{cases}
+			r = \sqrt[n]{a}\\
+			\varphi = \dfrac{2\pi k}{n}, \, k = \ovl{0,n-1} 
+		\end{cases}
+	$$
+	Таким образом, если $z$ - это корень, то он имеет вид:
+	$$
+		z = \sqrt[n]{a}\cos\left(\tfrac{2\pi k}{n}\right) = \ovl{z}
+	$$
+	Следовательно, $\ovl{z}$ тоже корень. Или ещё можно показать это так:
+	$$
+		z^n = a \Rightarrow \ovl{z^n} = \ovl{a} \Leftrightarrow \ovl{z}^n = \ovl{a} = a \in \MR 
+	$$
+\end{proof}
+
+\begin{problem}(\textbf{К22.2})
+	Доказать, что если $\sqrt[n]{z} = \{z_1,\dotsc,z_n\}$, то $\sqrt[n]{\ovl{z}} = \{\ovl{z}_1, \dotsc,\ovl{z}_n\}$.
+\end{problem}
+\begin{proof}
+	По определению:
+	$$
+		\sqrt[n]{z} = \{w \mid w^n = z\} = \{z_1,\dotsc,z_n\}
+	$$
+	Пусть $z = R(\cos\alpha + i\sin\alpha) \neq 0$, $w = r(\cos\varphi + i\sin\varphi) \neq 0$, тогда:
+	$$
+		w^n = z \Leftrightarrow 
+		\begin{cases}
+			r^n = R\\
+			n\varphi = \alpha + 2\pi k, \, k = \ovl{0,n-1} 
+		\end{cases} \Leftrightarrow
+		\begin{cases}
+			r = \sqrt[n]{R}\\
+			\varphi = \dfrac{\alpha + 2\pi k}{n}, \, k = \ovl{0,n-1} 
+		\end{cases}
+	$$
+	Тогда для сопряженного числа будет верно:
+	$$
+		\ovl{z} = R(\cos\alpha - i\sin\alpha) = R(\cos(-\alpha) + i\sin(-\alpha)), \, \sqrt[n]{\ovl{z}} = \{w \mid w^n = \ovl{z}\}
+	$$
+	$$
+		w^n = \ovl{z} \Leftrightarrow 
+		\begin{cases}
+			r^n = R\\
+			n\varphi = -\alpha + 2\pi k, \, k = \ovl{0,n-1} 
+		\end{cases} \Leftrightarrow
+		\begin{cases}
+			r = \sqrt[n]{R}\\
+			\varphi = \dfrac{-\alpha + 2\pi k}{n}, \, k = \ovl{0,n-1} 
+		\end{cases}
+	$$
+	$$
+		z_i = \sqrt[n]{R}\left(\cos\left(\tfrac{\alpha + 2\pi(i -1)}{n} \right) + i \sin\left(\tfrac{\alpha + 2\pi(i -1)}{n} \right) \right) \Rightarrow \ovl{z}_i =  \sqrt[n]{R}\left(\cos\left(\tfrac{\alpha + 2\pi(i -1)}{n} \right) - i \sin\left(\tfrac{\alpha + 2\pi(i -1)}{n} \right) \right) =
+	$$
+	$$
+		=	\sqrt[n]{R}\left(\cos\left(-\tfrac{\alpha}{n} - \tfrac{2\pi(i -1)}{n} \right) + i \sin\left(-\tfrac{\alpha}{n} - \tfrac{2\pi(i -1)}{n} \right) \right) = \sqrt[n]{R}\left(\cos\left(-\tfrac{\alpha}{n} + \tfrac{2\pi(n +1 -i)}{n} \right) + i \sin\left(-\tfrac{\alpha}{n} + \tfrac{2\pi(n + 1  -i)}{n} \right) \right)
+	$$
+	Поскольку $i = \ovl{1,n}$, то мы получим все корни степени $n$ из $\ovl{z}$.
+\end{proof}
+
+\begin{problem}(\textbf{К22.6})
+	Верно ли равенство: $\sqrt[ns]{z^s} = \sqrt[n]{z}, \, s >1$.
+\end{problem}
+\begin{proof}
+	$$
+		\sqrt[ns]{z^s} = \{w \mid w^{ns} = z^s\}, \, \sqrt[n]{z} = \{w \mid w^n = z\}
+	$$
+	Пусть $z = R(\cos\alpha + i\sin\alpha) \neq 0$, $w = r(\cos\varphi + i\sin\varphi) \neq 0$, тогда:
+	$$
+		w^n = z \Leftrightarrow 
+		\begin{cases}
+			r^n = R\\
+			n\varphi = \alpha + 2\pi k, \, k = \ovl{0,n-1} 
+		\end{cases} \Leftrightarrow
+		\begin{cases}
+			r = \sqrt[n]{R}\\
+			\varphi = \dfrac{\alpha + 2\pi k}{n}, \, k = \ovl{0,n-1} 
+		\end{cases}
+	$$
+	$$
+		w^{ns} = z^s \Leftrightarrow 
+		\begin{cases}
+			r^{ns} = R^s\\
+			ns\varphi = \alpha s + 2\pi k, \, k = \ovl{0,ns-1}  
+		\end{cases} \Leftrightarrow
+		\begin{cases}
+			r = \sqrt[n]{R}\\
+			\varphi = \dfrac{\alpha s + 2\pi k}{ns}, \, k = \ovl{0,ns-1}  
+		\end{cases}
+	$$
+	Таким образом, $\sqrt[ns]{z^s} \neq \sqrt[n]{z}$ для $s > 1$.
+\end{proof}
+
+\end{document}

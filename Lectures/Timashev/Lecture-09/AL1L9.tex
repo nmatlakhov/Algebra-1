@@ -1,0 +1,708 @@
+\documentclass[12pt]{article}
+\usepackage[left=1cm, right=1cm, top=2cm,bottom=1.5cm]{geometry} 
+
+\usepackage[parfill]{parskip}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage{enumitem}
+\usepackage[normalem]{ulem}
+\usepackage{amsfonts, amsmath, amsthm, amssymb, mathtools,xcolor}
+\usepackage{blkarray}
+
+\usepackage{tabularx}
+\usepackage{hhline}
+
+\usepackage{accents}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{1.5pt}
+\renewcommand{\footrulewidth}{1pt}
+
+\usepackage{graphicx}
+\usepackage[figurename=Рис.]{caption}
+\usepackage{subcaption}
+\usepackage{float}
+
+%%Наименование папки откуда забирать изображения
+\graphicspath{ {./images/} }
+
+%%Изменение формата для ввода доказательства
+\renewcommand{\proofname}{$\square$  \nopunct}
+\renewcommand\qedsymbol{$\blacksquare$}
+
+%%Изменение отступа на таблицах
+\addto\captionsrussian{%
+	\renewcommand{\proofname}{$\square$ \nopunct}%
+}
+%% Римские цифры
+\newcommand{\RN}[1]{%
+	\textup{\uppercase\expandafter{\romannumeral#1}}%
+}
+
+%% Для удобства записи
+\newcommand{\MR}{\mathbb{R}}
+\newcommand{\MC}{\mathbb{C}}
+\newcommand{\MQ}{\mathbb{Q}}
+\newcommand{\MN}{\mathbb{N}}
+\newcommand{\MZ}{\mathbb{Z}}
+\newcommand{\MTB}{\mathbb{T}}
+\newcommand{\MTI}{\mathbb{I}}
+\newcommand{\MI}{\mathrm{I}}
+\newcommand{\MCI}{\mathcal{I}}
+\newcommand{\MJ}{\mathrm{J}}
+\newcommand{\MH}{\mathrm{H}}
+\newcommand{\MT}{\mathrm{T}}
+\newcommand{\MA}{\mathcal{A}}
+\newcommand{\MCB}{\mathcal{B}}
+\newcommand{\MCC}{\mathcal{C}}
+\newcommand{\MCE}{\mathcal{E}}
+\newcommand{\MU}{\mathcal{U}}
+\newcommand{\MV}{\mathcal{V}}
+\newcommand{\MB}{\mathcal{B}}
+\newcommand{\MF}{\mathcal{F}}
+\newcommand{\MW}{\mathcal{W}}
+\newcommand{\ML}{\mathcal{L}}
+\newcommand{\MP}{\mathcal{P}}
+\newcommand{\VN}{\varnothing}
+\newcommand{\VE}{\varepsilon}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Опр:}
+\newtheorem{rem}{Rm:}
+\newtheorem{prop}{Утв.}
+\newtheorem{exrc}{Упр.}
+\newtheorem{problem}{Задача}
+\newtheorem{lemma}{Лемма}
+\newtheorem{theorem}{Теорема}
+\newtheorem{corollary}{Следствие}
+
+\newenvironment{cusdefn}[1]
+{\renewcommand\thedefn{#1}\defn}
+{\enddefn}
+
+\DeclareRobustCommand{\divby}{%
+	\mathrel{\text{\vbox{\baselineskip.65ex\lineskiplimit0pt\hbox{.}\hbox{.}\hbox{.}}}}%
+}
+%Короткий минус
+\DeclareMathSymbol{\SMN}{\mathbin}{AMSa}{"39}
+%Длинная шапка
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+%Функция знака
+\DeclareMathOperator{\sgn}{sgn}
+
+%Функция ранга
+\DeclareMathOperator{\rk}{\text{rk}}
+\DeclareMathOperator{\diam}{\text{diam}}
+
+
+%Обозначение константы
+\DeclareMathOperator{\const}{\text{const}}
+
+\DeclareMathOperator{\codim}{\text{codim}}
+
+\DeclareMathOperator*{\dsum}{\displaystyle\sum}
+\newcommand{\ddsum}[2]{\displaystyle\sum\limits_{#1}^{#2}}
+
+%Интеграл в большом формате
+\DeclareMathOperator{\dint}{\displaystyle\int}
+\newcommand{\ddint}[2]{\displaystyle\int\limits_{#1}^{#2}}
+\newcommand{\ssum}[1]{\displaystyle \sum\limits_{n=1}^{\infty}{#1}_n}
+
+\newcommand{\smallerrel}[1]{\mathrel{\mathpalette\smallerrelaux{#1}}}
+\newcommand{\smallerrelaux}[2]{\raisebox{.1ex}{\scalebox{.75}{$#1#2$}}}
+
+\newcommand{\smallin}{\smallerrel{\in}}
+\newcommand{\smallnotin}{\smallerrel{\notin}}
+
+\newcommand*{\medcap}{\mathbin{\scalebox{1.25}{\ensuremath{\cap}}}}%
+\newcommand*{\medcup}{\mathbin{\scalebox{1.25}{\ensuremath{\cup}}}}%
+
+\makeatletter
+\newcommand{\vast}{\bBigg@{3.5}}
+\newcommand{\Vast}{\bBigg@{5}}
+\makeatother
+
+%Промежуточное значение для sup\inf, поскольку они имеют разную высоту
+\newcommand{\newsup}{\mathop{\smash{\mathrm{sup}}}}
+\newcommand{\newinf}{\mathop{\mathrm{inf}\vphantom{\mathrm{sup}}}}
+
+%Скалярное произведение
+\newcommand{\inner}[2]{\left\langle #1, #2 \right\rangle }
+\newcommand{\linsp}[1]{\left\langle #1 \right\rangle }
+\newcommand{\linmer}[2]{\left\langle #1 \vert #2\right\rangle }
+
+%Подпись символов снизу
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+
+%% Шапка для букв сверху
+\newcommand{\wte}[1]{\widetilde{#1}}
+\newcommand{\wht}[1]{\widehat{#1}}
+
+%%Трансформация Фурье
+\newcommand{\fourt}[1]{\mathcal{F}\left(#1\right)}
+\newcommand{\ifourt}[1]{\mathcal{F}^{-1}\left(#1\right)}
+
+%%Символ вектора
+\newcommand{\vecm}[1]{\overrightarrow{#1\,}}
+
+%%Пространстов матриц
+\newcommand{\matsq}[1]{\operatorname{Mat}_{#1}}
+\newcommand{\mat}[2]{\operatorname{Mat}_{#1, #2}}
+
+
+%%Взятие в скобки, модули и норму
+\newcommand{\parfit}[1]{\left( #1 \right)}
+\newcommand{\modfit}[1]{\left| #1 \right|}
+\newcommand{\sqparfit}[1]{\left\{ #1 \right\}}
+\newcommand{\normfit}[1]{\left\| #1 \right\|}
+
+%%Функция для обозначения равномерной сходимости по множеству
+\newcommand{\uconv}[1]{\overset{#1}{\rightrightarrows}}
+\newcommand{\uconvm}[2]{\overset{#1}{\underset{#2}{\rightrightarrows}}}
+
+
+%%Функция для обозначения нижнего и верхнего интегралов
+\def\upint{\mathchoice%
+	{\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	\int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+
+%%След матрицы
+\DeclareMathOperator*{\tr}{tr}
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+	\hskip -\arraycolsep
+	\let\@ifnextchar\new@ifnextchar
+	\array{#1}}
+\makeatother
+
+
+%% Переопределение функции хи, чтобы выглядела более приятно
+\makeatletter
+\@ifdefinable\@latex@chi{\let\@latex@chi\chi}
+\renewcommand*\chi{{\@latex@chi\smash[t]{\mathstrut}}} % want only bottom half of \mathstrut
+\makeatletter
+
+\begin{document}
+\lhead{Алгебра-\RN{1}}
+\chead{Тимашев Д.А.}
+\rhead{Лекция - 9}
+\section*{Теория определителей}
+
+\begin{prop}
+	Всякая полилинейная и кососимметрическая функция строк квадратной матрицы пропорциональна определителю.
+\end{prop}
+\begin{proof}
+	В самом деле, пусть $f$ - такая функция. Возьмем произвольную квадратную матрицу $A$ и ЭП строк приведем к $A^*$ - треугольной матрице.
+	$$
+		A \xrightarrow{\text{ЭП строк}} A^* = 
+		\begin{pmatrix}
+			\lambda_1 & * & \dotsc & * \\
+			0 & \lambda_2 &  \dotsc & *\\
+			\vdots & \vdots & \ddots & \vdots\\
+			0 & 0 & \dotsc & \lambda_n
+		\end{pmatrix}
+	$$
+	Тогда, в силу линейности и кососимметричности функции строк, будет верно:
+	$$
+		f(A) = f(A^*){\cdot}(-1)^p{\cdot}\dfrac{1}{\mu_1}{\cdot}\dotsc{\cdot}\dfrac{1}{\mu_q}
+	$$
+	где $p$ - количество ЭП$2$, $\mu_1,\dotsc, \mu_q$ - множители в ЭП$3$. Это следует сразу из аналогичного доказательства для определителя. Проверим ещё раз:
+	$$
+		f(A_1, \dotsc, \mu A'_k + \lambda A''_k,\dotsc, A_n) = \mu{\cdot}f(A_1,\dotsc, A'_k, \dotsc, A_n) + \lambda{\cdot}f(A_1,\dotsc, A''_k, \dotsc, A_n)
+	$$
+	$$
+		f(A_1,\dotsc, A_k, \dotsc, A_l, \dotsc, A_n) = -f(A_1,\dotsc, A_l, \dotsc,A_k, \dotsc, A_n)
+	$$
+	Тогда будет верны свойства определителя: 
+	$$
+		A_k = 0  \Rightarrow f(A) = 0, \, A_k = A_l \Rightarrow f(A) = 0, \, A_l = \lambda{\cdot}A_k \Rightarrow f(A) = 0
+	$$
+	$$
+		f(A_1, \dotsc,A_k + \lambda{\cdot}A_l,\dotsc, A_l,\dotsc, A_n) = f(A_1,\dotsc, A_k, \dotsc, A_n)
+	$$
+	Таким образом, аналогично тому, как это проводилось для определителя, воспользуемся однородностью и ЭП$1$ строк, тогда:
+	$$
+		f(A^*) = \lambda_1{\cdot}\dotsc{\cdot}\lambda_n{\cdot}f(E) \Rightarrow
+	$$
+	$$
+		\Rightarrow f(A) = (-1)^p{\cdot}\dfrac{1}{\mu_1}{\cdot}\dotsc{\cdot}\dfrac{1}{\mu_q}{\cdot}\lambda_1{\cdot}\dotsc{\cdot}\lambda_n{\cdot}f(E) = \det{A}{\cdot}f(E) = \lambda{\cdot}\det{A}
+	$$
+\end{proof}
+\begin{rem}
+	Заметим, что в силу полилинейности и кососимметричности, можно разложить функцию $f$ так:
+	$$
+		f(A_1,\dotsc,A_n) = f(a_{11}e_1 + \dotsc + a_{1n}e_n, \dotsc, a_{n1}e_1 + \dotsc + a_{nn}e_n) = \ddsum{j_1\dotsc j_n}{}a_{1j_1}{\cdot}\dotsc{\cdot}a_{nj_n}{\cdot}f(e_{j_1},\dotsc,e_{j_n})
+	$$
+	Совершим перестановки строк $\sigma$:
+	$$
+		\sigma = \begin{pmatrix}
+			1 & 2 & \dotsc & n\\
+			j_1 & j_2 & \dotsc & j_n
+		\end{pmatrix}
+	$$
+	Тогда функция поменяет знак на знак подстановки $\sgn{\sigma}$ и мы получим:
+	$$
+		f(A) = \ddsum{j_1\dotsc j_n}{}\sgn{\sigma}{\cdot}a_{1\sigma(1)}{\cdot}\dotsc{\cdot}a_{n\sigma(n)}{\cdot}f(e_{1},\dotsc,e_{n}) = \det{A}{\cdot}f(e_{1},\dotsc,e_{n})
+	$$
+\end{rem}
+
+\newpage
+\section*{Определители специального вида}
+\begin{defn}
+	Пусть $A$ - квадратная матрица, устроенная следующим образом:
+	$$
+		A = 
+		\begin{pmatrix}[c|c]
+			B & D\\ \hline
+			0 & C
+		\end{pmatrix}, \, B \in \matsq{k}, \, C \in \matsq{(n-k)}, \, D \in \mat{k}{n-k}, \, 0 \in \mat{n-k}{k}
+	$$
+	Такие матрицы называются \uwave{матрицами с углом нулей}.
+\end{defn}
+\begin{prop}
+	Пусть $A$ - матрица с углом нулей, тогда: $\det{A} = \det{B}{\cdot}\det{C}$.
+\end{prop}
+\begin{proof}
+	Рассмотрим частный случай, когда $A$ является треугольной матрицей $\Rightarrow B$ и $C$ тоже будут треугольными. Тогда:
+	$$
+		A = 	
+		\begin{pmatrix}[c|c]
+			B & D\\ \hline
+			0 & C
+		\end{pmatrix} =
+		\begin{pmatrix}[ccc|ccc]
+			\beta_1  & \dotsc & * & * & \dotsc & *\\
+			\vdots  & \ddots & \vdots & \vdots & \ddots & \vdots\\
+			0  & \dotsc & \beta_k & * & \dotsc & *\\ \hline
+			0  & \dotsc & 0 & \gamma_1 & \dotsc & *\\
+			\vdots  & \ddots & \vdots & \vdots & \ddots & \vdots\\
+			0  & \dotsc & 0 & 0 & \dotsc & \gamma_{n-k}
+		\end{pmatrix} \Rightarrow \det{A} = \beta_1{\cdot}\dotsc{\cdot}\beta_k{\cdot}\gamma_1{\cdot}\dotsc{\cdot}\gamma_{n-k} = \det{B}{\cdot}\det{C}
+	$$
+	Рассмотрим общий случай и сведем его к частному. Приведем произвольную матрицу $A$ к треугольному виду. Путём ЭП первых $k$ строк получим матрицу $A'$ из матрицы $A$ так, чтобы получить из квадратной матрицы $B$ ступенчатую матрицу $B'$, затем ЭП последних $n-k$ строк получим матрицу $A''$ со ступенчатой матрицей $C'$:
+	$$
+		A \xrightarrow[1,\dotsc, k]{\text{ЭП строк}} A' = 		
+		\begin{pmatrix}[c|c]
+			B' & D'\\ \hline
+			0 & C
+		\end{pmatrix} \xrightarrow[k+1,\dotsc, n]{\text{ЭП строк}} A'' = 		
+		\begin{pmatrix}[c|c]
+			B' & D'\\ \hline
+			0 & C'
+		\end{pmatrix}
+	$$
+	Поскольку $B,C$ - квадратные матрицы, то после преобразования в ступенчатые они становятся треугольными матрицами $B',C'$ соответственно. Тогда:
+	$$
+		\det{A} = \det{A'}{\cdot}(-1)^p{\cdot}\dfrac{1}{\mu_1}{\cdot}\dotsc{\cdot}\dfrac{1}{\mu_q}
+	$$
+	где $p$ - количество ЭП$2$, $\mu_1,\dotsc, \mu_q$ - множители в ЭП$3$ для первых $k$ строк. Аналогично: 
+	$$
+		\det{A'} = \det{A''}{\cdot}(-1)^r{\cdot}\dfrac{1}{\nu_1}{\cdot}\dotsc{\cdot}\dfrac{1}{\nu_s}
+	$$
+	где $r$ - количество ЭП$2$, $\nu_1,\dotsc, \nu_s$ - множители в ЭП$3$ для последних $n-k$ строк. Следовательно:
+	$$
+		\det{A} = \det{A''}{\cdot}(-1)^{p +r}{\cdot}\dfrac{1}{\nu_1}{\cdot}\dotsc{\cdot}\dfrac{1}{\nu_s}{\cdot}\dfrac{1}{\mu_1}{\cdot}\dotsc{\cdot}\dfrac{1}{\mu_q} = \det{B'}{\cdot}\det{C'}{\cdot}(-1)^{p +r}{\cdot}\dfrac{1}{\nu_1}{\cdot}\dotsc{\cdot}\dfrac{1}{\nu_s}{\cdot}\dfrac{1}{\mu_1}{\cdot}\dotsc{\cdot}\dfrac{1}{\mu_q}
+	$$
+	где последнее верно в силу частного случая, который мы доказали ранее. Тогда:
+	$$
+		\det{B'}{\cdot}(-1)^{p}{\cdot}\dfrac{1}{\nu_1}{\cdot}\dotsc{\cdot}\dfrac{1}{\nu_s}{\cdot}\det{C'}{\cdot}(-1)^{r +r}{\cdot}\dfrac{1}{\mu_1}{\cdot}\dotsc{\cdot}\dfrac{1}{\mu_q} = \det{B}{\cdot}\det{C}
+	$$
+	Поскольку матрицы $B$ и $C$ связаны ЭП с матрицами $B'$ и $C'$.
+\end{proof}
+
+\subsection*{Определитель Вандермонда}
+
+\begin{defn}
+	\uwave{Определителем Вандермонда} называется определитель порядка $n$ следующего вида:
+	$$
+		V(x_1,x_2,\dotsc,x_n) = 
+		\begin{vmatrix}
+			1 & 1 & \dotsc & 1 \\
+			x_1 & x_2& \dotsc & x_n\\[4pt]
+			x_1^2 & x_2^2 & \dotsc & x_n^2 \\[4pt]
+			\vdots & \vdots & \ddots & \vdots \\[4pt]
+			x_1^{n-1} & x_2^{n-1} & \dotsc & x_n^{n-1}
+		\end{vmatrix}
+	$$
+\end{defn}
+
+\begin{theorem}
+	$$
+		V(x_1,x_2,\dotsc,x_n) = \prod\limits_{n \geq i > j \geq 1}(x_i - x_j)
+	$$
+\end{theorem}
+\begin{proof}
+	Воспользуемся ЭП$1$: из последней строки вычтем предпоследнюю с коэффициентом $x_1$, затем из строки $n-1$ вычтем $n-2$ строку с коэффициентом $x_1$. И продолжим процедуру далее. Как известно, при таком преобразовании определитель не меняется, тогда:
+	$$
+		V(x_1,x_2,\dotsc,x_n) = 
+		\begin{vmatrix}
+			1 & 1 & \dotsc & 1 \\
+			x_1 & x_2& \dotsc & x_n\\[4pt]
+			x_1^2 & x_2^2 & \dotsc & x_n^2 \\[4pt]
+			\vdots & \vdots & \ddots & \vdots \\[4pt]
+			x_1^{n-3} & x_2^{n-3} & \dotsc & x_n^{n-3}\\[4pt]
+			x_1^{n-2} & x_2^{n-2} & \dotsc & x_n^{n-2}\\[4pt]
+			x_1^{n-1} & x_2^{n-1} & \dotsc & x_n^{n-1}
+		\end{vmatrix} = 
+		\begin{vmatrix}
+			1 & 1 & \dotsc & 1 \\ 
+			0 & x_2 - x_1& \dotsc & x_n -x_1\\[4pt]
+			0 & x_2^2 - x_1 x_2& \dotsc & x_n^2  -x_1 x_n\\[4pt]
+			\vdots & \vdots & \ddots & \vdots \\[4pt]
+			0 & x_2^{n-3} - x_1x_2^{n-4}& \dotsc & x_n^{n-3} -x_1 x_n^{n-4}\\[4pt]
+			0 & x_2^{n-2} - x_1x_2^{n-3}& \dotsc & x_n^{n-2}-x_1 x_n^{n-3}\\[4pt]
+			0 & x_2^{n-1} - x_1x_2^{n-2} & \dotsc & x_n^{n-1}-x_1 x_n^{n-2}
+		\end{vmatrix}
+	$$
+	Заметим, что мы получили определитель матрицы с углом нулей, тогда:
+	$$
+		V(x_1,\dotsc,x_n) = |1|{\cdot}
+		\begin{vmatrix}
+			x_2 - x_1& \dotsc & x_n -x_1\\[4pt]
+			x_2^2 - x_1 x_2& \dotsc & x_n^2  -x_1 x_n\\[4pt]
+			\vdots & \ddots & \vdots \\[4pt]
+			x_2^{n-3} - x_1x_2^{n-4}& \dotsc & x_n^{n-3} -x_1 x_n^{n-4}\\[4pt]
+			x_2^{n-2} - x_1x_2^{n-3}& \dotsc & x_n^{n-2}-x_1 x_n^{n-3}\\[4pt]
+			x_2^{n-1} - x_1x_2^{n-2} & \dotsc & x_n^{n-1}-x_1 x_n^{n-2}
+		\end{vmatrix} =
+		\begin{vmatrix}
+			(x_2 - x_1){\cdot}1& \dotsc & (x_n -x_1){\cdot}1\\[4pt]
+			(x_2 - x_1){\cdot} x_2& \dotsc & (x_n -x_1){\cdot}x_n\\[4pt]
+			\vdots & \ddots & \vdots \\[4pt]
+			(x_2 - x_1){\cdot}x_2^{n-4}& \dotsc & (x_n -x_1){\cdot}x_n^{n-4}\\[4pt]
+			(x_2 - x_1){\cdot}x_2^{n-3}& \dotsc & (x_n -x_1){\cdot}x_n^{n-3}\\[4pt]
+			(x_2 - x_1){\cdot}x_2^{n-2} & \dotsc & (x_n -x_1){\cdot}x_n^{n-2}
+		\end{vmatrix}
+	$$
+	Используя свойство однородности, вынесем из каждого столбца соответствующие множители:
+	$$
+		V(x_1,\dotsc,x_n) = (x_2 - x_1){\cdot}\dotsc{\cdot}(x_n -x_1){\cdot}
+		\begin{vmatrix}
+			1& \dotsc & 1\\[4pt]
+			x_2& \dotsc & x_n\\[4pt]
+			\vdots & \ddots & \vdots \\[4pt]
+			x_2^{n-3}& \dotsc & x_n^{n-3}\\[4pt]
+			x_2^{n-2} & \dotsc & x_n^{n-2}
+		\end{vmatrix} = (x_2 - x_1){\cdot}\dotsc{\cdot}(x_n -x_1){\cdot}V(x_2,\dotsc,x_n)
+	$$
+	Далее можно по индукции раскрыть определители Вандермонда меньших степеней, тогда:	
+	$$
+		(x_2 - x_1){\cdot}\dotsc{\cdot}(x_n -x_1){\cdot}V(x_2,\dotsc,x_n) = (x_2 - 			x_1){\cdot}\dotsc{\cdot}(x_n -x_1){\cdot}(x_3 - x_2){\cdot}\dotsc{\cdot}(x_n -x_2){\cdot}V(x_3,\dotsc,x_n) =
+	$$
+	$$
+		=	\dotsc = (x_2 - x_1){\cdot}\dotsc{\cdot}(x_n - x_{n-2}){\cdot}
+		\begin{vmatrix}
+			1 & 1 \\
+			x_{n-1} & x_n
+		\end{vmatrix} = (x_2 - x_1){\cdot}\dotsc{\cdot}(x_n - x_{n-2}){\cdot}(x_n - x_{n-1})
+	$$
+	Следовательно, короткая запись для этого определителя будет иметь вид:
+	$$
+		V(x_1,\dotsc,x_n) = \prod\limits_{n \geq i > j \geq 1}(x_i - x_j)
+	$$
+\end{proof}
+
+
+\begin{corollary}(\textbf{основное свойство определителя Вандермонда})
+	$$
+		V(x_1,x_2, \dotsc, x_n) = 0 \Leftrightarrow \exists \, i,j \in \{1,\dotsc,n\}, \, i \neq j \colon x_i = x_j
+	$$
+\end{corollary}
+\begin{proof}
+	Следует сразу из короткой записи определителя Вандермонда.
+\end{proof}
+
+\subsection*{Определители невырожденных матриц}
+\begin{theorem}
+	Квадратная матрица $A$ - невырождена $\Leftrightarrow \det{A} \neq 0$.
+\end{theorem}
+\begin{proof}
+	Приведем матрицу $A$ ЭП строк к ступенчатому виду:
+	$$
+		A \xrightarrow{\text{ЭП строк}} A^* = 		
+		\begin{pmatrix}
+			\lambda_1 & * & \dotsc & * \\
+			0 & \lambda_2 &  \dotsc & *\\
+			\vdots & \vdots & \ddots & \vdots\\
+			0 & 0 & \dotsc & \lambda_n
+		\end{pmatrix}
+	$$
+	Поскольку матрица $A$ квадратная, то ступенчатый вид $=$ треугольная матрица. Заметим, что не обязательно все числа $\lambda_i \neq 0$, но ниже диагонали точно будут нули. При ЭП ранг матрицы не меняется, тогда матрица $A$ невырождена $\Leftrightarrow$ матрица $A^*$ также невырождена $\Leftrightarrow \rk{A^*} = n$. У ступенчатой квадратной матрицы её ранг равен $n \Leftrightarrow$ её ступеньки будут идти по диагонали, иначе в низу матрицы будут нулевые строки и ранг будет меньше $n$. Таким образом, $A^*$ невырождена $\Leftrightarrow \forall i = \overline{1,n}, \, \lambda_i \neq 0$. Тогда:
+	$$
+		\det{A^*} = \lambda_1{\cdot}\dotsc{\cdot}\lambda_n \neq 0 \Rightarrow \det{A} = \lambda{\cdot}\det{A^*}, \, \lambda \neq 0\Rightarrow 
+	$$
+	$$
+		\Rightarrow \det{A} = \lambda{\cdot}\lambda_1{\cdot}\dotsc{\cdot}\lambda_n \neq 0 \Leftrightarrow \forall i = \overline{1,n}, \, \lambda_i \neq 0
+	$$
+\end{proof}
+
+\begin{theorem}
+	Пусть $A, B$ - матрицы $n \times n$. Тогда:
+	$$
+		\det{(A{\cdot}B)} = \det{A}{\cdot}\det{B}
+	$$
+\end{theorem}
+\begin{proof}
+	Рассмотрим $2$ случая:
+	
+	\textbf{\uline{Случай $1$}}: матрица $A$ - вырождена. Тогда:
+	$$
+		\rk{(AB)} \leq \rk{A} < n 
+	$$
+	Следовательно, матрица $AB$ тоже будет вырожденной, тогда:
+	$$
+		|A{\cdot}B| = 0 = |A|{\cdot}|B| = 0{\cdot}|B|
+	$$
+	\textbf{\uline{Случай $2$}}: матрица $A$ - невырождена. Тогда её можно представить в виде произведения элементарных матриц:
+	$$
+		A = U_1{\cdot}\dotsc{\cdot}U_N
+	$$
+	Следовательно, можно сказать, что $A$ получается из единичной матрицы умножением слева на элементарные матрицы, а это тоже самое, что и ЭП строчек:
+	$$
+		E \xrightarrow{\text{ЭП}_1} \dotsc \xrightarrow{\text{ЭП}_N} U_1{\cdot}\dotsc{\cdot}U_N{\cdot}E
+	$$
+	где ЭП$_i$ это ЭП строк, соответствующее элементарной матрице $U_i$. Тогда:
+	$$
+		A{\cdot}B = U_1{\cdot}\dotsc{\cdot}U_N{\cdot}B
+	$$
+	То есть, матрица $AB$ получается теми же самыми ЭП из матрицы $B$:
+	$$
+		B \xrightarrow{\text{ЭП}_1} \dotsc \xrightarrow{\text{ЭП}_N} U_1{\cdot}\dotsc{\cdot}U_N{\cdot}B
+	$$
+	Мы знаем, что при ЭП строчек определитель меняется определенным образом, тогда:
+	$$
+		\det{A} = \lambda{\cdot}\det{E} = \lambda
+	$$
+	где $\lambda$ - множитель, возникающий при ЭП$_1, \dotsc$, ЭП$_N$. Аналогично:
+	$$
+		\det{(A{\cdot}B)} = \lambda{\cdot}\det{B} = \det{A}{\cdot}\det{B}
+	$$
+\end{proof}
+
+\newpage
+\section*{Миноры}
+Пусть $A$ - произвольная матрица размера $m \times n$:
+$$
+	A = \begin{pmatrix}
+		a_{11} & \dotsc  &a_{1n}\\
+		\vdots & \ddots & \vdots \\
+		a_{m1} & \dotsc & a_{mn}
+	\end{pmatrix}
+$$
+Выберем в ней какие-нибудь $k$ строчек $i_1, i_2,\dotsc,i_k$ и какие-нибудь $k$ столбцов $j_1, j_2, \dotsc, j_k$. Тогда на пересечении этих $k$ строк и $k$ столбцов мы получаем квадратную подматрицу:
+$$
+	\begin{blockarray}{ccccccccc }
+		\begin{block}{cc(ccccccc)}
+			&& a_{11} & \dotsc & \color{teal}a_{1j_1} & \dotsc & \color{teal}a_{1j_k} & \dotsc & a_{1n} \\
+			&& \vdots & \ddots & \color{teal}\vdots & \ddots & \color{teal}\vdots & \ddots & \vdots\\
+		 &{\color{teal}i_1}& {\color{teal}a_{i_11}} & {\color{teal}\dotsc} & {\color{red}\boldsymbol{a_{i_1j_1}}} & {\color{red}\dotsc} & \boldsymbol{\color{red}a_{i_1j_k}} & {\color{teal}\dotsc} &{\color{teal}a_{i_1n}}\\
+	 	 A = &{\color{teal}\vdots}	& \vdots & \ddots & {\color{red}\vdots} & \color{red}{\ddots} & \color{red}{\vdots} & \ddots & \vdots\\
+	 	 &\color{teal}i_k& {\color{teal}a_{i_k1}} & {\color{teal}\dotsc} & \boldsymbol{\color{red}a_{i_kj_1}} & {\color{red}\dotsc} & \boldsymbol{\color{red}a_{i_kj_k}} & \color{teal}\dotsc &\color{teal}a_{i_kn}\\
+	 	 	&& \vdots & \ddots & \color{teal}\vdots & \ddots & \color{teal}\vdots & \ddots & \vdots\\
+ 	 		&& a_{m1} & \dotsc & \color{teal}a_{mj_1} & \dotsc & \color{teal}a_{mj_k} & \dotsc & a_{mn}\\
+		\end{block}
+		&	&  &  & \color{teal}j_1 & \color{teal}\dotsc & \color{teal}j_k & & 
+	\end{blockarray}
+	\begin{blockarray}{ccccc}
+		& & & &  \\
+		& & & &  \\
+		\begin{block}{cc(ccc)}
+			& & a_{i_1 j_1} & \dotsc & a_{i_1 j_k} \\
+			\Rightarrow & \wht{A} =  & \vdots & \ddots & \vdots \\
+			& & a_{i_k j_1} & \dotsc & a_{i_k j_k}\\  
+		\end{block}
+		& & & &  \\
+		& & & &  \\
+		& & & &  
+	\end{blockarray}
+$$
+\begin{defn}
+	\uwave{Минором порядка $k$} матрицы $A$, стоящего на пересечении строк с номерами $i_1,\dotsc,i_k$ и столбцов с номерами $j_1,\dotsc, j_k$, называется определитель соответствующей подматрицы:
+	$$
+		M_{i_1 \dotsc i_k}^{j_1 \dotsc j_k} = 
+		\begin{vmatrix}
+			a_{i_1 j_1} & a_{i_1 j_2} & \dotsc & a_{i_1 j_k}\\
+			a_{i_2 j_1} & a_{i_2 j_2} & \dotsc & a_{i_2 j_k}\\
+			\vdots & \vdots & \ddots & \vdots\\
+			a_{i_k j_1} & a_{i_k j_2} & \dotsc & a_{i_k j_k}\\
+		\end{vmatrix} = |\wht{A}|
+	$$
+\end{defn}
+
+В частности, пусть $m = n$ и рассмотрим миноры порядка $k = n-1 \Rightarrow$ получается, что мы вычеркиваем из квадратной матрицы какую-то строчку и какой-то столбец $\Rightarrow$ на пересечении вычеркнутой строки и вычеркнутого столбца стоит какой-то элемент исходной матрицы и тот минор, который мы получаем будет дополнительным к этому элементу.
+
+\begin{defn}
+	\uwave{Дополнительным минором} к элементу $a_{ij}$ матрицы $A$ это определитель исходной матрицы без $i$-ой строчки и $j$-го столбца:
+	$$
+		\begin{pmatrix}
+			a_{11} & \dotsc & a_{1j -1} & a_{1j} & a_{1 j + 1 } & \dotsc & a_{1n}\\
+			\vdots & \ddots & \vdots & \vdots &\vdots & \ddots & \vdots\\
+			a_{i-1 1} & \dotsc & a_{i-1 j- 1} & a_{i-1 j} & a_{i - 1 j + 1 } & \dotsc & a_{i -1n}\\
+			\rlap{\rule[0.6ex]{8cm}{0.4pt}} a_{i 1} & \dotsc & a_{i j- 1}& a_{ij} \makebox(-6,0){\rule[1ex]{0.4pt}{7\normalbaselineskip}}  & a_{ij + 1 } & \dotsc & a_{in}\\
+			a_{i + 1 1} & \dotsc & a_{i+1 j -1} & a_{i+1 j} & a_{i + 1 j + 1 } & \dotsc & a_{i + 1n}\\
+			\vdots & \ddots & \vdots & \vdots & \vdots & \ddots & \vdots\\
+			a_{n1} & \dotsc & a_{n j-1} & a_{nj} &a_{n j + 1 } & \dotsc & a_{nn}
+		\end{pmatrix} \Rightarrow
+		M_{ij} = 
+		\begin{vmatrix}
+			a_{11} & \dotsc & a_{1j -1} & a_{1 j + 1 } & \dotsc & a_{1n}\\
+			\vdots & \ddots & \vdots & \vdots & \ddots & \vdots\\
+			a_{i-1 1} & \dotsc & a_{i-1 j- 1} & a_{i - 1 j + 1 } & \dotsc & a_{i -1n}\\
+			a_{i + 1 1} & \dotsc & a_{i+1 j -1} & a_{i + 1 j + 1 } & \dotsc & a_{i + 1n}\\
+			\vdots & \ddots & \vdots & \vdots & \ddots & \vdots\\
+			a_{n1} & \dotsc & a_{n j-1} & a_{n j + 1 } & \dotsc & a_{nn}
+		\end{vmatrix}
+	$$
+	то есть, это определитель матрицы размера $n-1 \times n-1$.
+\end{defn}
+\begin{defn}
+	\uwave{Алгебраическим дополнением} к элементу $a_{ij}$ матрицы $A$ называется число:
+	$$
+		A_{ij} = (-1)^{i + j}{\cdot}M_{ij}
+	$$
+\end{defn}
+
+\begin{theorem}
+	Пусть $A$ - матрица $n\times n$. Тогда:
+	$$
+		\det{A} = a_{i1}{\cdot}A_{i1} + a_{i2}{\cdot}A_{i2} + \dotsc + a_{in}{\cdot}A_{in}
+	$$
+	эта формула называется \uwave{разложением определителя по $i$-ой строке}. Аналогичная формула есть для разложения по столбцу:
+	$$
+		\det{A} = a_{1j}{\cdot}A_{1j} + a_{2j}{\cdot}A_{2j} + \dotsc + a_{nj}{\cdot}A_{nj}
+	$$
+	эта формула называется \uwave{разложением определителя по $j$-ому столбцу}.
+\end{theorem}
+\begin{rem}
+	Определитель квадратной матрицы можно разложить по любой строке и по любому столбцу.
+\end{rem}
+\begin{proof}
+	Докажем разложение по столбцу:
+	$$
+		A^{(j)} = 
+		\begin{pmatrix}
+			a_{1j}\\
+			0\\
+			\vdots \\
+			0\\
+			\vdots \\
+			0
+		\end{pmatrix} + 
+		\begin{pmatrix}
+			0\\
+			a_{2j}\\
+			\vdots \\
+			0\\
+			\vdots \\
+			0
+		\end{pmatrix} + \dotsc +
+		\begin{pmatrix}
+			0\\
+			0 \\
+			\vdots \\
+			a_{ij}\\
+			\vdots \\
+			0
+		\end{pmatrix} + \dotsc +
+		\begin{pmatrix}
+			0\\
+			0 \\
+			\vdots \\
+			0\\
+			\vdots \\
+			a_{nj}
+		\end{pmatrix} = a_{1j}{\cdot}e_1 + \dotsc + a_{ij}{\cdot}e_i + \dotsc + a_{nj}{\cdot}e_n	
+	$$
+	Поскольку определитель это аддитивная функция, то отсюда следует его вид:
+	$$
+		\det{A} = \ddsum{i = 1}{n} 
+		\begin{vmatrix}
+			a_{11} & \dotsc & a_{1j-1} & 0 & a_{1j+1} & \dotsc & a_{1n}\\
+			\vdots & \ddots & \vdots & \vdots & \vdots & \ddots  & \vdots \\
+			a_{i1} & \dotsc & a_{ij-1} & a_{ij} & a_{ij+1} & \dotsc & a_{in}\\
+			\vdots & \ddots & \vdots & \vdots & \vdots & \ddots  & \vdots \\
+			a_{n1} & \dotsc & a_{nj-1} & 0 & a_{nj+1} & \dotsc & a_{nn}
+		\end{vmatrix} = \ddsum{i = 1}{n} \left|A^{(1)} \dotsc a_{ij}{\cdot}e_i \dotsc A^{(n)}\right|
+	$$
+	В каждом определителе внутри суммы переставим $j$-ый столбец с $1$-ым, меняя его по очереди с предыдущими столбцами ($j-1$ столбец). Каждая перестановка столбцов меняет знак определителя, тогда:
+	$$
+		\det{A} = \ddsum{i = 1}{n}(-1)^{j-1}{\cdot}\left|a_{ij}{\cdot}e_i A^{(1)}\dotsc A^{(n)}\right| = \ddsum{i = 1}{n}(-1)^{j-1}	
+		\begin{vmatrix}
+			0& a_{11} & \dotsc & a_{1j-1} & a_{1j+1} & \dotsc & a_{1n}\\
+			\vdots & \vdots & \ddots & \vdots & \vdots & \ddots  & \vdots \\
+			a_{ij}& a_{i1} & \dotsc & a_{ij-1} & a_{ij+1} & \dotsc & a_{in}\\
+			\vdots & \vdots & \ddots & \vdots & \vdots & \ddots  & \vdots \\
+			0& a_{n1} & \dotsc & a_{nj-1} & a_{nj+1} & \dotsc & a_{nn}
+		\end{vmatrix}
+	$$
+	Проделаем теперь аналогичную операцию для строчек. В каждом определителе внутри суммы переставим $i$-ую строчку с $1$-ой, меняя её по очереди с предыдущими строчками ($i-1$ строка). Каждая перестановка строк меняет знак определителя, тогда:
+	$$
+		\det{A} = \ddsum{i = 1}{n}(-1)^{i+j - 2}		
+		\begin{vmatrix}
+			a_{ij}& a_{i1} & \dotsc & a_{ij-1} & a_{ij+1} & \dotsc & a_{in}\\
+			0& a_{11} & \dotsc & a_{1j-1} & a_{1j+1} & \dotsc & a_{1n}\\
+			\vdots & \vdots & \ddots & \vdots & \vdots & \ddots  & \vdots \\
+			0& a_{i-11} & \dotsc & a_{i-1j-1} & a_{i-1j+1} & \dotsc & a_{i-1n}\\
+			0& a_{i+11} & \dotsc & a_{i+1j-1} & a_{i+1j+1} & \dotsc & a_{i+1n}\\
+			\vdots & \vdots & \ddots & \vdots & \vdots & \ddots  & \vdots \\
+			0& a_{n1} & \dotsc & a_{nj-1} & a_{nj+1} & \dotsc & a_{nn}
+		\end{vmatrix}
+	$$
+	Видим, что здесь у нас получилась матрица с углом нулей, тогда:
+	$$
+		\det{A} = \ddsum{i = 1}{n}(-1)^{i + j - 2}{\cdot}a_{ij}{\cdot}M_{ij} = \ddsum{i = 1}{n}a_{ij}{\cdot}(-1)^{i + j }{\cdot}M_{ij} = \ddsum{i = 1}{n}a_{ij}{\cdot}A_{ij}
+	$$
+	Разложение по строке сводится к разложению по столбцу путём транспонирования. Пусть $M_{ji}^T$ - дополнительный минор к элементу $a_{ji}^T$ в матрице $A^T$, тогда $M_{ji}^T = M_{ij}$. Следовательно:
+	$$
+		\det{A} = \det{A^T} = \ddsum{j = 1}{n}a_{ji}^T{\cdot}A_{ji}^T = \ddsum{j = 1}{n}a_{ij}{\cdot}(-1)^{j+i}{\cdot}M_{ji}^T = \ddsum{j = 1}{n}a_{ij}{\cdot}(-1)^{j+i}{\cdot}M_{ij} = \ddsum{j = 1}{n}a_{ij}{\cdot}A_{ij}
+	$$
+\end{proof}
+
+\begin{lemma}(\textbf{о фальшивом разложении определителя})
+	Пусть $i \neq j$, тогда:
+	$$
+		a_{i1}A_{j1} + a_{i2}A_{j2} + \dotsc + a_{in}A_{jn} = 0
+	$$
+	это выражение называется \uwave{фальшивым разложением по строке}. Аналогично:
+	$$
+		a_{1i}A_{1j} + a_{2i}A_{2j} + \dotsc + a_{ni}A_{nj} = 0
+	$$
+	это выражение называется \uwave{фальшивым разложением по столбцу}.
+\end{lemma}
+\begin{proof}
+	Докажем первую формулу (вторая доказывается аналогично). Рассмотрим определитель матрицы:
+	$$
+		|A'| = 
+		\begin{matrix}
+			\vphantom{a}\\
+			\vphantom{\vdots}\\
+			i\\
+			\vphantom{\vdots}\\
+			j\\
+			\\
+			\vphantom{a}
+		\end{matrix}
+		\begin{vmatrix}
+			a_{11} & \dotsc & a_{1n}\\
+			\vdots & \ddots & \vdots \\
+			a_{i1} & \dotsc & a_{in}\\
+			\vdots & \ddots & \vdots \\
+			a_{i1} & \dotsc & a_{in}\\
+			\vdots & \ddots & \vdots \\
+			a_{n1} & \dotsc & a_{nn}
+		\end{vmatrix} = 0
+	$$
+	Разложим этот определитель по $j$-ой строке, тогда:
+	$$
+		|A'| = a_{i1}{\cdot}A_{j1} + a_{i2}{\cdot}A_{j2} + \dotsc + a_{in}{\cdot}A_{jn} = 0
+	$$
+	Здесь мы пользуемся тем, что алгебраические дополнения $A_{j1},\dotsc, A_{jn}$ не зависят от элементов $j$-ой строки. И таким образом, мы получаем требуемую формулу. Аналогично для столбцов.
+\end{proof}
+
+\end{document}

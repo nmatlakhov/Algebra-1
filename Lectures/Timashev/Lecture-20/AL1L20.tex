@@ -1,0 +1,571 @@
+\documentclass[12pt]{article}
+\usepackage[left=1cm, right=1cm, top=2cm,bottom=1.5cm]{geometry} 
+
+\usepackage[parfill]{parskip}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage{enumitem}
+\usepackage[normalem]{ulem}
+\usepackage{amsfonts, amsmath, amsthm, amssymb, mathtools,xcolor}
+\usepackage{blkarray}
+
+\usepackage{tabularx}
+\usepackage{hhline}
+
+\usepackage{accents}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{1.5pt}
+\renewcommand{\footrulewidth}{1pt}
+
+\usepackage{graphicx}
+\usepackage[figurename=Рис.]{caption}
+\usepackage{subcaption}
+\usepackage{float}
+
+%%Наименование папки откуда забирать изображения
+\graphicspath{ {./images/} }
+
+%%Изменение формата для ввода доказательства
+\renewcommand{\proofname}{$\square$  \nopunct}
+\renewcommand\qedsymbol{$\blacksquare$}
+
+%%Изменение отступа на таблицах
+\addto\captionsrussian{%
+	\renewcommand{\proofname}{$\square$ \nopunct}%
+}
+%% Римские цифры
+\newcommand{\RN}[1]{%
+	\textup{\uppercase\expandafter{\romannumeral#1}}%
+}
+
+%% Для удобства записи
+\newcommand{\MR}{\mathbb{R}}
+\newcommand{\MC}{\mathbb{C}}
+\newcommand{\MQ}{\mathbb{Q}}
+\newcommand{\MN}{\mathbb{N}}
+\newcommand{\MZ}{\mathbb{Z}}
+\newcommand{\MTB}{\mathbb{T}}
+\newcommand{\MTI}{\mathbb{I}}
+\newcommand{\MI}{\mathrm{I}}
+\newcommand{\MCI}{\mathcal{I}}
+\newcommand{\MJ}{\mathrm{J}}
+\newcommand{\MH}{\mathrm{H}}
+\newcommand{\MT}{\mathrm{T}}
+\newcommand{\MU}{\mathcal{U}}
+\newcommand{\MV}{\mathcal{V}}
+\newcommand{\MB}{\mathcal{B}}
+\newcommand{\MF}{\mathcal{F}}
+\newcommand{\MW}{\mathcal{W}}
+\newcommand{\ML}{\mathcal{L}}
+\newcommand{\MP}{\mathcal{P}}
+\newcommand{\VN}{\varnothing}
+\newcommand{\VE}{\varepsilon}
+\newcommand{\dx}{\, dx}
+\newcommand{\dy}{\, dy}
+\newcommand{\dz}{\, dz}
+\newcommand{\dd}{\, d}
+
+
+\theoremstyle{definition}
+\newtheorem{defn}{Опр:}
+\newtheorem{rem}{Rm:}
+\newtheorem{prop}{Утв.}
+\newtheorem{exrc}{Упр.}
+\newtheorem{problem}{Задача}
+\newtheorem{lemma}{Лемма}
+\newtheorem{theorem}{Теорема}
+\newtheorem{corollary}{Следствие}
+
+\newenvironment{cusdefn}[1]
+{\renewcommand\thedefn{#1}\defn}
+{\enddefn}
+
+\DeclareRobustCommand{\divby}{%
+	\mathrel{\text{\vbox{\baselineskip.65ex\lineskiplimit0pt\hbox{.}\hbox{.}\hbox{.}}}}%
+}
+\DeclareRobustCommand{\ndivby}{\mkern-1mu\not\mathrel{\mkern4.5mu\divby}\mkern1mu}
+
+
+%Короткий минус
+\DeclareMathSymbol{\SMN}{\mathbin}{AMSa}{"39}
+%Длинная шапка
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+%Функция знака
+\DeclareMathOperator{\sgn}{sgn}
+
+%Функция ранга
+\DeclareMathOperator{\rk}{\text{rk}}
+\DeclareMathOperator{\diam}{\text{diam}}
+
+
+%Обозначение константы
+\DeclareMathOperator{\const}{\text{const}}
+
+\DeclareMathOperator{\codim}{\text{codim}}
+
+\DeclareMathOperator*{\dsum}{\displaystyle\sum}
+\newcommand{\ddsum}[2]{\displaystyle\sum\limits_{#1}^{#2}}
+
+%Интеграл в большом формате
+\DeclareMathOperator{\dint}{\displaystyle\int}
+\newcommand{\ddint}[2]{\displaystyle\int\limits_{#1}^{#2}}
+\newcommand{\ssum}[1]{\displaystyle \sum\limits_{n=1}^{\infty}{#1}_n}
+
+\newcommand{\smallerrel}[1]{\mathrel{\mathpalette\smallerrelaux{#1}}}
+\newcommand{\smallerrelaux}[2]{\raisebox{.1ex}{\scalebox{.75}{$#1#2$}}}
+
+\newcommand{\smallin}{\smallerrel{\in}}
+\newcommand{\smallnotin}{\smallerrel{\notin}}
+
+\newcommand*{\medcap}{\mathbin{\scalebox{1.25}{\ensuremath{\cap}}}}%
+\newcommand*{\medcup}{\mathbin{\scalebox{1.25}{\ensuremath{\cup}}}}%
+
+\makeatletter
+\newcommand{\vast}{\bBigg@{3.5}}
+\newcommand{\Vast}{\bBigg@{5}}
+\makeatother
+
+%Промежуточное значение для sup\inf, поскольку они имеют разную высоту
+\newcommand{\newsup}{\mathop{\smash{\mathrm{sup}}}}
+\newcommand{\newinf}{\mathop{\mathrm{inf}\vphantom{\mathrm{sup}}}}
+
+%Скалярное произведение
+\newcommand{\inner}[2]{\left\langle #1, #2 \right\rangle }
+\newcommand{\linsp}[1]{\left\langle #1 \right\rangle }
+\newcommand{\linmer}[2]{\left\langle #1 \vert #2\right\rangle }
+
+%Подпись символов снизу
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+
+%% Шапка для букв сверху
+\newcommand{\wte}[1]{\widetilde{#1}}
+\newcommand{\wht}[1]{\widehat{#1}}
+\newcommand{\ovl}[1]{\overline{#1}}
+
+%%Трансформация Фурье
+\newcommand{\fourt}[1]{\mathcal{F}\left(#1\right)}
+\newcommand{\ifourt}[1]{\mathcal{F}^{-1}\left(#1\right)}
+
+%%Символ вектора
+\newcommand{\vecm}[1]{\overrightarrow{#1\,}}
+
+%%Пространстов матриц
+\newcommand{\matsq}[1]{\operatorname{Mat}_{#1}}
+\newcommand{\mat}[2]{\operatorname{Mat}_{#1, #2}}
+
+%Оператор для действ и мнимых чисел
+\DeclareMathOperator{\IM}{\operatorname{Im}}
+\DeclareMathOperator{\RE}{\operatorname{Re}}
+\DeclareMathOperator{\li}{\operatorname{li}}
+\DeclareMathOperator{\GL}{\operatorname{GL}}
+\DeclareMathOperator{\SL}{\operatorname{SL}}
+\DeclareMathOperator{\Char}{\operatorname{char}}
+\DeclareMathOperator\Arg{Arg}
+
+%Делимость чисел
+\newcommand{\modn}[3]{#1 \equiv #2 \; (\bmod \; #3)}
+
+
+%%Взятие в скобки, модули и норму
+\newcommand{\parfit}[1]{\left( #1 \right)}
+\newcommand{\modfit}[1]{\left| #1 \right|}
+\newcommand{\sqparfit}[1]{\left\{ #1 \right\}}
+\newcommand{\normfit}[1]{\left\| #1 \right\|}
+
+%%Функция для обозначения равномерной сходимости по множеству
+\newcommand{\uconv}[1]{\overset{#1}{\rightrightarrows}}
+\newcommand{\uconvm}[2]{\overset{#1}{\underset{#2}{\rightrightarrows}}}
+
+
+%%Функция для обозначения нижнего и верхнего интегралов
+\def\upint{\mathchoice%
+	{\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	\int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+
+%%След матрицы
+\DeclareMathOperator*{\tr}{tr}
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+	\hskip -\arraycolsep
+	\let\@ifnextchar\new@ifnextchar
+	\array{#1}}
+\makeatother
+
+
+%% Переопределение функции хи, чтобы выглядела более приятно
+\makeatletter
+\@ifdefinable\@latex@chi{\let\@latex@chi\chi}
+\renewcommand*\chi{{\@latex@chi\smash[t]{\mathstrut}}} % want only bottom half of \mathstrut
+\makeatletter
+
+\setcounter{MaxMatrixCols}{20}
+
+\begin{document}
+\lhead{Алгебра-\RN{1}}
+\chead{Тимашев Д.А.}
+\rhead{Лекция - 20}
+\section*{Дроби}
+Пусть $A$ - произвольная область целостности.
+\begin{defn}
+	В множестве $A \times \left(A\setminus \{0\}\right)$ будем говорить, что $(a,b) \sim (a',b')$, если $a{\cdot}b' = a'{\cdot}b$.
+\end{defn}
+\begin{prop}
+	Заданное отношение $\sim$ является отношением эквивалентности.
+\end{prop}
+
+\begin{defn}
+	Классы эквивалентности отношения $\sim$ назовём \uwave{дробями} элементов из кольца $A$.
+\end{defn}
+
+\textbf{\uline{Обозначение}}: $\dfrac{a}{b}$ - класс, содержащий $(a,b)$.
+
+\textbf{\uline{Правило пропорции}}: $\dfrac{a}{b} = \dfrac{a'}{b'} \Leftrightarrow a{\cdot}b' = a'{\cdot}b$. В частности, из правила следует: $\dfrac{a}{b} = \dfrac{ac}{bc}, \, \forall c \neq 0$.
+
+\textbf{\uline{Операции над дробями}}:
+\begin{enumerate}
+	\item[($+$):] $\forall \, \dfrac{a}{b}, \dfrac{c}{d} \in A \times \left(A\setminus \{0\}\right), \, \dfrac{a}{b} + \dfrac{c}{d} = \dfrac{ad + bc}{bd}$;
+	\item[($\, \cdot\, $):] $\forall \,\dfrac{a}{b}, \dfrac{c}{d} \in A \times \left(A\setminus \{0\}\right), \, \dfrac{a}{b}{\cdot}\dfrac{c}{d} = \dfrac{a{\cdot}c}{b{\cdot}d}$;
+\end{enumerate}
+\textbf{\uline{Корректность}}: Пусть $\dfrac{a}{b} = \dfrac{a'}{b'}, \, ab' = a'b$, тогда: 
+\begin{enumerate}
+	\item[($+$):] $\dfrac{ad + bc}{bd} = \dfrac{ab'd + bb'c}{bb'd} = \dfrac{a'bd + bb'c}{bb'd} = \dfrac{a'd + b'c}{b'd} \Rightarrow$ операция сложения - корректна;
+	\item[($\, \cdot\, $):] $\dfrac{ac}{bd} = \dfrac{ab'c}{bb'd} = \dfrac{a'c}{b'd} \Rightarrow$ операция умножения - корректна;
+\end{enumerate}
+
+\begin{defn}
+	Множество всех дробей (классов эквивалентностей) $Q(A)$ с введенными операциями сложения и умножения дробей называется \uwave{полем дробей} или \uwave{полем частных} или \uwave{полем отношений} кольца $A$:
+	$$
+		Q(A) = \left\{\dfrac{a}{b}\mid a,b \in A, \, b \neq 0\right\}
+	$$
+\end{defn}
+\textbf{\uline{Проверка аксиом поля}}:
+\begin{enumerate}[label=\arabic*)]
+	\item[1)-5)] \textbf{Коммутативность, ассоциативность, дистрибутивность сложения и умножения}: \\
+	Приводим дроби к общему знаменателю $\Rightarrow$ тождества сводятся к соответствующим тождествам для числителей, которые выполнены, поскольку это элементы коммутативного, ассоциативного кольца $A$. Например, коммутативность сложения:
+	$$
+		\dfrac{a}{b} + \dfrac{c}{b} = \dfrac{ab + bc}{b^2} =\dfrac{ab + cb}{b^2} =\dfrac{(a + c)b}{bb} = \dfrac{a + c}{b} = \dfrac{c + a}{b} = \dfrac{c}{b} + \dfrac{a}{b}
+	$$
+	где во четвертом равенстве мы воспользовались правилом пропорции. Аналогично, для коммутативности умножения:
+	$$
+		\dfrac{a}{b}{\cdot}\dfrac{c}{b} = \dfrac{ac}{b^2}  = \dfrac{ca}{b^2} = \dfrac{c}{b}{\cdot}\dfrac{a}{b}
+	$$
+	\setcounter{enumi}{5}
+	\item \textbf{Существование нулевого элемента}: $\forall \, \dfrac{a}{b} \in Q(A)$:
+	$$
+		\exists\, \dfrac{0}{1} \in Q(A) \colon  \dfrac{a}{b} + \dfrac{0}{1} = \dfrac{a{\cdot}1 + b{\cdot}0}{b{\cdot}1} = \dfrac{a}{b}
+	$$
+	Также заметим, что $\dfrac{0}{1} = \dfrac{0}{b}, \, \forall b \neq 0$;
+	\item \textbf{Существование единичного элемента}: $\forall \, \dfrac{a}{b} \in Q(A)$:
+	$$
+		\exists\, \dfrac{1}{1} \in Q(A) \colon \dfrac{a}{b}{\cdot}\dfrac{1}{1} = \dfrac{a{\cdot}1}{b{\cdot}1} = \dfrac{a}{b}
+	$$
+	\item \textbf{Существование противоположного элемента}: $\forall \, \dfrac{a}{b} \in Q(A)$:
+	$$
+		\exists\, -\left(\dfrac{a}{b}\right) = \dfrac{-a}{b} \in Q(A) \colon \dfrac{a}{b} + \dfrac{-a}{b} = \dfrac{ab + b(-a)}{bb} = \dfrac{(a + (-a))b}{bb} = \dfrac{a + (-a)}{b} = \dfrac{0}{b} = \dfrac{0}{1}
+	$$
+	\item \textbf{Существование обратного элемента}: $\forall \, \dfrac{a}{b} \in Q(A), \, \dfrac{a}{b} \neq \dfrac{0}{1} \Rightarrow a{\cdot}1 = a \neq 0{\cdot}b  = 0$:
+	$$
+		\exists\, \left(\dfrac{a}{b}\right)^{-1} = \dfrac{b}{a} \in Q(A) \colon \dfrac{a}{b} {\cdot}\dfrac{b}{a} = \dfrac{ab}{ba} = \dfrac{ab}{ab} = \dfrac{1}{1}
+	$$
+\end{enumerate}
+Это поле хорошо тем, что оно содержит в себе исходное кольцо $A$, то есть мы расширили $A$ до поля.
+\begin{prop}
+	Поле дробей $Q(A)$ содержит подкольцо: $\dfrac{A}{1} = \left\{\dfrac{a}{1} \mid a \in A\right\} \simeq A$.
+	При отождествлении $\dfrac{A}{1}$ с $A$ верно следующее:
+	$$
+		\forall q \in Q(A), \, \exists, \, a,b\in A, \, b\neq 0 \colon q = a{\cdot}b^{-1}
+	$$
+\end{prop}
+\begin{proof}
+	Проверим замкнутость множества $\dfrac{A}{1}$ относительно сложения и умножения:
+	$$
+		\forall \, \dfrac{a}{1}, \dfrac{b}{1} \in \dfrac{A}{1}, \, \dfrac{a}{1} \pm \dfrac{b}{1} = \dfrac{a \pm b}{1} \in \dfrac{A}{1}
+	$$
+	$$
+		\forall \, \dfrac{a}{1}, \dfrac{b}{1} \in \dfrac{A}{1}, \, \dfrac{a}{1}{\cdot}\dfrac{b}{1} = \dfrac{ab}{1} \in \dfrac{A}{1}
+	$$
+	Следовательно, $\dfrac{A}{1}$ является подкольцом. Соответствие $\varphi \colon A \to \dfrac{A}{1}, \, \varphi(a) = \dfrac{a}{1}$ является изоморфизмом:
+	\begin{enumerate}[label=\arabic*)]
+		\item \textbf{Согласованность с операциями}:
+		$$
+			\forall a,b \in A, \, \varphi(a \pm b) = \dfrac{a \pm b}{1} = \dfrac{a}{1} \pm \dfrac{b}{1} = \varphi(a) \pm \varphi(b) 
+		$$
+		$$
+			\forall a,b \in A,\, \varphi(a{\cdot}b) = \dfrac{ab}{1} = \dfrac{a}{1}{\cdot}\dfrac{b}{1} = \varphi(a){\cdot}\varphi(b) 
+		$$
+		\item \textbf{Биективность}: $\dfrac{a}{1} = \dfrac{a'}{1} \Leftrightarrow a = a{\cdot}1 = a'{\cdot}1 = a' \Rightarrow$ будет взаимнооднозначное соответствие;
+	\end{enumerate}
+
+	Пусть $q \in Q(A)$, тогда: 
+	$$
+		q = \dfrac{a}{b} = \dfrac{a}{1}{\cdot}\dfrac{1}{b} = \dfrac{a}{1}{\cdot}\left(\dfrac{b}{1}\right)^{-1} = a b^{-1}
+	$$
+\end{proof}
+\begin{rem}
+	Полученное расширение кольца до поля в каком-то смысле является минимальным, поскольку мы присоеденили то, что нужно присоединить, чтобы получить поле.
+\end{rem}
+\textbf{Итог}: Поскольку мы доказали, что дробь вида $\dfrac{a}{b}$ является частным дробей, отождествляемых с элементами исходного кольца $ab^{-1}$, то поэтому знак дроби можно понимать как знак деления.
+
+\textbf{Примеры}:
+\begin{enumerate}[label=\arabic*)]
+	\item $Q(\MZ) = \MQ$;
+	\item $Q(K[x]) = K(x)$ - \uwave{поле рациональных дробей} от одной переменной с коэффициентами из поля $K$;
+\end{enumerate}
+
+\section*{Поле рациональных дробей}
+\begin{defn}
+	\uwave{Полем рациональных дробей} от одной переменной с коэффициентами из поля $K$ называется поле дробей от кольца многочленов $K[x]$: $Q(K[x]) = K(x)$.
+\end{defn}
+
+\begin{defn}
+	Рациональная дробь: $r = \dfrac{f}{g} \in K(x)$ задаёт \uwave{рациональную функцию}: 
+	$$
+		r\colon K \setminus \{x_1,\dotsc,x_s\} \to K, \quad \forall c \in K \setminus \{x_1,\dotsc,x_s\}, \, r(c) = \dfrac{f(c)}{g(c)}
+	$$
+	где $x_1,\dotsc,x_s$ - корни многочлена $g$.
+\end{defn}
+
+\textbf{\uline{Равенство рациональных дробей}}: $\dfrac{f_1}{g_1} = \dfrac{f_2}{g_2} \Leftrightarrow f_1{\cdot}g_2 = f_2{\cdot}g_1$ по правилу пропорции, тогда: 
+$$
+	\forall c \in  K, \, f_1(c){\cdot}g_2(c) = f_2(c){\cdot}g_1(c) \Rightarrow \dfrac{f_1(c)}{g_1(c)} = \dfrac{f_2(c)}{g_2(c)}, \, g_1(c), g_2(c) \neq 0
+$$
+Таким образом, если две дроби равны формально, как элементы поля дробей, то они равны и функционально, то есть соответствующие рациональные функции равны. Обратное, как и в случае многочленов, верно не всегда, но для бесконечного поля $K$ обратное будет верно.
+
+\begin{prop}
+	Для бесконечного поля $K$, формальное равенство дробей равносильно функциональному.
+\end{prop}
+\begin{proof}
+	Если $\dfrac{f_1(c)}{g_1(c)} = \dfrac{f_2(c)}{g_2(c)}$ при $g_1(c),g_2(c) \neq 0$, тогда:
+	$$
+		f_1(c){\cdot}g_2(c) = f_2(c){\cdot}g_1(c), \, \forall c \in K \colon g_1(c),g_2(c) \neq 0
+	$$
+	Поле - бесконечное, а количество корней - конечно $\Rightarrow f_1g_2 - f_2g_1$ имеет бесконечно много корней в $K$, но это возможно лишь в случае, когда это тождественно нулевой многочлен (у ненулевого многочлена число корней не больше его степени), тогда:
+	$$
+		f_1g_2 - f_2g_1 \equiv 0 \Leftrightarrow f_1g_2 = f_2 g_1 \Leftrightarrow \dfrac{f_1}{g_1} = \dfrac{f_2}{g_2}		
+	$$ 
+\end{proof}
+
+\newpage
+\section*{Структура поля рациональных дробей}
+Нашей целью будет изучение структуры рациональных дробей. Применение результатов, которые докажем находят применение в математическом анализе, нежели в алгебре: интегрирование рациональных функций и изучение поведения рациональных функций вблизи их особых точек, то есть там, где они не определены (они ещё называются полюсами).
+
+В связи с такой постановкой задачи возникает вопрос, к какому виду можно привести любую рациональную дробь? Первое упрощение - сократить числитель и знаменатель на общий множитель, то есть привести к виду в котором у числителя и знаменателя нет общих множителей.
+
+\begin{defn}
+	Рациональная дробь $\dfrac{f}{g}$ называется \uwave{несократимой}, если $f$ и $g$ взаимно просты.
+\end{defn}
+
+\begin{prop}
+	$\forall r \in K(x), \, r \neq 0$, можно представить в виде $r = \dfrac{f}{g}$, где $r$ - несократимая дробь, причем $f$ и $g$ \\[4pt]определены однозначно, с точностью до умножения на константу.
+\end{prop}
+\begin{proof}
+	Пусть $r = \dfrac{f}{g}, \, f,g \neq 0$, тогда: $d = (f,g) = \text{НОД}(f,g)$. Положим:
+	$$
+		f_0 = \dfrac{f}{d}, \, g_0 = \dfrac{g}{d} \Rightarrow f = f_0{\cdot}d,\, g = g_0{\cdot}d \Rightarrow r = \dfrac{f}{g} = \dfrac{f_0{\cdot}d}{g_0{\cdot}d} = \dfrac{f_0}{g_0}	
+	$$
+	Получили несократимую дробь. Пусть $r = \tfrac{f_1}{g_1} = \tfrac{f_0}{g_0}$ - ещё одна несократимая дробь, тогда по правилу пропорции мы можем написать:
+	$$
+		\dfrac{f_1}{g_1} = \dfrac{f_0}{g_0} \Leftrightarrow f_0{\cdot}g_1 = f_1{\cdot}g_0
+	$$
+	Левая часть делится на $f_0 \Rightarrow$ правая часть тоже должна делиться на $f_0$, но $(f_0,g_0) = 1$, тогда $f_1 \divby f_0$:
+	$$
+		f_1 = f_0{\cdot}h \Rightarrow f_0{\cdot}g_1 = f_1{\cdot}g_0 = f_0{\cdot}h{\cdot}g_0 \Rightarrow g_1 = g_0{\cdot}h
+	$$
+	Поскольку $(f_1,g_1) = 1$, то никаких общих делителей нет $\Rightarrow h \in K^{\times}$.
+\end{proof}
+
+\begin{defn}
+	Рациональная дробь $\dfrac{f}{g}$ называется \uwave{правильной}, если $\deg(f) < \deg(g)$ или $f = 0$.
+\end{defn}
+\begin{prop}
+	Правильные дроби образуют подкольцо (без единицы) в $K(x)$.
+\end{prop}
+\begin{proof}
+	Проверим замкнутость относительно сложения и умножения:
+	$$
+		\forall \, \dfrac{f_0}{g_0}, \dfrac{f_1}{f_1} \in K(x), \, \dfrac{f_0}{g_0}{\cdot}\dfrac{f_1}{g_1} = \dfrac{f_0f_1}{g_0g_1}, \, \deg(f_0f_1) = \deg(f_0) + \deg(f_1) < \deg(g_0) + \deg(g_1) = \deg(g_0g_1)
+	$$
+	При сложении/вычитании будем считать, что дроби приведены к общему знаменателю:
+	$$
+		\forall \, \dfrac{f_0}{g}, \dfrac{f_1}{g} \in K(x), \, \dfrac{f_0}{g} \pm \dfrac{f_1}{g} = \dfrac{f_0 \pm f_1}{g}, \, \deg(f_0 \pm f_1) \leq \max\{\deg(f_0),\deg(f_1)\} < \deg(g)
+	$$
+	Получаем, что множество правильных дробей замкнуто относительно операций сложения и умножения, следовательно, это подкольцо.
+\end{proof}
+\newpage
+\begin{prop}
+	$\forall r = \dfrac{f}{g} \in K(x), \, \exists ! \,$ представление дроби: $r = q + \dfrac{h}{g}$, где $q$ - многочлен, а $\dfrac{h}{g}$ - правильная дробь.
+\end{prop}
+\begin{proof}
+	Поделим $f$ на $g$ с остатком, тогда:
+	$$
+		f = g{\cdot}q + h, \, \deg(h) < \deg(g)
+	$$
+	Поделим это равенство на $g$ уже в поле дробей, тогда:
+	$$
+		\dfrac{f}{g} = q + \dfrac{h}{g}
+	$$
+	где $q$ это многочлен, а $\dfrac{h}{g}$ - правильная дробь, так как $\deg(h) < \deg(g)$. Единственность такого представления следует из единственности деления с остатком. Можно дополнительно проверить пусть у нас есть два таких разложения:
+	$$
+		q + \dfrac{h}{g} = q_1 + \dfrac{h_1}{g_1} \Rightarrow q - q_1 = \dfrac{h_1}{g_1} - \dfrac{h}{g} = \dfrac{h_2}{g_2}
+	$$
+	то есть снова получили правильную дробь. Тогда: $(q - q_1){\cdot}g_2 = h_2$, следовательно:
+	$$
+		\deg((q - q_1)g_2) = \deg(q - q_1) + \deg(g_2) \geq \deg(g_2) > \deg(h_2)
+	$$
+	Получаем противоречие, за исключением случая, когда $h_2 = 0 \Rightarrow q = q_1 \Rightarrow \dfrac{h_1}{g_1} = \dfrac{h}{g}$.
+\end{proof}
+Остается вопрос, что делать с правильными дробями? 
+\begin{defn}
+	\uwave{Простейшая дробь} - это рациональная дробь вида: $\dfrac{h}{p^k}$, где $p$ - это неприводимый многочлен, где $k \in \MN$ и верно: $\deg(h) < \deg(p)$.
+\end{defn}
+Класс простейших дробей зависит от того поля, над которым мы все рассматриваем.
+
+\textbf{Примеры простейших дробей}:
+\begin{enumerate}[label=\arabic*)]
+	\item $K = \MC \Rightarrow$ в знаменателе должна стоять степень неприводимого многочлена $\Rightarrow$ степени линейного двухчлена, тогда простейшие дроби имеют вид:
+	$$
+		\dfrac{a}{(x - z_0)^k}, \, a,z_0 \in \MC
+	$$
+	\item $K = \MR \Rightarrow$ в знаменателе должна стоять степень неприводимого многочлена $\Rightarrow$ либо степени линейного двухчлена, либо степени квадратного трехчлена без действительных корней, тогда простейшие дроби имеют вид:
+	$$
+		\dfrac{a}{(x - x_0)^k}, \, a,x_0 \in \MR, \quad \dfrac{dx + e}{(x^2  + bx + c)^l}, \, b^2 - 4c < 0, \, d,e,b,c \in \MR
+	$$
+\end{enumerate}
+\newpage
+\subsection*{Разложение правильной дроби в простейшие дроби}
+\begin{theorem}
+	Пусть $r = \dfrac{f}{g}\in K(x)$ - правильная дробь. Представим знаменатель дроби в виде:
+	$$
+		g= p_1^{k_1}{\cdot}p_2^{k_2}{\cdot}\dotsc{\cdot}p_s^{k_s}
+	$$
+	где $p_1,p_2,\dotsc, p_s$ - неприводимые, попарно не пропорциональны. Тогда $\exists!$ разложение правильной дроби в сумму простейших дробей следующего вида:
+	$$
+		r = \dfrac{h_{11}}{p_1} + \dfrac{h_{12}}{p_1^2} + \dotsc+ \dfrac{h_{1k_1}}{p_1^{k_1}} + \dfrac{h_{21}}{p_2} + \dfrac{h_{22}}{p_2^2} + \dotsc+ \dfrac{h_{2k_2}}{p_2^{k_2}} + \dotsc  + \dfrac{h_{s1}}{p_s} + \dfrac{h_{s2}}{p_s^2} + \dotsc+ \dfrac{h_{sk_s}}{p_s^{k_s}} = \ddsum{\substack{i = 1,\dotsc,s\\k =1,\dotsc,k_i}}{} \dfrac{h_{ik}}{p_i^k}
+	$$
+\end{theorem}
+\begin{proof}\hfill\\
+	\textbf{\uline{Существование}}: Существование представления в требуемом виде следует из серии лемм.
+	\begin{lemma}
+		Если $g = g_1{\cdot}g_2$, где $(g_1,g_2) = 1$, то $\dfrac{f}{g} = \dfrac{f_1}{g_1} + \dfrac{f_2}{g_2}$, где все дроби - правильные.
+	\end{lemma}
+	\begin{proof}
+		Так как $(g_1,g_2) = 1$, тогда: $(g_1,g_2) = 1 = u_1{\cdot}g_1 + u_2 {\cdot}g_2$, где $u_1,u_2$ - многочлены. Домножим на это выражение нашу исходную дробь:
+		$$
+			\dfrac{f}{g} = \dfrac{f}{g}{\cdot}1 = \dfrac{f{\cdot}(u_1{\cdot}g_1 + u_2 {\cdot}g_2)}{g_1g_2} = \dfrac{f{\cdot}u_2}{g_1} + \dfrac{f{\cdot}u_1}{g_2}
+		$$
+		Поделим с остатком:
+		$$
+			f{\cdot}u_1 = g_1{\cdot}q_1 + f_1, \quad f{\cdot}u_2 = g_2{\cdot}q_2 + f_2, \quad \deg(f_i) < \deg(g_i), \, i =1,2 \Rightarrow
+		$$
+		$$
+			\Rightarrow \dfrac{f{\cdot}u_2}{g_1} + \dfrac{f{\cdot}u_1}{g_2} = q_1 + \dfrac{f_1}{g_1} + q_2 + \dfrac{f_2}{g_2} = \underbrace{(q_1 + q_2)}_{\text{многочлен}} + \underbrace{\dfrac{f_1}{g_1} + \dfrac{f_2}{g_2}}_{\text{правильные дроби}}
+		$$
+		Сумма правильных дробей даёт правильную дробь, исходная дробь также была правильной $\Rightarrow$ поскольку представление дроби в виде суммы правильной дроби и многочлена - единственно, то $q_1 + q_2 = 0$.
+	\end{proof}
+	\begin{corollary}
+		$\exists$ разложение $\dfrac{f}{g} = \dfrac{f_1}{p_1^{k_1}} + \dfrac{f_2}{p_2^{k_2}} + \dotsc + \dfrac{f_s}{p_s^{k_s}}$, где все слагаемые - правильные дроби.
+	\end{corollary}
+	\begin{proof}
+		Индукция по $s$.
+		
+		\uline{База индукции}: $s = 1 \Rightarrow g = p_1^{k_1} \Rightarrow \dfrac{f}{g} = \dfrac{f}{p_1^{k_1}}$.
+		
+		\uline{Шаг индукции}: По лемме $1$, нашу дробь можно представить так:
+		$$
+			\dfrac{f}{g} = \dfrac{f_1}{p_1^{k_1}} + \dfrac{\wte{f}}{p_2^{k_2}{\cdot}\dotsc{\cdot}p_s^{k_s}}
+		$$
+		где обе дроби - правильные. Тогда по предположению индукции будет верно:
+		$$
+			\dfrac{f}{g} = \dfrac{f_1}{p_1^{k_1}} + \dfrac{f_2}{p_2^{k_2}} + \dotsc + \dfrac{f_s}{p_s^{k_s}}
+		$$
+	\end{proof}
+	\begin{lemma}
+		Правильная дробь $\dfrac{f}{p^k}$, где $p$ - неприводим, может быть разложена в виде суммы простейших:
+		$$
+			\dfrac{f}{p^k} = \dfrac{h_1}{p} + \dfrac{h_2}{p^2} + \dotsc + \dfrac{h_k}{p^k}, \, \deg(h_i) < \deg(p), \, i = \ovl{1,k}
+		$$
+	\end{lemma}
+	\begin{proof}
+		Индукцией по $k$.
+		
+		\uline{База индукции}: $k = 1 \Rightarrow \dfrac{f}{p} = \dfrac{h_1}{p}$, поскольку исходная дробь правильная, то $\deg(f) = \deg(h_1) < \deg(p) \Rightarrow$ это простейшая дробь.
+		
+		\uline{Шаг индукции}: Поделим числитель нашей дроби с остатком на $p$:
+		$$
+			f = p{\cdot}\wte{f} + h_k, \, \deg(h_k) < \deg(p) \Rightarrow \dfrac{f}{p^k} = \dfrac{\wte{f}}{p^{k-1}} + \dfrac{h_k}{p^k}
+		$$
+		Второе слагаемое будет простейшей дробью, первое - правильной дробью, поскольку:
+		$$
+			\deg(p\wte{f}) = \deg(\wte{f}) + \deg(p) = \deg(f - h_k) \leq \deg(f) < \deg(p^k) \Rightarrow  \deg(\wte{f}) < \deg(p^{k-1})
+		$$
+		или просто как разница правильных дробей (одна из которых - простейшая). Применим предположение индукции, тогда:
+		$$
+			\dfrac{f}{p^k} = \dfrac{\wte{f}}{p^{k-1}} + \dfrac{h_k}{p^k} = \dfrac{h_1}{p} + \dfrac{h_2}{p^2} + \dotsc + \dfrac{h_k}{p^k}
+		$$
+		где все дроби - простейшие.
+	\end{proof}
+	Следовательно, мы представляем исходную дробь в виде разложения из следствия $1$ и затем каждую раскладываем по лемме $2$ в виде суммы простейших $\Rightarrow$ существование разложения доказано.
+	
+	\textbf{\uline{Единственность}}: Предположим, что есть два разложения:
+	$$
+		\dfrac{f}{g} = \ddsum{\substack{i = 1,\dotsc,s\\k =1,\dotsc,k_i}}{} \dfrac{h_{ik}}{p_i^k} = \ddsum{\substack{i = 1,\dotsc,s\\k =1,\dotsc,k_i}}{} \dfrac{\wte{h}_{ik}}{p_i^k}
+	$$
+	Предположим, что $\exists \, i,k \colon h_{ik} \neq \wte{h}_{ik}$. Домножим это равенство на $g = p_1^{k_1}{\cdot}p_2^{k_2}{\cdot}\dotsc{\cdot}p_s^{k_s}$, тогда:
+	$$
+		\ddsum{\substack{i = 1,\dotsc,s\\k =1,\dotsc,k_i}}{} h_{ik}{\cdot}p_1^{k_1}{\cdot}\dotsc{\cdot}p_i^{k_i -k}{\cdot}\dotsc{\cdot}p_s^{k_s} = \ddsum{\substack{i = 1,\dotsc,s\\k =1,\dotsc,k_i}}{} \wte{h}_{ik}{\cdot}p_1^{k_1}{\cdot}\dotsc{\cdot}p_i^{k_i -k}{\cdot}\dotsc{\cdot}p_s^{k_s} \Rightarrow
+	$$
+	$$
+		\Rightarrow  \ddsum{\substack{i = 1,\dotsc,s\\k =1,\dotsc,k_i}}{}(h_{ik} - \wte{h}_{ik}){\cdot}p_1^{k_1}{\cdot}\dotsc{\cdot}p_i^{k_i -k}{\cdot}\dotsc{\cdot}p_s^{k_s} = 0 
+	$$
+	Выберем $i = i_0, \, k = k_0$ так, чтобы $h_{i_0 k_0} \neq \wte{h}_{i_0 k_0}$, но $h_{i_0 k} = \wte{h}_{i_0 k}$ при $k > k_0$. Тогда:
+	$$
+		(h_{i_0k_0} - \wte{h}_{i_0k_0}){\cdot}p_1^{k_1}{\cdot}\dotsc{\cdot}p_{i_0}^{k_{i_0} -k_0}{\cdot}\dotsc{\cdot}p_s^{k_s} \neq 0, \ndivby p_{i_0}^{k_{i_0} - k_0 + 1}
+	$$
+	Отдельно заметим, что:
+	$$
+		\deg(h_{i_0k_0} - \wte{h}_{i_0k_0}) < \deg(p_{i_0})
+	$$
+	и соответственно не делится на $p_{i_0}$. Остальные слагаемые в сумме делятся на $p_{i_0}^{k_{i_0} - k_0 + 1}$ поскольку при $i = i_0$ верно либо $k < k_0$ и тогда: $k_{i_0} - k \geq k_{i_0} - k_0 + 1$, либо $k > k_0$ и тогда слагаемое равно $0$. Если $i \neq i_0$, то ничего из степени $p_{i_0}^{k_{i_0}}$ не вычитается и делится на $p_{i_0}^{k_{i_0} - k_0 + 1}$. Следовательно, мы получаем сумму равную нулю, в которой одно слагаемое на что-то не делится, а остальные слагаемые на это делятся $\Rightarrow$ противоречие.
+\end{proof}
+
+\section*{Многочлены от нескольких переменных}
+Пусть $K$ - коммутативное, ассоциативное кольцо с единицей. Дадим аксиоматическое определение.
+\begin{defn}
+	\uwave{Кольцо многочленов от $n$ переменных} с коэффициентами из кольца $K$ это ассоциативное, коммутативное кольцо с единицей, удовлетворяющее следующим свойствам:
+	\begin{enumerate}[label=\arabic*)]
+		\item $K \subset K[x_1,\dotsc, x_n]$;
+		\item $x_1,\dotsc,x_n \in K[x_1,\dotsc, x_n], \, x_1,\dotsc, x_n \not\in K$;
+		\item $\forall f \in K[x_1,\dotsc,x_n], \, \exists!$ представление: 
+		$$
+			f = \ddsum{k_1,\dotsc,k_n \geq 0}{}a_{k_1\dotsc k_n}{\cdot}x_1^{k_1}{\cdot}\dotsc{\cdot}x_n^{k_n}
+		$$ 
+		С точностью до добавления нулевых слагаемых;
+	\end{enumerate}
+	\textbf{\uwave{Обозначение}}: $K[x_1,\dotsc, k_n]$.
+\end{defn}
+\begin{defn}
+	Элементы $x_1,\dotsc,x_n \in K[x_1,\dotsc, x_n]$ называются \uwave{переменными}.
+\end{defn}
+\begin{defn}
+	Элементы $a_{k_1\dotsc k_n} \in K$ в представлении $f \in K[x_1,\dotsc,x_n]$ называются \uwave{коэффициентами}.
+\end{defn}
+\begin{defn}
+	Элементы $x_1^{k_1}{\cdot}\dotsc{\cdot}x_n^{k_n}$ в представлении $f \in K[x_1,\dotsc,x_n]$ называются \uwave{одночленами}.
+\end{defn}
+\begin{rem}
+	Свойство $3)$ определения кольца многочленов от нескольких переменных можно переформулировать так: любой элемент кольца многочленов от $n$ переменных представляется единственным способом, с точностью до добавления нулевых слагаемых, в виде линейной комбинации одночленов от этих переменных с коэффициентами из исходного кольца $K$.
+\end{rem}
+
+\begin{theorem}
+	$K[x_1,\dotsc,x_n]$ - существует и единственно с точностью до изоморфизма.
+\end{theorem}
+
+
+\end{document}

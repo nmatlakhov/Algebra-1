@@ -1,0 +1,588 @@
+\documentclass[12pt]{article}
+\usepackage[left=1cm, right=1cm, top=2cm,bottom=1.5cm]{geometry} 
+
+\usepackage[parfill]{parskip}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage{enumitem}
+\usepackage[normalem]{ulem}
+\usepackage{amsfonts, amsmath, amsthm, amssymb, mathtools,xcolor}
+\usepackage{blkarray}
+
+\usepackage{tabularx}
+\usepackage{hhline}
+
+\usepackage{accents}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{1.5pt}
+\renewcommand{\footrulewidth}{1pt}
+
+\usepackage{graphicx}
+\usepackage[figurename=Рис.]{caption}
+\usepackage{subcaption}
+\usepackage{float}
+
+%%Наименование папки откуда забирать изображения
+\graphicspath{ {./images/} }
+
+%%Изменение формата для ввода доказательства
+\renewcommand{\proofname}{$\square$  \nopunct}
+\renewcommand\qedsymbol{$\blacksquare$}
+
+%%Изменение отступа на таблицах
+\addto\captionsrussian{%
+	\renewcommand{\proofname}{$\square$ \nopunct}%
+}
+%% Римские цифры
+\newcommand{\RN}[1]{%
+	\textup{\uppercase\expandafter{\romannumeral#1}}%
+}
+
+%% Для удобства записи
+\newcommand{\MR}{\mathbb{R}}
+\newcommand{\MC}{\mathbb{C}}
+\newcommand{\MQ}{\mathbb{Q}}
+\newcommand{\MN}{\mathbb{N}}
+\newcommand{\MZ}{\mathbb{Z}}
+\newcommand{\MTB}{\mathbb{T}}
+\newcommand{\MTI}{\mathbb{I}}
+\newcommand{\MI}{\mathrm{I}}
+\newcommand{\MCI}{\mathcal{I}}
+\newcommand{\MJ}{\mathrm{J}}
+\newcommand{\MH}{\mathrm{H}}
+\newcommand{\MT}{\mathrm{T}}
+\newcommand{\MU}{\mathcal{U}}
+\newcommand{\MV}{\mathcal{V}}
+\newcommand{\MB}{\mathcal{B}}
+\newcommand{\MF}{\mathcal{F}}
+\newcommand{\MW}{\mathcal{W}}
+\newcommand{\ML}{\mathcal{L}}
+\newcommand{\MP}{\mathcal{P}}
+\newcommand{\VN}{\varnothing}
+\newcommand{\VE}{\varepsilon}
+\newcommand{\dx}{\, dx}
+\newcommand{\dy}{\, dy}
+\newcommand{\dz}{\, dz}
+\newcommand{\dd}{\, d}
+
+
+\theoremstyle{definition}
+\newtheorem{defn}{Опр:}
+\newtheorem{rem}{Rm:}
+\newtheorem{prop}{Утв.}
+\newtheorem{exrc}{Упр.}
+\newtheorem{problem}{Задача}
+\newtheorem{lemma}{Лемма}
+\newtheorem{theorem}{Теорема}
+\newtheorem{corollary}{Следствие}
+
+\newenvironment{cusdefn}[1]
+{\renewcommand\thedefn{#1}\defn}
+{\enddefn}
+
+\DeclareRobustCommand{\divby}{%
+	\mathrel{\text{\vbox{\baselineskip.65ex\lineskiplimit0pt\hbox{.}\hbox{.}\hbox{.}}}}%
+}
+\DeclareRobustCommand{\ndivby}{\mkern-1mu\not\mathrel{\mkern4.5mu\divby}\mkern1mu}
+
+
+%Короткий минус
+\DeclareMathSymbol{\SMN}{\mathbin}{AMSa}{"39}
+%Длинная шапка
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+%Функция знака
+\DeclareMathOperator{\sgn}{sgn}
+
+%Функция ранга
+\DeclareMathOperator{\rk}{\text{rk}}
+\DeclareMathOperator{\diam}{\text{diam}}
+
+
+%Обозначение константы
+\DeclareMathOperator{\const}{\text{const}}
+
+\DeclareMathOperator{\codim}{\text{codim}}
+
+\DeclareMathOperator*{\dsum}{\displaystyle\sum}
+\newcommand{\ddsum}[2]{\displaystyle\sum\limits_{#1}^{#2}}
+
+%Интеграл в большом формате
+\DeclareMathOperator{\dint}{\displaystyle\int}
+\newcommand{\ddint}[2]{\displaystyle\int\limits_{#1}^{#2}}
+\newcommand{\ssum}[1]{\displaystyle \sum\limits_{n=1}^{\infty}{#1}_n}
+
+\newcommand{\smallerrel}[1]{\mathrel{\mathpalette\smallerrelaux{#1}}}
+\newcommand{\smallerrelaux}[2]{\raisebox{.1ex}{\scalebox{.75}{$#1#2$}}}
+
+\newcommand{\smallin}{\smallerrel{\in}}
+\newcommand{\smallnotin}{\smallerrel{\notin}}
+
+\newcommand*{\medcap}{\mathbin{\scalebox{1.25}{\ensuremath{\cap}}}}%
+\newcommand*{\medcup}{\mathbin{\scalebox{1.25}{\ensuremath{\cup}}}}%
+
+\makeatletter
+\newcommand{\vast}{\bBigg@{3.5}}
+\newcommand{\Vast}{\bBigg@{5}}
+\makeatother
+
+%Промежуточное значение для sup\inf, поскольку они имеют разную высоту
+\newcommand{\newsup}{\mathop{\smash{\mathrm{sup}}}}
+\newcommand{\newinf}{\mathop{\mathrm{inf}\vphantom{\mathrm{sup}}}}
+
+%Скалярное произведение
+\newcommand{\inner}[2]{\left\langle #1, #2 \right\rangle }
+\newcommand{\linsp}[1]{\left\langle #1 \right\rangle }
+\newcommand{\linmer}[2]{\left\langle #1 \vert #2\right\rangle }
+
+%Подпись символов снизу
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+
+%% Шапка для букв сверху
+\newcommand{\wte}[1]{\widetilde{#1}}
+\newcommand{\wht}[1]{\widehat{#1}}
+\newcommand{\ovl}[1]{\overline{#1}}
+
+%%Трансформация Фурье
+\newcommand{\fourt}[1]{\mathcal{F}\left(#1\right)}
+\newcommand{\ifourt}[1]{\mathcal{F}^{-1}\left(#1\right)}
+
+%%Символ вектора
+\newcommand{\vecm}[1]{\overrightarrow{#1\,}}
+
+%%Пространстов матриц
+\newcommand{\matsq}[1]{\operatorname{Mat}_{#1}}
+\newcommand{\mat}[2]{\operatorname{Mat}_{#1, #2}}
+
+%Оператор для действ и мнимых чисел
+\DeclareMathOperator{\IM}{\operatorname{Im}}
+\DeclareMathOperator{\RE}{\operatorname{Re}}
+\DeclareMathOperator{\li}{\operatorname{li}}
+\DeclareMathOperator{\GL}{\operatorname{GL}}
+\DeclareMathOperator{\SL}{\operatorname{SL}}
+\DeclareMathOperator{\Char}{\operatorname{char}}
+\DeclareMathOperator\Arg{Arg}
+
+%Делимость чисел
+\newcommand{\modn}[3]{#1 \equiv #2 \; (\bmod \; #3)}
+
+
+%%Взятие в скобки, модули и норму
+\newcommand{\parfit}[1]{\left( #1 \right)}
+\newcommand{\modfit}[1]{\left| #1 \right|}
+\newcommand{\sqparfit}[1]{\left\{ #1 \right\}}
+\newcommand{\normfit}[1]{\left\| #1 \right\|}
+
+%%Функция для обозначения равномерной сходимости по множеству
+\newcommand{\uconv}[1]{\overset{#1}{\rightrightarrows}}
+\newcommand{\uconvm}[2]{\overset{#1}{\underset{#2}{\rightrightarrows}}}
+
+
+%%Функция для обозначения нижнего и верхнего интегралов
+\def\upint{\mathchoice%
+	{\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	\int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+
+%%След матрицы
+\DeclareMathOperator*{\tr}{tr}
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+	\hskip -\arraycolsep
+	\let\@ifnextchar\new@ifnextchar
+	\array{#1}}
+\makeatother
+
+
+%% Переопределение функции хи, чтобы выглядела более приятно
+\makeatletter
+\@ifdefinable\@latex@chi{\let\@latex@chi\chi}
+\renewcommand*\chi{{\@latex@chi\smash[t]{\mathstrut}}} % want only bottom half of \mathstrut
+\makeatletter
+
+\setcounter{MaxMatrixCols}{20}
+
+\begin{document}
+\lhead{Алгебра-\RN{1}}
+\chead{Тимашев Д.А.}
+\rhead{Лекция - 17}
+
+\section*{Теория делимости}
+Пусть $A$ - область целостности (коммутативное, ассоциативное кольцо с единицей без делителей нуля). И пусть $a,b \in A, \, a,b \neq 0$.
+\begin{defn}
+	Мы говорим, что $a$ \uwave{делится на} $b$ и соответственно $b$ \uwave{делит} элемент $a$, если:
+	$$
+		\exists \, c \in A \colon a = b{\cdot}c
+	$$
+	\textbf{\uline{Обозначение}}: $a\divby b \Rightarrow a$ делится на $b$, $b \mid a \Rightarrow b$ делит $a$. 
+\end{defn}
+\begin{defn}
+	Если $a \divby b$ и $b \divby a$, то говорят, что $a$ и $b$ - \uwave{ассоциированные элементы}.\\
+	\textbf{\uline{Обозначение}}: $a \sim b$.
+\end{defn}
+
+\begin{prop}(\textbf{Свойства отношения ассоциированности}):
+	\begin{enumerate}[label=\arabic*)]
+		\item $a \sim b \Leftrightarrow  a = b{\cdot}u$, где $u \in A^{\times}$ (то есть обратимый элемент кольца $A$);
+		\begin{proof}\hfill\\
+			$(\Rightarrow)$ По определению: 
+			$$
+				a \sim b \Rightarrow a \divby b \wedge b \divby a \Rightarrow a = b{\cdot}u, \, b = a{\cdot}v = b{\cdot}u{\cdot}v
+			$$ 
+			Поскольку мы находимся в кольце без делителей нуля, то на ненулевой множитель $b$ можно сократить и мы получим: 
+			$$
+				1 = u{\cdot}v \Rightarrow u,v \in A^{\times}
+			$$
+			$(\Leftarrow)$ Если верно $a = b{\cdot}u, \, u \in A^{\times}$, то домножив на обратный к $u$, получим:
+			$$
+				a{\cdot}u^{-1} = b{\cdot}u{\cdot}u^{-1} = b \Rightarrow a \divby b \wedge b \divby a \Rightarrow a \sim b
+			$$
+		\end{proof}
+		\item Ассоциированность является отношением эквивалентности на множестве $A$ без нуля (рефлексивность, симметричность, транзитивность);
+		\begin{proof}\hfill
+			\begin{enumerate}[label=(\arabic*)]
+				\item $a \sim a$ - очевидно, поскольку $a = a{\cdot}1$;
+				\item $a \sim b \Rightarrow a = b{\cdot}u, \, u \in A^{\times} \Rightarrow b = a{\cdot}u^{-1}, \, u^{-1} \in A^{\times} \Rightarrow b \sim a$;
+				\item $a \sim b \sim c \Rightarrow a = b{\cdot}u, \, b = c{\cdot}v, \, u,v \in A^{\times} \Rightarrow a = c{\cdot}v{\cdot}u, \, v{\cdot}u \in A^{\times} \Rightarrow a \sim c$;
+			\end{enumerate}
+		\end{proof}
+		\item Ассоциированность не влияет на делимость: пусть $a \sim a', \, b \sim b'$ тогда: $a\divby b \Leftrightarrow a' \divby b'$;
+		\begin{proof}
+			Заметим, что в силу того, что отношение ассоциированности симметрично, то достаточно доказать утверждение в одну сторону. По условию:
+			$$
+				a \sim a' \Rightarrow a = a'{\cdot}u, \, u \in A^{\times}, \,  b \sim b' \Rightarrow b = b'{\cdot}v, \, v \in A^{\times}
+			$$
+			Пусть известно, что $a \divby b$, то есть $a = b{\cdot}c$, тогда:
+			$$
+				a = a'{\cdot}u = b{\cdot}c = b'{\cdot}v{\cdot}c \Rightarrow a' = b'{\cdot}(v{\cdot}c{\cdot}u^{-1}) \Rightarrow a' \divby b'
+			$$
+		\end{proof}
+	\end{enumerate}
+\end{prop}
+\newpage
+Все вопросы теории делимости можно рассматривать с точностью до замены любых элементов на ассоциированные с ними. Далее, будем рассматривать все вопросы с точностью до ассоциированности.
+
+\textbf{Примеры ассоциированных элементов}:
+\begin{enumerate}[label=\arabic*)]
+	\item $A = \MZ$, тогда $a \sim b \Leftrightarrow a = \pm b$, поскольку обратные элементы в кольце целых чисел это лишь $\pm 1$;
+	\item $A = K[x], \, K$ - поле, тогда $f\sim g \Leftrightarrow f = \lambda{\cdot}g, \, \lambda \in K^{\times}$, поскольку обратимыми многочленами в кольце многочленов являются только ненулевые константы;
+\end{enumerate}
+
+\begin{defn}
+	Пусть $a,b \in A,\, a,b \neq 0$, тогда \uwave{наибольшим общим делителем} (НОД) элементов $a$ и $b$ называется такой их общий делитель $d \in A, \, d\neq 0$, который делится на все остальные общие делители:
+	\begin{enumerate}[label=\arabic*)]
+		\item $d \mid a$ и $d \mid b$;
+		\item $\forall c \in A\setminus \{0\}$, если $c \mid a, \, c\mid b \Rightarrow c \mid d$;
+	\end{enumerate}
+	\textbf{\uline{Обозначение}}: $d = \text{НОД}(a,b) = (a,b)$.
+\end{defn}
+\begin{defn}
+	Элементы $a$ и $b$ из $A$ \uwave{взаимно просты}, если $(a,b) = 1$, то есть $a$ и $b$ не имеют общих делителей, кроме обратимых элементов.
+\end{defn}
+
+\begin{prop}
+	НОД$(a,b)$ определён однозначно, с точностью до ассоциированности (если существует).
+\end{prop}
+\begin{proof}
+	Пусть $d$ и $d'$ - два НОД элементов $a$ и $b$, по свойству $1)$, оба эти элемента делят $a$ и $b$, но тогда по свойству $2)$ НОД делится на все остальные общие делители $\Rightarrow d \divby d'$ и $d' \divby d \Rightarrow$ они ассоциированы:
+	$$
+		(a,b) = d, \, (a,b) = d' \Rightarrow a \divby d, \, b \divby d, \, a \divby d', \, b \divby d' \Rightarrow d \divby d', \, d' \divby d \Rightarrow d \sim d'
+	$$
+\end{proof}
+
+\subsection*{Евклидовы кольца}
+Теперь хотелось бы вернуться к вопросам существования и найти для каких колец, любые два элемента обладают НОД. Укажем один класс колец, который удовлетворяет этому свойству.
+
+\begin{defn}
+	Целостное кольцо $A$ называется \uwave{евклидовым}, если задана функция: 
+	$$
+		N \colon A\setminus \{0\} \rightarrow \MZ_{+} = \{0,1,2, \dotsc\}
+	$$ 
+	называемая \uwave{евклидовой нормой}, со свойствами:
+	\begin{enumerate}[label=\arabic*)]
+		\item \textbf{Монотонность}: $N(a{\cdot}b) \geq N(a)$, причем равенство верно только в том случае, если $b\in A^{\times}$;
+		\item \textbf{Деление с остатком}: 
+		$$
+			\forall a,b \in A, \, b \neq 0, \, \exists \, q,r \in A \colon a = b{\cdot}q + r, \, N(r) < N(b) \wedge r = 0
+		$$
+	\end{enumerate}
+\end{defn}
+\begin{rem}
+	Условие $1)$ в силу коммутативности целостного кольца справедливо и для $b$: 
+	$$
+		N(a{\cdot}b) = N(b{\cdot}a) \geq N(b)
+	$$
+	Более того, равенство возможно при $b \in A^\times$, поскольку: 
+	$$
+		N((a{\cdot}b){\cdot}b^{-1}) = N(a{\cdot}b{\cdot}b^{-1}) = N(a{\cdot}1) = N(a) \geq N(a{\cdot}b)
+	$$
+\end{rem}
+\begin{rem}
+	На самом деле в условии $2)$ можно опустить условие про $r = 0$, если договориться считать, что норма нуля равна минус бесконечности: $N(0) = - \infty$.
+\end{rem}
+\begin{lemma}
+	$N(ab) = N(a) \Leftrightarrow b \in A^{\times}$.
+\end{lemma}
+\begin{proof}\hfill\\
+	$(\Leftarrow)$ Уже показали выше: $b \in A^{\times} \Rightarrow N((ab)b^{-1}) = N(a) \geq N(ab) \geq N(a)$.
+	
+	$(\Rightarrow)$ Предположим, что $b \not\in A^{\times}$ и что $a \ndivby ab$. Если $a = abc \Rightarrow a(bc - 1) = 0$. По определения нормы: 
+	$$
+		a,b \neq 0 \Rightarrow bc - 1 = 0\Rightarrow bc = 1 \Rightarrow b \in A^{\times}
+	$$
+	Тогда $a$ можно разделить на $ab$:
+	$$
+		\exists \, q, r \in A \colon a = ab{\cdot}q + r, \, r \neq 0, \, N(r) < N(ab) \Rightarrow r = a - ab{\cdot}q = a(1 - b{\cdot}q) \Rightarrow
+	$$
+	$$
+		\Rightarrow N(r) = N(a{\cdot}(1 - bq)) \geq N(a) \wedge N(r) < N(ab) \Rightarrow N(a) < N(ab)
+	$$
+	Получаем противоречие с первым свойством нормы.
+\end{proof}
+
+\textbf{Примеры евклидовых колец}:
+\begin{enumerate}[label=\arabic*)]
+	\item $A = \MZ, \, N(a) = |a|$;
+	\item $A = K[x]$, $K$ - поле, $N(f) = \deg(f)$;
+\end{enumerate}
+\begin{exrc}
+	\uwave{Кольцо гауссовых чисел} $K[i] = \{z = x + iy \in \MC \mid x,y \in \MZ\}$ - решетка точек с целыми координатами в $\MC$. Доказать, что это евклидово кольцо, с нормой $N(z) = |z|^2 = x^2 + y^2$. 
+\end{exrc}
+\begin{prop}
+	В евклидовом кольце $\forall a,b \neq 0, \, \exists \, (a,b)$.
+\end{prop}
+\begin{proof}
+	Основано на \uline{алгоритме Евклида}: 
+	\begin{enumerate}[label =(\arabic*)]
+		\item $a = b{\cdot}q_1 + r_1$ - делим элемент $a$ с остатком на элемент $b$.\\
+		Если $r_1 = 0$, то алгоритм Евклида заканчивается и мы останавливаемся. \\
+		Если $r_1 \neq 0$, то делаем второй шаг;
+		\item $b = r_1{\cdot}q_2 + r_2$ - делим элемент $b$ с остатком на элемент $r_1$.\\
+		Если $r_2 = 0$, то алгоритм Евклида заканчивается и мы останавливаемся. \\
+		Если $r_2 \neq 0$, то делаем третий шаг;
+		\item $r_1 = r_2{\cdot}q_3 + r_3$ - делим элемент $r_1$ с остатком на элемент $r_2$.\\
+		И так далее;
+		\item[\vdots]
+		\item[k)] $r_{k-1} = r_k{\cdot}q_{k+1} + r_{k+1}$;
+		\item[\vdots]
+		\item[s)] $r_{s-2} = r_{s-1}{\cdot}q_s + r_s, \, r_s \neq 0$;
+		\item[s+1)] $r_{s-1} = r_s{\cdot}q_{s+1}$;
+	\end{enumerate}
+	Основной вопрос - почему процесс остановится? Заметим, что норма каждого следующего остатка меньше нормы предыдущего, по свойству евклидовой нормы:
+	$$
+		N(b) > N(r_1) > N(r_2) > \dotsc > N(r_k) > N(r_{k+1}) > \dotsc
+	$$
+	Норма это целое неотрицательное число, она не может уменьшаться бесконечно $\Rightarrow$ рано или поздно, процесс оборвётся. Пусть мы остановились на шаге $s+1$, тогда $r_{s+1} = 0$ и алгоритм останавливается.
+	 
+	Докажем,что $r_s = (a,b)$:
+	\begin{enumerate}[label=\arabic*)]
+		\item Из последнего шага видно, что $r_s \mid r_{s-1}$. Поднимаясь по строчкам выше, мы видим:
+		$$
+			r_s \mid r_s, r_{s-1} \Rightarrow r_s \mid r_{s-2} = r_{s-1}{\cdot}q_s + r_s \Rightarrow r_s \mid r_{s -2}, r_{s-1} \Rightarrow r_s \mid r_{s - 3} = r_{s-2}{\cdot}q_{s-1} + r_{s-1} \Rightarrow \dotsc \Rightarrow
+		$$
+		$$
+			\Rightarrow r_s \mid r_{k+1}, r_k \Rightarrow r_s \mid r_{k-1} \Rightarrow \dotsc \Rightarrow r_s \mid r_2,r_1 \Rightarrow r_s \mid b \Rightarrow r_s \mid b,r_1 \Rightarrow r_s\mid a
+		$$
+		\item Покажем, что $r_s$ делится на любой другой общий делитель. Пусть $c \mid a,b$, тогда:
+		$$
+			c \mid r_1 = a - b{\cdot}q_1 \Rightarrow c \mid b,r_1 \Rightarrow c \mid r_2 = b - r_1{\cdot}q_2 \Rightarrow \dotsc \Rightarrow 
+		$$
+		$$
+			\Rightarrow c \mid r_{k-1},r_k \Rightarrow c \mid r_{k+1} = r_{k-1} - r_k{\cdot}q_{k+1} \Rightarrow \dotsc \Rightarrow c \mid r_s = r_{s-2} - r_{s-1}{\cdot}q_s 
+		$$
+	\end{enumerate}
+	Таким образом, $r_s = (a,b)$.
+\end{proof}
+\begin{corollary}(\textbf{Из алгоритма Евклида}) 
+	$\exists \, u,v \in A \colon (a,b) = u{\cdot}a + v{\cdot}b$.
+\end{corollary}
+\begin{proof}
+	Докажем, что $\forall k \geq 0, \, r_k = u_k{\cdot}a + v_k{\cdot}b$, в частности верно и для $r_s = (a,b)$. Индукцией по $k$:
+	
+	\uline{База индукции}: $k = 0 \Rightarrow r_0 = b= 0{\cdot}a + 1{\cdot}b, \, k = 1 \Rightarrow r_1 = a - q_1{\cdot}b = 1{\cdot}a - q_1{\cdot}b$.
+	
+	\uline{Шаг индукции}: Пусть все остатки $r_1,\dotsc, r_k$ уже представили в требуемом виде, рассмотрим $r_{k+1}$:
+	$$
+		r_{k+1} = r_{k-1} - r_k{\cdot}q_{k+1} = u_{k-1}{\cdot}a + v_{k-1}{\cdot}b - (u_k{\cdot}a + v_k{\cdot}b){\cdot}q_{k+1} = 
+	$$	
+	$$
+		= (u_{k-1} - u_k{\cdot}q_{k+1}){\cdot}a + (v_{k-1} - v_k{\cdot}q_{k+1}){\cdot}b =u_{k+1}{\cdot}a + v_{k+1}{\cdot}b
+	$$
+	При $k = s$, получаем $(a,b) = u_s{\cdot}a + v_s{\cdot}b$.
+\end{proof}
+
+\subsection*{Простые и неприводимые элементы}
+Основная задача теории делимости это выяснение, когда один элемент кольца делится на другой, другими словами, как элементы нашего кольца раскладываются на множители.
+
+\textbf{\uline{Тривиальное разложение на множители}}: $\forall a \in A, \, a = (a{\cdot}u){\cdot}u^{-1}, \, u \in A^{\times}$. Такие разложения всегда существуют, их очень много и они не интересны с точки зрения теории делимости. 
+
+Вопрос заключается в том, можно ли как-то разложить элемент нетривиальным способом (в произведение двух необратимых множителей)?
+
+\begin{defn}
+	Элемент $p \in A$ называется \uwave{простым}, если $p \neq 0$, $p \not\in A^{\times}$ и $\nexists$ разложения $p = a{\cdot}b$, где $a,b \not\in A^{\times}$.
+\end{defn}
+
+\textbf{Примеры простых элементов}:
+\begin{enumerate}[label=\arabic*)]
+	\item $A = \MZ \Rightarrow$ простые элементы в $\MZ$ это $\pm p$, где $p$ - натуральное простое число;
+	\item $A = K[x]$, где $K$ - поле, простые элементы - это многочлены $p \neq 0, \, \deg(p) > 0$, для которых не существует разложения $p = f{\cdot}g$, где $0 < \deg(f), \deg(g) < \deg(p)$, то есть многочлен $p$ не должен разлагаться в произведение многочленов меньшей степени;
+\end{enumerate}
+\begin{defn}
+	Многочлен называется \uwave{неприводимым}, если он не разлагается в произведение многочленов меньшей степени, то есть это простой элемент кольца многочленов.
+\end{defn}
+\begin{rem}
+	Простой элемент $p \in A$ имеет ровно $2$ делителя, с точностью до ассоциированности: $p$ и $1$. Это так, поскольку если мы разложили простой элемент $p$ на два множителя $p = a{\cdot}b$, то один из множителей должен быть обратимым. Пусть $b \in A^{\times}\Rightarrow b \sim 1$, $p \sim a$ и делитель $a$ это тоже самое, с точностью до ассоциированности, что и делитель $p$. При этом, $p \not\sim 1$, так как $p \not\in A^{\times}$.
+\end{rem}
+\begin{lemma}
+	Пусть $A$ - евклидово кольцо и $p \in A$ - простой элемент, тогда: $a{\cdot}b \divby p \Rightarrow a\divby p \vee b \divby p$.
+\end{lemma}
+\begin{proof}
+	Рассмотрим $(a,p)$. По определению: 
+	$$
+		(a,p)\mid p \Rightarrow (a,p) = p \vee (a,p) = 1
+	$$ 
+	Если $a \divby p$, то мы доказали требуемое. Если $(a,p) = 1$, то: 
+	$$
+		(a,p) = u{\cdot}a + v{\cdot}p \Rightarrow b = u{\cdot}ab + v{\cdot}pb, \, ab \divby p \wedge pb \divby p \Rightarrow b \divby p
+	$$
+\end{proof}
+
+\begin{corollary}
+	Если $a_1{\cdot}\dotsc{\cdot}a_k \divby p$, то $\exists \, i \colon a_i \divby p$.
+\end{corollary}
+\begin{proof}
+	Индукцией по $k$:
+	
+	\uline{База индукции}: $k = 2 \Rightarrow$ лемма.
+	
+	\uline{Шаг индукции}: Если $a_1{\cdot}\dotsc{\cdot}a_{k-1}{\cdot}a_k = (a_1{\cdot}\dotsc{\cdot}a_{k-1}){\cdot}a_k \divby p$, то по лемме $a_{k} \divby p \vee a_1{\cdot}\dotsc{\cdot}a_{k-1} \divby p$. В первом случае $a_{k}$ делится на $p$, во втором случае по предположению индукции $\exists \, i < k \colon a_i \divby p$.
+\end{proof}
+
+\subsection*{Основная теорема арифметики в евклидовых кольцах}
+\begin{theorem}(\textbf{Основная теорема арифметики в евклидовых кольцах})
+	В евклидовом кольце $A$, $\forall a \neq 0, \, a\notin A^{\times}, \, \exists$ разложение: 
+	$$
+		a = p_1{\cdot}\dotsc{\cdot}p_m
+	$$ 
+	где $p_i$ - простые элементы. Причём разложение единственное, с точностью до перестановки множителей и их замены на ассоциированные.
+\end{theorem}
+\begin{proof}
+	\hfill\\
+	\textbf{\uline{Существование}}: Индукцией по $N(a)$:
+	
+	\uline{База индукции}: $N(a) = n_0$ - наименьшее значение нормы необратимых элементов в кольце $A$. Следовательно, элемент $a$ - прост, иначе $a = b{\cdot}c, \, b,c \in A^\times$ и тогда $N(a) = N(bc) > N(b),N(c)$ - по монотонности евклидовой нормы и мы получаем противоречие с тем, что $N(a) = n_0$. Следовательно, $a$ разлагается в разложение из самого себя.
+	
+	\uline{Шаг индукции}: Возьмем произвольный элемент $a$ с любой нормой. Либо элемент $a$ прост и тогда существование доказано, либо он не прост и тогда $a = b{\cdot}c, \, b,c \in A^{\times}$, где $N(b),N(c) < N(a)$. Тогда по предположению индукции $b$ и $c$ можно разложить в произведение простых элементов:
+	$$
+		b = p_1{\cdot}\dotsc{\cdot}p_k, \, c = p_{k+1}{\cdot}\dotsc{\cdot}p_m
+	$$
+	где $p_1, p_2, \dotsc, p_m$ - это простые элементы. Перемножая их, мы получаем разложение для элемента $a$:
+	$$
+		a = p_1{\cdot}\dotsc{\cdot}p_m
+	$$
+	\textbf{\uline{Единственность}}: Пусть у нас есть два разложения $a \in A$ на простые элементы:
+	$$
+		a = p_1{\cdot}\dotsc{\cdot}p_m = q_1{\cdot}\dotsc{\cdot}q_n
+	$$
+	Без ограничения общности, будем считать, что $m \leq n$. Докажем, что на самом деле $m = n$ и после  перенумерации множителей, $p_i \sim q_i, \, \forall i$. Будем вести индукцию по числу множителей $m$ в разложении:
+	
+	\uline{База индукции}: $m = 1 \Rightarrow a = p_1$ - простое $\Rightarrow n =1, \, a = q_1 \Rightarrow p_1 = q_1$.
+	
+	\uline{Шаг индукции}: Рассмотрим последний множитель в разложении: $p_m \mid a = q_1{\cdot}\dotsc{\cdot}q_n \Rightarrow \exists \, i \colon p_m \mid q_i$. После перенумерации, для удобства можно считать, что $p_m \mid q_n$. Поскольку это простые множители, тогда $p_m \sim q_n$, так как $p_m$ - необратимый элемент $\Rightarrow p_m \sim q_n \Rightarrow q_n = p_m{\cdot}u, \, u \in A^{\times}$. Подставим:
+	$$
+		a = p_1{\cdot}\dotsc{\cdot}p_{m-1}{\cdot}p_m = q_1{\cdot}\dotsc{\cdot}q_{n-1}{\cdot}u{\cdot}p_m \Rightarrow p_1{\cdot}\dotsc{\cdot}p_{m-1} = q_1{\cdot}\dotsc{\cdot}q_{n-2}{\cdot}(q_{n-1}{\cdot}u)
+	$$
+	где мы можем поделить на $p_m$, поскольку находимся в целостном кольце. Итого, мы снова получили два разложения на простые множители, но по предположению индукции $n-1 = m - 1 \Rightarrow n = m$ и после перенумерации будет верно:
+	$$
+		p_1 \sim q_1, \, \dotsc, \, p_{m-2} \sim q_{n-2},\, p_{m-1} \sim q_{n-1}{\cdot}u \sim q_{n-1}
+	$$
+	Таким образом, единственность доказана.
+\end{proof}
+
+\begin{corollary}(\textbf{Основная теорема арифметики целых чисел})
+	$\forall n \in \MN, \, n > 1, \, \exists!$ разложение: 
+	$$
+		n = p_1{\cdot}\dotsc{\cdot}p_m
+	$$ 
+	где $p_i$ - простые числа. Причём разложение единственное с точностью до перестановки множителей.
+\end{corollary}
+\begin{rem}
+	Поскольку простые элементы кольца целых чисел это с точностью до знака - простые натуральные числа, а $n$ - само натуральное, то все знаки можно убрать и ассоциированности не возникает, так как все множители положительны. 
+\end{rem}
+\begin{corollary}
+	$\forall f \in K[x], \, K$ - поле, $\deg(f) > 0, \,  \exists$ разложение: 
+	$$
+		f = p_1{\cdot}\dotsc{\cdot}p_m	
+	$$ 
+	где $p_i$ - неприводимые многочлены. Причём разложение единственное с точностью до перестановки множителей и умножению их на ненулевые константы.
+\end{corollary}
+
+\section*{Факториальные кольца}
+
+\begin{defn}
+	Целостное кольцо $A$ называется \uwave{факториальным}, если $\forall a \in A, \, a\neq 0, \, a\not\in A^{\times}$ можно разложить в произведение простых множителей единственным образом, с точностью до перестановки множителей и их замены на ассоциированные элементы.
+\end{defn}
+\begin{rem}
+	Коротко можно сказать, что целостное кольцо факториально, если в нём выполняется теорема о разложении. То есть теорема по существу говорит, что евклидовы кольца - факториальны.
+\end{rem}
+\begin{corollary}
+	Евклидовы кольца - факториальны.
+\end{corollary}
+\begin{rem}
+	Но не все факториальные кольца - евклидовы.
+\end{rem}
+\begin{rem}
+	В частности кольцо $K[x]$ над полем $K$ и кольцо $\MZ$ - это факториальные кольца.
+\end{rem}
+В факториальном кольце $A$ все вопросы теории делимости сводятся к разложению на простые множители. Например, хотим выяснить, когда один элемент делится на другой.
+
+Пусть $a,b \in A,\, a,b \neq 0, \, a,b \not\in A^{\times}$. Разложим каждое на простые так, чтобы ассоциированные множители были сгруппированы, вынеся обратимые множители перед произведением:
+$$
+	a = u{\cdot}p_1^{k_1}{\cdot}p_2^{k_2}{\cdot}\dotsc{\cdot}p_s^{k_s}, \, u \in A^{\times}, \, \forall i = \ovl{1,s}, \, k_i \geq 0
+$$
+где $p_i$ - простые и попарно не ассоциированные. Аналогично для $b$:
+$$
+	b = v{\cdot}p_1^{l_1}{\cdot}p_2^{l_2}{\cdot}\dotsc{\cdot}p_s^{l_s}, \, v \in A^{\times}, \, \forall i = \ovl{1,s}, \, l_i \geq 0
+$$
+Причём можно считать, что $p_1, \dotsc, p_s$ - одинаковые у $a$ и $b$.
+\begin{prop}
+	В условиях выше, верно:
+	$$
+		a\divby b \Leftrightarrow \forall i = \ovl{1,s}, \, k_i \geq l_i
+	$$
+\end{prop}
+\begin{proof}\hfill\\
+	$(\Leftarrow)$ Если $\forall i = \ovl{1,s}, \, k_i \geq l_i$, то $a = b{\cdot}u{\cdot}v^{-1}{\cdot}p_1^{k_1 - l_1}{\cdot}\dotsc{\cdot}p_s^{k_s - l_s} \Rightarrow a \divby b$.
+	
+	$(\Rightarrow)$ Если $a \divby b$, то $a = b{\cdot}c = 			v{\cdot}p_1^{l_1}{\cdot}p_2^{l_2}{\cdot}\dotsc{\cdot}p_s^{l_s}{\cdot}c = v{\cdot}p_1^{l_1}{\cdot}p_2^{l_2}{\cdot}\dotsc{\cdot}p_s^{l_s}{\cdot}q_1{\cdot}\dotsc{\cdot}q_t$, где $q_j$ - простые множители. Но в силу разложения $a$ и единственности разложения с точностью до перестановки множителей и ассоциированности мы имеем:
+	$$
+		u{\cdot}p_1^{k_1}{\cdot}p_2^{k_2}{\cdot}\dotsc{\cdot}p_s^{k_s} = v{\cdot}p_1^{l_1}{\cdot}p_2^{l_2}{\cdot}\dotsc{\cdot}p_s^{l_s}{\cdot}q_1{\cdot}\dotsc{\cdot}q_t \Rightarrow \forall j = \ovl{1,t}, \, \exists \, i \in \ovl{1,s} \colon q_j \sim p_i \Rightarrow
+	$$
+	$$
+		\Rightarrow q_1{\cdot}\dotsc{\cdot}q_t = w{\cdot}p_1^{m_1}{\cdot}\dotsc{\cdot}p_s^{m_s}, \, w \in A^{\times} \Rightarrow \forall i = \ovl{1,s}, \, k_i = l_i + m_i \Rightarrow k_i \geq l_i
+	$$
+\end{proof}
+
+\begin{defn}
+	Пусть $a,b \in A,\, a,b \neq 0$, тогда \uwave{наименьшим общим кратным} (НОК) элементов $a$ и $b$ называется такой наименьший элемент $m \in A, \, d\neq 0$, который делится на $a$ и $b$ без остатка:
+	\begin{enumerate}[label=\arabic*)]
+		\item $a \mid m$ и $b\mid m$;
+		\item $\forall c \in A\setminus \{0\}$, если $a \mid c, \, b\mid c \Rightarrow m \mid c$;
+	\end{enumerate}
+	\textbf{\uline{Обозначение}}: $m = \text{НОК}(a,b) = [a,b]$.
+\end{defn}
+Таким образом, вопрос делимости одного элемента на другой сводится к сравнению показателя степеней. Например, \uline{наибольший общий делитель} - НОД$(a,b)$: 
+$$
+	(a,b)= p_1^{\min(k_1,l_1)}{\cdot}\dotsc{\cdot}p_s^{\min(k_s,l_s)}
+$$ 
+и \uline{наименьшее общее кратное} - НОК$[a,b]$: 
+$$
+	[a,b] = p_1^{\max(k_1,l_1)}{\cdot}\dotsc{\cdot}p_s^{\max(k_s,l_s)}
+$$
+
+\end{document}
